@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin V7 - Forever - GearHaven</title><script src="https://cdn.tailwindcss.com"></script>
+<style>.sub.active{background:#1a204f!important;border-color:#8b5cf6!important;color:white}</style>
+<script>
+const CF_API = "https://silent-term-1b1a.riasdeath77.workers.dev/api/prices";
+const PRICE_KEY = "Gear2024!";
+async function saveToCloudflare(){
+  updatePreview();
+  let currentForever = JSON.parse(document.getElementById('preview').value).forever;
+  document.getElementById('status').innerText='☁️ Subiendo FOREVER...';
+  try{
+    let resCloud = await fetch(CF_API).then(r=>r.json()).catch(()=>({}));
+    let base = resCloud.retail? resCloud : {retail:{}, forever:{}, leveling:resCloud.leveling, gold:resCloud.gold};
+    let merged = {...base, retail: base.retail, forever: currentForever, leveling: base.leveling, gold: base.gold};
+    let res = await fetch(CF_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:PRICE_KEY,data:merged})});
+    let j=await res.json();
+    if(j.ok){ document.getElementById('status').innerText='✅ EN VIVO! Forever actualizado'; alert("✅ FOREVER en vivo!"); }
+    else{ alert("Error: "+(j.error||'no admin')); }
+  }catch(e){ alert(e.message); }
+}
+</script>
+</head>
+<body class="bg-[#080c22] text-white p-4">
+<div class="max-w-[1300px] mx-auto">
+<h1 class="text-[24px] font-black">GEAR<span class="text-[#8b5cf6]">HAVEN</span> ADMIN V7 FOREVER</h1>
+<div class="flex gap-2 mt-3 mb-5 flex-wrap">
+  <button onclick="location.href='./admin-price.html'" id="nav-retail" class="px-4 py-2 rounded-full text-[10px] font-black border">🛒 RETAIL BOOSTS</button>
+  <button onclick="location.href='./admin-v7-forever.html'" id="nav-forever" class="px-4 py-2 rounded-full text-[10px] font-black border">💀 FOREVER D/R/PVP</button>
+  <button onclick="location.href='./admin-leveling-gold.html'" id="nav-levelgold" class="px-4 py-2 rounded-full text-[10px] font-black border">📈💰 LEVEL + GOLD</button>
+</div>
+<script>
+let cur = location.pathname.includes('admin-price')? 'nav-retail' : location.pathname.includes('admin-v7')? 'nav-forever' : 'nav-levelgold';
+document.getElementById(cur).classList.add('bg-[#8b5cf6]','text-white','border-[#8b5cf6]');
+['nav-retail','nav-forever','nav-levelgold'].forEach(id=>{ if(id!==cur) document.getElementById(id).classList.add('bg-[#111536]','border-[#2a3366]','text-[#8b92c9]'); });
+</script>
+<div id="forever-subs" class="flex gap-2 mt-5 mb-5 overflow-x-auto pb-2">
+<style>
+.sub{background:#111536;border:1px solid #2a3366;color:#8b92c9;transition:all 0.2s;backdrop-filter:blur(10px);}
+.sub.active{background:linear-gradient(135deg,#1a204f 0%,#2a3366 100%)!important;border-color:#8b5cf6!important;color:white!important;box-shadow:0 0 15px rgba(139,92,246,0.4);transform:translateY(-1px);}
+.sub:hover{border-color:#8b5cf6;color:white;}
+</style>
+<button onclick="setSub('dungeon')" id="sub-dungeon" class="sub active px-5 py-2.5 rounded-full text-[10px] font-black tracking-wider">💀 DUNGEON 34</button>
+<button onclick="setSub('raid')" id="sub-raid" class="sub px-5 py-2.5 rounded-full text-[10px] font-black tracking-wider">🔥 RAID</button>
+<button onclick="setSub('pvp')" id="sub-pvp" class="sub px-5 py-2.5 rounded-full text-[10px] font-black tracking-wider">⚔️ PVP</button>
+</div>
+
+<div id="panel-dungeon" class="panel"><div class="grid lg:grid-cols-[1fr_320px] gap-4">
+<div class="bg-[#111536] border border-[#2a3366] rounded-2xl p-4">
+<h2 class="text-[11px] font-black text-[#8b5cf6] mb-3">FOREVER DUNGEON - 34 DUNGEONS + BLOQUEO</h2>
+<div class="flex gap-2 mb-3 flex-wrap">
+<button onclick="blockAllNew()" class="bg-[#ef4444]/20 border border-[#ef4444] text-[#ef4444] px-3 py-1.5 rounded-full text-[9px] font-bold">🚫 Bloquear NEW 🎁</button>
+<button onclick="clearBlocks()" class="bg-[#22c55e]/20 border border-[#22c55e] text-[#22c55e] px-3 py-1.5 rounded-full text-[9px] font-bold">✅ Desbloquear todo</button>
+</div>
+<div id="f-dungeon" class="space-y-2 max-h-[700px] overflow-y-auto pr-1"></div>
+</div>
+<div class="bg-[#111536] border rounded-2xl p-4 h-fit">
+<h2 class="text-[10px] font-black mb-3">% EXTRAS DUNGEON</h2>
+<div id="f-perc-dungeon" class="grid gap-2 text-[10px]"></div>
+<button onclick="saveAll()" class="w-full mt-4 bg-[#8b5cf6] py-3 rounded-xl font-black text-[12px]">💾 GUARDAR TODO</button>
+<button onclick="saveToCloudflare()" class="w-full mt-2 bg-[#f59e0b] text-black py-3 rounded-xl font-black text-[12px]">☁️ GUARDAR EN CLOUDFLARE - EN VIVO</button>
+<p id="status" class="text-[9px] text-center text-[#6b77b5] mt-2">Cargando...</p>
+<textarea id="preview" readonly class="w-full h-[220px] bg-black border border-[#1e254a] rounded-lg p-2 text-[7px] font-mono mt-3 text-[#8b92c9]"></textarea>
+</div>
+</div></div>
+
+<div id="panel-raid" class="panel hidden"><div class="grid lg:grid-cols-[1fr_320px] gap-4">
+<div class="bg-[#111536] border border-[#2a3366] rounded-2xl p-4">
+<h2 class="text-[11px] font-black text-[#ef4444] mb-3">FOREVER RAID - PRECIOS + BLOQUEO</h2>
+<div id="f-raid" class="space-y-2"></div>
+</div>
+<div class="bg-[#111536] border rounded-2xl p-4 h-fit">
+<h2 class="text-[10px] font-black mb-3">% EXTRAS RAID</h2>
+<div id="f-perc-raid" class="grid gap-2 text-[10px]"></div>
+<button onclick="saveAll()" class="w-full mt-4 bg-[#ef4444] py-3 rounded-xl font-black text-[12px]">💾 GUARDAR TODO</button>
+<button onclick="saveToCloudflare()" class="w-full mt-2 bg-[#f59e0b] text-black py-3 rounded-xl font-black text-[12px]">☁️ GUARDAR EN CLOUDFLARE - EN VIVO</button>
+<p id="status-raid" class="text-[9px] text-center text-[#6b77b5] mt-2">Cargando raid...</p>
+</div>
+</div></div>
+
+<div id="panel-pvp" class="panel hidden"><div class="grid lg:grid-cols-[1fr_340px] gap-4">
+<div class="bg-[#111536] border border-[#2a3366] rounded-2xl p-4">
+<h2 class="text-[11px] font-black text-[#f59e0b] mb-3">FOREVER PVP - 12 PACKS + HONOR RATE + BLOQUEO</h2>
+<div class="flex gap-2 mb-3 flex-wrap">
+<button onclick="blockAllHighPvp()" class="bg-[#ef4444]/20 border border-[#ef4444] text-[#ef4444] px-3 py-1.5 rounded-full text-[9px] font-bold">🚫 Bloquear Ranks/Marks</button>
+<button onclick="clearBlocksPvp()" class="bg-[#22c55e]/20 border border-[#22c55e] text-[#22c55e] px-3 py-1.5 rounded-full text-[9px] font-bold">✅ Desbloquear todo</button>
+</div>
+<div id="f-pvp" class="space-y-2 max-h-[700px] overflow-y-auto pr-1"></div>
+</div>
+<div class="bg-[#111536] border rounded-2xl p-4 h-fit">
+<h2 class="text-[10px] font-black mb-3">% EXTRAS PVP + HONOR RATE</h2>
+<div id="f-perc-pvp" class="grid gap-2 text-[10px]"></div>
+<button onclick="saveAll()" class="w-full mt-4 bg-[#f59e0b] text-black py-3 rounded-xl font-black text-[12px]">💾 GUARDAR TODO</button>
+<button onclick="saveToCloudflare()" class="w-full mt-2 bg-[#f59e0b] text-black py-3 rounded-xl font-black text-[12px]">☁️ GUARDAR EN CLOUDFLARE - EN VIVO</button>
+<p id="status-pvp" class="text-[9px] text-center text-[#6b77b5] mt-2">Cargando pvp...</p>
+</div>
+</div></div>
+
+</div>
+<script>
+const DUNGEONS=[
+{id:0,name:'Hall of Thanes',lvl:'13-18',new:true},{id:1,name:'Ragefire Chasm',lvl:'13-18',new:false},{id:2,name:'Ruins of Lordaeron',lvl:'15-20',new:true},{id:3,name:'Wailing Caverns',lvl:'17-24/25',new:false},{id:4,name:'The Deadmines',lvl:'17-26',new:false},{id:5,name:'Shadowfang Keep',lvl:'22-30',new:false},{id:6,name:'Blackfathom Deeps',lvl:'24-32',new:false},{id:7,name:'Excavation Site: Wetlands',lvl:'24-29',new:true},{id:8,name:'The Stockade',lvl:'24-32',new:false},{id:9,name:'City of Dalaran',lvl:'28-33',new:true},{id:10,name:'Gnomeregan',lvl:'29-38',new:false},{id:11,name:'Razorfen Kraul',lvl:'29-38',new:false},{id:12,name:'Scarlet Monastery - Graveyard',lvl:'30-38',new:false},{id:13,name:'Scarlet Monastery - Library',lvl:'33-41',new:false},{id:14,name:'The Drowned City',lvl:'35-40',new:true},{id:15,name:'Scarlet Monastery - Armory',lvl:'36-44',new:false},{id:16,name:'Razorfen Downs',lvl:'37-46',new:false},{id:17,name:'Scarlet Monastery - Cathedral',lvl:'38-46',new:false},{id:18,name:'Krol\'dok Stronghold',lvl:'40-45',new:true},{id:19,name:'Zul\'Farrak',lvl:'40-47',new:false},{id:20,name:'Uldaman',lvl:'41-51',new:false},{id:21,name:'Maraudon',lvl:'45-51/55',new:false},{id:22,name:'Alcaz Prison',lvl:'48-53',new:true},{id:23,name:'Sunken Temple',lvl:'50-60',new:false},{id:24,name:'Blackrock Depths',lvl:'52-60',new:false},{id:25,name:'Blackmaw Hold',lvl:'55-60',new:true},{id:26,name:'Lower Blackrock Spire',lvl:'55-60',new:false},{id:27,name:'Dire Maul West',lvl:'56-60',new:false},{id:28,name:'Dire Maul North',lvl:'56-60',new:false},{id:29,name:'Dire Maul East',lvl:'54-60',new:false},{id:30,name:'Scholomance',lvl:'58-60',new:false},{id:31,name:'Stratholme',lvl:'58-60',new:false},{id:32,name:'Shaper\'s Terrace',lvl:'58-60',new:true},{id:33,name:'Upper Blackrock Spire',lvl:'59-60',new:false}
+];
+const RAIDS=[
+ {id:0,name:"Onyxia's Lair 40-man"},
+ {id:1,name:"Barrow Deeps 10-man"},
+ {id:2,name:"Hyjal Summit 20-man"},
+];
+const PVP=[
+ {id:0,name:'Honor Farm 10k'},{id:1,name:'Honor Farm 25k'},{id:2,name:'Honor Farm 50k'},{id:3,name:'Honor Farm 100k'},{id:4,name:'Honor Farm 250k'},{id:5,name:'Honor Farm 500k'},{id:6,name:'Rank 1-7 Boost'},{id:7,name:'Rank 7-10 Boost'},{id:8,name:'Rank 10-14 Boost'},{id:9,name:'Rank 1-14 Full'},{id:10,name:'BG Marks Farm 100'},{id:11,name:'BG Marks Farm 300'},
+];
+let data=null;
+let def={forever:{
+ dungeon:{prices:{0:14,1:15.5,2:15.5,3:23,4:23,5:27,6:28.99,7:23,8:27,9:35.99,10:12,11:13,12:14,13:16,14:18,15:18,16:20,17:22,18:28,19:26,20:30,21:32,22:34,23:38,24:42,25:45,26:44,27:46,28:46,29:44,30:48,31:50,32:52,33:50}, percents:{selfplay:0,pilot:0,remote:30}, blocked:[10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33]},
+ raid:{prices:{0:80,1:35,2:55}, names:{0:"Onyxia's Lair 40-man",1:"Barrow Deeps 10-man",2:"Hyjal Summit 20-man"}, percents:{selfplay:0,pilot:0,remote:30}, blocked:[]},
+ pvp:{prices:{0:15,1:37.5,2:75,3:150,4:375,5:750,6:60,7:120,8:250,9:450,10:20,11:60, honor_rate:0.8}, names:{0:"Honor Farm 10k",1:"Honor Farm 25k",2:"Honor Farm 50k",3:"Honor Farm 100k",4:"Honor Farm 250k",5:"Honor Farm 500k",6:"Rank 1-7 Boost",7:"Rank 7-10 Boost",8:"Rank 10-14 Boost",9:"Rank 1-14 Full",10:"BG Marks Farm 100",11:"BG Marks Farm 300"}, percents:{selfplay:0,pilot:0,remote:30}, blocked:[4,5,6,7,8,9,10,11]}
+}};
+
+function setSub(s){document.querySelectorAll('.sub').forEach(x=>x.classList.remove('active'));document.getElementById('sub-'+s).classList.add('active');document.querySelectorAll('.panel').forEach(p=>p.classList.add('hidden'));document.getElementById('panel-'+s).classList.remove('hidden');}
+
+async function init(){
+ try{let r=await fetch('./price-forever.json?v='+Date.now()); if(r.ok){let raw=await r.json(); data=raw.forever? raw : {forever:raw};} else data=def;}catch(e){data=def;}
+ if(!data.forever.dungeon) data.forever.dungeon=def.forever.dungeon;
+ if(!data.forever.dungeon.percents) data.forever.dungeon.percents=def.forever.dungeon.percents;
+ if(!data.forever.dungeon.blocked) data.forever.dungeon.blocked=def.forever.dungeon.blocked;
+ if(!data.forever.raid) data.forever.raid=def.forever.raid;
+ if(!data.forever.raid.percents) data.forever.raid.percents=def.forever.raid.percents;
+ if(!data.forever.raid.blocked) data.forever.raid.blocked=def.forever.raid.blocked;
+ if(!data.forever.pvp) data.forever.pvp=def.forever.pvp;
+ if(!data.forever.pvp.percents) data.forever.pvp.percents=def.forever.pvp.percents;
+ if(!data.forever.pvp.blocked) data.forever.pvp.blocked=def.forever.pvp.blocked;
+ if(!data.forever.pvp.prices.honor_rate) data.forever.pvp.prices.honor_rate=0.8;
+ renderAll();
+}
+
+function renderAll(){
+ let prices=data.forever.dungeon.prices;
+ let blocked=data.forever.dungeon.blocked||[];
+ document.getElementById('f-dungeon').innerHTML=DUNGEONS.map(d=>{
+  let isB=blocked.includes(d.id);
+  return `<div class="flex gap-2 items-center bg-[#0a0e28] border ${isB?'border-[#ef4444] bg-[#ef4444]/10':'border-[#1e254a]'} rounded-xl p-2">
+  <input type="checkbox" ${isB?'checked':''} onchange="toggleBlock(${d.id},this.checked)" class="w-4 h-4 accent-[#ef4444]">
+  <div class="flex-1 min-w-0"><div class="text-[10px] font-bold truncate">${d.id}. ${d.name} ${d.new?'🎁':''}</div><div class="text-[8px] text-white/40">Lvl ${d.lvl}</div></div>
+  <span class="text-[9px]">$</span><input id="price-${d.id}" value="${prices[d.id]??20}" type="number" step="0.01" class="w-[80px] bg-[#111536] border rounded-lg px-2 py-2 text-[11px] font-bold" oninput="updatePreview()">
+  </div>`;
+ }).join('');
+ document.getElementById('f-perc-dungeon').innerHTML=`
+  <label class="bg-[#0a0e28] p-3 rounded-xl border-2 border-[#22c55e]/40"><div class="font-black text-[#22c55e]">🎮 SELFPLAY %</div><input id="f-selfplay" value="${data.forever.dungeon.percents.selfplay??0}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-2 mt-1 font-black" oninput="updatePreview()"></label>
+  <label class="bg-[#0a0e28] p-3 rounded-xl border-2 border-[#fbbf24]/40"><div class="font-black text-[#fbbf24]">🧑‍✈️ PILOT %</div><input id="f-pilot" value="${data.forever.dungeon.percents.pilot??0}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-2 mt-1 font-black" oninput="updatePreview()"></label>
+  <label class="bg-[#0a0e28] p-3 rounded-xl border-2 border-[#8b5cf6]/40"><div class="font-black text-[#a78bfa]">🖥️ REMOTE %</div><input id="f-remote" value="${data.forever.dungeon.percents.remote??30}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-2 mt-1 font-black" oninput="updatePreview()"></label>
+ `;
+
+ let raidPrices=data.forever.raid.prices;
+ let raidBlocked=data.forever.raid.blocked||[];
+ let raidNames=data.forever.raid.names||{};
+ document.getElementById('f-raid').innerHTML=RAIDS.map(r=>{
+  let isB=raidBlocked.includes(r.id);
+  return `<div class="flex gap-2 items-center bg-[#0a0e28] border ${isB?'border-[#ef4444] bg-[#ef4444]/10':'border-[#1e254a]'} rounded-xl p-2">
+  <input type="checkbox" ${isB?'checked':''} onchange="toggleBlockRaid(${r.id},this.checked)" class="w-4 h-4 accent-[#ef4444]">
+  <div class="flex-1 min-w-0"><input id="f-raid-name-${r.id}" value="${raidNames[r.id]||r.name}" class="w-full bg-[#111536] border rounded-lg px-2 py-1 text-[10px] font-bold" oninput="updatePreview()"></div>
+  <span class="text-[9px]">$</span><input id="f-raid-price-${r.id}" value="${raidPrices[r.id]??50}" type="number" step="0.01" class="w-[80px] bg-[#111536] border rounded-lg px-2 py-2 text-[11px] font-bold" oninput="updatePreview()">
+  </div>`;
+ }).join('');
+ document.getElementById('f-perc-raid').innerHTML=`
+  <label class="bg-[#0a0e28] p-3 rounded-xl border-2 border-[#22c55e]/40"><div class="font-black text-[#22c55e]">🎮 SELFPLAY %</div><input id="f-raid-selfplay" value="${data.forever.raid.percents.selfplay??0}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-2 mt-1 font-black" oninput="updatePreview()"></label>
+  <label class="bg-[#0a0e28] p-3 rounded-xl border-2 border-[#fbbf24]/40"><div class="font-black text-[#fbbf24]">🧑‍✈️ PILOT %</div><input id="f-raid-pilot" value="${data.forever.raid.percents.pilot??0}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-2 mt-1 font-black" oninput="updatePreview()"></label>
+  <label class="bg-[#0a0e28] p-3 rounded-xl border-2 border-[#8b5cf6]/40"><div class="font-black text-[#a78bfa]">🖥️ REMOTE %</div><input id="f-raid-remote" value="${data.forever.raid.percents.remote??30}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-2 mt-1 font-black" oninput="updatePreview()"></label>
+ `;
+ if(document.getElementById('status-raid')) document.getElementById('status-raid').innerText='✅ Raid listo - '+raidBlocked.length+' bloqueadas';
+
+ // PVP 12 PACKS
+ let pvpPrices=data.forever.pvp.prices;
+ let pvpBlocked=data.forever.pvp.blocked||[];
+ let pvpNames=data.forever.pvp.names||{};
+ document.getElementById('f-pvp').innerHTML=PVP.map(p=>{
+  let isB=pvpBlocked.includes(p.id);
+  return `<div class="flex gap-2 items-center bg-[#0a0e28] border ${isB?'border-[#ef4444] bg-[#ef4444]/10':'border-[#1e254a]'} rounded-xl p-2">
+  <input type="checkbox" ${isB?'checked':''} onchange="toggleBlockPvp(${p.id},this.checked)" class="w-4 h-4 accent-[#ef4444]">
+  <div class="flex-1 min-w-0"><input id="f-pvp-name-${p.id}" value="${pvpNames[p.id]||p.name}" class="w-full bg-[#111536] border rounded-lg px-2 py-1 text-[10px] font-bold" oninput="updatePreview()"></div>
+  <span class="text-[9px]">$</span><input id="f-pvp-price-${p.id}" value="${pvpPrices[p.id]??20}" type="number" step="0.01" class="w-[80px] bg-[#111536] border rounded-lg px-2 py-2 text-[11px] font-bold" oninput="updatePreview()">
+  </div>`;
+ }).join('');
+ document.getElementById('f-perc-pvp').innerHTML=`
+  <label class="bg-[#0a0e28] p-3 rounded-xl border-2 border-[#22c55e]/40"><div class="font-black text-[#22c55e]">🎮 SELFPLAY %</div><input id="f-pvp-selfplay" value="${data.forever.pvp.percents.selfplay??0}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-2 mt-1 font-black" oninput="updatePreview()"></label>
+  <label class="bg-[#0a0e28] p-3 rounded-xl border-2 border-[#fbbf24]/40"><div class="font-black text-[#fbbf24]">🧑‍✈️ PILOT %</div><input id="f-pvp-pilot" value="${data.forever.pvp.percents.pilot??0}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-2 mt-1 font-black" oninput="updatePreview()"></label>
+  <label class="bg-[#0a0e28] p-3 rounded-xl border-2 border-[#8b5cf6]/40"><div class="font-black text-[#a78bfa]">🖥️ REMOTE %</div><input id="f-pvp-remote" value="${data.forever.pvp.percents.remote??30}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-2 mt-1 font-black" oninput="updatePreview()"></label>
+  <label class="bg-[#0a0e28] p-3 rounded-xl border-2 border-[#fbbf24]/40"><div class="font-black text-[#fbbf24]">💰 HONOR RATE $/1k</div><input id="f-pvp-honor-rate" value="${data.forever.pvp.prices.honor_rate??0.8}" type="number" step="0.01" class="w-full bg-[#111536] border rounded-lg px-2 py-2 mt-1 font-black" oninput="updatePreview()"></label>
+ `;
+ if(document.getElementById('status-pvp')) document.getElementById('status-pvp').innerText='✅ PvP listo - '+pvpBlocked.length+' bloqueadas';
+
+
+ updatePreview();
+ document.getElementById('status').innerText='✅ Dungeon listo - '+blocked.length+' bloqueadas';
+}
+
+function renderGeneric(key,container,status){
+ let cat=data.forever[key];
+ if(!cat.names) cat.names={};
+ document.getElementById(container).innerHTML=Object.keys(cat.prices).map(id=>`<div class="flex gap-2 items-center bg-[#0a0e28] border border-[#1e254a] rounded-xl p-2"><input id="f-${key}-name-${id}" value="${cat.names[id]||id}" class="flex-1 bg-[#111536] border rounded-lg px-2 py-2 text-[10px]" oninput="updatePreview()"><input id="f-${key}-price-${id}" value="${cat.prices[id]}" type="number" step="0.01" class="w-[90px] bg-[#111536] border rounded-lg px-2 py-2 text-[11px] font-bold" oninput="updatePreview()"></div>`).join('');
+ if(document.getElementById(status)) document.getElementById(status).innerText='✅ '+key+' listo';
+}
+
+function toggleBlock(id,checked){
+ if(checked){ if(!data.forever.dungeon.blocked.includes(id)) data.forever.dungeon.blocked.push(id); }
+ else{ data.forever.dungeon.blocked=data.forever.dungeon.blocked.filter(x=>x!==id); }
+ renderAll();
+}
+function toggleBlockRaid(id,checked){
+ if(checked){ if(!data.forever.raid.blocked.includes(id)) data.forever.raid.blocked.push(id); }
+ else{ data.forever.raid.blocked=data.forever.raid.blocked.filter(x=>x!==id); }
+ renderAll();
+}
+function toggleBlockPvp(id,checked){
+ if(checked){ if(!data.forever.pvp.blocked.includes(id)) data.forever.pvp.blocked.push(id); }
+ else{ data.forever.pvp.blocked=data.forever.pvp.blocked.filter(x=>x!==id); }
+ renderAll();
+}
+function blockAllNew(){ DUNGEONS.forEach(d=>{ if(d.new &&!data.forever.dungeon.blocked.includes(d.id)) data.forever.dungeon.blocked.push(d.id); }); renderAll(); }
+function clearBlocks(){ data.forever.dungeon.blocked=[]; renderAll(); }
+function blockAllHighPvp(){ [4,5,6,7,8,9,10,11].forEach(id=>{ if(!data.forever.pvp.blocked.includes(id)) data.forever.pvp.blocked.push(id); }); renderAll(); }
+function clearBlocksPvp(){ data.forever.pvp.blocked=[]; renderAll(); }
+
+function updatePreview(){
+ let out={forever:{
+   dungeon:{prices:{}, percents:{}, blocked:[]},
+   raid:{prices:{}, names:{}, percents:{}, blocked:[]},
+   pvp:{prices:{}, names:{}, percents:{}, blocked:[]}
+ }};
+ DUNGEONS.forEach(d=>{ let el=document.getElementById('price-'+d.id); if(el) out.forever.dungeon.prices[d.id]=parseFloat(el.value)||0; });
+ out.forever.dungeon.percents={
+  selfplay:parseInt(document.getElementById('f-selfplay')?.value||0),
+  pilot:parseInt(document.getElementById('f-pilot')?.value||0),
+  remote:parseInt(document.getElementById('f-remote')?.value||30)
+ };
+ out.forever.dungeon.blocked=[...data.forever.dungeon.blocked].sort((a,b)=>a-b);
+
+ RAIDS.forEach(r=>{
+  let ep=document.getElementById(`f-raid-price-${r.id}`);
+  let en=document.getElementById(`f-raid-name-${r.id}`);
+  if(ep) out.forever.raid.prices[r.id]=parseFloat(ep.value)||0;
+  if(en) out.forever.raid.names[r.id]=en.value;
+ });
+ out.forever.raid.percents={
+  selfplay:parseInt(document.getElementById('f-raid-selfplay')?.value||0),
+  pilot:parseInt(document.getElementById('f-raid-pilot')?.value||0),
+  remote:parseInt(document.getElementById('f-raid-remote')?.value||30)
+ };
+ out.forever.raid.blocked=[...data.forever.raid.blocked].sort((a,b)=>a-b);
+
+ PVP.forEach(p=>{
+  let ep=document.getElementById(`f-pvp-price-${p.id}`);
+  let en=document.getElementById(`f-pvp-name-${p.id}`);
+  if(ep) out.forever.pvp.prices[p.id]=parseFloat(ep.value)||0;
+  if(en) out.forever.pvp.names[p.id]=en.value;
+ });
+ out.forever.pvp.prices.honor_rate=parseFloat(document.getElementById('f-pvp-honor-rate')?.value||0.8);
+ out.forever.pvp.percents={
+  selfplay:parseInt(document.getElementById('f-pvp-selfplay')?.value||0),
+  pilot:parseInt(document.getElementById('f-pvp-pilot')?.value||0),
+  remote:parseInt(document.getElementById('f-pvp-remote')?.value||30)
+ };
+ out.forever.pvp.blocked=[...data.forever.pvp.blocked].sort((a,b)=>a-b);
+
+ document.getElementById('preview').value=JSON.stringify(out,null,2);
+}
+
+function saveAll(){
+ updatePreview();
+ let txt=document.getElementById('preview').value;
+ let blob=new Blob([txt],{type:'application/json'});
+ let a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='price-forever.json'; a.click();
+ document.getElementById('status').innerText='✅ Guardado! Sube el JSON';
+}
+init();
+</script>
+</body>
+</html>

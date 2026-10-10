@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ADMIN - RESPONDER</title><script src="https://cdn.tailwindcss.com"></script></head><body style="background:#070a1f;color:white;font-family:Arial" class="p-4">
+<h1 style="font-weight:900;font-size:18px">📥 ADMIN GEARHAVEN - CHATS SEPARADOS</h1>
+<p style="color:#8b92c9;font-size:11px">Fix: ya no se borra al escribir. Cada cliente chat privado.</p>
+<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+<button onclick="render(true)" style="background:#8b5cf6;color:white;padding:8px 14px;border-radius:10px;font-size:11px;font-weight:900">🔄 Recargar</button>
+<button onclick="if(confirm('¿Borrar TODO?')){localStorage.clear();render(true);}" style="background:#ef4444;color:white;padding:8px 14px;border-radius:10px;font-size:11px">&#x1F5D1;️ Borrar TODO</button>
+<label style="display:flex;align-items:center;gap:6px;font-size:11px;color:#8b92c9"><input type="checkbox" id="autoRefresh" checked> Auto-recarga cada 5s</label>
+</div>
+<div id="list" style="margin-top:16px;display:flex;flex-direction:column;gap:14px"></div>
+
+<script>
+let lastIndexLength = 0;
+let savedInputs = {}; // Guarda lo que escribes para que no se borre
+
+function saveCurrentInputs(){
+  document.querySelectorAll('[id^="inp_"]').forEach(inp=>{
+    savedInputs[inp.id] = inp.value;
+  });
+}
+
+function render(force=false){
+  // Si alguien está escribiendo y no es forzado, no recargar para no borrar
+  let isTyping = document.activeElement && document.activeElement.tagName === 'INPUT';
+  if(isTyping &&!force){
+    // Solo recargar si hay mensajes nuevos
+    let index=JSON.parse(localStorage.getItem('gearhaven_chat_index')||'[]');
+    if(index.length === lastIndexLength) return;
+  }
+
+  saveCurrentInputs();
+
+  let index=JSON.parse(localStorage.getItem('gearhaven_chat_index')||'[]');
+  let cont=document.getElementById('list');
+
+  // Solo re-render si hay cambios o es forzado
+  if(!force && index.length === lastIndexLength && isTyping) return;
+  lastIndexLength = index.length;
+
+  if(index.length===0){cont.innerHTML='<div style="color:#8b92c9;text-align:center;padding:40px">No hay mensajes<br>Abre bundle.html, logueate y escribe</div>';return;}
+
+  let users={};
+  index.forEach(e=>{
+    let key=e.userKey||(e.user?.email||e.user?.username||'guest').toLowerCase().replace(/[^a-z0-9]/g,'_');
+    if(!users[key]) users[key]={key:key, user:e.user, msgs:[]};
+    users[key].msgs.push(e);
+  });
+
+  cont.innerHTML=Object.values(users).map((u,i)=>{
+    let safeId='user_'+i;
+    let inpId='inp_'+safeId;
+    let currentValue = savedInputs[inpId] || '';
+
+    let msgsHtml=u.msgs.slice().reverse().map(m=>`
+      <div style="margin-top:6px;padding:8px 10px;border-radius:10px;${m.who==='user'?'background:#111536;border:1px solid #2a3366':'background:#052e16;border:1px solid #22c55e'}">
+        <div style="font-size:9px;color:#8b92c9">${m.time} &#x2022; ${m.categoria} &#x2022; ${m.who}</div>
+        <div style="font-size:13px;color:${m.who==='user'?'white':'#22c55e'};margin-top:4px;word-break:break-word">${m.text}</div>
+      </div>
+    `).join('');
+
+    return `
+      <div style="background:#111536;border:2px solid #2a3366;border-radius:16px;padding:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="display:flex;gap:10px;align-items:center">
+            <div style="width:40px;height:40px;background:linear-gradient(135deg,#8b5cf6,#22c55e);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900">${(u.user?.username||'G').charAt(0).toUpperCase()}</div>
+            <div><div style="font-weight:900;font-size:14px">${u.user?.username||'guest'}</div><div style="font-size:11px;color:#8b92c9">📧 ${u.user?.email||'no email'} &#x2022; Key: ${u.key} &#x2022; ${u.msgs.length} msgs</div></div>
+          </div>
+          <button onclick="deleteUser('${u.key}')" style="background:#1e254a;border:1px solid #ef4444;color:#ef4444;padding:6px 10px;border-radius:20px;font-size:9px">&#x1F5D1;️ Borrar</button>
+        </div>
+        <div style="margin-top:12px;max-height:260px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;background:#070a1f;border-radius:10px;padding:8px;border:1px solid #1e254a">${msgsHtml}</div>
+        <div style="margin-top:12px;background:#070a1f;border:2px solid #22c55e;border-radius:12px;padding:10px">
+          <div style="font-size:10px;font-weight:900;color:#22c55e;margin-bottom:6px">✍️ RESPONDER A ${u.user?.username||'guest'}:</div>
+          <div style="display:flex;gap:8px">
+            <input id="${inpId}" value="${currentValue.replace(/"/g,'&quot;')}" placeholder="Escribe como moderador..." style="flex:1;background:#0a0e28;border:1px solid #2a3366;border-radius:20px;padding:10px 14px;color:white;font-size:12px;outline:none" oninput="savedInputs['${inpId}']=this.value">
+            <button onclick="reply('${u.key}','${safeId}')" style="background:linear-gradient(135deg,#22c55e,#16a34a);color:black;border:none;border-radius:20px;padding:10px 18px;font-size:12px;font-weight:900;cursor:pointer">Enviar ➤</button>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+            <button onclick="quickReply('${u.key}','${safeId}','Hola ${u.user?.username||''}, ¿en qué te ayudo?')" style="font-size:9px;background:#111536;border:1px solid #1e254a;color:#8b92c9;padding:4px 8px;border-radius:20px">Hola</button>
+            <button onclick="quickReply('${u.key}','${safeId}','Ya revisé tu pago, dame un momento')" style="font-size:9px;background:#1a1500;border:1px solid #f59e0b;color:#fbbf24;padding:4px 8px;border-radius:20px">Revisando pago</button>
+            <button onclick="quickReply('${u.key}','${safeId}','Tu pedido está en proceso')" style="font-size:9px;background:#111536;border:1px solid #1e254a;color:#8b92c9;padding:4px 8px;border-radius:20px">En proceso</button>
+            <button onclick="quickReply('${u.key}','${safeId}','Listo, solucionado ✅')" style="font-size:9px;background:#052e16;border:1px solid #22c55e;color:#22c55e;padding:4px 8px;border-radius:20px">Solucionado ✅</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function deleteUser(key){
+  if(!confirm('¿Borrar chat de '+key+'?')) return;
+  saveCurrentInputs();
+  let index=JSON.parse(localStorage.getItem('gearhaven_chat_index')||'[]');
+  index=index.filter(e=> (e.userKey||'')!==key);
+  localStorage.setItem('gearhaven_chat_index',JSON.stringify(index));
+  localStorage.removeItem('gearhaven_support_chat_'+key);
+  localStorage.removeItem('gearhaven_last_notice_'+key);
+  delete savedInputs['inp_user_'+key];
+  render(true);
+}
+
+function quickReply(key,safeId,text){
+  let id='inp_'+safeId;
+  savedInputs[id]=text;
+  document.getElementById(id).value=text;
+  document.getElementById(id).focus();
+}
+
+function reply(key,safeId){
+  let id='inp_'+safeId;
+  let input=document.getElementById(id);
+  if(!input) input=document.querySelector(`#${id}`);
+  let text=input.value.trim();
+  if(!text){alert('Escribe algo'); return;}
+
+  // Guarda en chat privado de ese usuario
+  let chatKey='gearhaven_support_chat_'+key;
+  let chat=JSON.parse(localStorage.getItem(chatKey)||'[]');
+  chat.push({text:text, role:'moderator', time:new Date().toLocaleTimeString(), ts:Date.now()});
+  localStorage.setItem(chatKey,JSON.stringify(chat));
+
+  // También en index
+  let index=JSON.parse(localStorage.getItem('gearhaven_chat_index')||'[]');
+  let found=index.find(e=>e.userKey===key);
+  let userObj=found?found.user:{username:key};
+  index.push({id:Date.now(),text:`MODERADOR: ${text}`,categoria:'moderator-reply',who:'moderator',user:userObj,userKey:key,lang:'es',time:new Date().toLocaleString(),ts:Date.now()});
+  localStorage.setItem('gearhaven_chat_index',JSON.stringify(index));
+
+  input.value='';
+  savedInputs[id]='';
+  render(true);
+}
+
+render(true);
+
+setInterval(()=>{
+  let auto = document.getElementById('autoRefresh');
+  if(auto &&!auto.checked) return;
+  render(false);
+},5000);
+</script></body></html>

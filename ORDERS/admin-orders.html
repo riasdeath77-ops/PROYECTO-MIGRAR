@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADMIN - Órdenes | GEARHAVEN</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>body{font-family:Arial;background:#0a0e28;color:#fff}</style>
+</head>
+<body class="p-4 md:p-6">
+<div class="max-w-[1150px] mx-auto">
+
+<div class="flex justify-between items-center mb-6">
+  <h1 class="text-[22px] font-black">🔐 ADMIN - Gestión de Pedidos</h1>
+  <div class="flex gap-2">
+    <button onclick="location.href='./bundle.html'" class="text-[11px] bg-[#1a204f] border border-[#2a3366] px-3 py-2 rounded-full">&#x2190; Tienda</button>
+    <button onclick="location.href='./cart.html'" class="text-[11px] bg-[#1a204f] border border-[#2a3366] px-3 py-2 rounded-full">&#x1F6D2; Cart</button>
+    <button onclick="location.reload()" class="text-[11px] bg-[#8b5cf6] px-3 py-2 rounded-full font-bold">🔄 Recargar</button>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="grid grid-cols-2 md:grid-cols-6 gap-2 mb-6">
+  <div class="bg-[#151a40] border border-[#2a3366] rounded-xl p-3 text-center"><div class="text-[9px] text-[#8b92c9]">TOTAL</div><div id="totalOrders" class="text-[20px] font-black">0</div></div>
+  <div class="bg-[#151a40] border border-[#f59e0b]/30 rounded-xl p-3 text-center"><div class="text-[9px] text-[#f59e0b]">PENDIENTE</div><div id="pendingOrders" class="text-[20px] font-black text-[#f59e0b]">0</div></div>
+  <div class="bg-[#151a40] border border-[#22c55e]/30 rounded-xl p-3 text-center"><div class="text-[9px] text-[#22c55e]">VERIFICADO</div><div id="verifiedOrders" class="text-[20px] font-black text-[#22c55e]">0</div></div>
+  <div class="bg-[#151a40] border border-[#3b82f6]/30 rounded-xl p-3 text-center"><div class="text-[9px] text-[#3b82f6]">EN CURSO</div><div id="progressOrders" class="text-[20px] font-black text-[#3b82f6]">0</div></div>
+  <div class="bg-[#151a40] border border-[#a855f7]/30 rounded-xl p-3 text-center"><div class="text-[9px] text-[#a855f7]">COMPLETADO</div><div id="completedOrders" class="text-[20px] font-black text-[#a855f7]">0</div></div>
+  <div class="bg-[#151a40] border border-[#8b5cf6]/30 rounded-xl p-3 text-center"><div class="text-[9px] text-[#8b5cf6]">VENTAS USD</div><div id="totalSales" class="text-[16px] font-black">$0</div></div>
+</div>
+
+<!-- FILTROS -->
+<div class="bg-[#111536] border border-[#1e254a] rounded-xl p-3 mb-4 flex flex-wrap gap-2 items-center">
+  <input id="searchInput" oninput="renderOrders()" placeholder="&#x1F50D; Buscar ID, título, DUNGEON, MULTI..." class="flex-1 min-w-[180px] bg-[#0a0e28] border border-[#2a3366] rounded-lg px-3 py-2 text-[11px]">
+  <select id="filterStatus" onchange="renderOrders()" class="bg-[#0a0e28] border border-[#2a3366] rounded-lg px-3 py-2 text-[11px]">
+    <option value="all">Todos los estados</option>
+    <option value="PENDING_VERIFICATION">&#x1F7E1; Pendiente Verificación</option>
+    <option value="PAID_VERIFIED">&#x1F7E2; Pago Verificado</option>
+    <option value="IN_PROGRESS">&#x1F535; En Progreso</option>
+    <option value="COMPLETED">✅ Completado</option>
+    <option value="DELAYED">🟠 Retrasado</option>
+    <option value="CANCELLED">&#x1F534; Cancelado</option>
+    <option value="REFUNDED">⚫ Reembolsado</option>
+  </select>
+  <select id="filterType" onchange="renderOrders()" class="bg-[#0a0e28] border border-[#8b5cf6] rounded-lg px-3 py-2 text-[11px] font-bold">
+    <option value="all">&#x1F4E6; Todos</option>
+    <option value="single">&#x1F4E6; Singles</option>
+    <option value="multi">&#x1F6D2; Canastas MULTI</option>
+  </select>
+  <button onclick="exportOrders()" class="bg-[#22c55e] text-black font-bold px-4 py-2 rounded-lg text-[10px]">📥 CSV</button>
+</div>
+
+<div id="ordersContainer" class="grid gap-3"></div>
+<div id="emptyMsg" style="display:none" class="bg-[#151a40] border border-[#2a3366] rounded-xl p-10 text-center text-[#6b77b5] text-[12px]">No hay órdenes.</div>
+</div>
+
+<script>
+const ADMIN_PASS="gearhaven123";
+if(localStorage.getItem('gearhaven_admin_auth')!=='ok'){
+  let p=prompt('🔐 Contraseña Admin:'); if(p!==ADMIN_PASS){alert('Incorrecta'); location.href='./bundle.html';} else localStorage.setItem('gearhaven_admin_auth','ok');
+}
+let mainImg=localStorage.getItem('bundle_main_img')||'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600';
+function getOrders(){return JSON.parse(localStorage.getItem('gearhaven_orders')||'[]');}
+function saveOrders(a){localStorage.setItem('gearhaven_orders',JSON.stringify(a));}
+
+const STATUS_CONFIG={
+  PENDING_VERIFICATION:{label:'Pendiente',color:'bg-[#f59e0b] text-black',dot:'&#x1F7E1;'},
+  PAID_VERIFIED:{label:'Verificado',color:'bg-[#22c55e] text-black',dot:'&#x1F7E2;'},
+  IN_PROGRESS:{label:'En Curso',color:'bg-[#3b82f6] text-white',dot:'&#x1F535;'},
+  COMPLETED:{label:'Completado',color:'bg-[#a855f7] text-white',dot:'✅'},
+  DELAYED:{label:'Retrasado',color:'bg-[#f97316] text-black',dot:'🟠'},
+  CANCELLED:{label:'Cancelado',color:'bg-[#ef4444] text-white',dot:'&#x1F534;'},
+  REFUNDED:{label:'Reembolsado',color:'bg-[#6b7280] text-white',dot:'⚫'}
+};
+
+function renderOrders(){
+  let orders=getOrders();
+  let filter=document.getElementById('filterStatus').value;
+  let typeFilter=document.getElementById('filterType').value;
+  let search=document.getElementById('searchInput').value.toLowerCase();
+  let filtered=orders.filter(o=>{
+    if(filter!=='all'&&o.status!==filter) return false;
+    if(typeFilter==='single'&&o.isCart) return false;
+    if(typeFilter==='multi'&&!o.isCart) return false;
+    if(search){
+      let hay = (o.id||'').toLowerCase().includes(search) ||
+                (o.title||'').toLowerCase().includes(search) ||
+                (o.dungeons||'').toLowerCase().includes(search) ||
+                (o.isCart&&'multi canasta'.includes(search));
+      if(!hay) return false;
+    }
+    return true;
+  });
+
+  document.getElementById('totalOrders').innerText=orders.length;
+  document.getElementById('pendingOrders').innerText=orders.filter(o=>o.status==='PENDING_VERIFICATION').length;
+  document.getElementById('verifiedOrders').innerText=orders.filter(o=>o.status==='PAID_VERIFIED').length;
+  document.getElementById('progressOrders').innerText=orders.filter(o=>o.status==='IN_PROGRESS').length;
+  document.getElementById('completedOrders').innerText=orders.filter(o=>o.status==='COMPLETED').length;
+  let total=orders.filter(o=>!['CANCELLED','REFUNDED'].includes(o.status)).reduce((s,o)=>s+(parseFloat(o.usd)||0),0);
+  document.getElementById('totalSales').innerText='$'+total.toFixed(2);
+
+  let container=document.getElementById('ordersContainer');
+  if(filtered.length===0){container.innerHTML='';document.getElementById('emptyMsg').style.display='block';return;}
+  document.getElementById('emptyMsg').style.display='none';
+
+  container.innerHTML=filtered.map(o=>{
+    let idx=getOrders().findIndex(x=>x.id===o.id);
+    let num=getOrders().length-idx;
+    let cfg=STATUS_CONFIG[o.status]||STATUS_CONFIG.PENDING_VERIFICATION;
+    let isMulti=o.isCart;
+    let img=o.isCart && o.items && o.items[0]? o.items[0].img : mainImg;
+
+    // BLOQUE DUNGEONS - NUEVO
+    let dungeonsBlock = '';
+    if(o.dungeons){
+      let countD = o.dungeonList? o.dungeonList.length : (o.dungeonIds? o.dungeonIds.length : '');
+      dungeonsBlock = `
+        <div class="mt-2 bg-[#0a0e28] border border-[#8b5cf6]/40 rounded-lg p-2">
+          <div class="text-[8px] text-[#8b5cf6] font-black mb-1">&#x1F5FA;&#xFE0F; DUNGEONS SELECCIONADAS ${countD? '('+countD+')' : ''}:</div>
+          <div class="text-[11px] text-[#22c55e] font-bold leading-[1.3]">${o.dungeons}</div>
+          ${o.tier?`<div class="text-[8px] text-[#8b92c9] mt-1">Tier: ${o.tier.toUpperCase()} ${o.traders?`| Traders: ${o.traders}`:''} ${o.keys?`| Keys: ${o.keys}`:''}</div>`:''}
+        </div>`;
+    } else if(o.type==='KMASTER' && o.title){
+      dungeonsBlock = `<div class="mt-2 text-[10px] text-[#f59e0b]">⚠️ KMASTER sin dungeons (es FULL)</div>`;
+    }
+
+    return `
+    <div class="bg-[#151a40] border ${isMulti?'border-[#8b5cf6] border-2':'border-[#2a3366]'} rounded-2xl p-4">
+      <div class="flex gap-4 items-start">
+        <div class="text-center min-w-[55px]">
+          <div class="text-[9px] text-[#8b92c9]">ORDEN</div>
+          <div class="text-[18px] font-black">#${num}</div>
+          <div class="text-[7px] bg-[#0a0e28] border border-[#2a3366] rounded px-1 mt-1 break-all">${o.id}</div>
+          ${isMulti?`<div class="text-[7px] bg-[#8b5cf6] text-white px-2 py-0.5 rounded-full mt-1 font-black">&#x1F6D2; MULTI x${o.count}</div>`:''}
+          ${o.type==='KMASTER'?`<div class="text-[7px] bg-[#f59e0b] text-black px-2 py-0.5 rounded-full mt-1 font-black">KMASTER</div>`:''}
+        </div>
+        <img src="${img}" class="w-[65px] h-[65px] rounded-xl object-cover border border-[#2a3366]">
+        <div class="flex-1">
+          <div class="font-black text-[13px]">${isMulti?`&#x1F6D2; Canasta ${o.count} productos - ${o.title}`:o.title||'Mythic+ Bundle'} ${isMulti?'<span class="text-[9px] bg-[#8b5cf6] px-2 py-0.5 rounded-full ml-2">CANASTA UNICA</span>':''}</div>
+
+          ${isMulti?`
+            <div class="mt-2 bg-[#0a0e28] border border-[#1e254a] rounded-lg p-2">
+              <div class="text-[8px] text-[#8b92c9] font-bold mb-1">&#x1F4E6; Productos en esta orden (1 sola orden):</div>
+              ${o.items.map(it=>`<div class="text-[10px] text-[#c2c8e8]">${it.dungeons? '&#x1F5FA;&#xFE0F; '+it.dungeons+' | ' : ''}&#x2022; ${it.title} ${it.tier? '('+it.tier+')' : ''} ${it.traders? it.traders+' traders':''} | ${it.mode||''} | ${it.symbol}${it.price}</div>`).join('')}
+            </div>
+          `:`
+            <div class="text-[10px] text-[#8b92c9] mt-1">+${o.level||o.keys||10} ${o.bundle?'x'+o.bundle:''} | ${o.mode||'self'} | ${o.method||'PayPal'} | $${o.usd} USD ${o.tier?`| ${o.tier}`:''}</div>
+          `}
+
+          ${dungeonsBlock}
+
+          ${o.customer?`<div class="text-[9px] text-[#8b92c9] mt-2 bg-[#0a0e28] rounded px-2 py-1">&#x1F464; ${o.customer.charName} - ${o.customer.realm} | BT: ${o.customer.btag} | WA: ${o.customer.contactPhone}</div>`:''}
+
+          <div class="mt-2 flex gap-2 items-center flex-wrap">
+            <span class="text-[11px] font-black bg-[#0a0e28] border border-[#2a3366] px-2 py-1 rounded-full">${o.symbol||'$'}${o.price} ${o.currency||'USD'} ${isMulti?`TOTAL ${o.count} ITEMS`:''}</span>
+            <span class="text-[9px] px-2 py-1 rounded-full font-bold ${cfg.color}">${cfg.dot} ${cfg.label}</span>
+          </div>
+          <div class="text-[8px] text-[#6b77b5] mt-1">📅 ${o.date} ${o.status_history?` | Historial: ${o.status_history.length} cambios`:''} ${isMulti?` | 🔥 ORDEN UNICA MULTI`:''}</div>
+        </div>
+        <div class="flex flex-col gap-1 min-w-[125px]">
+          <select onchange="changeStatus(${idx},this.value)" class="bg-[#0a0e28] border border-[#2a3366] rounded-lg px-2 py-2 text-[10px] font-bold">
+            <option value="">Cambiar estado...</option>
+            <option value="PENDING_VERIFICATION">&#x1F7E1; Pendiente</option>
+            <option value="PAID_VERIFIED">&#x1F7E2; Verificado</option>
+            <option value="IN_PROGRESS">&#x1F535; En Progreso</option>
+            <option value="COMPLETED">✅ Completado</option>
+            <option value="DELAYED">🟠 Retrasado</option>
+            <option value="CANCELLED">&#x1F534; Cancelado</option>
+            <option value="REFUNDED">⚫ Reembolsado</option>
+          </select>
+          <div class="grid grid-cols-2 gap-1">
+            <button onclick="quickStatus(${idx},'COMPLETED')" class="bg-[#a855f7] text-white py-1.5 rounded text-[9px] font-bold">✅ Listo</button>
+            <button onclick="quickStatus(${idx},'IN_PROGRESS')" class="bg-[#3b82f6] text-white py-1.5 rounded text-[9px] font-bold">&#x1F535; Curso</button>
+            <button onclick="quickStatus(${idx},'DELAYED')" class="bg-[#f97316] text-black py-1.5 rounded text-[9px] font-bold">🟠 Retraso</button>
+            <button onclick="quickStatus(${idx},'REFUNDED')" class="bg-[#6b7280] text-white py-1.5 rounded text-[9px]">Reembolso</button>
+          </div>
+          <button onclick="copySimpleOrder(${idx})" class="bg-[#8b5cf6] text-white py-2 rounded-lg text-[9px] font-black">&#x1F4CB; Copy Orden (sin precio)</button>
+          <button onclick="copyFullOrder(${idx})" class="bg-[#1a204f] border border-[#8b5cf6] py-2 rounded-lg text-[8px] font-bold">&#x1F4CB; Copy FULL con precio</button>
+          <button onclick="copyLink(${idx})" class="bg-[#1a204f] border border-[#2a3366] py-1.5 rounded text-[8px]">&#x1F517; Link Cliente</button>
+          <button onclick="del(${idx})" class="text-[#ef4444] text-[8px] mt-1">Borrar</button>
+        </div>
+      </div>
+      ${o.status_history?`<div class="mt-3 pt-3 border-t border-[#1e254a]"><div class="text-[9px] text-[#8b92c9] font-bold mb-1">&#x1F4CB; Historial:</div><div class="flex flex-wrap gap-1">${o.status_history.map(h=>`<span class="text-[8px] bg-[#0a0e28] border border-[#2a3366] px-2 py-0.5 rounded-full">${h.status} - ${h.date}</span>`).join('')}</div></div>`:''}
+    </div>`;
+  }).join('');
+}
+
+function changeStatus(i,newStatus){
+  if(!newStatus) return;
+  let orders=getOrders();
+  let oldStatus=orders[i].status;
+  if(oldStatus===newStatus) return;
+  if(!orders[i].status_history) orders[i].status_history=[];
+  orders[i].status_history.push({status:oldStatus,date:new Date().toLocaleString()});
+  orders[i].status=newStatus;
+  orders[i].last_update=new Date().toLocaleString();
+  if(newStatus==='PAID_VERIFIED'&&!orders[i].verified_date) orders[i].verified_date=new Date().toLocaleString();
+  saveOrders(orders);
+  renderOrders();
+  if(newStatus==='COMPLETED'){ alert('✅ Orden '+orders[i].id+' COMPLETADA'); }
+  else if(newStatus==='DELAYED'){ let r=prompt('Motivo del retraso:','Equipo PRO con alta demanda'); if(r) orders[i].delay_reason=r; saveOrders(orders); }
+}
+
+function quickStatus(i,s){ changeStatus(i,s); }
+
+function copySimpleOrder(i){
+  let o=getOrders()[i];
+  let txt='';
+  if(o.isCart){
+    txt=`${o.id} - CANASTA ${o.count} PRODUCTOS (ORDEN UNICA)
+${o.items.map(it=>`- ${it.dungeons? it.dungeons+' | ' : ''}${it.title} +${it.level||''} x${it.bundle||''} | ${it.mode||''}`).join('\n')}
+Status: ${o.status}
+Cliente: ${o.customer?o.customer.charName+' - '+o.customer.btag:''}`;
+  } else {
+    txt=`${o.id} - ${o.title}
+DUNGEONS: ${o.dungeons||'FULL - All Dungeons'}
+Tier: ${o.tier||''} | Traders: ${o.traders||''} | +${o.level||o.keys||10} x${o.bundle||3} | ${o.mode||'self'} | ${o.status}
+Cliente: ${o.customer?o.customer.charName:''}`;
+  }
+  navigator.clipboard.writeText(txt);
+  alert('✅ Orden copiada SIN PRECIO:\n'+txt);
+}
+
+function copyFullOrder(i){
+  let o=getOrders()[i];
+  let txt='';
+  if(o.isCart){
+    txt=`${o.id} - CANASTA ${o.count} ITEMS - TOTAL ${o.symbol}${o.price} ${o.currency}
+${o.items.map(it=>`- ${it.dungeons? it.dungeons+' | ' : ''}${it.title} +${it.level||''} x${it.bundle||''} ${it.mode||''} = ${it.symbol}${it.price}`).join('\n')}
+TOTAL USD: $${o.usd} | Status: ${o.status} | Cliente: ${o.customer?o.customer.charName+' '+o.customer.btag:''}`;
+  } else {
+    txt=`${o.id} - ${o.title} = ${o.symbol}${o.price} ${o.currency} ($${o.usd} USD)
+DUNGEONS: ${o.dungeons||'FULL'}
+Tier: ${o.tier||''} | Traders: ${o.traders||''} | +${o.level||o.keys||''} x${o.bundle||''} | ${o.mode} | ${o.status}`;
+  }
+  navigator.clipboard.writeText(txt);
+  alert('✅ FULL copiado:\n'+txt);
+}
+
+function copyLink(i){
+  let o=getOrders()[i];
+  let base=window.location.origin+window.location.pathname.replace('admin-orders.html','');
+  let cfg=STATUS_CONFIG[o.status]||{label:o.status};
+  let link='';
+  if(o.isCart){
+    link=`${base}thankyou.html?verified=${o.status==='PAID_VERIFIED'||o.status==='COMPLETED'?'true':'false'}&order_id=${o.id}&is_cart=1&cart_total=${o.price}&cart_usd=${o.usd}&currency=${o.currency}&symbol=${encodeURIComponent(o.symbol||'$')}&count=${o.count}`;
+  } else {
+    link=`${base}thankyou.html?verified=${o.status==='PAID_VERIFIED'||o.status==='COMPLETED'?'true':'false'}&order_id=${o.id}&status=${o.status}&title=${encodeURIComponent(o.title)}&price=${o.price}&usd=${o.usd}&currency=${o.currency}&symbol=${encodeURIComponent(o.symbol||'$')}&level=${o.level}&bundle=${o.bundle}&mode=${o.mode}&dungeons=${encodeURIComponent(o.dungeons||'')}`;
+  }
+  navigator.clipboard.writeText(link);
+  alert(`Link copiado (${cfg.label}):\n`+link);
+}
+function del(i){ if(!confirm('¿Borrar orden '+getOrders()[i].id+'?')) return; let orders=getOrders(); orders.splice(i,1); saveOrders(orders); renderOrders(); }
+function exportOrders(){
+  let orders=getOrders(); let csv='Num,ID,Tipo,Count,Titulo,Dungeons,Tier,Traders,Precio,Currency,USD,Modo,Level,Bundle,Metodo,Cliente,Realm,BT,WA,Fecha,Estado\n';
+  orders.forEach((o,i)=>{
+    let num=orders.length-i;
+    let tipo=o.isCart?'MULTI':'SINGLE';
+    let titulo=o.isCart?`CANASTA ${o.count} ITEMS - `+o.items.map(it=>it.title+'+'+(it.level||'')+'x'+(it.bundle||'')).join('|'):`"${(o.title||'').replace(/"/g,'""')}"`;
+    let dungeonsCSV = `"${(o.dungeons||'').replace(/"/g,'""')}"`;
+    csv+=`${num},${o.id},${tipo},${o.count||1},${titulo},${dungeonsCSV},${o.tier||''},${o.traders||''},${o.price},${o.currency},${o.usd},${o.mode||''},${o.level||o.keys||''},${o.bundle||''},${o.method||''},"${o.customer?.charName||''}","${o.customer?.realm||''}","${o.customer?.btag||''}","${o.customer?.contactPhone||''}","${o.date}",${o.status}\n`;
+  });
+  let blob=new Blob([csv],{type:'text/csv'}); let url=URL.createObjectURL(blob); let a=document.createElement('a'); a.href=url; a.download='ordenes_'+new Date().toISOString().slice(0,10)+'.csv'; a.click();
+}
+renderOrders();
+</script>
+</body>
+</html>

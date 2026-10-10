@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buy Mythic +10 Boost - 311 ilvl Hero + 318 Vault + Myth Mistcrests | WoW Midnight S2 | GearHaven</title>
+<meta name="description" content="Buy Mythic +10 Boost - Gear cap in Midnight Season 2. 311 ilvl Hero 3/6 end chest, 318 Myth 1/6 Great Vault, 12 Myth Mistcrests, teleport at +10 timed, 2 traders free. In-time included.">
+<link rel="icon" type="image/png" href="./imagenes/favicon.jpg">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18496576661"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-18496576661');
+</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  html, body { max-width: 100vw!important; overflow-x: hidden!important; }
+    * { box-sizing: border-box; }
+  body{font-family:Arial;background:#0a0e28;color:#fff;margin:0}
+  /* FIX IMAGENES SIN ROMPER TUS CARDS */
+  img { max-width: 100%; height: auto; }
+  #bundleImg,.like-img,.hero-banner img { height: 100%!important; max-width: none!important; }
+  #bundleImg{height:160px!important; width:100%!important; object-fit:cover;}
+ .like-img{height:90px!important; width:100%!important; object-fit:cover;}
+
+  /*...resto igual... */
+  #bgOverlay{position:fixed;inset:0;background:url('./Keys/fondokeys.jpg') center/cover no-repeat;opacity:0.06;pointer-events:none;z-index:-1}
+ .check{width:18px;height:18px;border:1px solid #2a3366;background:#0e1230;border-radius:4px;accent-color:#8b5cf6}
+ .admin-img-btn{display:none;position:absolute;top:6px;right:6px;z-index:20;background:rgba(0,0,0,0.85);border:1px solid #8b5cf6;border-radius:6px;padding:4px 8px;font-size:9px;color:white;cursor:pointer}
+ .admin-bg-btn{display:none;position:fixed;top:70px;left:12px;z-index:60;background:#22c55e;color:black;border-radius:20px;padding:7px 14px;font-size:10px;font-weight:900;cursor:pointer}
+ .hero-banner{position:relative;height:175px;border-radius:16px;overflow:hidden;border:1px solid #1e254a;margin-bottom:16px;background:#0a0e28}
+ .hero-banner img{width:100%;height:100%;object-fit:cover;object-position:center center;display:block}
+ .hero-banner::after{content:'';position:absolute;inset:0;background:linear-gradient(to right, #0a0e28 20%, transparent 70%), linear-gradient(to top, #0a0e28 10%, transparent 60%);pointer-events:none}
+ .hero-text{position:absolute;left:0;top:0;bottom:0;z-index:2;display:flex;flex-direction:column;justify-content:center;padding:18px;pointer-events:none}
+ .dungeon-btn.selected{background:#8b5cf6!important;border-color:#8b5cf6!important;color:white}
+ .trader-btn.active{background:#151a40!important;border-color:#8b5cf6!important;color:white;box-shadow:0 0 0 1px #8b5cf6}
+  #chatModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:100;align-items:center;justify-content:center;padding:20px}
+  #chatModal.show{display:flex}
+  #toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#8b5cf6;color:#fff;padding:12px 24px;border-radius:30px;font-weight:900;font-size:12px;z-index:200;display:none;white-space:nowrap}
+  input[type=range]{-webkit-appearance:none;width:100%;height:6px;background:#1e254a;border-radius:5px;outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;background:#8b5cf6;border-radius:50%;cursor:pointer;border:2px solid white}
+ .loot-table th{background:#151a40;color:#8b92c9;font-size:10px;text-transform:uppercase}
+ .loot-table td{font-size:11px;border-top:1px solid #1e254a;line-height:1.3}
+  #levelSelect{ background-color:#0e1230!important; color:#ffffff!important; border:none!important; outline:none!important; width:75%; font-size:12px; font-weight:800; }
+  #levelSelect option{ background-color:#0e1230!important; color:#ffffff!important; font-weight:700; padding:10px; }
+
+  @media (max-width: 768px) {
+    header { padding-left: 12px!important; padding-right: 12px!important; flex-wrap: wrap!important; }
+   .hero-banner{height:130px!important}
+  }
+</style>
+</head>
+<body>
+<!-- HEADER FINAL - UNICO -->
+<!-- HEADER FINAL - UNICO - USA ONLY -->
+<header class="flex justify-between items-center px-6 py-3 bg-[#0f1333] border-b border-[#1e254a] sticky top-0 z-30 gap-4">
+  <div onclick="location.href='./midnight.html'" class="font-black text-[20px] tracking-wider cursor-pointer shrink-0">GEAR<span class="text-[#8b5cf6]">HAVEN</span> <span class="text-[9px] bg-[#1a204f] border border-[#2a3366] px-2 py-1 rounded-full ml-2">HOME</span></div>
+  <div class="flex-1 max-w-[480px] relative mx-4 hidden md:block">
+    <input id="globalSearch" type="text" placeholder="&#x1F50D; Search all boosts..." class="w-full bg-[#0a0e28] border border-[#2a3366] rounded-full px-5 py-2 text-[12px] text-white outline-none focus:border-[#8b5cf6]">
+    <div id="globalResults" class="absolute top-[115%] left-0 w-full bg-[#111536] border border-[#2a3366] rounded-xl z-50 hidden max-h-[400px] overflow-y-auto"></div>
+  </div>
+  <div class="px-4 pt-2">
+    <button onclick="location.href='./midnight.html'" class="inline-flex items-center gap-2 text-[11px] font-bold bg-[#111536] border border-[#2a3366] text-[#c2c8e8] hover:text-white hover:border-[#8b5cf6] hover:bg-[#1a204f] px-5 py-3 rounded-full transition-all">
+    <span>&#x2190;</span> Back
+  </button>
+  </div>
+  <div class="flex gap-2 items-center shrink-0">
+    <div class="text-[11px] bg-[#0e1230] border border-[#2a3366] px-3 py-2 rounded-full font-bold text-[#8b92c9]">EN</div>
+    <div id="ghNavUserWrap" class="relative">
+      <div id="ghNavUserGuest" class="flex items-center">
+        <button onclick="location.href='./account.html'" class="text-[11px] bg-[#111536] border border-[#2a3366] text-[#c2c8e8] px-3.5 py-2 rounded-l-full font-bold">&#x1F464; Sign In</button>
+        <button onclick="location.href='./account.html'" class="text-[11px] bg-[#8b5cf6] text-white px-4 py-2 rounded-r-full font-black">Sign Up</button>
+      </div>
+      <div id="ghNavUserLogged" class="hidden items-center gap-2 bg-[#111536] border border-[#2a3366] pl-1 pr-3 py-1 rounded-full cursor-pointer" onclick="ghToggleUserMenu(event)">
+        <div id="ghNavAvatar" class="w-[28px] h-[28px] bg-gradient-to-br from-[#8b5cf6] to-[#22c55e] rounded-full flex items-center justify-center font-black text-[11px]">R</div>
+        <span id="ghNavName" class="text-[12px] font-bold text-white max-w-[90px] truncate">User</span>
+      </div>
+      <div id="ghUserDropdown" class="hidden absolute top-[120%] right-0 w-[210px] bg-[#0f1333] border border-[#2a3366] rounded-xl overflow-hidden z-50">
+        <div class="p-3 border-b border-[#1e254a] bg-[#111536]"><div id="ghDropName" class="font-black text-[12px] text-white">User</div><div id="ghDropEmail" class="text-[10px] text-[#8b92c9] truncate">email</div></div>
+        <div class="p-2.5 text-[11px] text-[#c2c8e8] cursor-pointer hover:bg-[#1a204f]" onclick="location.href='./account.html'">&#x1F464; My Account</div>
+        <div class="p-2.5 text-[11px] text-[#c2c8e8] cursor-pointer hover:bg-[#1a204f]" onclick="location.href='./account.html#orders'">&#x1F4E6; My Orders</div>
+        <div class="p-2.5 text-[11px] text-[#ef4444] cursor-pointer hover:bg-[#1a1500] border-t border-[#1e254a]" onclick="ghLogout(event)">&#x1F6AA; Logout</div>
+      </div>
+    </div>
+    <button onclick="location.href='./cart.html'" class="text-[11px] bg-[#8b5cf6] px-4 py-2 rounded-full font-bold">&#x1F6D2; Cart (<span id="cartCount">0</span>)</button>
+  </div>
+</header>
+<script>
+// UNICO SISTEMA - NO REVIVE CUENTAS VIEJAS
+function ghDetectNavUser(){
+  try{
+    let raw=localStorage.getItem('gearhaven_current_user');
+    if(!raw) return null;
+    let u=JSON.parse(raw);
+    if(!u||u.logged===false) return null;
+    return u;
+  }catch(e){return null;}
+}
+function ghUpdateNavUser(){
+  let u=ghDetectNavUser();
+  let guest=document.getElementById('ghNavUserGuest');
+  let logged=document.getElementById('ghNavUserLogged');
+  if(!guest||!logged) return;
+  if(u){
+    guest.classList.add('hidden');guest.classList.remove('flex');
+    logged.classList.remove('hidden');logged.classList.add('flex');
+    let name=u.username||u.name||u.email.split('@')[0];
+    document.getElementById('ghNavName').innerText=name;
+    document.getElementById('ghNavAvatar').innerText=name.charAt(0).toUpperCase();
+    document.getElementById('ghDropName').innerText=name;
+    document.getElementById('ghDropEmail').innerText=u.email||'';
+  }else{
+    guest.classList.remove('hidden');guest.classList.add('flex');
+    logged.classList.add('hidden');logged.classList.remove('flex');
+    document.getElementById('ghUserDropdown')?.classList.add('hidden');
+  }
+}
+function ghToggleUserMenu(e){if(e){e.preventDefault();e.stopPropagation();}document.getElementById('ghUserDropdown').classList.toggle('hidden');}
+function ghLogout(e){
+  if(e){e.preventDefault();e.stopPropagation();}
+  let cart=localStorage.getItem('gearhaven_cart');
+  let lang=localStorage.getItem('gearhaven_lang');
+  localStorage.clear();
+  sessionStorage.clear();
+  if(cart) localStorage.setItem('gearhaven_cart',cart);
+  if(lang) localStorage.setItem('gearhaven_lang',lang);
+  // si estás en account.html, mándalo a index como invitado
+  if(location.pathname.includes('account')){
+    location.href='./midnight.html';
+  } else {
+    location.reload();
+  }
+}
+document.addEventListener('click',function(e){
+  let w=document.getElementById('ghNavUserWrap');
+  if(w&&!w.contains(e.target)){document.getElementById('ghUserDropdown')?.classList.add('hidden');}
+});
+ghUpdateNavUser();
+</script>
+<!-- BARRA STICKY CENTRADA - NO MODIFICA CENTRADO -->
+<div id="topPayBar" class="sticky top-[52px] z-20 w-full bg-[#0f1333]/95 backdrop-blur-md border-y border-[#1e254a] px-4 py-[5px] flex flex-wrap items-center justify-center gap-3 shadow-lg">
+  <span class="text-[8px] tracking-[2px] font-black text-[#6b77b5]">WE ACCEPT</span>
+  <div class="flex items-center gap-3 flex-wrap justify-center">
+    <span class="text-white font-black italic text-[11px]">VISA</span>
+    <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-[#eb001b]"></span><span class="w-3 h-3 rounded-full bg-[#f79e1b] -ml-1.5"></span><span class="text-[7px] ml-1 text-[#8b92c9]">Master</span></span>
+    <span class="text-[#0099df] font-bold text-[10px]">PayPal</span>
+    <span class="text-white font-bold text-[10px]"> Pay</span>
+    <span class="text-white font-bold text-[10px]"><span class="text-[#4285f4]">G</span> Pay</span>
+    <span class="bg-[#F3BA2F] text-black text-[7px] font-black px-1.5 py-0.5 rounded">Binance</span>
+    <span class="bg-[#f7931a] text-white text-[7px] font-black px-1.5 py-0.5 rounded-full">₿</span>
+  </div>
+</div>
+<div class="max-w-[1350px] mx-auto px-6 py-6 grid lg:grid-cols-[1fr_360px] gap-6">
+  <div>
+      <div class="hero-banner relative">
+      <img id="heroImg" src="./keydies/baneruno.jpg">
+      <div class="hero-text">
+    <div class="text-[25px] text-[#8b5cf6] font-black tracking-widest">WORLD OF WARCRAFT: MIDNIGHT - MYTHIC +10</div>
+    <div class="text-[20px] font-black leading-tight">Mythic +10 Boost - Timed</div>
+    <div class="text-[11px] text-[#c2c8e8] mt-1">Portals + 318 Vault - Score + - In Time Included</div>
+      </div>
+      </div>
+
+    <h1 class="text-[26px] font-black mt-2" data-i="mainTitle">WoW Mythic +10 Boost - Timed Runs</h1>
+    <p class="text-[15px] text-[#8b92c9] mt-3 bg-[#111536] border border-[#1e254a] rounded-xl p-3" data-i="mainDesc">Mythic +10 Boost&#x2014; your fastest way to 311 ilvl gear and 318 Vault, portals unlocked, In Time guaranteed, bundle discount up to 25% at run 8.</p>
+
+    <div class="mt-5 bg-[#111536] border border-[#1e254a] rounded-2xl p-5">
+      <h2 class="font-black text-[23px]" data-i="winsTitle">Your Wins</h2>
+      <ul class="mt-3 space-y-2 text-[18px] text-[#c2c8e8] leading-relaxed">
+        <li data-i="win1">&#x1F3AF; Mythic +10 dungeons cleared&#x2014; pick specific or leave random;</li>
+        <li data-i="win2">&#x1F48E; 311 ilvl loot, 318 ilvl Vault slot&#x2014; strongest M+ gear in reach;</li>
+        <li data-i="win3">&#x23F1; In Time on every run&#x2014; included in the price, no add-on needed;</li>
+        <li data-i="win4">&#x1F91D; Up to 4 loot traders&#x2014; 2 traders are free, all suitable drops traded to you;</li>
+        <li data-i="win5">&#x1F4A0; Crests scale every key&#x2014; up to Myth Mistcrest, every slot at max ilvl;</li>
+        <li data-i="win6">&#x1F300; Teleport unlocked with In Time&#x2014; instant entry, no summon wait;</li>
+        <li data-i="win7">&#x1F4B0; Bundle: add runs, save more&#x2014; scales from run 2, up to 25% at run 8.</li>
+      </ul>
+    </div>
+
+    <div class="mt-5 bg-[#111536] border border-[#1e254a] rounded-2xl p-5">
+      <h2 class="font-black text-[22px]" data-i="howTitle">How It Works</h2>
+      <div class="grid grid-cols-4 gap-2 mt-4 text-[18px] text-center">
+        <div class="bg-[#0e1230] rounded-xl p-3 border border-[#1e254a]"><div class="text-[18px]">&#x1F4AC;</div><b class="mt-1 block" data-i="how1t">Team Up on Discord</b></div>
+        <div class="bg-[#0e1230] rounded-xl p-3 border border-[#1e254a]"><div class="text-[18px]">&#x1F300;</div><b class="mt-1 block" data-i="how2t">Invited & Summoned</b></div>
+        <div class="bg-[#0e1230] rounded-xl p-3 border border-[#1e254a]"><div class="text-[18px]">&#x2694;</div><b class="mt-1 block" data-i="how3t">AFK or Fight</b></div>
+        <div class="bg-[#0e1230] rounded-xl p-3 border border-[#1e254a]"><div class="text-[18px]">&#x1F3C6;</div><b class="mt-1 block" data-i="how4t">Grab Your Loot</b></div>
+      </div>
+      <div class="mt-4 space-y-3 text-[16px] text-[#8b92c9] bg-[#0e1230] border border-[#1e254a] rounded-xl p-4">
+        <div class="flex gap-2"><span>&#x2460;</span><span data-i="how1d">After payment, enter your character name and realm&#x2014; Discord chat with your team is ready in ~5 min;</span></div>
+        <div class="flex gap-2"><span>&#x2461;</span><span data-i="how2d">Get invited and summoned to the dungeon at run time&#x2014; just be online;</span></div>
+        <div class="flex gap-2"><span>&#x2462;</span><span data-i="how3d">Play along or go AFK at the entrance&#x2014; the team clears the key either way;</span></div>
+        <div class="flex gap-2"><span>&#x2463;</span><span data-i="how4d">Run ends&#x2014; loot the chest and repeat until all ordered runs are done.</span></div>
+      </div>
+    </div>
+
+    <div class="mt-8">
+      <h2 class="text-[22px] font-black" data-i="alsoLike">You may also like - 8 Products - CLICK OK</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+        <div onclick="location.href='./mythic-keys.html'" class="bg-[#111536] border border-[#1e254a] rounded-xl overflow-hidden relative cursor-pointer hover:border-[#8b5cf6] group"><img id="like1Img" src="./Keys/lateral.webp" class="w-full h-[85px] object-cover pointer-events-none"><div class="p-2 pointer-events-none"><div class="text-[11px] font-bold group-hover:text-[#8b5cf6]">Mythic+ Keys 2-20</div><div class="text-[10px]">From <b class="text-[#22c55e]">$10.99</b></div></div></div>
+        <div onclick="location.href='./bundle.html'" class="bg-[#111536] border border-[#1e254a] rounded-xl overflow-hidden relative cursor-pointer hover:border-[#8b5cf6] group"><img id="like2Img" src="./bundle/bundle1.avif" class="w-full h-[85px] object-cover pointer-events-none"><div class="p-2 pointer-events-none"><div class="text-[11px] font-bold group-hover:text-[#8b5cf6]">Mythic+ Bundle 8 Runs</div><div class="text-[10px]">From <b class="text-[#22c55e]">$32.97</b></div></div></div>
+        <div onclick="location.href='./keystone-hero.html'" class="bg-[#111536] border border-[#1e254a] rounded-xl overflow-hidden relative cursor-pointer hover:border-[#8b5cf6] group"><img id="like3Img" src="./wowr/keym.jpg" class="w-full h-[85px] object-cover pointer-events-none"><div class="p-2 pointer-events-none"><div class="text-[11px] font-bold group-hover:text-[#8b5cf6]">Keystone Master ALL</div><div class="text-[10px]">From <b class="text-[#22c55e]">$49.99</b></div></div></div>
+        <div onclick="location.href='./keystone-hero.html'" class="bg-[#111536] border border-[#1e254a] rounded-xl overflow-hidden relative cursor-pointer hover:border-[#8b5cf6] group"><img id="like4Img" src="/wowr/hero.jpg" class="w-full h-[85px] object-cover pointer-events-none"><div class="p-2 pointer-events-none"><div class="text-[11px] font-bold group-hover:text-[#8b5cf6]">Keystone Hero 2500</div><div class="text-[10px]">From <b class="text-[#22c55e]">$79.13</b></div></div></div>
+        <div onclick="location.href='./keystone-hero.html'" class="bg-[#111536] border border-[#1e254a] rounded-xl overflow-hidden relative cursor-pointer hover:border-[#8b5cf6] group"><img id="like5Img" src="./wowr/legend.jpg" class="w-full h-[85px] object-cover pointer-events-none"><div class="p-2 pointer-events-none"><div class="text-[11px] font-bold group-hover:text-[#8b5cf6]">Keystone Legend 3000</div><div class="text-[10px]">From <b class="text-[#22c55e]">$121.72</b></div></div></div>
+        <div onclick="location.href='./keystone-hero.html'" class="bg-[#111536] border border-[#1e254a] rounded-xl overflow-hidden relative cursor-pointer hover:border-[#8b5cf6] group"><img id="like6Img" src="./wowr/mdies.jpg" class="w-full h-[85px] object-cover pointer-events-none"><div class="p-2 pointer-events-none"><div class="text-[11px] font-bold group-hover:text-[#8b5cf6]">Keystone C/H/L/M</div><div class="text-[10px]">From <b class="text-[#22c55e]">$277.12</b></div></div></div>
+        <div onclick="location.href='./forever-dungeon.html'" class="bg-[#111536] border border-[#1e254a] rounded-xl overflow-hidden relative cursor-pointer hover:border-[#8b5cf6] group"><img id="like7Img" src="./Forever/foesaken.jpeg" class="w-full h-[85px] object-cover pointer-events-none"><div class="p-2 pointer-events-none"><div class="text-[11px] font-bold group-hover:text-[#8b5cf6]">Forever Dungeon Boost</div><div class="text-[10px]">From <b class="text-[#22c55e]">$75.00</b></div></div></div>
+        <div onclick="location.href='./forever-dungeon.html'" class="bg-[#111536] border border-[#1e254a] rounded-xl overflow-hidden relative cursor-pointer hover:border-[#8b5cf6] group"><img id="like7Img" src="./gold/oroc.webp" class="w-full h-[85px] object-cover pointer-events-none"><div class="p-2 pointer-events-none"><div class="text-[11px] font-bold group-hover:text-[#8b5cf6]">Gold Retaild-Classic</div><div class="text-[10px]">From <b class="text-[#22c55e]">$75.00</b></div></div></div>        
+      </div>
+      <button onclick="location.href='./midnight.html'" class="w-full mt-3 border border-[#2a3366] text-[11px] py-2 rounded-full" data-i="discover">Discover all Midnight</button>
+    </div>
+  </div>
+
+  <div class="lg:sticky top-[80px] h-fit">
+    <div class="bg-[#151a40] border border-[#2a3366] rounded-[16px] overflow-hidden">
+      
+      <div class="relative"><img id="bundleImg" src="./keydies/peque.avif" class="w-full h-[150px] object-cover">
+      </div>
+      <div class="p-4">
+        <div class="flex gap-2 mb-3"><span class="bg-[#8b5cf6] text-[10px] px-3 py-1.5 rounded-full font-bold"></span><span class="text-[10px] px-2 py-1.5 text-[#22c55e] border border-[#22c55e] rounded-full" data-i="fixedBadge">+10 FIXED - TIMED</span></div>
+        <div class="mb-4">
+          <div style="margin:12px 0 16px 0">
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button id="play-self" class="play-btn" onclick="setPlayMode('self')">Self Played</button>
+          <button id="play-pilot" class="play-btn selected" onclick="setPlayMode('pilot')">Piloted</button>
+          <button id="play-remote" class="play-btn" onclick="setPlayMode('remote')">&#x1F5A5; Remote <span style="background:#f59e0b;color:#000;padding:2px 7px;border-radius:999px;font-size:9px;font-weight:900">+30%</span></button>
+       </div>
+       </div>
+          <div class="flex justify-between items-center mb-2"><div class="text-[11px] text-[#8b92c9]" data-i="barLabel">How many +10 keys? Barra 1-8</div><div class="text-[11px] font-black bg-[#8b5cf6] px-2.5 py-1 rounded-full"><span id="keysCountLabel">1</span> Keys</div></div>
+          <input type="range" id="keysRange" min="1" max="8" value="1" step="1" oninput="setBundle(this.value)">
+</div>
+
+<!-- INICIO LOOT TRADERS - NUEVO -->
+<div class="mt-4 mb-4">
+  <div class="text-[11px] text-[#8b92c9] font-bold mb-2">Number of loot traders (2 free)</div>
+  <div class="grid grid-cols-3 gap-2">
+    <button id="trader-2" onclick="setTraders(2)" class="trader-btn active bg-[#0a0e28] border-2 border-[#fbbf24] text-white font-black py-3 rounded-xl text-[12px]">Two</button>
+    <button id="trader-3" onclick="setTraders(3)" class="trader-btn bg-[#0a0e28] border border-[#2a3366] text-white font-bold py-3 rounded-xl text-[12px]">Three <span class="text-[#fbbf24]">+30%</span></button>
+    <button id="trader-4" onclick="setTraders(4)" class="trader-btn bg-[#0a0e28] border border-[#2a3366] text-white font-bold py-3 rounded-xl text-[12px]">Four <span class="text-[#22c55e]">+50%</span></button>
+  </div>
+</div>
+<style>.trader-btn.active{border-color:#fbbf24!important;background:#151a36!important;box-shadow:0 0 15px rgba(251,191,36,0.2);}</style>
+<!-- FIN LOOT TRADERS -->
+
+<div class="space-y-3 text-[12px] mb-4">
+        
+        <div class="space-y-3 text-[12px] mb-4">
+          <label class="flex items-center justify-between bg-[#0e1230] p-3 rounded-xl border border-[#1e254a] cursor-pointer"><span class="flex items-center gap-2"><input type="checkbox" id="chkExpress" class="check" onchange="calcTotal()"> <span data-i="express">&#x26A1; Express - 15 min start</span></span><span class="text-[#8b92c9] text-[11px]">+<span id="expressLabel">30</span>%</span></label>
+          <label class="flex items-center justify-between bg-[#0e1230] p-3 rounded-xl border border-[#1e254a] cursor-pointer"><span class="flex items-center gap-2"><input type="checkbox" id="chkSpecific" class="check" onchange="calcTotal()"> <span data-i="specific">&#x1F3AF; Specific Dungeon</span></span><span class="text-[#8b92c9] text-[11px]">+20%</span></label>
+        </div>
+
+        <div id="dungeonSelector" class="bg-[#0a0e28] border border-[#1e254a] rounded-xl p-3">
+          <div class="flex justify-between items-center mb-2"><div class="text-[11px] font-black" data-i="chooseDungeon">Midnight Dungeons - +10</div><button onclick="clearDungeons()" class="text-[9px] bg-[#1a204f] border px-2 py-1 rounded-full" data-i="clear">Clear</button></div>
+          <div class="grid grid-cols-2 gap-2" id="dungeonGrid"></div>
+        </div>
+
+        <div class="mt-5 bg-[#0e1230] rounded-xl p-4 border border-[#1e254a]">
+          <div class="flex items-center justify-between mb-3"><span class="text-[11px] text-[#8b92c9]" data-i="currency">Currency - LIVE</span><select id="currencySelect" onchange="calcTotal()" class="bg-[#111536] border border-[#2a3366] rounded-lg px-2 py-1.5 text-[11px] font-bold text-white"><option value="USD" selected>USD $</option><option value="EUR">EUR €</option><option value="BRL">BRL R$</option><option value="COP">COP $</option></select></div>
+          <div class="flex items-center gap-2"><span id="totalP" class="text-white font-black text-[22px]">$28.50</span><span class="text-[9px] bg-[#1a204f] border px-2 py-0.5 rounded-full">Cashback 1% &#x1FA99;</span></div>
+          <div class="text-[10px] text-[#6b77b5] mt-1">≈ $<span id="usdRef">28.50</span> USD &#x2022; <span id="selectedDungeonLabel" class="text-[#8b5cf6]">Any +10</span></div>
+          <div class="mt-4">
+            <!-- BOTON PRIMARIO UNICO - Para SEO solo "Buy Now" -->
+            <button onclick="goCheckout('payphone')" class="w-full bg-[#22c55e] hover:bg-[#16a34a] text-black py-3.5 rounded-xl font-black text-[13px] shadow-lg transition-all">
+              &#128179; Buy Now - <span id="payphoneBtnPrice">$28.50 USD</span>
+            </button>
+
+            <!-- METODOS SECUNDARIOS - sutiles, no amarillos gigantes -->
+            <div class="mt-3 bg-[#0a0e28] border border-[#1e254a] rounded-xl p-2.5">
+              <p class="text-[9px] text-center text-[#666] mb-2 tracking-widest font-bold">SECURE CHECKOUT</p>
+              <div class="grid grid-cols-3 gap-2">
+                <button onclick="goCheckout('payphone')" class="bg-[#111536] border border-[#2a3366] hover:border-[#8b5cf6] hover:text-white text-[10px] py-2.5 rounded-lg text-[#8b92c9] font-bold transition-all">
+                  &#128179; Card
+                </button>
+                <button onclick="goCheckout('paypal')" class="bg-[#111536] border border-[#2a3366] hover:border-[#8b5cf6] hover:text-white text-[10px] py-2.5 rounded-lg text-[#8b92c9] font-bold transition-all">
+                  PayPal
+                </button>
+                <button onclick="goCheckout('binance')" class="bg-[#111536] border border-[#2a3366] hover:border-[#8b5cf6] hover:text-white text-[10px] py-2.5 rounded-lg text-[#8b92c9] font-bold transition-all">
+                  Crypto
+                </button>
+              </div>
+              <!-- SPANS OCULTOS PARA QUE TU JS NO SE ROMPA - MANTIENE COMPATIBILIDAD -->
+              <span id="payBtnPrice" class="hidden">$28.50 USD</span>
+              <span class="binPrice hidden">$28.50 USD</span>
+            </div>
+
+            <button onclick="addToCart()" class="w-full mt-3 bg-[#0e1230] border-2 border-[#8b5cf6] hover:bg-[#1a204f] text-white py-3 rounded-xl font-black text-[12px] transition-all" data-i="addCart">
+              🛒 Add to Cart
+            </button>
+
+            <div class="mt-3 flex items-center justify-center gap-2 text-[9px] text-[#6b77b5] text-center">
+              <span>🔒 256-bit SSL</span><span>•</span><span>⚡ Instant Start</span><span>•</span><span id="liveTime">--:--:--</span>
+            </div>
+            <div class="mt-2 text-[8px] text-center text-[#444]">
+              Secure payment available via card, PayPal and crypto at checkout
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="chatModal"><div class="bg-[#151a40] border border-[#2a3366] rounded-2xl p-5 w-full max-w-[380px]"><div class="flex justify-between items-center mb-4"><div class="font-black text-[14px]" data-i="chatTitle">&#x1F4AC; Choose Contact</div><button onclick="closeChatOptions()" class="bg-[#0e1230] border border-[#2a3366] w-7 h-7 rounded-full text-[12px]">&#x2715;</button></div><div class="space-y-2"><button onclick="contactOption('whatsapp')" class="w-full bg-[#25D366] text-black py-3 rounded-xl font-black text-[12px]">&#x1F4F1; WhatsApp - 2 min reply</button><button onclick="contactOption('discord')" class="w-full bg-[#5865F2] text-white py-3 rounded-xl font-black text-[12px]">&#x1F4AC; Discord - Ticket</button><button onclick="contactOption('live')" class="w-full bg-[#8b5cf6] text-white py-3 rounded-xl font-black text-[12px]">&#x1F4AC; Live Chat</button></div></div></div>
+
+<script>
+let translations={
+en:{
+back:"&#x2190; Back",heroTitle:"Mythic +10 Boost - Timed",heroSub:"Portals + 318 Vault - Score 320+ - In Time Included",mainTitle:"WoW Mythic +10 Boost - Timed Runs",mainDesc:"Mythic +10 Boost&#x2014; your fastest way to 311 ilvl gear and 318 Vault, portals unlocked, In Time guaranteed, bundle discount up to 25% at run 8.",
+winsTitle:"Your Wins",win1:"&#x1F3AF; Mythic +10 dungeons cleared&#x2014; pick specific or leave random;",win2:"&#x1F48E; 311 ilvl loot, 318 ilvl Vault slot&#x2014; strongest M+ gear in reach;",win3:"&#x23F1; In Time on every run&#x2014; included in the price, no add-on needed;",win4:"&#x1F91D; Up to 4 loot traders&#x2014; 2 traders are free, all suitable drops traded to you;",win5:"&#x1F4A0; Crests scale every key&#x2014; up to Myth Mistcrest, every slot at max ilvl;",win6:"&#x1F300; Teleport unlocked with In Time&#x2014; instant entry, no summon wait;",win7:"&#x1F4B0; Bundle: add runs, save more&#x2014; scales from run 2, up to 25% at run 8.",
+howTitle:"How It Works",how1t:"Team Up on Discord",how2t:"Invited & Summoned",how3t:"AFK or Fight",how4t:"Grab Your Loot",how1d:"After payment, enter your character name and realm&#x2014; Discord chat with your team is ready in ~5 min;",how2d:"Get invited and summoned to the dungeon at run time&#x2014; just be online;",how3d:"Play along or go AFK at the entrance&#x2014; the team clears the key either way;",how4d:"Run ends&#x2014; loot the chest and repeat until all ordered runs are done.",
+alsoLike:"You may also like - 8 Products",discover:"Discover all Midnight",customTitle:"Create Your Custom Offer! - Chat with us",customDesc:"If you can't find what you need, let's customize!",customBtn:"Request custom offer - Chat",fixedBadge:"+10 FIXED - TIMED",barLabel:"How many +10 keys? Barra 1-8",express:"&#x26A1; Express - 15 min start",specific:"&#x1F3AF; Specific Dungeon",chooseDungeon:"Midnight Dungeons - +10",clear:"Clear",currency:"Currency - LIVE",copy:"&#x1F517; Copy link",addCart:"&#x1F6D2; Add to Cart",otherMethods:"&#x1F4AC; Other Methods - Chat",chatTitle:"&#x1F4AC; Choose Contact"
+},
+es:{
+back:"&#x2190; Volver",heroTitle:"Impulso Mítico +10 - A Tiempo",heroSub:"Portales + Bóveda 318 - Puntaje 320+ - A Tiempo Incluido",mainTitle:"WoW Mítico +10 Impulso - Carreras A Tiempo",mainDesc:"Impulso Mítico +10&#x2014; tu camino más rápido a equipo 311 ilvl y Bóveda 318, portales desbloqueados, A Tiempo garantizado, descuento por paquete hasta 25% en 8 runs.",
+winsTitle:"Tus Ganancias",win1:"&#x1F3AF; Mazmorras Míticas +10 completadas&#x2014; elige específica o deja aleatoria;",win2:"&#x1F48E; Botín 311 ilvl, Bóveda 318 ilvl&#x2014; el equipo M+ más fuerte a tu alcance;",win3:"&#x23F1; A Tiempo en cada run&#x2014; incluido en el precio, sin costo adicional;",win4:"&#x1F91D; Hasta 4 comerciantes de botín&#x2014; 2 son gratis, todos los drops adecuados para ti;",win5:"&#x1F4A0; Crestas escalan en cada llave&#x2014; hasta Cresta Nube Mítica, cada ranura al máximo ilvl;",win6:"&#x1F300; Teletransporte desbloqueado con A Tiempo&#x2014; entrada instantánea, sin espera de invocación;",win7:"&#x1F4B0; Paquete: agrega runs, ahorra más&#x2014; escala desde run 2, hasta 25% en run 8.",
+howTitle:"Cómo Funciona",how1t:"Equipo en Discord",how2t:"Invitado e Invocado",how3t:"AFK o Pelea",how4t:"Recoge Tu Botín",how1d:"Después del pago, ingresa tu nombre y reino&#x2014; chat de Discord con tu equipo listo en ~5 min;",how2d:"Recibe invitación e invocación a la mazmorra a la hora del run&#x2014; solo estate en línea;",how3d:"Juega o quédate AFK en la entrada&#x2014; el equipo limpia la llave de cualquier forma;",how4d:"Termina el run&#x2014; saquea el cofre y repite hasta completar todos los runs ordenados.",
+alsoLike:"También te puede gustar - 8 Productos",discover:"Descubrir todo Midnight",customTitle:"¡Crea Tu Oferta Personalizada! - Chatea con nosotros",customDesc:"¡Si no encuentras lo que necesitas, personalicemos!",customBtn:"Solicitar oferta personalizada - Chat",fixedBadge:"+10 FIJO - A TIEMPO",barLabel:"¿Cuántas llaves +10? Barra 1-8",express:"&#x26A1; Express - inicio 15 min",specific:"&#x1F3AF; Mazmorra Específica",chooseDungeon:"Mazmorras Midnight - +10",clear:"Limpiar",currency:"Moneda - EN VIVO",copy:"&#x1F517; Copiar enlace",addCart:"&#x1F6D2; Agregar al Carrito",otherMethods:"&#x1F4AC; Otros Métodos - Chat",chatTitle:"&#x1F4AC; Elige Contacto"
+}
+};
+let currentLang=localStorage.getItem('gearhaven_lang')||'en';
+function applyLang(){
+  let dict=translations[currentLang]||translations.en;
+  document.querySelectorAll('[data-i]').forEach(el=>{
+    let k=el.getAttribute('data-i');
+    if(dict[k]) el.innerHTML=dict[k];
+  });
+  let btn = document.getElementById('langBtn');
+  if(btn){
+    btn.innerHTML = currentLang==='en'? '&#x1F310; EN / ES' : '&#x1F310; ES / EN';
+  }
+}
+function toggleLang(){currentLang=currentLang==='en'?'es':'en'; localStorage.setItem('gearhaven_lang',currentLang); applyLang();}
+const CF_API = "https://silent-term-1b1a.riasdeath77.workers.dev/api/prices";
+let basePrice=9.00, expressPerc=30, currentBundle=1, selectedDungeons=[];
+let playMode='pilot', selfPerc=0, pilotPerc=0, remotePerc=30;
+let currentTraders=2;
+let traderMultipliers={2:1, 3:1.30, 4:1.50};
+let currencyRates={USD:1,EUR:0.92,BRL:5.65,COP:4100};
+let currencySymbols={USD:'$',EUR:'€',BRL:'R$',COP:'COP $'};
+let dungeonNames={altar:'Altar of Fangs',murder:'Murder Row',den:'Den of Nalorakk',vale:'The Blinding Vale',voidscar:'Voidscar Arena',kings:"Kings' Rest",temple:'Temple of Sethraliss',ruby:'Ruby Life Pools'};
+let contactLinks={whatsapp:localStorage.getItem('gearhaven_whatsapp')||'https://wa.me/1234567890', discord:localStorage.getItem('gearhaven_discord')||'https://discord.gg/gearhaven'};
+
+async function loadLivePrices(){
+ try{
+  let res = await fetch(CF_API+'?v='+Date.now()).then(r=>r.json());
+  let m = (res.retail && res.retail.m10)? res.retail.m10 : (res.m10 || null);
+  if(m){
+    basePrice = parseFloat(m.base || m.price) || 9.00;
+    expressPerc = m.percents?.express?? 30;
+    remotePerc = m.percents?.remote?? 30;
+    traderMultipliers[3] = 1 + (m.percents?.trader3?? 30)/100;
+    traderMultipliers[4] = 1 + (m.percents?.trader4?? 50)/100;
+    if(m.dungeonNames) dungeonNames = m.dungeonNames;
+  }
+ }catch(e){}
+}
+function getCart(){try{return JSON.parse(localStorage.getItem('gearhaven_cart')||'[]');}catch(e){return [];}}
+function saveCart(c){
+  localStorage.setItem('gearhaven_cart',JSON.stringify(c));
+  // FIX: soporta cartCount y cartCountHead
+  let el = document.getElementById('cartCountHead') || document.getElementById('cartCount');
+  if(el) el.innerText=c.length;
+  // sincroniza todos los carritos como en tu keystone-hero
+  try{
+    localStorage.setItem('cart', JSON.stringify(c));
+    localStorage.setItem('wow_cart', JSON.stringify(c));
+    localStorage.setItem('bundle_cart', JSON.stringify(c));
+    localStorage.setItem('mythic_cart', JSON.stringify(c));
+    localStorage.setItem('gearhaven_checkout_cart', JSON.stringify(c));
+  }catch(e){}
+}
+function renderDungeons(){document.getElementById('dungeonGrid').innerHTML=Object.keys(dungeonNames).map(k=>`<button onclick="selectDungeon('${k}')" id="dun-${k}" class="dungeon-btn bg-[#111536] border border-[#1e254a] rounded-lg px-3 py-2.5 text-[11px] text-left font-bold">${dungeonNames[k]}</button>`).join('');}
+function clearDungeons(){selectedDungeons=[]; document.querySelectorAll('.dungeon-btn').forEach(b=>b.classList.remove('selected')); document.getElementById('selectedDungeonLabel').innerText='Any +10'; document.getElementById('chkSpecific').checked=false; calcTotal();}
+function selectDungeon(k){let idx=selectedDungeons.indexOf(k); if(idx>-1){selectedDungeons.splice(idx,1); document.getElementById('dun-'+k).classList.remove('selected');} else {selectedDungeons.push(k); document.getElementById('dun-'+k).classList.add('selected');} document.getElementById('selectedDungeonLabel').innerText=selectedDungeons.length?selectedDungeons.map(x=>dungeonNames[x]).join(', '):'Any +10'; if(selectedDungeons.length>0) document.getElementById('chkSpecific').checked=true; else document.getElementById('chkSpecific').checked=false; calcTotal();}
+function setPlayMode(m){playMode=m; document.querySelectorAll('.play-btn').forEach(b=>b.classList.remove('selected')); document.getElementById('play-'+m).classList.add('selected'); calcTotal();}
+function setBundle(v){currentBundle=parseInt(v); document.getElementById('keysRange').value=v; document.getElementById('keysCountLabel').innerText=v; calcTotal();}
+function setTraders(n){currentTraders=n; document.querySelectorAll('.trader-btn').forEach(b=>{b.classList.remove('active','border-2','border-[#fbbf24]');b.classList.add('border','border-[#2a3366]');});
+let active=document.getElementById('trader-'+n);
+if(active){active.classList.add('active');active.classList.remove('border','border-[#2a3366]');active.classList.add('border-2','border-[#fbbf24]');} localStorage.setItem('gh_traders',n); calcTotal();}
+function calcTotal(){
+  let mult={1:100,2:200,3:300,4:400,5:500,6:600,7:700,8:800}[currentBundle]||100;
+  let price=basePrice*mult/100;
+  // Traders +30% +50%
+  price*= (traderMultipliers[currentTraders]||1);
+  if(playMode==='self') price*=(1+selfPerc/100);
+  if(playMode==='remote') price*=(1+remotePerc/100);
+  if(playMode==='pilot') price*=(1+pilotPerc/100);
+  if(document.getElementById('chkExpress').checked) price*=(1+expressPerc/100);
+  if(selectedDungeons.length>0 || document.getElementById('chkSpecific').checked) price*=1.20;
+  let curr=document.getElementById('currencySelect').value;
+  let rate=currencyRates[curr]||1;
+  let sym=currencySymbols[curr]||'$';
+  let finalP=curr==='COP'?Math.round(price*rate):(price*rate).toFixed(2);
+  document.getElementById('totalP').innerText=sym+finalP;
+  document.getElementById('usdRef').innerText=price.toFixed(2);
+  document.getElementById('payBtnPrice').innerText=sym+finalP+' USD';
+  document.querySelectorAll('.binPrice').forEach(e=>e.innerText=sym+finalP+' USD');
+  let elPP=document.getElementById('payphoneBtnPrice'); if(elPP) elPP.innerText=sym+finalP+' USD';
+  let dunNames = selectedDungeons.length? selectedDungeons.map(k=>dungeonNames[k]).join(', ') : 'Any +10';
+  window._last={price:finalP,usd:price.toFixed(2),currency:curr,symbol:sym,title:`Mythic +10 x${currentBundle} - ${currentTraders} traders`,dungeonNames:dunNames,dungeons: dunNames, traders: currentTraders};
+}
+function goCheckout(method){
+  let c=window._last;
+  let dunIds = selectedDungeons.join(',');
+  location.href=`./checkout.html?title=${encodeURIComponent(c.title)}&price=${c.price}&usd=${c.usd}&currency=${c.currency}&symbol=${encodeURIComponent(c.symbol)}&method=${method}&type=M10&level=10&bundle=${currentBundle}&mode=${playMode}&traders=${currentTraders}&dungeons=${encodeURIComponent(c.dungeonNames)}&dungeonIds=${encodeURIComponent(dunIds)}`;
+}
+function addToCart(){
+  let c=window._last;
+  let cart=getCart();
+  if(cart.length>=5){alert('Max 5');return;}
+  cart.push({id:'CART-'+Date.now(),name:c.title,title:c.title,price:c.price,usd:c.usd,currency:c.currency,symbol:c.symbol,type:'M10',level:10,bundle:currentBundle,playMode:playMode,traders:currentTraders,dungeonNames:c.dungeonNames,dungeons:c.dungeonNames,dungeonIds:selectedDungeons.join(','),character:'Dungeon Pack'});
+  saveCart(cart);
+  alert('✅ Agregado: '+c.title+' | '+c.dungeonNames);
+}
+function openChatOptions(){document.getElementById('chatModal').classList.add('show');}
+function closeChatOptions(){document.getElementById('chatModal').classList.remove('show');}
+function contactOption(t){closeChatOptions(); if(t==='whatsapp') window.open(contactLinks.whatsapp,'_blank'); else if(t==='discord') window.open(contactLinks.discord,'_blank'); else window.open(contactLinks.whatsapp,'_blank');}
+function copyLink(){navigator.clipboard.writeText(location.href); alert('&#x1F517; Link copiado');}
+(async function init(){
+applyLang();
+await loadLivePrices();
+renderDungeons();
+calcTotal();
+saveCart(getCart());
+document.getElementById('expressLabel').innerText=expressPerc;
+setInterval(()=>{let el=document.getElementById('liveTime'); if(el) el.innerText=new Date().toLocaleTimeString();},1000);
+})();
+</script>
+<script src="./global-search.js"></script>
+<script src="./chat-widget.js"></script>
+<!-- ===== INICIO FAQ SEO - MYTHIC 10 - CAP DE GEAR ===== -->
+<div class="max-w-[1350px] mx-auto px-6 mt-10 mb-8">
+  <div class="bg-[#12162e]/60 border border-[#232845] rounded-xl p-6">
+    <h2 class="text-[20px] font-black text-white mb-4">Mythic +10 Boost - Gear Cap - 311 Chest + 318 Vault - Season 2</h2>
+    <p class="text-[13px] text-[#a3a8c9] leading-relaxed mb-4">
+      <strong class="text-white">+10 is the reward cap</strong> in Midnight Season 2. From <strong class="text-[#8b5cf6]">+10 to +20 loot does NOT increase ilvl</strong>. +10 already gives max: <strong class="text-white">311 ilvl Hero 3/6 end dungeon + 318 Myth 1/6 Great Vault + 12 Myth Mistcrests</strong>. Higher keys only give more io rating, not more gear.
+    </p>
+    <div class="overflow-x-auto rounded-lg border border-[#2a3366] my-4">
+      <table class="w-full text-[11px] text-left">
+        <thead class="bg-[#151a40] text-[#8b92c9]"><tr><th class="px-3 py-2">Key</th><th class="px-3 py-2">End Chest</th><th class="px-3 py-2">Vault</th><th class="px-3 py-2">Crest</th></tr></thead>
+        <tbody class="text-[#c2c8e8]">
+          <tr class="border-t border-[#1e254a]"><td class="px-3 py-2">+2/+3</td><td class="px-3 py-2">295 Champion 2/6</td><td class="px-3 py-2">305 Hero 1/6</td><td class="px-3 py-2">Champion</td></tr>
+          <tr class="border-t border-[#1e254a]"><td class="px-3 py-2">+6</td><td class="px-3 py-2">305 Hero 1/6</td><td class="px-3 py-2">311 Hero 3/6</td><td class="px-3 py-2">Hero</td></tr>
+          <tr class="border-t border-[#1e254a] bg-[#8b5cf6]/10"><td class="px-3 py-2 font-black text-[#8b5cf6]">+10 CAP</td><td class="px-3 py-2 font-bold text-white">311 Hero 3/6</td><td class="px-3 py-2 font-bold text-white">318 Myth 1/6</td><td class="px-3 py-2 font-bold text-[#22c55e]">12 Myth Mistcrest</td></tr>
+          <tr class="border-t border-[#1e254a]"><td class="px-3 py-2">+11 to +20</td><td class="px-3 py-2">311 Hero 3/6 SAME</td><td class="px-3 py-2">318 Myth 1/6 SAME</td><td class="px-3 py-2">12 Myth Mistcrest SAME</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-[13px] text-[#a3a8c9] leading-relaxed mb-4">
+      Why buy +10? 1 run = 1 Vault slot, 4 runs = 2 slots, 8 runs = 3 slots (max). With <strong class="text-white">2 free loot traders</strong> same armor type, your chance of loot per run is 3x. Includes <strong class="text-white">dungeon teleport</strong> when timed +10 (all 8 dungeons). Also gives Myth Mistcrests to upgrade gear to <strong class="text-white">344 ilvl</strong>.
+    </p>
+    <h3 class="text-[16px] font-black text-white mt-6 mb-3">Mythic +10 FAQ</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-[12px] text-[#a3a8c9]">
+      <div><strong class="text-white">What ilvl does +10 give?</strong><br>311 ilvl end chest Hero 3/6 + 318 Myth Vault + 12 Myth Mistcrests. Gear cap, +11 to +20 same ilvl.</div>
+      <div><strong class="text-white">Does +10 give teleport?</strong><br>Yes, timed +10 gives permanent teleport to that dungeon. Need timed +10 in all 8 dungeons for all teleports.</div>
+      <div><strong class="text-white">How many traders?</strong><br>2 free traders same armor as you. 3 = +30%, 4 = +50%. They trade you their loot if it's not needed.</div>
+      <div><strong class="text-white">What about Great Vault?</strong><br>+10 fills Vault with 318 Myth. Do 4 runs for 2 choices, 8 runs for 3 choices next reset. Best for targeting BiS.</div>
+    </div>
+  </div>
+</div>
+<!-- ===== FIN FAQ SEO - MYTHIC 10 ===== -->
+<!-- BARRA DE PAGOS GENIAL - GEARHAVEN -->
+<div class="mt-6 bg-[#0f1333] border border-[#1e254a] rounded-2xl px-4 py-3 flex flex-wrap items-center justify-center md:justify-between gap-4">
+  <span class="text-[10px] tracking-[2px] font-black text-[#6b77b5]">WE ACCEPT</span>
+  <div class="flex items-center gap-5 flex-wrap">
+    <span class="text-white font-black italic text-[16px]">VISA</span>
+    <span class="flex items-center gap-1"><span class="w-4 h-4 rounded-full bg-[#eb001b]"></span><span class="w-4 h-4 rounded-full bg-[#f79e1b] -ml-2"></span><span class="text-[9px] ml-1">Mastercard</span></span>
+    <span class="text-[#0099df] font-bold text-[12px]">PayPal</span>
+    <span class="text-white font-bold text-[12px]"> Pay</span>
+    <span class="text-white font-bold text-[12px]"><span class="text-[#4285f4]">G</span> Pay</span>
+    <span class="bg-[#F3BA2F] text-black text-[9px] font-black px-2 py-1 rounded">Binance Pay</span>
+    <span class="bg-[#f7931a] text-white text-[9px] font-black px-2 py-1 rounded-full">₿ Crypto</span>
+  </div>
+  <span class="text-[8px] text-[#444]">🔒 256-bit SSL • Encrypted</span>
+</div>
+</body>
+</html>

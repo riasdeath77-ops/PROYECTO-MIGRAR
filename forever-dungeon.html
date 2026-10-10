@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buy WoW Forever Dungeon Boost - All 9 New Dungeons - 13 to 60 | Classic+ | GearHaven</title>
+<meta name="description" content="Buy WoW Forever Dungeon Boost - 9 new Classic+ dungeons + 23 classic dungeons. Hall of Thanes 13-18 to Shaper's Terrace 60. Quest completion, XP, pre-raid gear. No dungeon finder, hand-made LFG. Launch Nov 4.">
+<link rel="icon" type="image/png" href="./imagenes/favicon.jpg">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18496576661"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-18496576661');
+</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forever Dungeon Pack | GEARHAVEN</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  /* ===== PARCHE UNIVERSAL MOVIL - COPIA ESTO EN TODOS LOS HTML ===== */
+  html, body { max-width: 100vw !important; overflow-x: hidden !important; }
+    * { box-sizing: border-box; }
+  img { max-width: 100%; height: auto; }
+  /* Tus fotos con altura fija no se rompen */
+  #bundleImg, .like-img, .hero-banner img, #heroImg, .card img {
+    height: auto !important; 
+  }
+  #bundleImg{height:160px !important; width:100% !important; object-fit:cover !important;}
+  .like-img{height:90px !important; width:100% !important; object-fit:cover !important;}
+  .hero-banner img, #heroImg{height:100% !important; width:100% !important; object-fit:cover !important;}
+
+  @media (max-width: 768px) {
+    header { padding-left: 12px !important; padding-right: 12px !important; flex-wrap: wrap !important; max-width: 100vw !important; }
+    .max-w-\[1350px\], .max-w-\[1200px\], .max-w-\[1400px\] { padding-left: 12px !important; padding-right: 12px !important; }
+  }
+  /* ===== FIN PARCHE UNIVERSAL ===== */
+body{background:#06081a;color:#fff;font-family:Inter,sans-serif}
+.bg-dynamic{position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse at top, rgba(139,92,246,0.35) 0%, transparent 55%),url('./foreverdungeon/dungeon.jpeg') center/cover no-repeat}
+.bg-dynamic::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom, #06081a 0%, rgba(6,8,26,0.93) 40%, #06081a 100%)}
+.glass{background:rgba(21,26,54,0.9);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.08)}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#fbbf24;color:#000;padding:12px 24px;border-radius:30px;font-weight:900;font-size:12px;z-index:100;display:none}
+.dungeon-card.selected{border-color:#fbbf24!important;background:rgba(251,191,36,0.12)!important}
+.dungeon-card.blocked{opacity:0.25;pointer-events:none;background:rgba(239,68,68,0.15)!important;border-color:#ef4444!important}
+.range-slider{width:100%;accent-color:#fbbf24}
+.admin-img-btn{display:none}
+</style>
+</head>
+<body>
+<div class="bg-dynamic" id="bgDynamic"></div>
+<div id="toast"></div>
+<header class="flex justify-between items-center px-6 py-3 bg-[#0f1333] border-b border-[#1e254a] sticky top-0 z-30 gap-4">
+  <div onclick="location.href='./midnight.html'" class="font-black text-[20px] tracking-wider cursor-pointer shrink-0">GEAR<span class="text-[#8b5cf6]">HAVEN</span> <span class="text-[9px] bg-[#1a204f] border border-[#2a3366] px-2 py-1 rounded-full ml-2">HOME</span></div>
+  <div class="flex-1 max-w-[480px] relative mx-4 hidden md:block">
+    <input id="globalSearch" type="text" placeholder="&#128269; Search all boosts..." class="w-full bg-[#0a0e28] border border-[#2a3366] rounded-full px-5 py-2 text-[12px] text-white outline-none focus:border-[#8b5cf6]">
+    <div id="globalResults" class="absolute top-[115%] left-0 w-full bg-[#111536] border border-[#2a3366] rounded-xl z-50 hidden max-h-[400px] overflow-y-auto"></div>
+  </div>
+  <div class="px-4 pt-2"><button onclick="location.href='./midnight.html'" class="inline-flex items-center gap-2 text-[11px] font-bold bg-[#111536] border border-[#2a3366] text-[#c2c8e8] hover:text-white hover:border-[#8b5cf6] hover:bg-[#1a204f] px-5 py-3 rounded-full transition-all"><span>&#8592;</span> Back</button></div>
+  <div class="flex gap-2 items-center shrink-0">
+    <div class="text-[11px] bg-[#0e1230] border border-[#2a3366] px-3 py-2 rounded-full font-bold text-[#8b92c9]">EN</div>
+    <div id="ghNavUserWrap" class="relative">
+      <div id="ghNavUserGuest" class="flex items-center"><button onclick="location.href='./account.html'" class="text-[11px] bg-[#111536] border border-[#2a3366] text-[#c2c8e8] px-3.5 py-2 rounded-l-full font-bold">&#128100; Sign In</button><button onclick="location.href='./account.html'" class="text-[11px] bg-[#8b5cf6] text-white px-4 py-2 rounded-r-full font-black">Sign Up</button></div>
+      <div id="ghNavUserLogged" class="hidden items-center gap-2 bg-[#111536] border border-[#2a3366] pl-1 pr-3 py-1 rounded-full cursor-pointer" onclick="ghToggleUserMenu(event)"><div id="ghNavAvatar" class="w-[28px] h-[28px] bg-gradient-to-br from-[#8b5cf6] to-[#22c55e] rounded-full flex items-center justify-center font-black text-[11px]">R</div><span id="ghNavName" class="text-[12px] font-bold text-white max-w-[90px] truncate">User</span></div>
+      <div id="ghUserDropdown" class="hidden absolute top-[120%] right-0 w-[210px] bg-[#0f1333] border border-[#2a3366] rounded-xl overflow-hidden z-50"><div class="p-3 border-b border-[#1e254a] bg-[#111536]"><div id="ghDropName" class="font-black text-[12px] text-white">User</div><div id="ghDropEmail" class="text-[10px] text-[#8b92c9] truncate">email</div></div><div class="p-2.5 text-[11px] text-[#c2c8e8] cursor-pointer hover:bg-[#1a204f]" onclick="location.href='./account.html'">&#128100; My Account</div><div class="p-2.5 text-[11px] text-[#c2c8e8] cursor-pointer hover:bg-[#1a204f]" onclick="location.href='./account.html#orders'">&#128230; My Orders</div><div class="p-2.5 text-[11px] text-[#ef4444] cursor-pointer hover:bg-[#1a1500] border-t border-[#1e254a]" onclick="ghLogout(event)">&#128682; Logout</div></div>
+    </div>
+    <button onclick="location.href='./cart.html'" class="text-[11px] bg-[#8b5cf6] px-4 py-2 rounded-full font-bold">&#128722; Cart (<span id="cartCount">0</span>)</button>
+  </div>
+</header>
+<div id="topPayBar" class="sticky top-[52px] z-20 w-full bg-[#0f1333]/95 backdrop-blur-md border-y border-[#1e254a] px-4 py-[5px] flex flex-wrap items-center justify-center gap-3 shadow-lg">
+  <span class="text-[8px] tracking-[2px] font-black text-[#6b77b5]">WE ACCEPT</span>
+  <div class="flex items-center gap-3 flex-wrap justify-center"><span class="text-white font-black italic text-[11px]">VISA</span><span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-[#eb001b]"></span><span class="w-3 h-3 rounded-full bg-[#f79e1b] -ml-1.5"></span><span class="text-[7px] ml-1 text-[#8b92c9]">Master</span></span><span class="text-[#0099df] font-bold text-[10px]">PayPal</span><span class="text-white font-bold text-[10px]">&#63743; Pay</span><span class="text-white font-bold text-[10px]"><span class="text-[#4285f4]">G</span> Pay</span><span class="bg-[#F3BA2F] text-black text-[7px] font-black px-1.5 py-0.5 rounded">Binance</span><span class="bg-[#f7931a] text-white text-[7px] font-black px-1.5 py-0.5 rounded-full">&#8383;</span></div>
+</div>
+<script>
+function ghDetectNavUser(){try{let raw=localStorage.getItem('gearhaven_current_user');if(!raw) return null;let u=JSON.parse(raw);if(!u||u.logged===false) return null;return u;}catch(e){return null;}}
+function ghUpdateNavUser(){let u=ghDetectNavUser();let guest=document.getElementById('ghNavUserGuest');let logged=document.getElementById('ghNavUserLogged');if(!guest||!logged) return;if(u){guest.classList.add('hidden');guest.classList.remove('flex');logged.classList.remove('hidden');logged.classList.add('flex');let name=u.username||u.name||u.email.split('@')[0];document.getElementById('ghNavName').innerText=name;document.getElementById('ghNavAvatar').innerText=name.charAt(0).toUpperCase();document.getElementById('ghDropName').innerText=name;document.getElementById('ghDropEmail').innerText=u.email||'';}else{guest.classList.remove('hidden');guest.classList.add('flex');logged.classList.add('hidden');logged.classList.remove('flex');document.getElementById('ghUserDropdown')?.classList.add('hidden');}}
+function ghToggleUserMenu(e){if(e){e.preventDefault();e.stopPropagation();}document.getElementById('ghUserDropdown').classList.toggle('hidden');}
+function ghLogout(e){if(e){e.preventDefault();e.stopPropagation();}let cart=localStorage.getItem('gearhaven_cart');let lang=localStorage.getItem('gearhaven_lang');localStorage.clear();sessionStorage.clear();if(cart) localStorage.setItem('gearhaven_cart',cart);if(lang) localStorage.setItem('gearhaven_lang',lang);if(location.pathname.includes('account')){location.href='./midnight.html';} else {location.reload();}}
+document.addEventListener('click',function(e){let w=document.getElementById('ghNavUserWrap');if(w&&!w.contains(e.target)){document.getElementById('ghUserDropdown')?.classList.add('hidden');}});ghUpdateNavUser();
+</script>
+
+<div class="max-w-[1250px] mx-auto p-4 grid lg:grid-cols-[460px_1fr] gap-6 relative z-10">
+<div class="glass rounded-[20px] overflow-hidden h-fit sticky top-[80px]">
+<div class="relative h-[200px] bg-[#0a0e28]"><img id="mainProductImg" src="./foreverdungeon/lvl2.jpg" class="w-full h-full object-cover"><div class="absolute inset-0 bg-gradient-to-t from-[#151a36] to-transparent"></div><div class="absolute bottom-3 left-4"><div class="font-black">Classic Dungeon Pack</div><div class="text-[10px] text-white/70">Choose the one you need.</div></div></div>
+<div class="p-6">
+<div id="selectedCount" class="text-[11px] text-[#fbbf24] font-bold">0 dungeons</div>
+<div id="selectedList" class="mt-2 max-h-[120px] overflow-y-auto text-[11px] grid gap-1"></div>
+<div class="mt-4 border-t border-[#2a3366] pt-4"><label class="font-bold text-[12px]">&#128230; Runs: <span id="qtyNum" class="text-[#fbbf24] font-black text-[18px]">1</span></label><input type="range" min="1" max="20" value="1" id="qtyRange" class="range-slider" oninput="setQty(this.value)"><div class="grid grid-cols-4 gap-2 mt-3"><button onclick="setQty(1)" class="qty-btn active bg-[#1a204f] border-2 border-[#fbbf24] py-2 rounded-full text-[11px] font-black">1</button><button onclick="setQty(5)" class="qty-btn bg-[#0e1230] border border-[#2a3366] py-2 rounded-full text-[11px]">5</button><button onclick="setQty(10)" class="qty-btn bg-[#0e1230] border border-[#2a3366] py-2 rounded-full text-[11px]">10</button><button onclick="setQty(20)" class="qty-btn bg-[#0e1230] border border-[#2a3366] py-2 rounded-full text-[11px]">20</button></div></div>
+<div class="mt-5"><div class="font-bold text-[12px] mb-2">&#127918; Mode</div><div class="grid grid-cols-3 gap-2"><button onclick="setMode('selfplay')" id="modeSelf" class="mode-btn active bg-[#1a204f] border-2 border-[#fbbf24] py-3 rounded-xl font-black text-[10px]">&#127918;<br>SELFPLAY<br><span id="selfplayLabel">0%</span></button><button onclick="setMode('pilot')" id="modePilot" class="mode-btn bg-[#0e1230] border border-[#2a3366] py-3 rounded-xl text-[10px]">&#129489;&#8205;&#9992;&#65039;<br>PILOT<br><span id="pilotLabel">0%</span></button><button onclick="setMode('remote')" id="modeRemote" class="mode-btn bg-[#0e1230] border border-[#8b5cf6]/50 py-3 rounded-xl text-[10px]">&#128421;&#65039;<br>REMOTE<br><span id="remoteLabel">+30%</span></button></div><div id="modeDesc" class="text-[9px] text-[#8b92c9] mt-2">Selfplay 0%</div></div>
+<div class="mt-6 bg-[#0a0e28] rounded-xl p-4 border border-[#2a3366] flex justify-between items-center"><span class="font-black">Total</span><span class="font-black text-[22px] text-[#fbbf24]">$<span id="priceMain">0.00</span></span></div>
+<div class="mt-4 grid gap-2"><button onclick="addToCartUnified()" class="w-full bg-white/10 border border-white/20 py-3.5 rounded-full font-black text-[13px]">&#128722; Add to Cart</button><button onclick="buyNow()" class="w-full bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] py-4 rounded-full font-black text-[13px]">&#128179; Buy Now &#8594;</button></div>
+</div>
+</div>
+<div class="glass rounded-[20px] p-5"><h2 class="font-black text-[14px]">&#127984; Choose your Dungeons - Click to select multiple</h2><div class="flex gap-2 mt-3 flex-wrap"><button onclick="filterLevel('all')" class="filter-btn active bg-[#fbbf24] text-black px-3 py-1.5 rounded-full text-[10px] font-black">All 34</button><button onclick="filterLevel('low')" class="filter-btn bg-[#0e1230] border border-[#2a3366] px-3 py-1.5 rounded-full text-[10px]">13-30</button><button onclick="filterLevel('mid')" class="filter-btn bg-[#0e1230] border border-[#2a3366] px-3 py-1.5 rounded-full text-[10px]">30-50</button><button onclick="filterLevel('high')" class="filter-btn bg-[#0e1230] border border-[#2a3366] px-3 py-1.5 rounded-full text-[10px]">50-60</button><button onclick="filterLevel('new')" class="filter-btn bg-[#0e1230] border border-[#8b5cf6] px-3 py-1.5 rounded-full text-[10px]">&#127381; New</button><button onclick="selectAllVisible()" class="bg-[#22c55e]/20 border border-[#22c55e]/40 text-[#22c55e] px-3 py-1.5 rounded-full text-[10px] font-bold">&#10003; All visible</button><button onclick="clearSelection()" class="bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-[10px]">Clear</button></div><div id="dungeonList" class="grid md:grid-cols-2 gap-2 mt-4 max-h-[800px] overflow-y-auto pr-1"></div></div>
+</div>
+
+<script>
+function showToast(m){let t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(()=>t.style.display='none',2500);}
+const dungeons=[{id:0,name:'Hall of Thanes',lvl:'13-18',min:13,max:18,new:true},{id:1,name:'Ragefire Chasm',lvl:'13-18',min:13,max:18,new:false},{id:2,name:'Ruins of Lordaeron',lvl:'15-20',min:15,max:20,new:true},{id:3,name:'Wailing Caverns',lvl:'17-24/25',min:17,max:25,new:false},{id:4,name:'The Deadmines',lvl:'17-26',min:17,max:26,new:false},{id:5,name:'Shadowfang Keep',lvl:'22-30',min:22,max:30,new:false},{id:6,name:'Blackfathom Deeps',lvl:'24-32',min:24,max:32,new:false},{id:7,name:'Excavation Site: Wetlands',lvl:'24-29',min:24,max:29,new:true},{id:8,name:'The Stockade',lvl:'24-32',min:24,max:32,new:false},{id:9,name:'City of Dalaran',lvl:'28-33',min:28,max:33,new:true},{id:10,name:'Gnomeregan',lvl:'29-38',min:29,max:38,new:false},{id:11,name:'Razorfen Kraul',lvl:'29-38',min:29,max:38,new:false},{id:12,name:'Scarlet Monastery - Graveyard',lvl:'30-38',min:30,max:38,new:false},{id:13,name:'Scarlet Monastery - Library',lvl:'33-41',min:33,max:41,new:false},{id:14,name:'The Drowned City',lvl:'35-40',min:35,max:40,new:true},{id:15,name:'Scarlet Monastery - Armory',lvl:'36-44',min:36,max:44,new:false},{id:16,name:'Razorfen Downs',lvl:'37-46',min:37,max:46,new:false},{id:17,name:'Scarlet Monastery - Cathedral',lvl:'38-46',min:38,max:46,new:false},{id:18,name:'Krol\'dok Stronghold',lvl:'40-45',min:40,max:45,new:true},{id:19,name:'Zul\'Farrak',lvl:'40-47',min:40,max:47,new:false},{id:20,name:'Uldaman',lvl:'41-51',min:41,max:51,new:false},{id:21,name:'Maraudon',lvl:'45-51/55',min:45,max:55,new:false},{id:22,name:'Alcaz Prison',lvl:'48-53',min:48,max:53,new:true},{id:23,name:'Sunken Temple',lvl:'50-60',min:50,max:60,new:false},{id:24,name:'Blackrock Depths',lvl:'52-60',min:52,max:60,new:false},{id:25,name:'Blackmaw Hold',lvl:'55-60',min:55,max:60,new:true},{id:26,name:'Lower Blackrock Spire',lvl:'55-60',min:55,max:60,new:false},{id:27,name:'Dire Maul West',lvl:'56-60',min:56,max:60,new:false},{id:28,name:'Dire Maul North',lvl:'56-60',min:56,max:60,new:false},{id:29,name:'Dire Maul East',lvl:'54-60',min:54,max:60,new:false},{id:30,name:'Scholomance',lvl:'58-60',min:58,max:60,new:false},{id:31,name:'Stratholme',lvl:'58-60',min:58,max:60,new:false},{id:32,name:'Shaper\'s Terrace',lvl:'58-60',min:58,max:60,new:true},{id:33,name:'Upper Blackrock Spire',lvl:'59-60',min:59,max:60,new:false}];
+let selectedIds=new Set(); let qty=1; let mode='selfplay'; let PRICES=null; let currentFilter='all'; let mainImg='./foreverdungeon/lvl2.jpg';
+function isBlocked(id){ if(!PRICES || !PRICES.blocked) return false; return PRICES.blocked.includes(id); }
+function getPriceFor(d){ if(!PRICES||!PRICES.dungeon||!PRICES.dungeon.prices) return 20; let v=PRICES.dungeon.prices[d.id]; if(v==null) return 20; return parseFloat(v); }
+function getModeMult(m){ if(!PRICES||!PRICES.percents) return 1; return 1+(PRICES.percents[m]||0)/100; }
+function renderList(){
+  let list=document.getElementById('dungeonList');
+  let filtered=dungeons.filter(d=>{
+    if(currentFilter==='all') return true;
+    if(currentFilter==='new') return d.new;
+    if(currentFilter==='low') return d.min<30;
+    if(currentFilter==='mid') return d.min>=30&&d.min<50;
+    if(currentFilter==='high') return d.min>=50;
+    return true;
+  });
+  list.innerHTML=filtered.map(d=>{
+    let sel=selectedIds.has(d.id);
+    let blocked=isBlocked(d.id);
+    return `<div onclick="${blocked?'':'toggleDungeon('+d.id+')'}" class="dungeon-card glass rounded-xl p-3 flex gap-3 items-center border ${blocked?'blocked':sel?'selected border-[#fbbf24]':'border-[#2a3366]'} cursor-pointer">
+    <div class="w-[20px] h-[20px] border-2 ${sel?'bg-[#fbbf24] border-[#fbbf24] text-black':'border-[#2a3366]'} rounded-[6px] flex items-center justify-center text-[10px] font-black">${sel?'&#10003;':''}</div>
+    <div class="flex-1"><div class="font-bold text-[11px]">${d.new?'&#127381; ':''}${d.name} ${blocked?'&#128683; BLOCKED':''}</div><div class="text-[9px] text-[#8b92c9]">Lvl ${d.lvl} &#8226; $${getPriceFor(d).toFixed(2)}</div></div>
+    </div>`;
+  }).join('');
+}
+function toggleDungeon(id){ if(isBlocked(id)) return; if(selectedIds.has(id)) selectedIds.delete(id); else selectedIds.add(id); renderList(); updateSummary(); }
+function selectAllVisible(){ let f=dungeons.filter(d=>{ if(isBlocked(d.id)) return false; if(currentFilter==='all') return true; if(currentFilter==='new') return d.new; if(currentFilter==='low') return d.min<30; if(currentFilter==='mid') return d.min>=30&&d.min<50; if(currentFilter==='high') return d.min>=50; return true; }); f.forEach(d=>selectedIds.add(d.id)); renderList(); updateSummary(); }
+function clearSelection(){selectedIds.clear(); renderList(); updateSummary();}
+function filterLevel(t){ currentFilter=t; document.querySelectorAll('.filter-btn').forEach(b=>{b.classList.remove('active','bg-[#fbbf24]','text-black'); b.classList.add('bg-[#0e1230]','border','border-[#2a3366]');}); event.currentTarget.classList.add('active','bg-[#fbbf24]','text-black'); renderList(); }
+function setQty(v){ qty=parseInt(v); document.getElementById('qtyNum').innerText=qty; document.getElementById('qtyRange').value=qty; document.querySelectorAll('.qty-btn').forEach(b=>{b.classList.remove('bg-[#1a204f]','border-2','border-[#fbbf24]','font-black','active'); b.classList.add('bg-[#0e1230]','border','border-[#2a3366]');}); let map={1:0,5:1,10:2,20:3}; if(map[qty]!=null) document.querySelectorAll('.qty-btn')[map[qty]].classList.add('bg-[#1a204f]','border-2','border-[#fbbf24]','font-black','active'); updateSummary(); }
+function setMode(m){ mode=m; document.querySelectorAll('.mode-btn').forEach(b=>{b.className='mode-btn bg-[#0e1230] border border-[#2a3366] py-3 rounded-xl font-bold text-[10px]';}); let id={selfplay:'modeSelf',pilot:'modePilot',remote:'modeRemote'}[m]; document.getElementById(id).className='mode-btn active bg-[#1a204f] border-2 border-[#fbbf24] py-3 rounded-xl font-black text-[10px]'; updateSummary(); }
+function calcTotal(){ if(selectedIds.size===0) return {total:0}; let per=0; selectedIds.forEach(id=>{ per+=getPriceFor(dungeons.find(x=>x.id===id)); }); let base=per*qty; let disc=0; if(qty>=15) disc=0.25; else if(qty>=10) disc=0.2; else if(qty>=5) disc=0.1; let total=base*(1-disc); total*=getModeMult(mode); return {total}; }
+function updateSummary(){ let c=selectedIds.size; document.getElementById('selectedCount').innerText=`${c} dungeons &#8226; ${c*qty} runs`; let selDiv=document.getElementById('selectedList'); selDiv.innerHTML=c===0?'<div class="text-[10px] text-white/30">None</div>':Array.from(selectedIds).map(id=>{let d=dungeons.find(x=>x.id===id); return `<div class="flex justify-between bg-[#0a0e28] border border-[#1e254a] rounded px-2 py-1"><span>&#8226; ${d.name}</span><span class="text-[#fbbf24]">$${getPriceFor(d).toFixed(2)}</span></div>`;}).join(''); let {total}=calcTotal(); document.getElementById('priceMain').innerText=total.toFixed(2); let p=PRICES?.percents||{selfplay:0,pilot:0,remote:30}; document.getElementById('selfplayLabel').innerText='+'+p.selfplay+'%'; document.getElementById('pilotLabel').innerText='+'+p.pilot+'%'; document.getElementById('remoteLabel').innerText='+'+p.remote+'%'; document.getElementById('modeDesc').innerText=`${mode.toUpperCase()} ${p[mode]}%`; }
+function getCartData(){ if(selectedIds.size===0){showToast('&#10060; Choose 1'); return null;} let {total}=calcTotal(); let names=Array.from(selectedIds).map(id=>dungeons.find(x=>x.id===id).name); let p=PRICES?.percents||{selfplay:0,pilot:0,remote:30}; return {id:'FD-'+Date.now(),title:`Forever Dungeon Pack ${names.slice(0,2).join(', ')} x${qty} ${mode}`,name:`Dungeon Pack ${names.slice(0,2).join(', ')} x${qty} ${mode} ${p[mode]}%`,price:parseFloat(total.toFixed(2)),usd:parseFloat(total.toFixed(2)),dungeons:names.join(', '),dungeonNames:names.join(', '),dungeonIds:Array.from(selectedIds).join(','),level:'FOREVER',bundle:qty,mode:mode,playMode:mode,server:mode.toUpperCase()+' '+p[mode]+'%',qty:qty,img:mainImg}; }
+function addToCartUnified(){ let d=getCartData(); if(!d) return; let cart=JSON.parse(localStorage.getItem('gearhaven_cart')||'[]'); cart.push(d); localStorage.setItem('gearhaven_cart', JSON.stringify(cart)); showToast('&#9989; Added - '+d.dungeons); updateCartCount(); }
+function buyNow(){ let d=getCartData(); if(!d) return; let cart=JSON.parse(localStorage.getItem('gearhaven_cart')||'[]'); cart.push(d); localStorage.setItem('gearhaven_cart', JSON.stringify(cart)); let code='GH-'+Math.random().toString(36).substr(2,4).toUpperCase(); localStorage.setItem('gh_last_order', JSON.stringify({items:[d], total:d.price.toFixed(2), code:code, date:Date.now(), dungeons: d.dungeons})); localStorage.setItem('gh_cart_code', code); location.href=`./checkout.html?title=${encodeURIComponent(d.title)}&price=${d.price}&usd=${d.usd}&level=FOREVER&bundle=${d.bundle}&mode=${d.mode}&dungeons=${encodeURIComponent(d.dungeons)}&traders=2`; }
+function updateCartCount(){let c=JSON.parse(localStorage.getItem('gearhaven_cart')||'[]');document.getElementById('cartCount').innerText=c.length;}
+async function init(){
+  try{
+    let r=await fetch('https://silent-term-1b1a.riasdeath77.workers.dev/api/prices?v='+Date.now());
+    if(r.ok){
+      let j=await r.json();
+      PRICES=j.forever || j.retail?.forever || j;
+    }
+  }catch(e){}
+  if(!PRICES){
+    PRICES={
+      dungeon:{prices:{0:14,1:15.5,2:15.5,3:23,4:23,5:27,6:28.99,7:23,8:27,9:35.99,10:14,11:15,12:16,13:18,14:22,15:20,16:24,17:22,18:28,19:26,20:30,21:32,22:34,23:38,24:42,25:45,26:44,27:46,28:46,29:44,30:48,31:50,32:52,33:50}},
+      percents:{selfplay:0,pilot:0,remote:30},
+      blocked:[]
+    };
+  }
+  if(!PRICES.blocked) PRICES.blocked=[];
+  renderList();
+  updateCartCount();
+  updateSummary();
+}
+init();
+</script>
+<script src="./global-search.js"></script>
+<script src="./gh-banner.js"></script>
+<script src="./chat-widget.js"></script>
+<!-- ===== INICIO FAQ SEO - FOREVER DUNGEON - LISTA OFICIAL 9 DUNGEONS ===== -->
+<div class="max-w-[1350px] mx-auto px-6 mt-10 mb-8">
+  <div class="bg-[#12162e]/60 border border-[#232845] rounded-xl p-6">
+    <h2 class="text-[20px] font-black text-white mb-4">WoW Forever Dungeon Boost - All 9 New Classic+ Dungeons + 23 Classic Dungeons</h2>
+    <p class="text-[13px] text-[#a3a8c9] leading-relaxed mb-4">
+      GearHavenGG <strong class="text-white">Forever Dungeon Boost</strong> covers all dungeons in WoW Forever (WoW Classic+). <strong class="text-white">No automated dungeon finder</strong> - only listing board LFG with playstyle tags Learning / Relaxed / Competitive / Carry Offered. <strong class="text-white">No WoW Token and no paid boost from Blizzard</strong>, carry is only way to skip grind. <strong class="text-white">Beta cap now 30</strong> since Oct 1 build, launch Nov 4 all start level 1, beta does not carry. <strong class="text-white">20% XP buff from mob kills in dungeons</strong> announced to avoid one-and-done feeling.
+    </p>
+
+    <div class="bg-[#0a0e28] border border-[#8b5cf6] rounded-xl p-4 mb-5">
+      <h3 class="text-[13px] font-black text-[#8b5cf6] mb-3">9 NEW FOREVER DUNGEONS - OFFICIAL LIST BY BLIZZARD (CORRECTED)</h3>
+      <div class="overflow-x-auto rounded-lg border border-[#2a3366]">
+        <table class="w-full text-[11px] text-left">
+          <thead class="bg-[#151a40] text-[#8b92c9]"><tr><th class="px-3 py-2">Dungeon (NEW)</th><th class="px-3 py-2">Location</th><th class="px-3 py-2">Level</th><th class="px-3 py-2">Note</th></tr></thead>
+          <tbody class="text-[#c2c8e8]">
+            <tr class="border-t border-[#1e254a] bg-[#8b5cf6]/10"><td class="px-3 py-2 font-bold text-white">Hall of Thanes</td><td class="px-3 py-2">Ironforge</td><td class="px-3 py-2">13-18</td><td class="px-3 py-2">Alliance parity - same as Ragefire Chasm Horde. First dungeon Alliance.</td></tr>
+            <tr class="border-t border-[#1e254a] bg-[#8b5cf6]/10"><td class="px-3 py-2 font-bold text-white">Ruins of Lordaeron</td><td class="px-3 py-2">Undercity</td><td class="px-3 py-2">15-20</td><td class="px-3 py-2">Undercity ruins, second new.</td></tr>
+            <tr class="border-t border-[#1e254a] bg-[#8b5cf6]/10"><td class="px-3 py-2 font-bold text-white">Excavation Site: Wetlands</td><td class="px-3 py-2">Wetlands</td><td class="px-3 py-2">24-29</td><td class="px-3 py-2">NEW in beta update two - Menethil Harbor access.</td></tr>
+            <tr class="border-t border-[#1e254a] bg-[#8b5cf6]/10"><td class="px-3 py-2 font-bold text-white">City of Dalaran</td><td class="px-3 py-2">Alterac Mountains</td><td class="px-3 py-2">28-33</td><td class="px-3 py-2">Floating city version pre-WotLK.</td></tr>
+            <tr class="border-t border-[#1e254a]"><td class="px-3 py-2 font-bold text-white">The Drowned City</td><td class="px-3 py-2">Stranglethorn Vale</td><td class="px-3 py-2">35-40</td><td class="px-3 py-2">Underwater troll city.</td></tr>
+            <tr class="border-t border-[#1e254a]"><td class="px-3 py-2 font-bold text-white">Krol'Dok Stronghold</td><td class="px-3 py-2">Riverglades (new zone)</td><td class="px-3 py-2">40-45 CORRECTED</td><td class="px-3 py-2">Blizzard clarified, not 40-55, is 40-45. Ogre stronghold.</td></tr>
+            <tr class="border-t border-[#1e254a]"><td class="px-3 py-2 font-bold text-white">Alcaz Island Prison</td><td class="px-3 py-2">Dustwallow Marsh</td><td class="px-3 py-2">48-53</td><td class="px-3 py-2">Naga prison island, pre-raid gear.</td></tr>
+            <tr class="border-t border-[#1e254a]"><td class="px-3 py-2 font-bold text-white">Blackmaw Hold</td><td class="px-3 py-2">Azshara</td><td class="px-3 py-2">55-60</td><td class="px-3 py-2">Furbolg city behind mysterious gate in Azshara, corruption. Best pre-raid.</td></tr>
+            <tr class="border-t border-[#1e254a]"><td class="px-3 py-2 font-bold text-white">Shaper's Terrace</td><td class="px-3 py-2">Un'Goro Crater</td><td class="px-3 py-2">58-60</td><td class="px-3 py-2">Titan facility, level 60 end dungeon, leads to raids Dec 9.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-[10px] text-[#8b92c9] mt-2">Classic dungeons still present: Ragefire Chasm 13-18, Deadmines 15-22, Wailing Caverns 17-24, Shadowfang Keep 20-26, Blackfathom Deeps 22-26, Stockade 25-29, Gnomeregan 29-38, Razorfen Kraul 29-38, SM Graveyard 30-38 etc to UBRS 60-60, Dire Maul North/West 60-60.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-3 my-5">
+      <div class="bg-[#0a0e28] border border-[#2a3366] rounded-lg p-3"><div class="text-[11px] font-black text-white">What You Get</div><div class="text-[10px] text-[#8b92c9]">Full clear entrance to final boss, all main bosses, quest completion (quests now give 50% less extra XP beyond normal, so we do them all), leveling gear chances, XP + reputation, gold + drops keep, no group search needed.</div></div>
+      <div class="bg-[#0a0e28] border border-[#2a3366] rounded-lg p-3"><div class="text-[11px] font-black text-white">Launch Timeline</div><div class="text-[10px] text-[#8b92c9]">Beta: cap 30 now, last full day Oct 21. Launch: Nov 4 2026 everyone level 1. Raids Barrow Deeps 10-player + Hyjal Summit open Dec 9. Be 60 before raids with boost.</div></div>
+      <div class="bg-[#0a0e28] border border-[#8b5cf6] rounded-lg p-3"><div class="text-[11px] font-black text-white">Why Buy Dungeon Boost?</div><div class="text-[10px] text-[#8b92c9]">Nine new dungeons cover every bracket from 13 to 60. Without dungeon finder you waste hours LFG. We bring group, clear once for quest XP and blue gear, then quest again - optimal route per Blizzard philosophy.</div></div>
+    </div>
+
+    <h3 class="text-[16px] font-black text-white mt-6 mb-3">Forever Dungeon FAQ - Verified</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-[12px] text-[#a3a8c9]">
+      <div><strong class="text-white">What is fastest dungeon for leveling?</strong><br>Hall of Thanes 13-18 for Alliance start, then Ruins of Lordaeron 15-20, Excavation Site 24-29 for 20-30 bracket. Each gives quest XP + 20% mob XP buff.</div>
+      <div><strong class="text-white">How many runs per dungeon?</strong><br>1-3 runs optimal. Blizzard says don't spam same dungeon, do once for quests then open world. We offer 1 to 10 clears selectable.</div>
+      <div><strong class="text-white">Can I get loot priority?</strong><br>Yes Normal or Loot Priority option. Full priority for your armor type.</div>
+      <div><strong class="text-white">Is Hardcore available?</strong><br>Hardcore realm leveling will be available when mode launches, more careful route, survival over speed. Standard leveling uses efficient quest + grind + dungeon mix.</div>
+    </div>
+  </div>
+</div>
+<!-- ===== FIN FAQ SEO - FOREVER DUNGEON OFICIAL ===== -->
+<!-- BARRA DE PAGOS GENIAL - GEARHAVEN -->
+<div class="mt-6 bg-[#0f1333] border border-[#1e254a] rounded-2xl px-4 py-3 flex flex-wrap items-center justify-center md:justify-between gap-4">
+  <span class="text-[10px] tracking-[2px] font-black text-[#6b77b5]">WE ACCEPT</span>
+  <div class="flex items-center gap-5 flex-wrap">
+    <span class="text-white font-black italic text-[16px]">VISA</span>
+    <span class="flex items-center gap-1"><span class="w-4 h-4 rounded-full bg-[#eb001b]"></span><span class="w-4 h-4 rounded-full bg-[#f79e1b] -ml-2"></span><span class="text-[9px] ml-1">Mastercard</span></span>
+    <span class="text-[#0099df] font-bold text-[12px]">PayPal</span>
+    <span class="text-white font-bold text-[12px]"> Pay</span>
+    <span class="text-white font-bold text-[12px]"><span class="text-[#4285f4]">G</span> Pay</span>
+    <span class="bg-[#F3BA2F] text-black text-[9px] font-black px-2 py-1 rounded">Binance Pay</span>
+    <span class="bg-[#f7931a] text-white text-[9px] font-black px-2 py-1 rounded-full">₿ Crypto</span>
+  </div>
+  <span class="text-[8px] text-[#444]">🔒 256-bit SSL • Encrypted</span>
+</div>
+</body>
+</html>

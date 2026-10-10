@@ -1,0 +1,368 @@
+{
+  "retail": {
+    "bundle": {
+      "levelPrices": {
+        "6": 22.88,
+        "7": 22.88,
+        "8": 23.5,
+        "9": 23.5,
+        "10": 23.5,
+        "11": 26.5,
+        "12": 29.8,
+        "13": 29,
+        "14": 44.5,
+        "15": 52.38,
+        "16": 61.78,
+        "17": 73,
+        "18": 86,
+        "19": 210,
+        "20": 360.67
+      },
+      "keystoneLabels": {
+        "6": "+6 In Time— 305 ilvl Hero (1/6)",
+        "7": "+7 In Time— 305 ilvl Hero (1/6)",
+        "8": "+8 In Time— 308 ilvl Hero (2/6)",
+        "9": "+9 In Time— 309 ilvl Hero (2/6)",
+        "10": "+10 In Time— 311 ilvl Hero (3/6)",
+        "11": "+11 In Time— 311 ilvl Hero (3/6)",
+        "12": "+12 In Time— 311 ilvl Hero (3/6)",
+        "13": "+13 In Time— 311 ilvl Hero (3/6)",
+        "14": "+14 In Time— 311 ilvl Hero (3/6)",
+        "15": "+15 In Time— 311 ilvl Hero (3/6)",
+        "16": "+16 In Time— 311 ilvl Hero (3/6)",
+        "17": "+17 In Time— 311 ilvl Hero (3/6)",
+        "18": "+18 In Time— 311 ilvl Hero (3/6)",
+        "19": "+19 In Time— 311 ilvl Hero (3/6)",
+        "20": "+20 In Time— 311 ilvl Hero (3/6)"
+      },
+      "dungeonNames": {
+        "altar": "Altar of Fangs",
+        "murder": "Murder Row",
+        "den": "Den of Nalorakk",
+        "vale": "The Blinding Vale",
+        "voidscar": "Voidscar Arena",
+        "kings": "Kings' Rest",
+        "temple": "Temple of Sethraliss",
+        "ruby": "Ruby Life Pools"
+      },
+      "bundleLabels": {
+        "3+1": "3 + 1 FREE",
+        "6+2": "6 + 2 FREE",
+        "9+3": "9 + 3 FREE"
+      },
+      "percents": {
+        "express": 30,
+        "specific": 20,
+        "remote": 30,
+        "trader3": 30,
+        "trader4": 50
+      },
+      "bundles": {
+        "3+1": {
+          "pay": 3,
+          "total": 4,
+          "mult": 1
+        },
+        "6+2": {
+          "pay": 6,
+          "total": 8,
+          "mult": 2
+        },
+        "9+3": {
+          "pay": 9,
+          "total": 12,
+          "mult": 2.85
+        }
+      }
+    },
+    "keys": {
+      "levelPrices": {
+        "2": 7,
+        "3": 7,
+        "4": 7,
+        "5": 7,
+        "6": 7.89,
+        "7": 7.89,
+        "8": 7.89,
+        "9": 8.89,
+        "10": 8.89,
+        "11": 10.89,
+        "12": 10.89,
+        "13": 13.89,
+        "14": 19.89,
+        "15": 22.89,
+        "16": 28.89,
+        "17": 35.89,
+        "18": 42.99,
+        "19": 113.99,
+        "20": 122.99
+      },
+      "keystoneLabels": {
+        "2": "+2 In Time— 295 ilvl (2/6 Champion)",
+        "3": "+3 In Time— 295 ilvl (2/6 Champion)",
+        "4": "+4 In Time— 298 ilvl (3/6 Champion)",
+        "5": "+5 In Time— 302 ilvl (4/6 Champion)",
+        "6": "+6 In Time— 305 ilvl Hero (1/6)",
+        "7": "+7 In Time— 305 ilvl Hero (1/6)",
+        "8": "+8 In Time— 305 ilvl Hero (2/6)",
+        "9": "+9 In Time— 305 ilvl Hero (2/6)",
+        "10": "+10 In Time— 311 ilvl Hero (3/6)",
+        "11": "+11 In Time— 311 ilvl Hero (3/6)",
+        "12": "+12 In Time— 311 ilvl Hero (3/6)",
+        "13": "+13 In Time— 311 ilvl Hero (3/6)",
+        "14": "+14 In Time— 311 ilvl Hero (3/6)",
+        "15": "+15 In Time— 311 ilvl Hero (3/6)",
+        "16": "+16 In Time— 311 ilvl Hero (3/6)",
+        "17": "+17 In Time— 311 ilvl Hero (3/6)",
+        "18": "+18 In Time— 311 ilvl Hero (3/6)",
+        "19": "+19 In Time— 311 ilvl Hero (3/6)",
+        "20": "+20 In Time— 311 ilvl Hero (3/6)"
+      },
+      "dungeonNames": {
+        "altar": "Altar of Fangs",
+        "murder": "Murder Row",
+        "den": "Den of Nalorakk",
+        "vale": "The Blinding Vale",
+        "voidscar": "Voidscar Arena",
+        "kings": "Kings' Rest",
+        "temple": "Temple of Sethraliss",
+        "ruby": "Ruby Life Pools"
+      },
+      "percents": {
+        "express": 30,
+        "specific": 20,
+        "remote": 10,
+        "trader3": 30,
+        "trader4": 45
+      },
+      "bundlePercents": {
+        "1": 100,
+        "2": 200,
+        "3": 300,
+        "4": 400,
+        "5": 500,
+        "6": 600,
+        "7": 700,
+        "8": 800,
+        "9": 900,
+        "10": 1000,
+        "11": 1100,
+        "12": 1200,
+        "13": 1300,
+        "14": 1400,
+        "15": 1500,
+        "16": 1600,
+        "17": 1700,
+        "18": 1800,
+        "19": 1900,
+        "20": 2000
+      }
+    },
+    "hero": {
+      "fullPrices": {
+        "conqueror": 52.99,
+        "master": 55,
+        "hero": 55,
+        "legend": 83,
+        "myth": 194
+      },
+      "perDungeonBase": {
+        "conqueror": 6.62,
+        "master": 6.88,
+        "hero": 6.88,
+        "legend": 10.38,
+        "myth": 24.25
+      },
+      "dungeonPrices": {
+        "conqueror": {
+          "altar": 7.5,
+          "murder": 7.5,
+          "den": 7.5,
+          "vale": 7.5,
+          "voidscar": 7.5,
+          "kings": 7.5,
+          "temple": 7.5,
+          "ruby": 7.5
+        },
+        "master": {
+          "altar": 7.5,
+          "murder": 7.5,
+          "den": 7.5,
+          "vale": 7.5,
+          "voidscar": 7.5,
+          "kings": 7.5,
+          "temple": 7.5,
+          "ruby": 7.5
+        },
+        "hero": {
+          "altar": 10,
+          "murder": 10,
+          "den": 10,
+          "vale": 10,
+          "voidscar": 10,
+          "kings": 10,
+          "temple": 10,
+          "ruby": 10
+        },
+        "legend": {
+          "altar": 15,
+          "murder": 15,
+          "den": 15,
+          "vale": 15,
+          "voidscar": 15,
+          "kings": 15,
+          "temple": 15,
+          "ruby": 15
+        },
+        "myth": {
+          "altar": 50,
+          "murder": 50,
+          "den": 50,
+          "vale": 50,
+          "voidscar": 50,
+          "kings": 50,
+          "temple": 50,
+          "ruby": 50
+        }
+      },
+      "percents": {
+        "express": 30,
+        "trader3": 30,
+        "trader4": 50
+      },
+      "tierEnabled": {
+        "conqueror": true,
+        "master": true,
+        "hero": true,
+        "legend": true,
+        "myth": true
+      }
+    },
+    "m10": {
+      "price": 7.85,
+      "base": 7.8,
+      "percents": {
+        "express": 30,
+        "specific": 20,
+        "remote": 30,
+        "trader3": 30,
+        "trader4": 50
+      },
+      "bundlePercents": {
+        "1": 100,
+        "2": 195,
+        "3": 290,
+        "4": 385,
+        "5": 475,
+        "6": 565,
+        "7": 655,
+        "8": 745
+      }
+    },
+    "gearing": {
+      "tracks": {
+        "mythic": [
+          {
+            "id": "m0",
+            "label": "292 ilvl in each slot (M+0)",
+            "price": 55.99
+          },
+          {
+            "id": "m6",
+            "label": "305 ilvl in each slot (M+6)",
+            "price": 84.99
+          },
+          {
+            "id": "m8",
+            "label": "308 ilvl in each slot (M+8)",
+            "price": 105.99
+          },
+          {
+            "id": "m10",
+            "label": "311 ilvl in each slot (M+10)",
+            "price": 108.99
+          }
+        ],
+        "pvp": [
+          {
+            "id": "p331",
+            "label": "331 ilvl Honor (PvP)",
+            "price": 18.99
+          },
+          {
+            "id": "p344",
+            "label": "344 ilvl Conquest (PvP)",
+            "price": 87.99
+          }
+        ],
+        "raid": [
+          {
+            "id": "r292",
+            "label": "292 ilvl Normal Raid",
+            "price": 384.99
+          },
+          {
+            "id": "r318",
+            "label": "318 ilvl Heroic Raid",
+            "price": 461.99
+          },
+          {
+            "id": "r344",
+            "label": "344 ilvl Mythic Raid",
+            "price": 4799.99
+          }
+        ]
+      },
+      "percents": {
+        "express": 30,
+        "remote": 10
+      }
+    },
+    "m0": {
+      "price": 6.99,
+      "base": 6.99,
+      "dungeonNames": {
+        "altar": "Altar of Fangs",
+        "murder": "Murder Row",
+        "den": "Den of Nalorakk",
+        "vale": "The Blinding Vale",
+        "voidscar": "Voidscar Arena",
+        "kings": "Kings' Rest",
+        "temple": "Temple of Sethraliss",
+        "ruby": "Ruby Life Pools"
+      },
+      "percents": {
+        "express": 30,
+        "specific": 20,
+        "remote": 30,
+        "trader3": 30,
+        "trader4": 50
+      },
+      "bundlePercents": {
+        "1": 100,
+        "2": 200,
+        "3": 300,
+        "4": 400,
+        "5": 500,
+        "6": 600,
+        "7": 700,
+        "8": 800
+      }
+    },
+    "crests": {
+      "prices": {
+        "veteran": 0.26,
+        "champion": 0.4,
+        "hero": 0.46,
+        "myth": 0.82
+      },
+      "percents": {
+        "express": 30,
+        "remote": 10
+      },
+      "min": 0,
+      "max": 804,
+      "default": 396
+    }
+  }
+}

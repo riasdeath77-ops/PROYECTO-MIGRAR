@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WoW Forever Guide - Leveling, Gold & Best Boosts | GearHaven</title>
+<meta name="description" content="New to WoW Forever? Full guide for fast leveling 1-60, gold farm and why hardcore boost is worth it.">
+<link rel="canonical" href="https://gearhavengg.com/wow-blogwow-forever-guide.html">
+<link rel="icon" type="image/jpeg" href="/imagenes/favicon.jpg">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  /* ===== PARCHE UNIVERSAL MOVIL - COPIA ESTO EN TODOS LOS HTML ===== */
+  html, body { max-width: 100vw !important; overflow-x: hidden !important; }
+    * { box-sizing: border-box; }
+  img { max-width: 100%; height: auto; }
+  /* Tus fotos con altura fija no se rompen */
+  #bundleImg, .like-img, .hero-banner img, #heroImg, .card img {
+    height: auto !important; 
+  }
+  #bundleImg{height:160px !important; width:100% !important; object-fit:cover !important;}
+  .like-img{height:90px !important; width:100% !important; object-fit:cover !important;}
+  .hero-banner img, #heroImg{height:100% !important; width:100% !important; object-fit:cover !important;}
+
+  @media (max-width: 768px) {
+    header { padding-left: 12px !important; padding-right: 12px !important; flex-wrap: wrap !important; max-width: 100vw !important; }
+    .max-w-\[1350px\], .max-w-\[1200px\], .max-w-\[1400px\] { padding-left: 12px !important; padding-right: 12px !important; }
+  }
+  /* ===== FIN PARCHE UNIVERSAL ===== */
+body{background:#070a14;color:#fff;font-family:Inter,Arial,sans-serif;line-height:1.7;overflow-x:hidden}
+</style>
+</head>
+<body>
+<header class="flex justify-between items-center px-6 py-3 bg-[#0f1333] border-b border-[#1e254a] sticky top-0 z-30 gap-4">
+  <div onclick="location.href='./index.html'" class="font-black text-[20px] tracking-wider cursor-pointer shrink-0">GEAR<span class="text-[#8b5cf6]">HAVEN</span> <span class="text-[9px] bg-[#1a204f] border border-[#2a3366] px-2 py-1 rounded-full ml-2">HOME</span></div>
+  <div class="flex-1 max-w-[480px] relative mx-4 hidden md:block">
+    <input id="globalSearch" type="text" placeholder="&#x1F50D; Search all boosts..." class="w-full bg-[#0a0e28] border border-[#2a3366] rounded-full px-5 py-2 text-[12px] text-white outline-none focus:border-[#8b5cf6]">
+    <div id="globalResults" class="absolute top-[115%] left-0 w-full bg-[#111536] border border-[#2a3366] rounded-xl z-50 hidden max-h-[400px] overflow-y-auto"></div>
+  </div>
+  <div class="px-4 pt-2 flex gap-2">
+    <button onclick="location.href='./blog.html'" class="text-[11px] font-bold bg-[#8b5cf6] text-white px-4 py-2 rounded-full">&#x1F4DD; Blog</button>
+    <button onclick="location.href='./forever.html'" class="inline-flex items-center gap-2 text-[11px] font-bold bg-[#111536] border border-[#2a3366] text-[#c2c8e8] px-5 py-3 rounded-full"><span>&#x2190;</span> Back</button>
+  </div>
+  <div class="flex gap-2 items-center shrink-0">
+    <div class="text-[11px] bg-[#0e1230] border border-[#2a3366] px-3 py-2 rounded-full font-bold text-[#8b92c9]">EN</div>
+    <div id="ghNavUserWrap" class="relative">
+      <div id="ghNavUserGuest" class="flex items-center">
+        <button onclick="location.href='./account.html'" class="text-[11px] bg-[#111536] border border-[#2a3366] text-[#c2c8e8] px-3.5 py-2 rounded-l-full font-bold">&#x1F464; Sign In</button>
+        <button onclick="location.href='./account.html'" class="text-[11px] bg-[#8b5cf6] text-white px-4 py-2 rounded-r-full font-black">Sign Up</button>
+      </div>
+      <div id="ghNavUserLogged" class="hidden items-center gap-2 bg-[#111536] border border-[#2a3366] pl-1 pr-3 py-1 rounded-full cursor-pointer" onclick="ghToggleUserMenu(event)">
+        <div id="ghNavAvatar" class="w-[28px] h-[28px] bg-gradient-to-br from-[#8b5cf6] to-[#22c55e] rounded-full flex items-center justify-center font-black text-[11px]">R</div>
+        <span id="ghNavName" class="text-[12px] font-bold text-white max-w-[90px] truncate">User</span>
+      </div>
+      <div id="ghUserDropdown" class="hidden absolute top-[120%] right-0 w-[210px] bg-[#0f1333] border border-[#2a3366] rounded-xl overflow-hidden z-50">
+        <div class="p-3 border-b border-[#1e254a] bg-[#111536]"><div id="ghDropName" class="font-black text-[12px] text-white">User</div><div id="ghDropEmail" class="text-[10px] text-[#8b92c9] truncate">email</div></div>
+        <div class="p-2.5 text-[11px] text-[#c2c8e8] cursor-pointer hover:bg-[#1a204f]" onclick="location.href='./account.html'">&#x1F464; My Account</div>
+        <div class="p-2.5 text-[11px] text-[#c2c8e8] cursor-pointer hover:bg-[#1a204f]" onclick="location.href='./account.html#orders'">&#x1F4E6; My Orders</div>
+        <div class="p-2.5 text-[11px] text-[#ef4444] cursor-pointer hover:bg-[#1a1500] border-t border-[#1e254a]" onclick="ghLogout(event)">&#x1F6AA; Logout</div>
+      </div>
+    </div>
+    <button onclick="location.href='./cart.html'" class="text-[11px] bg-[#8b5cf6] px-4 py-2 rounded-full font-bold">&#x1F6D2; Cart (<span id="cartCount">0</span>)</button>
+  </div>
+</header>
+
+<div class="md:hidden px-4 py-2 bg-[#0f1333] border-b border-[#1e254a] relative">
+  <input id="globalSearchMobile" type="text" placeholder="&#x1F50D; Search..." class="w-full bg-[#0a0e28] border border-[#2a3366] rounded-full px-4 py-2 text-[12px] text-white outline-none">
+  <div id="globalResultsMobile" class="absolute left-4 right-4 top-[85%] bg-[#111536] border border-[#2a3366] rounded-xl z-50 hidden max-h-[350px] overflow-y-auto"></div>
+</div>
+
+<article class="max-w-[800px] mx-auto px-6 py-12">
+<div class="flex gap-2 items-center mb-4">
+<span class="text-[10px] bg-[#f59e0b] text-black inline-block px-3 py-1 rounded-full font-black">WOW FOREVER</span>
+<span class="text-[10px] bg-[#12162e] border border-[#232845] px-3 py-1 rounded-full">Hardcore &#x2022; Classic</span>
+</div>
+<h1 class="text-[32px] font-black leading-tight">WoW Forever Guide: Fastest Leveling 1-60 &#x0026; Gold Farm</h1>
+<p class="text-[#8b92c9] mt-3 text-[12px]">&#x1F4C5; May 13, 2026 &#x2022; Hardcore &#x0026; Classic Realms &#x2022; 5 min read</p>
+
+<div class="mt-6 flex gap-2">
+<a href="./forever.html" class="text-[10px] bg-[#f59e0b]/20 border border-[#f59e0b]/40 text-[#fbbf24] px-3 py-1.5 rounded-full">&#x26A1; Buy Forever Boost</a>
+<a href="./blog.html" class="text-[10px] bg-[#12162e] border border-[#232845] px-3 py-1.5 rounded-full">Back to Blog</a>
+</div>
+
+<p class="mt-8 text-[#c2c8e8] text-[15px] leading-relaxed">WoW Forever is back to roots - no boost, no LFG, 1 life. One mistake and you lose 40 hours. This guide saves you.</p>
+
+<h2 class="text-[20px] font-black mt-10 text-[#f59e0b]">&#x1F4C8; How to Level Fast in Forever</h2>
+<p class="text-[14px] text-[#c2c8e8] mt-3"><b>Questing &#x003E; Dungeons until 50.</b> Use routes: Tirisfal &#x2192; Silverpine &#x2192; Hillsbrad. Never play after midnight - 70% of hardcore deaths are sleepy mistakes.</p>
+
+<div class="mt-5 bg-[#12162e] border border-[#232845] rounded-xl p-4 text-[12px]">
+<div class="font-bold text-[#f59e0b]">&#x1F4A1; Route:</div>
+<p class="text-[#8b92c9] mt-1">1-10 starter &#x2192; 10-20 Silverpine &#x2192; 20-30 Hillsbrad &#x2192; 30-40 STV &#x2192; 40-50 Tanaris &#x2192; 50-60 Plaguelands</p>
+</div>
+
+<h2 class="text-[20px] font-black mt-10 text-[#f59e0b]">&#x1F4B0; Gold in Forever is Everything</h2>
+<p class="text-[14px] text-[#c2c8e8] mt-3">Mount at 40 costs 100g. If you don't farm, you walk for 20 hours. Best farms: Elemental fire in Arathi, linen farm in Deadmines, mage boosts.</p>
+
+<div class="mt-10 bg-gradient-to-br from-[#12162e] to-[#2a1f0f] border border-[#f59e0b]/50 rounded-xl p-6 text-center">
+<p class="font-black text-[18px]">Don&#x2019;t risk your Hardcore character &#x2620;&#xFE0F;</p>
+<p class="text-[12px] text-[#8b92c9] mt-2">We level 1-60 with 0 deaths, with stream proof and guarantee. 1-60 in 48h.</p>
+<button onclick="location.href='./forever.html'" class="mt-4 bg-[#f59e0b] text-black hover:bg-[#fbbf24] px-8 py-3 rounded-full font-black text-[13px] transition">Buy Forever Boost from $9 &#x2192;</button>
+<div class="text-[10px] text-[#6f76a0] mt-2">No bots &#x2022; Hand-leveled &#x2022; 100% safe</div>
+</div>
+
+<div class="mt-12 border-t border-[#232845] pt-6 flex justify-between">
+<a href="./blog.html" class="text-[11px] text-[#8b92c9] hover:text-white">&#x2190; Back to all guides</a>
+<a href="./wow-midnight-season-3-guide.html" class="text-[11px] text-[#8b5cf6] hover:underline">Next: Midnight S3 Guide &#x2192;</a>
+</div>
+</article>
+
+<script>
+function ghDetectNavUser(){ try{ let raw=localStorage.getItem('gearhaven_current_user'); if(!raw) return null; let u=JSON.parse(raw); if(!u||u.logged===false) return null; return u; }catch(e){ return null; } }
+function ghUpdateNavUser(){ let u=ghDetectNavUser(); let guest=document.getElementById('ghNavUserGuest'); let logged=document.getElementById('ghNavUserLogged'); if(!guest||!logged) return; if(u){ guest.classList.add('hidden'); guest.classList.remove('flex'); logged.classList.remove('hidden'); logged.classList.add('flex'); let name=u.username||u.name||u.email.split('@')[0]; document.getElementById('ghNavName').innerText=name; document.getElementById('ghNavAvatar').innerText=name.charAt(0).toUpperCase(); document.getElementById('ghDropName').innerText=name; document.getElementById('ghDropEmail').innerText=u.email||''; }else{ guest.classList.remove('hidden'); guest.classList.add('flex'); logged.classList.add('hidden'); logged.classList.remove('flex'); document.getElementById('ghUserDropdown')?.classList.add('hidden'); } }
+function ghToggleUserMenu(e){ if(e){e.preventDefault(); e.stopPropagation();} document.getElementById('ghUserDropdown').classList.toggle('hidden'); }
+function ghLogout(e){ if(e){e.preventDefault(); e.stopPropagation();} let cart=localStorage.getItem('gearhaven_cart'); localStorage.clear(); sessionStorage.clear(); if(cart) localStorage.setItem('gearhaven_cart', cart); location.reload(); }
+document.addEventListener('click',function(e){ let w=document.getElementById('ghNavUserWrap'); if(w&&!w.contains(e.target)) document.getElementById('ghUserDropdown')?.classList.add('hidden'); });
+ghUpdateNavUser();
+(function(){ let cart=JSON.parse(localStorage.getItem('gearhaven_cart')||'[]'); let cc=document.getElementById('cartCount'); if(cc) cc.innerText=cart.length; })();
+</script>
+<script src="./global-search.js"></script>
+<script src="./gh-banner.js"></script>
+<script src="./chat-widget.js"></script>
+</body>
+</html>

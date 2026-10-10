@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buy Mythic+ Bundle 3+1 FREE & 6+2 FREE - WoW Midnight Season 2 | GearHaven</title>
+<meta name="description" content="Buy WoW Boost safe & fast. Mythic+10 from $15, Raids, PvP, Gold. 24/7 Online, 5000+ trusted customers. Live Support on Telegram.">
+<link rel="icon" type="image/png" href="./imagenes/favicon.jpg">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18496576661"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-18496576661');
+</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  /* ===== PARCHE UNIVERSAL MOVIL - COPIA ESTO EN TODOS LOS HTML ===== */
+  html, body { max-width: 100vw !important; overflow-x: hidden !important; }
+    * { box-sizing: border-box; }
+  img { max-width: 100%; height: auto; }
+  /* Tus fotos con altura fija no se rompen */
+  #bundleImg, .like-img, .hero-banner img, #heroImg, .card img {
+    height: auto !important; 
+  }
+  #bundleImg{height:160px !important; width:100% !important; object-fit:cover !important;}
+  .like-img{height:90px !important; width:100% !important; object-fit:cover !important;}
+  .hero-banner img, #heroImg{height:100% !important; width:100% !important; object-fit:cover !important;}
+
+  @media (max-width: 768px) {
+    header { padding-left: 12px !important; padding-right: 12px !important; flex-wrap: wrap !important; max-width: 100vw !important; }
+    .max-w-\[1350px\], .max-w-\[1200px\], .max-w-\[1400px\] { padding-left: 12px !important; padding-right: 12px !important; }
+  }
+  /* ===== FIN PARCHE UNIVERSAL ===== */
+body{font-family:Arial;background:#0a0e28;color:#fff;margin:0}
+#bgOverlay{position:fixed;inset:0;background:url('./bundle/bundle2.jpg') center/cover no-repeat;opacity:0.06;pointer-events:none;z-index:-1}
+.check{width:18px;height:18px;border:1px solid #2a3366;background:#0e1230;border-radius:4px;accent-color:#8b5cf6}
+.admin-img-btn{display:none;position:absolute;top:6px;right:6px;z-index:20;background:rgba(0,0,0,0.85);border:1px solid #8b5cf6;border-radius:6px;padding:4px 8px;font-size:9px;color:white;cursor:pointer}
+.admin-bg-btn{display:none;position:fixed;top:70px;left:12px;z-index:60;background:#22c55e;color:black;border-radius:20px;padding:7px 14px;font-size:10px;font-weight:900;cursor:pointer}
+.hero-banner{position:relative;height:175px;border-radius:16px;overflow:hidden;border:1px solid #1e254a;margin-bottom:16px;background:#0a0e28}
+.hero-banner img{width:100%;height:100%;object-fit:cover;object-position:center center;display:block}
+.hero-banner::after{content:'';position:absolute;inset:0;background:linear-gradient(to right, #0a0e28 20%, transparent 70%), linear-gradient(to top, #0a0e28 10%, transparent 60%);pointer-events:none}
+.hero-text{position:absolute;left:0;top:0;bottom:0;z-index:2;display:flex;flex-direction:column;justify-content:center;padding:18px;pointer-events:none}
+#bundleImg{width:100%;height:160px;object-fit:cover;object-position:center center;display:block;background:#0a0e28}
+.dungeon-btn.selected{background:#8b5cf6!important;border-color:#8b5cf6!important;color:white}
+.mode-btn.active{background:#8b5cf6!important;color:white;border-color:#8b5cf6!important}
+.bundle-btn.active{background:#151a40!important;border-color:#8b5cf6!important;color:white;box-shadow:0 0 0 1px #8b5cf6}
+.trader-btn.active{background:#151a40!important;border-color:#8b5cf6!important;color:white;box-shadow:0 0 0 1px #8b5cf6}
+#chatModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:100;align-items:center;justify-content:center;padding:20px}
+#chatModal.show{display:flex}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#8b5cf6;color:#fff;padding:12px 24px;border-radius:30px;font-weight:900;font-size:12px;z-index:200;display:none;white-space:nowrap}
+select#levelSelect{background-color:#0e1230;color:white}
+select#levelSelect option{background-color:#0e1230;color:white}
+.loot-table th{background:#151a40;color:#8b92c9;font-size:10px;text-transform:uppercase;letter-spacing:0.5px}
+.loot-table td{font-size:11px;border-top:1px solid #1e254a;line-height:1.3}
+.loot-table tr:hover td{background:rgba(139,92,246,0.08)}
+</style>
+</head>
+<body>
+<div id="bgOverlay"></div>
+<div id="toast"></div>
+<label class="admin-bg-btn" id="bgEditBtn">📷 CAMBIAR FONDO<input type="file" accept="image/*" hidden onchange="changeBackground(event)"></label>
+<header class="flex justify-between items-center px-6 py-3 bg-[#0f1333] border-b border-[#1e254a] sticky top-0 z-30 gap-4">
+  <div onclick="location.href='./midnight.html'" class="font-black text-[20px] tracking-wider cursor-pointer shrink-0">GEAR<span class="text-[#8b5cf6]">HAVEN</span> <span class="text-[9px] bg-[#1a204f] border border-[#2a3366] px-2 py-1 rounded-full ml-2">HOME</span></div>
+  <div class="flex-1 max-w-[480px] relative mx-4 hidden md:block">
+    <input id="globalSearch" type="text" placeholder="🔍 Search all boosts..." class="w-full bg-[#0a0e28] border border-[#2a3366] rounded-full px-5 py-2 text-[12px] text-white outline-none focus:border-[#8b5cf6]">
+    <div id="globalResults" class="absolute top-[115%] left-0 w-full bg-[#111536] border border-[#2a3366] rounded-xl z-50 hidden max-h-[400px] overflow-y-auto"></div>
+  </div>
+  <div class="px-4 pt-2">
+    <button onclick="location.href='./midnight.html'" class="inline-flex items-center gap-2 text-[11px] font-bold bg-[#111536] border border-[#2a3366] text-[#c2c8e8] hover:text-white hover:border-[#8b5cf6] hover:bg-[#1a204f] px-5 py-3 rounded-full transition-all">
+    <span>←</span> Back
+  </button>
+  </div>
+  <div class="flex gap-2 items-center shrink-0">
+    <div class="text-[11px] bg-[#0e1230] border border-[#2a3366] px-3 py-2 rounded-full font-bold text-[#8b92c9]">EN</div>
+    <div id="ghNavUserWrap" class="relative">
+      <div id="ghNavUserGuest" class="flex items-center">
+        <button onclick="location.href='./account.html'" class="text-[11px] bg-[#111536] border border-[#2a3366] text-[#c2c8e8] px-3.5 py-2 rounded-l-full font-bold">👤 Sign In</button>
+        <button onclick="location.href='./account.html'" class="text-[11px] bg-[#8b5cf6] text-white px-4 py-2 rounded-r-full font-black">Sign Up</button>
+      </div>
+      <div id="ghNavUserLogged" class="hidden items-center gap-2 bg-[#111536] border border-[#2a3366] pl-1 pr-3 py-1 rounded-full cursor-pointer" onclick="ghToggleUserMenu(event)">
+        <div id="ghNavAvatar" class="w-[28px] h-[28px] bg-gradient-to-br from-[#8b5cf6] to-[#22c55e] rounded-full flex items-center justify-center font-black text-[11px]">R</div>
+        <span id="ghNavName" class="text-[12px] font-bold text-white max-w-[90px] truncate">User</span>
+      </div>
+      <div id="ghUserDropdown" class="hidden absolute top-[120%] right-0 w-[210px] bg-[#0f1333] border border-[#2a3366] rounded-xl overflow-hidden z-50">
+        <div class="p-3 border-b border-[#1e254a] bg-[#111536]"><div id="ghDropName" class="font-black text-[12px] text-white">User</div><div id="ghDropEmail" class="text-[10px] text-[#8b92c9] truncate">email</div></div>
+        <div class="p-2.5 text-[11px] text-[#c2c8e8] cursor-pointer hover:bg-[#1a204f]" onclick="location.href='./account.html'">👤 My Account</div>
+        <div class="p-2.5 text-[11px] text-[#c2c8e8] cursor-pointer hover:bg-[#1a204f]" onclick="location.href='./account.html#orders'">📦 My Orders</div>
+        <div class="p-2.5 text-[11px] text-[#ef4444] cursor-pointer hover:bg-[#1a1500] border-t border-[#1e254a]" onclick="ghLogout(event)">🚪 Logout</div>
+      </div>
+    </div>
+    <button onclick="location.href='./cart.html'" class="text-[11px] bg-[#8b5cf6] px-4 py-2 rounded-full font-bold">🛒 Cart (<span id="cartCount">0</span>)</button>
+  </div>
+</header>
+<!-- BARRA STICKY CENTRADA - NO MODIFICA CENTRADO -->
+<div id="topPayBar" class="sticky top-[52px] z-20 w-full bg-[#0f1333]/95 backdrop-blur-md border-y border-[#1e254a] px-4 py-[5px] flex flex-wrap items-center justify-center gap-3 shadow-lg">
+  <span class="text-[8px] tracking-[2px] font-black text-[#6b77b5]">WE ACCEPT</span>
+  <div class="flex items-center gap-3 flex-wrap justify-center">
+    <span class="text-white font-black italic text-[11px]">VISA</span>
+    <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-[#eb001b]"></span><span class="w-3 h-3 rounded-full bg-[#f79e1b] -ml-1.5"></span><span class="text-[7px] ml-1 text-[#8b92c9]">Master</span></span>
+    <span class="text-[#0099df] font-bold text-[10px]">PayPal</span>
+    <span class="text-white font-bold text-[10px]"> Pay</span>
+    <span class="text-white font-bold text-[10px]"><span class="text-[#4285f4]">G</span> Pay</span>
+    <span class="bg-[#F3BA2F] text-black text-[7px] font-black px-1.5 py-0.5 rounded">Binance</span>
+    <span class="bg-[#f7931a] text-white text-[7px] font-black px-1.5 py-0.5 rounded-full">₿</span>
+  </div>
+</div>
+<script>
+function ghDetectNavUser(){const keys=['gearhaven_current_user','gearhaven_user','currentUser','user','gearhaven_accounts'];for(let k of keys){try{let raw=localStorage.getItem(k);if(!raw)continue;let d=JSON.parse(raw);if(Array.isArray(d)&&d.length>0){let l=d.find(u=>u.logged||u.active)||d[d.length-1];if(l&&(l.username||l.email))return l;}else if(d&&(d.username||d.email))return d;}catch(e){}}return null;}
+function ghUpdateNavUser(){let u=ghDetectNavUser();let guest=document.getElementById('ghNavUserGuest');let logged=document.getElementById('ghNavUserLogged');if(!guest||!logged)return;if(u){guest.classList.add('hidden');guest.classList.remove('flex');logged.classList.remove('hidden');logged.classList.add('flex');let name=u.username||u.email.split('@')[0];document.getElementById('ghNavName').innerText=name;document.getElementById('ghNavAvatar').innerText=name.charAt(0).toUpperCase();document.getElementById('ghDropName').innerText=name;document.getElementById('ghDropEmail').innerText=u.email||'';}else{guest.classList.remove('hidden');guest.classList.add('flex');logged.classList.add('hidden');logged.classList.remove('flex');}}
+function ghToggleUserMenu(){document.getElementById('ghUserDropdown').classList.toggle('hidden');}
+function ghLogout(){localStorage.removeItem('gearhaven_current_user');localStorage.removeItem('gearhaven_user');localStorage.removeItem('currentUser');try{let acc=JSON.parse(localStorage.getItem('gearhaven_accounts')||'[]');acc=acc.map(a=>({...a,logged:false,active:false}));localStorage.setItem('gearhaven_accounts',JSON.stringify(acc));}catch(e){}location.href='./account.html';}
+document.addEventListener('click',function(e){let wrap=document.getElementById('ghNavUserWrap');if(wrap&&!wrap.contains(e.target)){document.getElementById('ghUserDropdown').classList.add('hidden');}});
+ghUpdateNavUser();setInterval(ghUpdateNavUser,1500);
+</script>
+
+<div class="max-w-[1350px] mx-auto px-6 py-6 grid lg:grid-cols-[1fr_360px] gap-6">
+  <div>
+    <div class="hero-banner relative">
+      <img id="heroImg" src="./bundle/bundle3.jpg">
+      <div class="hero-text">
+        <div class="text-[25px] text-[#8b5cf6] font-black tracking-widest">WORLD OF WARCRAFT: MIDNIGHT - SEASON 2</div>
+        <div class="text-[20px] font-black leading-tight">Mythic+ Bundle - Save Up To 30%</div>
+        <div class="text-[11px] text-[#c2c8e8] mt-1">Keys 6-20 - 3+1 FREE / 6+2 FREE / 9+3 FREE</div>
+      </div>
+      <label class="admin-img-btn">📷 Banner<input type="file" accept="image/*" hidden onchange="changeImage(event,'bundle_hero','heroImg',1200,175)"></label>
+    </div>
+
+    <h1 class="text-[26px] font-black mt-2">WoW Mythic+ Bundle Boost - 6-20</h1>
+    <p class="text-[15px] text-[#8b92c9] mt-3 bg-[#111536] border border-[#1e254a] rounded-xl p-3">Mythic+ Bundle 6-20— timed, Vault filled, Score climbing. 3+1 FREE, 6+2 FREE, 9+3 FREE best value. US Region only. Express available.</p>
+
+    <div class="mt-5 bg-[#111536] border border-[#1e254a] rounded-2xl p-5">
+      <h2 class="font-black text-[20px]">Your Wins - Bundle</h2>
+      <ul class="mt-3 space-y-2 text-[18px] text-[#c2c8e8] leading-relaxed">
+        <li>🎯 3 to 12 dungeons cleared— 3+1 FREE, 6+2 FREE, 9+3 FREE;</li>
+        <li>💎 308-311 ilvl loot, 318 Vault— strongest M+ gear;</li>
+        <li>⏱ In Time included— no extra cost;</li>
+        <li>🤝 Up to 4 loot traders— 2 free per run;</li>
+        <li>💠 Myth Mistcrest crests— max ilvl every slot;</li>
+        <li>🌰 Teleports at +10;</li>
+        <li>📊 Score up— 2500+ in one bundle;</li>
+        <li>💰 Save up to 30%— more runs, more free.</li>
+      </ul>
+    </div>
+
+    <div class="mt-5 bg-[#111536] border border-[#1e254a] rounded-2xl p-5">
+      <h2 class="font-black text-[30px] mb-1">Midnight Season 2 Loot Rewards - Complete Table</h2>
+      <p class="text-[15px] text-[#8b92c9] mb-3">Here are the Midnight Season 2 item-level loot rewards for all Mythic Keystone levels:</p>
+      <div class="overflow-x-auto rounded-xl border border-[#1e254a]">
+        <table class="w-full loot-table">
+          <thead><tr><th class="text-left px-3 py-2.5">Keystone Level</th><th class="text-left px-3 py-2.5">Dungeon gear</th><th class="text-left px-3 py-2.5">Crest</th><th class="text-left px-3 py-2.5">Great Vault + Bonus Rolls</th></tr></thead>
+          <tbody>
+            <tr><td class="px-3 py-2.5 font-bold text-[#8b5cf6]">M+ 2</td><td class="px-3 py-2.5">295<br><span class="text-[9px] text-[#8b92c9]">Champion 2/6</span></td><td class="px-3 py-2.5">10 Champion Mistcrest</td><td class="px-3 py-2.5">305<br><span class="text-[9px] text-[#8b92c9]">Hero 1/6</span></td></tr>
+            <tr><td class="px-3 py-2.5 font-bold text-[#8b5cf6]">M+ 3</td><td class="px-3 py-2.5">295<br><span class="text-[9px] text-[#8b92c9]">Champion 2/6</span></td><td class="px-3 py-2.5">12 Champion Mistcrest</td><td class="px-3 py-2.5">305<br><span class="text-[9px] text-[#8b92c9]">Hero 1/6</span></td></tr>
+            <tr><td class="px-3 py-2.5 font-bold text-[#8b5cf6]">M+ 4</td><td class="px-3 py-2.5">298<br><span class="text-[9px] text-[#8b92c9]">Champion 3/6</span></td><td class="px-3 py-2.5">10 Hero Mistcrest</td><td class="px-3 py-2.5">308<br><span class="text-[9px] text-[#8b92c9]">Hero 2/6</span></td></tr>
+            <tr><td class="px-3 py-2.5 font-bold text-[#8b5cf6]">M+ 5</td><td class="px-3 py-2.5">302<br><span class="text-[9px] text-[#8b92c9]">Champion 4/6</span></td><td class="px-3 py-2.5">12 Hero Mistcrest</td><td class="px-3 py-2.5">308<br><span class="text-[9px] text-[#8b92c9]">Hero 2/6</span></td></tr>
+            <tr><td class="px-3 py-2.5 font-bold text-[#8b5cf6]">M+ 6</td><td class="px-3 py-2.5">305<br><span class="text-[9px] text-[#8b92c9]">Hero 1/6</span></td><td class="px-3 py-2.5">14 Hero Mistcrest</td><td class="px-3 py-2.5">311<br><span class="text-[9px] text-[#8b92c9]">Hero 3/6</span></td></tr>
+            <tr><td class="px-3 py-2.5 font-bold text-[#8b5cf6]">M+ 7</td><td class="px-3 py-2.5">305<br><span class="text-[9px] text-[#8b92c9]">Hero 1/6</span></td><td class="px-3 py-2.5">16 Hero Mistcrest</td><td class="px-3 py-2.5">315<br><span class="text-[9px] text-[#8b92c9]">Hero 4/6</span></td></tr>
+            <tr><td class="px-3 py-2.5 font-bold text-[#8b5cf6]">M+ 8</td><td class="px-3 py-2.5">308<br><span class="text-[9px] text-[#8b92c9]">Hero 2/6</span></td><td class="px-3 py-2.5">18 Hero Mistcrest</td><td class="px-3 py-2.5">315<br><span class="text-[9px] text-[#8b92c9]">Hero 4/6</span></td></tr>
+            <tr><td class="px-3 py-2.5 font-bold text-[#8b5cf6]">M+ 9</td><td class="px-3 py-2.5">308<br><span class="text-[9px] text-[#8b92c9]">Hero 2/6</span></td><td class="px-3 py-2.5">10 Myth Mistcrest</td><td class="px-3 py-2.5">315<br><span class="text-[9px] text-[#8b92c9]">Hero 4/6</span></td></tr>
+            <tr><td class="px-3 py-2.5 font-bold text-[#22c55e]">M+ 10</td><td class="px-3 py-2.5 font-bold">311<br><span class="text-[9px] text-[#8b92c9]">Hero 3/6</span></td><td class="px-3 py-2.5 font-bold">12 Myth Mistcrest</td><td class="px-3 py-2.5 font-bold">318<br><span class="text-[9px] text-[#8b92c9]">Myth 1/6</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="lg:sticky top-[80px] h-fit">
+    <div class="bg-[#151a40] border border-[#2a3366] rounded-[16px] overflow-hidden">
+      <div class="relative" style="background:#0a0e28"><img id="bundleImg" src="./bundle/bundle1.avif"></div>
+      <div class="p-4">
+        <div class="flex gap-2 mb-3"><span class="bg-[#8b5cf6] text-[10px] px-3 py-1.5 rounded-full font-bold">US</span><span class="text-[10px] px-3 py-1.5 text-[#8b92c9] bg-[#0e1230] border border-[#1e254a] rounded-full">Region - US Only</span></div>
+        <div class="flex gap-2 mb-4">
+          <button onclick="setMode('self')" id="btnSelf" class="mode-btn active bg-[#0e1230] border border-[#252d63] text-[10px] px-3 py-1.5 rounded-full font-bold">Self Played</button>
+          <button onclick="setMode('pilot')" id="btnPilot" class="mode-btn bg-[#0e1230] border border-[#252d63] text-[10px] px-3 py-1.5 rounded-full font-bold">Piloted</button>
+          <button onclick="setMode('remote')" id="btnRemote" class="mode-btn bg-[#0e1230] border border-[#252d63] text-[10px] px-3 py-1.5 rounded-full font-bold">🖥 Remote <span class="text-[8px] bg-[#f59e0b] text-black px-1.5 py-0.5 rounded ml-1 font-black">+30%</span></button>
+        </div>
+        <div class="mb-3">
+          <div class="text-[11px] text-[#8b92c9] mb-1.5">Keystone level</div>
+          <div class="bg-[#0e1230] border border-[#252d63] rounded-xl px-3 py-2 flex items-center justify-between">
+            <select id="levelSelect" onchange="setLevel(this.value)" class="w-[75%] bg-transparent text-[12px] font-bold text-white outline-none">
+            <option>Cargando...</option>
+            </select>
+            <span id="levelPriceDisplay" class="text-[13px] font-black">$26.97</span>
+          </div>
+        </div>
+        <div class="space-y-2 mb-4 text-[11px]">
+          <label class="flex items-center justify-between bg-[#0e1230] p-3 rounded-xl border border-[#1e254a] cursor-pointer"><span class="flex items-center gap-2"><input type="checkbox" id="chkExpress" class="check" onchange="calcTotal()"> ⚡ Express start</span><span class="text-[#8b92c9]">+<span id="expressLabel">30</span>%</span></label>
+          <label class="flex items-center justify-between bg-[#0e1230] p-3 rounded-xl border border-[#1e254a] cursor-pointer"><span class="flex items-center gap-2"><input type="checkbox" id="chkDungeon" class="check" onchange="calcTotal()"> 🎯 Specific dungeon(s)</span><span class="text-[#8b92c9]">+<span id="specificLabel">20</span>%</span></label>
+        </div>
+        <div class="mb-4">
+          <div class="text-[11px] text-[#8b92c9] mb-1.5">Bundle options</div>
+          <div class="grid grid-cols-3 gap-2">
+            <button onclick="setBundle('3+1')" id="bundle-3" class="bundle-btn active bg-[#0e1230] border border-[#252d63] rounded-xl py-2.5 text-[11px] font-bold">3 + 1 FREE</button>
+            <button onclick="setBundle('6+2')" id="bundle-6" class="bundle-btn bg-[#0e1230] border border-[#252d63] rounded-xl py-2.5 text-[11px] font-bold">6 + 2 FREE</button>
+            <button onclick="setBundle('9+3')" id="bundle-9" class="bundle-btn bg-[#0e1230] border border-[#252d63] rounded-xl py-2.5 text-[11px] font-bold">9 + 3 FREE</button>
+          </div>
+        </div>
+        <div class="mb-4">
+          <div class="text-[11px] text-[#8b92c9] mb-1.5">Number of loot traders</div>
+          <div class="grid grid-cols-3 gap-2">
+            <button onclick="setTraders(2)" id="trader-2" class="trader-btn active bg-[#0e1230] border border-[#252d63] rounded-xl py-2.5 text-[11px] font-bold">Two</button>
+            <button onclick="setTraders(3)" id="trader-3" class="trader-btn bg-[#0e1230] border border-[#252d63] rounded-xl py-2.5 text-[11px] font-bold">Three +<span id="trader3Label">30</span>%</button>
+            <button onclick="setTraders(4)" id="trader-4" class="trader-btn bg-[#0e1230] border border-[#252d63] rounded-xl py-2.5 text-[11px] font-bold">Four +<span id="trader4Label">50</span>%</button>
+          </div>
+        </div>
+        <div id="dungeonSelector" class="bg-[#0a0e28] border border-[#1e254a] rounded-xl p-3 mb-4">
+          <div class="flex justify-between items-center mb-2"><div class="text-[11px] font-black">Midnight Dungeons - Bundle 6-20</div><button onclick="clearDungeons()" class="text-[9px] bg-[#1a204f] border px-2 py-1 rounded-full">Clear</button></div>
+          <div class="grid grid-cols-2 gap-2" id="dungeonGrid"></div>
+        </div>
+        <div class="bg-[#0e1230] rounded-xl p-4 border border-[#1e254a]">
+          <div class="flex items-center justify-between mb-3"><span class="text-[11px] text-[#8b92c9]">Currency</span><select id="currencySelect" onchange="calcTotal()" class="bg-[#111536] border border-[#2a3366] rounded-lg px-2 py-1.5 text-[11px] font-bold text-white"><option value="USD" selected>USD $</option><option value="EUR">EUR €</option><option value="BRL">BRL R$</option><option value="COP">COP $</option></select></div>
+          <div class="flex items-center gap-2"><span id="totalP" class="text-white font-black text-[22px]">$26.97</span><span class="text-[9px] bg-[#22c55e] text-black px-2 py-0.5 rounded-full font-black" id="discountBadge">3+1 FREE</span></div>
+          <div class="text-[10px] text-[#6b77b5] mt-1">≈ $<span id="usdRef">26.97</span> USD • <span id="selectedDungeonLabel" class="text-[#8b5cf6]">Any Dungeon</span> • <span id="traderLabel">2 traders</span></div>
+                              <div class="mt-4">
+            <!-- BOTON PRIMARIO UNICO - Para SEO solo "Buy Now" -->
+            <button onclick="goCheckout('payphone')" class="w-full bg-[#22c55e] hover:bg-[#16a34a] text-black py-3.5 rounded-xl font-black text-[13px] shadow-lg transition-all">
+              &#128179; Buy Now - <span id="payphoneBtnPrice">$28.50 USD</span>
+            </button>
+
+            <!-- METODOS SECUNDARIOS - sutiles, no amarillos gigantes -->
+            <div class="mt-3 bg-[#0a0e28] border border-[#1e254a] rounded-xl p-2.5">
+              <p class="text-[9px] text-center text-[#666] mb-2 tracking-widest font-bold">SECURE CHECKOUT</p>
+              <div class="grid grid-cols-3 gap-2">
+                <button onclick="goCheckout('payphone')" class="bg-[#111536] border border-[#2a3366] hover:border-[#8b5cf6] hover:text-white text-[10px] py-2.5 rounded-lg text-[#8b92c9] font-bold transition-all">
+                  &#128179; Card
+                </button>
+                <button onclick="goCheckout('paypal')" class="bg-[#111536] border border-[#2a3366] hover:border-[#8b5cf6] hover:text-white text-[10px] py-2.5 rounded-lg text-[#8b92c9] font-bold transition-all">
+                  PayPal
+                </button>
+                <button onclick="goCheckout('binance')" class="bg-[#111536] border border-[#2a3366] hover:border-[#8b5cf6] hover:text-white text-[10px] py-2.5 rounded-lg text-[#8b92c9] font-bold transition-all">
+                  Crypto
+                </button>
+              </div>
+              <!-- SPANS OCULTOS PARA QUE TU JS NO SE ROMPA - MANTIENE COMPATIBILIDAD -->
+              <span id="payBtnPrice" class="hidden">$28.50 USD</span>
+              <span class="binPrice hidden">$28.50 USD</span>
+            </div>
+
+            <button onclick="addToCart()" class="w-full mt-3 bg-[#0e1230] border-2 border-[#8b5cf6] hover:bg-[#1a204f] text-white py-3 rounded-xl font-black text-[12px] transition-all" data-i="addCart">
+              🛒 Add to Cart
+            </button>
+
+            <div class="mt-3 flex items-center justify-center gap-2 text-[9px] text-[#6b77b5] text-center">
+              <span>🔒 256-bit SSL</span><span>•</span><span>⚡ Instant Start</span><span>•</span><span id="liveTime">--:--:--</span>
+            </div>
+            <div class="mt-2 text-[8px] text-center text-[#444]">
+              Secure payment available via card, PayPal and crypto at checkout
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="chatModal"><div class="bg-[#151a40] border border-[#2a3366] rounded-2xl p-5 w-full max-w-[380px]"><div class="flex justify-between items-center mb-4"><div class="font-black text-[14px]">💬 Choose Contact</div><button onclick="closeChatOptions()" class="bg-[#0e1230] border border-[#2a3366] w-7 h-7 rounded-full text-[12px]">✕</button></div><div class="space-y-2"><button onclick="contactOption('whatsapp')" class="w-full bg-[#25D366] text-black py-3 rounded-xl font-black text-[12px]">📱 WhatsApp</button><button onclick="contactOption('discord')" class="w-full bg-[#5865F2] text-white py-3 rounded-xl font-black text-[12px]">💬 Discord</button></div></div></div>
+
+<script>
+// === SISTEMA CENTRAL DE PRECIOS ===
+let levelPrices={}; 
+let expressPerc=30, specificPerc=20, remotePerc=30, trader3Perc=30, trader4Perc=50;
+let bundleConfig={"3+1":{pay:3,total:4,mult:1},"6+2":{pay:6,total:8,mult:2},"9+3":{pay:9,total:12,mult:2.85}};
+let preciosCargados=false;
+
+fetch('https://silent-term-1b1a.riasdeath77.workers.dev/api/prices?v='+Date.now())
+ .then(r=>r.json())
+ .then(j=>{
+    let b = j.retail ? j.retail.bundle : j; // SOPORTA NUEVO Y VIEJO
+    levelPrices=b.levelPrices;
+    keystoneLabels=b.keystoneLabels || {};
+    dungeonNames=b.dungeonNames || {};
+    bundleLabels=b.bundleLabels || {"3+1":"3 + 1 FREE","6+2":"6 + 2 FREE","9+3":"9 + 3 FREE"};
+    expressPerc=b.percents.express;
+    specificPerc=b.percents.specific;
+    remotePerc=b.percents.remote;
+    trader3Perc=b.percents.trader3;
+    trader4Perc=b.percents.trader4;
+    if(b.bundles) bundleConfig=b.bundles;
+
+    document.getElementById('expressLabel').innerText=expressPerc;
+    document.getElementById('specificLabel').innerText=specificPerc;
+    document.getElementById('trader3Label').innerText=trader3Perc;
+    document.getElementById('trader4Label').innerText=trader4Perc;
+
+    // AUMENTO 1: LLENAR DROPDOWN KEYSTONE LEVEL
+    let sel=document.getElementById('levelSelect');
+    sel.innerHTML=Object.keys(levelPrices).sort((a,b)=>a-b).map(k=>{
+      let label=keystoneLabels[k] || `+${k} In Time`;
+      return `<option value="${k}" ${k==currentLevel?'selected':''}>${label}</option>`;
+    }).join('');
+
+    // AUMENTO 2: LLENAR LABELS BUNDLE
+    if(bundleLabels["3+1"]) document.getElementById('bundle-3').innerText=bundleLabels["3+1"];
+    if(bundleLabels["6+2"]) document.getElementById('bundle-6').innerText=bundleLabels["6+2"];
+    if(bundleLabels["9+3"]) document.getElementById('bundle-9').innerText=bundleLabels["9+3"];
+
+    renderDungeons();
+    preciosCargados=true;
+    setLevel(sel.value);
+    calcTotal();
+  })
+let currentLevel=10, currentBundle="3+1", currentMode="self", currentTraders=2, selectedDungeons=[];
+let currencyRates={USD:1,EUR:0.92,BRL:5.65,COP:4100};
+let currencySymbols={USD:'$',EUR:'€',BRL:'R$',COP:'COP $'};
+let dungeonNames={}; // <-- AHORA VACIO, SE LLENA DESDE JSON
+let keystoneLabels={};
+let bundleLabels={};
+let contactLinks={whatsapp:localStorage.getItem('gearhaven_whatsapp')||'https://wa.me/593979294075?text=Hola%20GEARHAVEN%20quiero%20info%20de%20un%20boost%20Mythic%2B%20Bundle', discord:localStorage.getItem('gearhaven_discord')||'https://discord.gg/kbbpUUePa4'};
+
+function cleanForTelegram(text){
+  if(!text) return "Any Dungeon";
+  let s = String(text);
+  s = s.replace(/[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{FE00}-\u{FE0F}\u{1F900}-\u{1F9FF}]/gu, '');
+  s = s.replace(/[^\x20-\x7E\xC0-\xFF,.\-+()\/]/g, '');
+  s = s.replace(/\s+/g,' ').trim();
+  return s || "Any Dungeon";
+}
+
+function toast(m){let t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(()=>t.style.display='none',2500);}
+function getCart(){return JSON.parse(localStorage.getItem('gearhaven_cart')||'[]');}
+function saveCart(c){localStorage.setItem('gearhaven_cart',JSON.stringify(c)); let el=document.getElementById('cartCount'); if(el) el.innerText=c.length;}
+function renderDungeons(){document.getElementById('dungeonGrid').innerHTML=Object.keys(dungeonNames).map(k=>`<button onclick="selectDungeon('${k}')" id="dun-${k}" class="dungeon-btn bg-[#111536] border border-[#1e254a] rounded-lg px-3 py-2.5 text-[11px] text-left font-bold">${dungeonNames[k]}</button>`).join('');}
+function clearDungeons(){selectedDungeons=[]; document.querySelectorAll('.dungeon-btn').forEach(b=>b.classList.remove('selected')); document.getElementById('selectedDungeonLabel').innerText='Any Dungeon'; document.getElementById('chkDungeon').checked=false; calcTotal();}
+function selectDungeon(k){let i=selectedDungeons.indexOf(k); if(i>-1){selectedDungeons.splice(i,1); document.getElementById('dun-'+k).classList.remove('selected');} else {selectedDungeons.push(k); document.getElementById('dun-'+k).classList.add('selected');} document.getElementById('selectedDungeonLabel').innerText=selectedDungeons.length?selectedDungeons.map(x=>dungeonNames[x]).join(', '):'Any Dungeon'; document.getElementById('chkDungeon').checked=selectedDungeons.length>0; calcTotal();}
+function setMode(m){currentMode=m; document.getElementById('btnSelf').className=m==='self'?'mode-btn active bg-[#0e1230] border text-[10px] px-3 py-1.5 rounded-full font-bold':'mode-btn bg-[#0e1230] border border-[#252d63] text-[10px] px-3 py-1.5 rounded-full font-bold'; document.getElementById('btnPilot').className=m==='pilot'?'mode-btn active bg-[#0e1230] border text-[10px] px-3 py-1.5 rounded-full font-bold':'mode-btn bg-[#0e1230] border border-[#252d63] text-[10px] px-3 py-1.5 rounded-full font-bold'; document.getElementById('btnRemote').className=m==='remote'?'mode-btn active bg-[#0e1230] border text-[10px] px-3 py-1.5 rounded-full font-bold':'mode-btn bg-[#0e1230] border border-[#252d63] text-[10px] px-3 py-1.5 rounded-full font-bold'; calcTotal();}
+function setLevel(v){currentLevel=parseInt(v); document.getElementById('levelPriceDisplay').innerText='$'+(levelPrices[v]||0).toFixed(2); calcTotal();}
+function setBundle(b){currentBundle=b; document.getElementById('bundle-3').className=b==='3+1'?'bundle-btn active bg-[#0e1230] border rounded-xl py-2.5 text-[11px] font-bold':'bundle-btn bg-[#0e1230] border border-[#252d63] rounded-xl py-2.5 text-[11px] font-bold'; document.getElementById('bundle-6').className=b==='6+2'?'bundle-btn active bg-[#0e1230] border rounded-xl py-2.5 text-[11px] font-bold':'bundle-btn bg-[#0e1230] border border-[#252d63] rounded-xl py-2.5 text-[11px] font-bold'; document.getElementById('bundle-9').className=b==='9+3'?'bundle-btn active bg-[#0e1230] border rounded-xl py-2.5 text-[11px] font-bold':'bundle-btn bg-[#0e1230] border border-[#252d63] rounded-xl py-2.5 text-[11px] font-bold'; document.getElementById('discountBadge').innerText=b+' FREE'; calcTotal();}
+function setTraders(n){currentTraders=n; document.getElementById('trader-2').className=n===2?'trader-btn active bg-[#0e1230] border rounded-xl py-2.5 text-[11px] font-bold':'trader-btn bg-[#0e1230] border border-[#252d63] rounded-xl py-2.5 text-[11px] font-bold'; document.getElementById('trader-3').className=n===3?'trader-btn active bg-[#0e1230] border rounded-xl py-2.5 text-[11px] font-bold':'trader-btn bg-[#0e1230] border border-[#252d63] rounded-xl py-2.5 text-[11px] font-bold'; document.getElementById('trader-4').className=n===4?'trader-btn active bg-[#0e1230] border rounded-xl py-2.5 text-[11px] font-bold':'trader-btn bg-[#0e1230] border border-[#252d63] rounded-xl py-2.5 text-[11px] font-bold'; document.getElementById('traderLabel').innerText=n+' traders'; calcTotal();}
+
+function calcTotal(){
+  let base=levelPrices[currentLevel]||26.97;
+  let cfg=bundleConfig[currentBundle];
+  let price=base*(cfg.mult||1);
+  if(document.getElementById('chkExpress').checked) price*=(1+expressPerc/100);
+  if(document.getElementById('chkDungeon').checked) price*=(1+specificPerc/100);
+  if(currentMode==='remote') price*=(1+remotePerc/100);
+  if(currentTraders===3) price*=(1+trader3Perc/100);
+  if(currentTraders===4) price*=(1+trader4Perc/100);
+  let curr=document.getElementById('currencySelect').value;
+  let rate=currencyRates[curr]||1;
+  let sym=currencySymbols[curr]||'$';
+  let finalP=curr==='COP'?Math.round(price*rate):(price*rate).toFixed(2);
+  document.getElementById('totalP').innerText=sym+finalP;
+  document.getElementById('usdRef').innerText=price.toFixed(2);
+  document.getElementById('payBtnPrice').innerText=sym+finalP+' USD';
+  document.querySelectorAll('.binPrice').forEach(e=>e.innerText=sym+finalP+' USD');
+  let elPayPhone = document.getElementById('payphoneBtnPrice');
+  if(elPayPhone) elPayPhone.innerText=sym+finalP+' USD';
+  let dungeonStr = selectedDungeons.length? selectedDungeons.map(k=>dungeonNames[k]).join(', ') : 'Any Dungeon';
+  window._last={
+    price:finalP,
+    usd:price.toFixed(2),
+    currency:curr,
+    symbol:sym,
+    title:`Mythic+ Bundle +${currentLevel} ${currentBundle} FREE - ${currentMode} - ${currentTraders} traders`,
+    titleClean: cleanForTelegram(`Mythic+ Bundle +${currentLevel} ${currentBundle} FREE - ${currentMode} - ${currentTraders} traders`),
+    dungeons: dungeonStr,
+    dungeonsClean: cleanForTelegram(dungeonStr),
+    dungeonIds: selectedDungeons.join(','),
+    level: currentLevel,
+    bundle: currentBundle,
+    traders: currentTraders,
+    mode: currentMode
+  };
+}
+
+function goCheckout(m){
+  let c=window._last;
+  if(!c) calcTotal();
+  c=window._last;
+  let dungeonIds = c.dungeonIds || selectedDungeons.join(',');
+  let dungeonNamesStr = c.dungeonsClean || cleanForTelegram(c.dungeons || (selectedDungeons.length? selectedDungeons.map(k=>dungeonNames[k]).join(', ') : 'Any Dungeon'));
+  let titleClean = c.titleClean || cleanForTelegram(c.title);
+  location.href=`./checkout.html?title=${encodeURIComponent(titleClean)}&price=${c.price}&usd=${c.usd}&currency=${c.currency}&symbol=${encodeURIComponent(c.symbol)}&method=${m}&type=BUNDLE&level=${c.level}&bundle=${c.bundle}&mode=${c.mode}&traders=${c.traders}&dungeons=${encodeURIComponent(dungeonNamesStr)}&dungeonIds=${encodeURIComponent(dungeonIds)}&keys=${c.bundle}`;
+}
+
+function addToCart(){
+  let c=window._last;
+  if(!c) calcTotal();
+  c=window._last;
+  let cart=getCart();
+  if(cart.length>=5){alert('Max 5');return;}
+  let dungeonNamesStr = c.dungeonsClean || cleanForTelegram(c.dungeons || (selectedDungeons.length? selectedDungeons.map(k=>dungeonNames[k]).join(', ') : 'Any Dungeon'));
+  let titleClean = c.titleClean || cleanForTelegram(c.title);
+  let dungeonIds = c.dungeonIds || selectedDungeons.join(',');
+  cart.push({
+    id:'CART-'+Date.now(),
+    title: titleClean,
+    name: titleClean,
+    titleDisplay: c.title,
+    price:c.price,
+    usd:c.usd,
+    currency:c.currency,
+    symbol:c.symbol,
+    type:'BUNDLE',
+    dungeons: dungeonNamesStr,
+    dungeonNamesDisplay: c.dungeons,
+    dungeonIds: dungeonIds,
+    traders: c.traders,
+    bundle: c.bundle,
+    level: c.level,
+    mode: c.mode,
+    playMode: c.mode
+  });
+  saveCart(cart);
+  toast('✅ Added to cart - '+c.dungeons);
+}
+
+function openChatOptions(){document.getElementById('chatModal').classList.add('show');}
+function closeChatOptions(){document.getElementById('chatModal').classList.remove('show');}
+function contactOption(t){closeChatOptions(); if(t==='whatsapp') window.open(contactLinks.whatsapp,'_blank'); else window.open(contactLinks.discord,'_blank');}
+(function init(){renderDungeons(); setBundle('3+1'); setTraders(2); calcTotal(); saveCart(getCart()); setInterval(()=>{let el=document.getElementById('liveTime'); if(el) el.innerText=new Date().toLocaleTimeString();},1000);})();
+</script>
+<script src="./global-search.js"></script>
+<script src="./gh-banner.js"></script>
+<script src="./chat-widget.js"></script>
+<!-- ===== INICIO FAQ SEO - BUNDLE - PUEDES BORRAR/REEMPLAZAR TODO ESTE BLOQUE CUANDO QUIERAS ===== -->
+<div class="max-w-[1350px] mx-auto px-6 mt-10 mb-8">
+  <div class="bg-[#12162e]/60 border border-[#232845] rounded-xl p-6">
+    <h2 class="text-[20px] font-black text-white mb-4">WoW Mythic+ Bundle - 3+1 FREE & 6+2 FREE - Best Value for Season 2</h2>
+    <p class="text-[13px] text-[#a3a8c9] leading-relaxed mb-4">
+      GearHavenGG <strong class="text-white">Mythic+ Bundle Boost</strong> is the cheapest way to gear in Midnight Season 2. Instead of buying single keys, you get <strong class="text-[#8b5cf6]">3+1 FREE (4 runs paying 3) and 6+2 FREE (8 runs paying 6)</strong>. Same fixed key level you choose, from +2 to +20, US or EU.
+    </p>
+    <p class="text-[13px] text-[#a3a8c9] leading-relaxed mb-4">
+      Why bundle? <strong class="text-white">Great Vault math:</strong> 1 run = 1 vault slot, 4 runs = 2 vault slots, 8 runs = 3 vault slots (max). With bundle you unlock all 3 choices for next reset at best discount. Each +10 run gives <strong class="text-white">311 ilvl end chest + 318 Myth Vault + Myth Mistcrests</strong>. +9 already gives Myth Mistcrests for upgrading to 344 ilvl.
+    </p>
+    <div class="grid md:grid-cols-2 gap-3 my-5">
+      <div class="bg-[#0a0e28] border border-[#22c55e] rounded-lg p-3"><div class="text-[11px] font-black text-white">3+1 Bundle - Most Popular</div><div class="text-[10px] text-[#8b92c9]">Pay 3 get 4. Unlocks 2 Great Vault options. Best if you already did 1-2 keys this week. 25% OFF</div></div>
+      <div class="bg-[#0a0e28] border border-[#8b5cf6] rounded-lg p-3"><div class="text-[11px] font-black text-white">6+2 Bundle - Max Value</div><div class="text-[10px] text-[#8b92c9]">Pay 6 get 8. Unlocks 3 Great Vault options max. Best for full gearing & max Mistcrests. 30% OFF</div></div>
+    </div>
+    <h3 class="text-[16px] font-black text-white mt-6 mb-3">Mythic+ Bundle FAQ - Season 2</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-[12px] text-[#a3a8c9]">
+      <div><strong class="text-white">How many runs in bundle?</strong><br>3+1 = 4 total runs, you pay 3. 6+2 = 8 total runs, you pay 6. Free runs count same for Vault and Crests.</div>
+      <div><strong class="text-white">What ilvl do I get?</strong><br>+2/+3: 295 chest / 305 vault. +10: 311 chest / 318 Myth vault. +10 is cap for gear.</div>
+      <div><strong class="text-white">Is it good for rating?</strong><br>Yes. 4 runs across 4 different dungeons push rating fast. Best for Keystone Master/Hero/Legend and teleports.</div>
+      <div><strong class="text-white">Can I choose dungeons?</strong><br>Yes, specific dungeon option available. We use our keys, you don't need a key. Selfplay or Piloted 24/7 start in 15 min.</div>
+    </div>
+  </div>
+</div>
+<!-- ===== FIN FAQ SEO - BUNDLE ===== -->
+<!-- BARRA DE PAGOS GENIAL - GEARHAVEN -->
+<div class="mt-6 bg-[#0f1333] border border-[#1e254a] rounded-2xl px-4 py-3 flex flex-wrap items-center justify-center md:justify-between gap-4">
+  <span class="text-[10px] tracking-[2px] font-black text-[#6b77b5]">WE ACCEPT</span>
+  <div class="flex items-center gap-5 flex-wrap">
+    <span class="text-white font-black italic text-[16px]">VISA</span>
+    <span class="flex items-center gap-1"><span class="w-4 h-4 rounded-full bg-[#eb001b]"></span><span class="w-4 h-4 rounded-full bg-[#f79e1b] -ml-2"></span><span class="text-[9px] ml-1">Mastercard</span></span>
+    <span class="text-[#0099df] font-bold text-[12px]">PayPal</span>
+    <span class="text-white font-bold text-[12px]"> Pay</span>
+    <span class="text-white font-bold text-[12px]"><span class="text-[#4285f4]">G</span> Pay</span>
+    <span class="bg-[#F3BA2F] text-black text-[9px] font-black px-2 py-1 rounded">Binance Pay</span>
+    <span class="bg-[#f7931a] text-white text-[9px] font-black px-2 py-1 rounded-full">₿ Crypto</span>
+  </div>
+  <span class="text-[8px] text-[#444]">🔒 256-bit SSL • Encrypted</span>
+</div>
+</body>
+</html>

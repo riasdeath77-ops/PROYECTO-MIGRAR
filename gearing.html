@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buy WoW Gearing Service - Full 311 ilvl Hero & 318 Myth Vault - Midnight S2 | GearHaven</title>
+<meta name="description" content="Buy WoW Gearing Service - Get full 311 Hero 3/6 gear from M+10, 318 Myth Vault, Myth Mistcrests to 344, tier sets. Choose Heroic dungeon + Vault + Lair. Fastest gearing Midnight Season 2.">
+<link rel="icon" type="image/png" href="./imagenes/favicon.jpg">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18496576661"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-18496576661');
+</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  /* ===== PARCHE UNIVERSAL MOVIL - COPIA ESTO EN TODOS LOS HTML ===== */
+  html, body { max-width: 100vw !important; overflow-x: hidden !important; }
+    * { box-sizing: border-box; }
+  img { max-width: 100%; height: auto; }
+  /* Tus fotos con altura fija no se rompen */
+  #bundleImg, .like-img, .hero-banner img, #heroImg, .card img {
+    height: auto !important; 
+  }
+  #bundleImg{height:160px !important; width:100% !important; object-fit:cover !important;}
+  .like-img{height:90px !important; width:100% !important; object-fit:cover !important;}
+  .hero-banner img, #heroImg{height:100% !important; width:100% !important; object-fit:cover !important;}
+
+  @media (max-width: 768px) {
+    header { padding-left: 12px !important; padding-right: 12px !important; flex-wrap: wrap !important; max-width: 100vw !important; }
+    .max-w-\[1350px\], .max-w-\[1200px\], .max-w-\[1400px\] { padding-left: 12px !important; padding-right: 12px !important; }
+  }
+  /* ===== FIN PARCHE UNIVERSAL ===== */
+body{font-family:Arial;background:#0a0e28;color:#fff}
+body::before{content:'';position:fixed;inset:0;background:url('./Gearing/allwow.jpg') center/cover no-repeat;opacity:0.06;pointer-events:none;z-index:-1}
+.check{width:18px;height:18px;border:1px solid #2a3366;background:#0e1230;border-radius:4px}
+.hero-banner{position:relative;height:175px;border-radius:16px;overflow:hidden;border:1px solid #1e254a;margin-bottom:16px}
+.hero-banner img{width:100%;height:100%;object-fit:cover}
+.hero-banner::after{content:'';position:absolute;inset:0;background:linear-gradient(to right, #0a0e28 15%, transparent 70%), linear-gradient(to top, #0a0e28 10%, transparent 60%)}
+.hero-text{position:absolute;left:0;top:0;bottom:0;z-index:2;display:flex;flex-direction:column;justify-content:center;padding:18px;pointer-events:none}
+.top-order-img{width:100%;height:110px;object-fit:cover;display:block}
+.mode-btn.active{background:#8b5cf6!important;border-color:#8b5cf6!important;color:white}
+#chatModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:100;align-items:center;justify-content:center;padding:20px}
+#chatModal.show{display:flex}
+</style>
+</head>
+<body>
+<!-- HEADER FINAL - UNICO - USA ONLY -->
+<header class="flex justify-between items-center px-6 py-3 bg-[#0f1333] border-b border-[#1e254a] sticky top-0 z-30 gap-4">
+  <div onclick="location.href='./midnight.html'" class="font-black text-[20px] tracking-wider cursor-pointer shrink-0">GEAR<span class="text-[#8b5cf6]">HAVEN</span> <span class="text-[9px] bg-[#1a204f] border border-[#2a3366] px-2 py-1 rounded-full ml-2">HOME</span></div>
+  <div class="flex-1 max-w-[480px] relative mx-4 hidden md:block">
+    <input id="globalSearch" type="text" placeholder="&#x1F50D; Search all boosts..." class="w-full bg-[#0a0e28] border border-[#2a3366] rounded-full px-5 py-2 text-[12px] text-white outline-none focus:border-[#8b5cf6]">
+    <div id="globalResults" class="absolute top-[115%] left-0 w-full bg-[#111536] border border-[#2a3366] rounded-xl z-50 hidden max-h-[400px] overflow-y-auto"></div>
+  </div>
+  <div class="px-4 pt-2">
+    <button onclick="location.href='./midnight.html'" class="inline-flex items-center gap-2 text-[11px] font-bold bg-[#111536] border border-[#2a3366] text-[#c2c8e8] hover:text-white hover:border-[#8b5cf6] hover:bg-[#1a204f] px-5 py-3 rounded-full transition-all">
+    <span>&#x2190;</span> Back
+  </button>
+  </div>
+  <div class="flex gap-2 items-center shrink-0">
+    <div class="text-[11px] bg-[#0e1230] border border-[#2a3366] px-3 py-2 rounded-full font-bold text-[#8b92c9]">EN</div>
+    <div id="ghNavUserWrap" class="relative">
+      <div id="ghNavUserGuest" class="flex items-center">
+        <button onclick="location.href='./account.html'" class="text-[11px] bg-[#111536] border border-[#2a3366] text-[#c2c8e8] px-3.5 py-2 rounded-l-full font-bold">&#x1F464; Sign In</button>
+        <button onclick="location.href='./account.html'" class="text-[11px] bg-[#8b5cf6] text-white px-4 py-2 rounded-r-full font-black">Sign Up</button>
+      </div>
+      <div id="ghNavUserLogged" class="hidden items-center gap-2 bg-[#111536] border border-[#2a3366] pl-1 pr-3 py-1 rounded-full cursor-pointer" onclick="ghToggleUserMenu(event)">
+        <div id="ghNavAvatar" class="w-[28px] h-[28px] bg-gradient-to-br from-[#8b5cf6] to-[#22c55e] rounded-full flex items-center justify-center font-black text-[11px]">R</div>
+        <span id="ghNavName" class="text-[12px] font-bold text-white max-w-[90px] truncate">User</span>
+      </div>
+      <div id="ghUserDropdown" class="hidden absolute top-[120%] right-0 w-[210px] bg-[#0f1333] border border-[#2a3366] rounded-xl overflow-hidden z-50">
+        <div class="p-3 border-b border-[#1e254a] bg-[#111536]"><div id="ghDropName" class="font-black text-[12px] text-white">User</div><div id="ghDropEmail" class="text-[10px] text-[#8b92c9] truncate">email</div></div>
+        <div class="p-2.5 text-[11px] text-[#c2c8e8] cursor-pointer hover:bg-[#1a204f]" onclick="location.href='./account.html'">&#x1F464; My Account</div>
+        <div class="p-2.5 text-[11px] text-[#c2c8e8] cursor-pointer hover:bg-[#1a204f]" onclick="location.href='./account.html#orders'">&#x1F4E6; My Orders</div>
+        <div class="p-2.5 text-[11px] text-[#ef4444] cursor-pointer hover:bg-[#1a1500] border-t border-[#1e254a]" onclick="ghLogout(event)">&#x1F6AA; Logout</div>
+      </div>
+    </div>
+    <button onclick="location.href='./cart.html'" class="text-[11px] bg-[#8b5cf6] px-4 py-2 rounded-full font-bold">&#x1F6D2; Cart (<span id="cartCount">0</span>)</button>
+  </div>
+</header>
+<!-- BARRA STICKY CENTRADA - NO MODIFICA CENTRADO -->
+<div id="topPayBar" class="sticky top-[52px] z-20 w-full bg-[#0f1333]/95 backdrop-blur-md border-y border-[#1e254a] px-4 py-[5px] flex flex-wrap items-center justify-center gap-3 shadow-lg">
+  <span class="text-[8px] tracking-[2px] font-black text-[#6b77b5]">WE ACCEPT</span>
+  <div class="flex items-center gap-3 flex-wrap justify-center">
+    <span class="text-white font-black italic text-[11px]">VISA</span>
+    <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-[#eb001b]"></span><span class="w-3 h-3 rounded-full bg-[#f79e1b] -ml-1.5"></span><span class="text-[7px] ml-1 text-[#8b92c9]">Master</span></span>
+    <span class="text-[#0099df] font-bold text-[10px]">PayPal</span>
+    <span class="text-white font-bold text-[10px]"> Pay</span>
+    <span class="text-white font-bold text-[10px]"><span class="text-[#4285f4]">G</span> Pay</span>
+    <span class="bg-[#F3BA2F] text-black text-[7px] font-black px-1.5 py-0.5 rounded">Binance</span>
+    <span class="bg-[#f7931a] text-white text-[7px] font-black px-1.5 py-0.5 rounded-full">₿</span>
+  </div>
+</div>
+<script>
+function ghDetectNavUser(){
+  try{
+    let raw=localStorage.getItem('gearhaven_current_user');
+    if(!raw) return null;
+    let u=JSON.parse(raw);
+    if(!u||u.logged===false) return null;
+    return u;
+  }catch(e){return null;}
+}
+function ghUpdateNavUser(){
+  let u=ghDetectNavUser();
+  let guest=document.getElementById('ghNavUserGuest');
+  let logged=document.getElementById('ghNavUserLogged');
+  if(!guest||!logged) return;
+  if(u){
+    guest.classList.add('hidden');guest.classList.remove('flex');
+    logged.classList.remove('hidden');logged.classList.add('flex');
+    let name=u.username||u.name||u.email.split('@')[0];
+    document.getElementById('ghNavName').innerText=name;
+    document.getElementById('ghNavAvatar').innerText=name.charAt(0).toUpperCase();
+    document.getElementById('ghDropName').innerText=name;
+    document.getElementById('ghDropEmail').innerText=u.email||'';
+  }else{
+    guest.classList.remove('hidden');guest.classList.add('flex');
+    logged.classList.add('hidden');logged.classList.remove('flex');
+    document.getElementById('ghUserDropdown')?.classList.add('hidden');
+  }
+}
+function ghToggleUserMenu(e){if(e){e.preventDefault();e.stopPropagation();}document.getElementById('ghUserDropdown').classList.toggle('hidden');}
+function ghLogout(e){
+  if(e){e.preventDefault();e.stopPropagation();}
+  let cart=localStorage.getItem('gearhaven_cart');
+  let lang=localStorage.getItem('gearhaven_lang');
+  localStorage.clear();
+  sessionStorage.clear();
+  if(cart) localStorage.setItem('gearhaven_cart',cart);
+  if(lang) localStorage.setItem('gearhaven_lang',lang);
+  if(location.pathname.includes('account')) location.href='./midnight.html'; else location.reload();
+}
+document.addEventListener('click',function(e){
+  let w=document.getElementById('ghNavUserWrap');
+  if(w&&!w.contains(e.target)){document.getElementById('ghUserDropdown')?.classList.add('hidden');}
+});
+ghUpdateNavUser();
+</script>
+
+<div class="max-w-[1350px] mx-auto px-6 py-6 grid lg:grid-cols-[1fr_360px] gap-6">
+  <div>
+    <div class="hero-banner relative">
+      <img id="heroImg" src="./Gearing/Orco.jpg">
+      <div class="hero-text">
+        <div class="text-[25px] text-[#8b5cf6] font-black tracking-widest">WORLD OF WARCRAFT: MIDNIGHT - GEARING</div>
+        <div class="text-[20px] font-black leading-tight" data-i="heroTitle">Full Gearing - Target ilvl Hit</div>
+        <div class="text-[11px] text-[#c2c8e8] mt-1" data-i="heroSub">292-318 ilvl Every Slot - Mythic+ / Raid / PvP / Tier</div>
+      </div>
+    </div>
+
+    <h1 class="text-[26px] font-black mt-2" data-i="mainTitle">WoW Full Gearing Boost - Every ilvl Covered</h1>
+    <p class="text-[18px] text-[#8b92c9] mt-3 bg-[#111536] border border-[#1e254a] rounded-xl p-3" data-i="mainDesc">Full Gearing to your target ilvl&#x2014; Mythic+, Raid, PvP, Tier sets. We clear the content your gear comes from until you hit ilvl.</p>
+
+    <div class="mt-5 bg-[#111536] border border-[#1e254a] rounded-2xl p-5">
+      <h2 class="font-black text-[24px]" data-i="winsTitle">Your Wins</h2>
+      <div class="text-[20px] font-black mt-3" data-i="winsSub">&#x2694; Every ilvl and gear type covered:</div>
+      <ul class="mt-3 space-y-2 text-[18px] text-[#c2c8e8] leading-relaxed">
+        <li data-i="win1">&#x2694; 292&#x2013;311 ilvl in each slot&#x2014; Mythic+;</li>
+        <li data-i="win2">&#x1F6E1; 276&#x2013;310 ilvl (avg. across all slots)&#x2014; Overall;</li>
+        <li data-i="win3">&#x2694; 331, 344 ilvl (Honor, Conquest & BiS)&#x2014; PvP;</li>
+        <li data-i="win4">&#x1F451; 292&#x2013;344 ilvl (Normal to Mythic)&#x2014; Tier sets;</li>
+        <li data-i="win5">&#x1F432; 292&#x2013;344 ilvl (Normal to Mythic)&#x2014; Raid.</li>
+      </ul>
+    </div>
+
+    <div class="mt-5 bg-[#111536] border border-[#1e254a] rounded-2xl p-5">
+      <h2 class="font-black text-[18px]" data-i="howTitle">How It Works</h2>
+      <div class="grid grid-cols-4 gap-2 mt-4 text-[18px] text-center">
+        <div class="bg-[#0e1230] rounded-xl p-3 border border-[#1e254a]">&#x1F4AC;<br><b data-i="how1t">Discord Setup</b></div>
+        <div class="bg-[#0e1230] rounded-xl p-3 border border-[#1e254a]">&#x1F300;<br><b data-i="how2t">Invited & Summoned</b></div>
+        <div class="bg-[#0e1230] rounded-xl p-3 border border-[#1e254a]">&#x2694;<br><b data-i="how3t">Content Cleared</b></div>
+        <div class="bg-[#0e1230] rounded-xl p-3 border border-[#1e254a]">&#x1F3AF;<br><b data-i="how4t">Target ilvl Hit</b></div>
+      </div>
+      <div class="mt-4 space-y-3 text-[17px] text-[#8b92c9] bg-[#0e1230] border border-[#1e254a] rounded-xl p-4">
+        <div class="flex gap-2"><span>&#x2460;</span><span data-i="how1d">After payment, enter your character name and realm&#x2014; Discord chat with your team is set up;</span></div>
+        <div class="flex gap-2"><span>&#x2461;</span><span data-i="how2d">Get invited and summoned to each run at the booked time&#x2014; just be online;</span></div>
+        <div class="flex gap-2"><span>&#x2462;</span><span data-i="how3d">The content your chosen gear comes from gets cleared&#x2014; keys, raid bosses, PvP games;</span></div>
+        <div class="flex gap-2"><span>&#x2463;</span><span data-i="how4d">Run after run, gear lands on your character until your chosen track reaches the target ilvl.</span></div>
+      </div>
+    </div>
+
+    <div class="mt-8">
+      <h2 class="text-[18px] font-black" data-i="alsoLike">You may also like - 8 Products</h2>
+       <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+  <div onclick="location.href='./mythic-keys.html'" class="bg-[#111536] border border-[#1e254a] rounded-xl overflow-hidden relative cursor-pointer hover:border-[#8b5cf6] group"><img id="like1Img" src="./Keys/fotoi.jpg" class="w-full h-[85px] object-cover"><div class="p-2"><div class="text-[11px] font-bold group-hover:text-[#8b5cf6]">Mythic+ Keys </div><div class="text-[10px]">From $10.99</div></div></div>
+  <div onclick="location.href='./mythic-10.html'" class="bg-[#111536] border border-[#1e254a] rounded-xl overflow-hidden relative cursor-pointer hover:border-[#8b5cf6] group"><img id="like2Img" src="./keydies/baneruno.jpg" class="w-full h-[85px] object-cover"><div class="p-2"><div class="text-[11px] font-bold group-hover:text-[#8b5cf6]">Mythic +10</div><div class="text-[10px]">From $28.50</div></div></div>
+  <div onclick="location.href='./bundle.html'" class="bg-[#111536] border border-[#1e254a] rounded-xl overflow-hidden relative cursor-pointer hover:border-[#8b5cf6] group"><img id="like3Img" src="./bundle/fondob.jpg" class="w-full h-[85px] object-cover"><div class="p-2"><div class="text-[11px] font-bold group-hover:text-[#8b5cf6]">Bundle 3+1 FREE</div><div class="text-[10px]">From $62.97</div></div></div>
+  <div onclick="location.href='./keystone-hero.html'" class="bg-[#111536] border border-[#1e254a] rounded-xl overflow-hidden relative cursor-pointer hover:border-[#8b5cf6] group"><img id="like4Img" src="./keystonearchivements/fotoc.avif" class="w-full h-[85px] object-cover"><div class="p-2"><div class="text-[11px] font-bold group-hover:text-[#8b5cf6]">Keystone Master</div><div class="text-[10px]">From $49.99</div></div></div>
+  <div onclick="location.href='./forever.html'" class="bg-[#111536] border border-[#1e254a] rounded-xl overflow-hidden relative cursor-pointer hover:border-[#8b5cf6] group"><img id="like5Img" src="./Forever/foesaken.jpeg" class="w-full h-[85px] object-cover"><div class="p-2"><div class="text-[11px] font-bold group-hover:text-[#8b5cf6]">WoW Forever </div><div class="text-[10px]">From $75</div></div></div>
+  <div onclick="location.href='./forever-dungeon.html'" class="bg-[#111536] border border-[#1e254a] rounded-xl overflow-hidden relative cursor-pointer hover:border-[#8b5cf6] group"><img id="like6Img" src="./Forever/lvl2.jpg" class="w-full h-[85px] object-cover"><div class="p-2"><div class="text-[11px] font-bold group-hover:text-[#8b5cf6]">WoW Forever Dungeon</div><div class="text-[10px]">From $145</div></div></div>
+  <div onclick="location.href='./leveling.html'" class="bg-[#111536] border border-[#1e254a] rounded-xl overflow-hidden relative cursor-pointer hover:border-[#8b5cf6] group"><img id="like7Img" src="./lvl/lvltres.jpg" class="w-full h-[85px] object-cover"><div class="p-2"><div class="text-[11px] font-bold group-hover:text-[#8b5cf6]">Leveling retal-Forever</div><div class="text-[10px]">From $89</div></div></div>
+  <div onclick="location.href='./keystone-hero.html'" class="bg-[#111536] border border-[#1e254a] rounded-xl overflow-hidden relative cursor-pointer hover:border-[#8b5cf6] group"><img id="like8Img" src="./wowr/hero.jpg" class="w-full h-[85px] object-cover"><div class="p-2"><div class="text-[11px] font-bold group-hover:text-[#8b5cf6]">Keyston Hero</div><div class="text-[10px]">From $110</div></div></div>
+</div>
+    </div>
+  </div>
+
+  <div class="lg:sticky top-[80px] h-fit">
+    <div class="bg-[#151a40] border border-[#2a3366] rounded-[16px] overflow-hidden">
+      <div class="relative"><img id="bundleImg" src="./Gearing/lobo.jpg" class="w-full h-[150px] object-cover"></div>
+      <div class="p-4">
+        <div class="flex gap-2 mb-3"><span class="bg-[#8b5cf6] text-[10px] px-3 py-1.5 rounded-full font-bold">US</span><span class="text-[10px] px-3 py-1.5 text-[#8b92c9] bg-[#0e1230] border border-[#1e254a] rounded-full" data-i="region">Region - US Only</span></div>
+        <div class="flex gap-2 mb-4">
+          <button onclick="setMode('self')" id="btnSelf" class="mode-btn active bg-[#0e1230] border border-[#252d63] text-[10px] px-3 py-1.5 rounded-full font-bold">Self Played</button>
+          <button onclick="setMode('pilot')" id="btnPilot" class="mode-btn bg-[#0e1230] border border-[#252d63] text-[10px] px-3 py-1.5 rounded-full font-bold">Piloted</button>
+          <button onclick="setMode('remote')" id="btnRemote" class="mode-btn bg-[#0e1230] border border-[#252d63] text-[10px] px-3 py-1.5 rounded-full font-bold">&#x1F5A5; Remote <span class="text-[8px] bg-[#f59e0b] text-black px-1.5 py-0.5 rounded ml-1 font-black">+30%</span></button>
+        </div>
+
+        <div class="mb-3">
+          <div class="text-[11px] text-[#8b92c9] mb-1.5" data-i="typeGear">Type of gear</div>
+          <select id="typeGearSelect" onchange="updateGearOptions()" class="w-full bg-[#0e1230] border border-[#252d63] rounded-lg px-3 py-2.5 text-[12px] font-bold text-white">
+            <option value="mythic" selected>Mythic+ gear</option>
+            <option value="pvp">PvP gear</option>
+            <option value="raid">Raid gear</option>
+          </select>
+        </div>
+
+        <label class="flex items-center justify-between bg-[#0e1230] p-3 rounded-xl border border-[#1e254a] cursor-pointer mb-3">
+          <span class="flex items-center gap-2"><input type="checkbox" id="chkExpress" class="check" onchange="calcTotal()"> <span class="text-[11px]" data-i="express">&#x26A1; Express start & completion</span></span><span class="text-[10px] text-[#8b92c9]">+30%</span>
+        </label>
+
+        <div class="mb-4">
+          <div class="text-[11px] text-[#8b92c9] mb-1.5" id="gearLabel" data-i="gearLabel">Mythic+ gear</div>
+          <select id="gearTrackSelect" onchange="setGearTrack(this.value)" class="w-full bg-[#0e1230] border border-[#252d63] rounded-lg px-3 py-3 text-[12px] font-bold text-white"></select>
+        </div>
+
+        <div class="bg-[#0e1230] rounded-xl p-4 border border-[#1e254a]">
+          <div class="flex items-center justify-between mb-3"><span class="text-[11px] text-[#8b92c9]" data-i="currency">Currency - LIVE</span><select id="currencySelect" onchange="calcTotal()" class="bg-[#111536] border border-[#2a3366] rounded-lg px-2 py-1.5 text-[11px] font-bold text-white"><option value="USD" selected>USD $</option><option value="EUR">EUR €</option><option value="BRL">BRL R$</option><option value="COP">COP $</option></select></div>
+          <div class="flex items-center gap-2"><span id="totalP" class="text-white font-black text-[22px]">$55.99</span><span class="text-[9px] bg-[#8b5cf6] text-white px-2 py-0.5 rounded-full font-bold" id="ilvlBadge">292 ilvl</span></div>
+          <div class="text-[10px] text-[#6b77b5] mt-1">≈ $<span id="usdRef">55.99</span> USD &#x2022; <span id="selectedGearLabel" class="text-[#8b5cf6]">292 ilvl in each slot (M+0)</span></div>
+          <div class="mt-4">
+            <!-- BOTON PRIMARIO UNICO - Para SEO solo "Buy Now" -->
+            <button onclick="goCheckout('payphone')" class="w-full bg-[#22c55e] hover:bg-[#16a34a] text-black py-3.5 rounded-xl font-black text-[13px] shadow-lg transition-all">
+              &#128179; Buy Now - <span id="payphoneBtnPrice">$28.50 USD</span>
+            </button>
+
+            <!-- METODOS SECUNDARIOS - sutiles, no amarillos gigantes -->
+            <div class="mt-3 bg-[#0a0e28] border border-[#1e254a] rounded-xl p-2.5">
+              <p class="text-[9px] text-center text-[#666] mb-2 tracking-widest font-bold">SECURE CHECKOUT</p>
+              <div class="grid grid-cols-3 gap-2">
+                <button onclick="goCheckout('payphone')" class="bg-[#111536] border border-[#2a3366] hover:border-[#8b5cf6] hover:text-white text-[10px] py-2.5 rounded-lg text-[#8b92c9] font-bold transition-all">
+                  &#128179; Card
+                </button>
+                <button onclick="goCheckout('paypal')" class="bg-[#111536] border border-[#2a3366] hover:border-[#8b5cf6] hover:text-white text-[10px] py-2.5 rounded-lg text-[#8b92c9] font-bold transition-all">
+                  PayPal
+                </button>
+                <button onclick="goCheckout('binance')" class="bg-[#111536] border border-[#2a3366] hover:border-[#8b5cf6] hover:text-white text-[10px] py-2.5 rounded-lg text-[#8b92c9] font-bold transition-all">
+                  Crypto
+                </button>
+              </div>
+              <!-- SPANS OCULTOS PARA QUE TU JS NO SE ROMPA - MANTIENE COMPATIBILIDAD -->
+              <span id="payBtnPrice" class="hidden">$28.50 USD</span>
+              <span class="binPrice hidden">$28.50 USD</span>
+            </div>
+
+            <button onclick="addToCart()" class="w-full mt-3 bg-[#0e1230] border-2 border-[#8b5cf6] hover:bg-[#1a204f] text-white py-3 rounded-xl font-black text-[12px] transition-all" data-i="addCart">
+              🛒 Add to Cart
+            </button>
+
+            <div class="mt-3 flex items-center justify-center gap-2 text-[9px] text-[#6b77b5] text-center">
+              <span>🔒 256-bit SSL</span><span>•</span><span>⚡ Instant Start</span><span>•</span><span id="liveTime">--:--:--</span>
+            </div>
+            <div class="mt-2 text-[8px] text-center text-[#444]">
+              Secure payment available via card, PayPal and crypto at checkout
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="chatModal"><div class="bg-[#151a40] border border-[#2a3366] rounded-2xl p-5 w-full max-w-[380px]"><div class="flex justify-between items-center mb-4"><div class="font-black text-[14px]" data-i="chatTitle">&#x1F4AC; Choose Contact</div><button onclick="closeChatOptions()" class="bg-[#0e1230] border border-[#2a3366] w-7 h-7 rounded-full text-[12px]">&#x2715;</button></div><div class="space-y-2"><button onclick="contactOption('whatsapp')" class="w-full bg-[#25D366] text-black py-3 rounded-xl font-black text-[12px]">&#x1F4F1; WhatsApp - 2 min reply</button><button onclick="contactOption('discord')" class="w-full bg-[#5865F2] text-white py-3 rounded-xl font-black text-[12px]">&#x1F4AC; Discord - Ticket</button></div></div></div>
+
+<script>
+let translations={
+en:{back:"&#x2190; Back",heroTitle:"Full Gearing - Target ilvl Hit",heroSub:"292-344 ilvl Every Slot - Mythic+ / Raid / PvP / Tier",mainTitle:"WoW Full Gearing Boost - Every ilvl Covered",mainDesc:"Full Gearing to your target ilvl&#x2014; Mythic+, Raid, PvP, Tier sets. We clear the content your gear comes from until you hit 292-344 ilvl.",winsTitle:"Your Wins",winsSub:"&#x2694; Every ilvl and gear type covered:",win1:"&#x2694; 292&#x2013;311 ilvl in each slot&#x2014; Mythic+;",win2:"&#x1F6E1; 276&#x2013;310 ilvl (avg. across all slots)&#x2014; Overall;",win3:"&#x2694; 331, 344 ilvl (Honor, Conquest & BiS)&#x2014; PvP;",win4:"&#x1F451; 292&#x2013;344 ilvl (Normal to Mythic)&#x2014; Tier sets;",win5:"&#x1F432; 292&#x2013;344 ilvl (Normal to Mythic)&#x2014; Raid.",howTitle:"How It Works",how1t:"Discord Setup",how2t:"Invited & Summoned",how3t:"Content Cleared",how4t:"Target ilvl Hit",how1d:"After payment, enter your character name and realm&#x2014; Discord chat with your team is set up;",how2d:"Get invited and summoned to each run at the booked time&#x2014; just be online;",how3d:"The content your chosen gear comes from gets cleared&#x2014; keys, raid bosses, PvP games;",how4d:"Run after run, gear lands on your character until your chosen track reaches the target ilvl.",alsoLike:"You may also like - 8 Products",region:"Region - US Only",typeGear:"Type of gear",express:"&#x26A1; Express start & completion",gearLabel:"Mythic+ gear",currency:"Currency - LIVE",addCart:"&#x1F6D2; Add to Cart",viewCart:"View Cart",otherMethods:"&#x1F4AC; Other Methods - Chat",chatTitle:"&#x1F4AC; Choose Contact"},
+es:{back:"&#x2190; Volver",heroTitle:"Equipo Completo - Objetivo ilvl Alcanzado",heroSub:"292-344 ilvl Cada Ranura - Mítico+ / Raid / PvP / Tier",mainTitle:"WoW Equipo Completo - Todo ilvl Cubierto",mainDesc:"Equipo completo hasta tu ilvl objetivo&#x2014; Mítico+, Raid, PvP, Tier sets. Limpiamos el contenido de donde viene tu equipo hasta que alcances 292-344 ilvl.",winsTitle:"Tus Ganancias",winsSub:"&#x2694; Cada ilvl y tipo de equipo cubierto:",win1:"&#x2694; 292&#x2013;311 ilvl en cada ranura&#x2014; Mítico+;",win2:"&#x1F6E1; 276&#x2013;310 ilvl (prom. en todas las ranuras)&#x2014; General;",win3:"&#x2694; 331, 344 ilvl (Honor, Conquista & BiS)&#x2014; PvP;",win4:"&#x1F451; 292&#x2013;344 ilvl (Normal a Mítico)&#x2014; Sets de Tier;",win5:"&#x1F432; 292&#x2013;344 ilvl (Normal a Mítico)&#x2014; Raid.",howTitle:"Cómo Funciona",how1t:"Configuración Discord",how2t:"Invitado e Invocado",how3t:"Contenido Limpiado",how4t:"Objetivo ilvl Alcanzado",how1d:"Después del pago, ingresa tu personaje y reino&#x2014; chat de Discord con tu equipo configurado;",how2d:"Recibe invitación e invocación a cada run a la hora reservada&#x2014; solo estate en línea;",how3d:"El contenido de donde viene tu equipo elegido se limpia&#x2014; llaves, jefes de raid, juegos PvP;",how4d:"Run tras run, el equipo cae en tu personaje hasta que tu pista elegida alcance el ilvl objetivo.",alsoLike:"También te puede gustar - 8 Productos",region:"Región - Solo US",typeGear:"Tipo de equipo",express:"&#x26A1; Inicio y finalización express",gearLabel:"Equipo Mítico+",currency:"Moneda - EN VIVO",addCart:"&#x1F6D2; Agregar al Carrito",viewCart:"Ver Carrito",otherMethods:"&#x1F4AC; Otros Métodos - Chat",chatTitle:"&#x1F4AC; Elige Contacto"}
+};
+let currentLang=localStorage.getItem('gearhaven_lang')||'en';
+let customTexts=JSON.parse(localStorage.getItem('gearhaven_custom_texts')||'{}');
+function applyLang(){
+  let dict=translations[currentLang]||translations.en;
+  document.querySelectorAll('[data-i]').forEach(el=>{
+    let k=el.getAttribute('data-i');
+    let custom=customTexts[k]?.[currentLang];
+    if(custom) el.innerHTML=custom;
+    else if(dict[k]) el.innerHTML=dict[k];
+  });
+  let btn = document.getElementById('langBtn');
+  if(btn){
+    btn.innerHTML = currentLang==='en'? '&#x1F310; EN / ES' : '&#x1F310; ES / EN';
+  }
+}
+function toggleLang(){currentLang=currentLang==='en'?'es':'en'; localStorage.setItem('gearhaven_lang',currentLang); applyLang();}
+let gearingTracks={
+  mythic:[{id:'m0',label:'292 ilvl in each slot (M+0)',price:55.99},{id:'m6',label:'305 ilvl in each slot (M+6)',price:84.99},{id:'m8',label:'308 ilvl in each slot (M+8)',price:105.99},{id:'m10',label:'311 ilvl in each slot (M+10)',price:108.99}],
+  pvp:[{id:'p331',label:'331 ilvl Honor (PvP)',price:18.99},{id:'p344',label:'344 ilvl Conquest (PvP)',price:87.99}],
+  raid:[{id:'r292',label:'292 ilvl Normal Raid',price:384.99},{id:'r318',label:'318 ilvl Heroic Raid',price:461.99},{id:'r344',label:'344 ilvl Mythic Raid',price:4799.99}]
+};
+let currentType='mythic', currentTrackId='m0', currentMode='self', expressPerc=30, remotePerc=10;
+let currencyRates={USD:1,EUR:0.92,BRL:5.65,COP:4100};
+let currencySymbols={USD:'$',EUR:'€',BRL:'R$',COP:'COP $'};
+let contactLinks={whatsapp:localStorage.getItem('gearhaven_whatsapp')||'https://wa.me/593979294075', discord:localStorage.getItem('gearhaven_discord')||'https://discord.gg/kbbpUUePa4'};
+let percents={express:30,remote:10};
+async function loadPrices(){
+  try{
+let r=await fetch('https://silent-term-1b1a.riasdeath77.workers.dev/api/prices?v='+Date.now());
+    if(r.ok){
+      let raw=await r.json();
+      let retail = raw.retail || raw;
+      if(retail.gearing){
+        if(retail.gearing.tracks) gearingTracks=retail.gearing.tracks;
+        if(retail.gearing.percents){
+          percents=retail.gearing.percents;
+          expressPerc=percents.express;
+          remotePerc=percents.remote;
+        }
+      }
+    }
+  }catch(e){ console.log('JSON no encontrado, usando default'); }
+}
+function getCart(){return JSON.parse(localStorage.getItem('gearhaven_cart')||'[]');}
+function saveCart(c){
+  localStorage.setItem('gearhaven_cart',JSON.stringify(c));
+  let el1=document.getElementById('cartCount');
+  let el2=document.getElementById('cartCountBtn');
+  if(el1) el1.innerText=c.length;
+  if(el2) el2.innerText=c.length;
+}
+function setMode(m){
+  currentMode=m;
+  document.getElementById('btnSelf').className=m==='self'?'mode-btn active bg-[#0e1230] border text-[10px] px-3 py-1.5 rounded-full font-bold':'mode-btn bg-[#0e1230] border border-[#252d63] text-[10px] px-3 py-1.5 rounded-full font-bold';
+  document.getElementById('btnPilot').className=m==='pilot'?'mode-btn active bg-[#0e1230] border text-[10px] px-3 py-1.5 rounded-full font-bold':'mode-btn bg-[#0e1230] border border-[#252d63] text-[10px] px-3 py-1.5 rounded-full font-bold';
+  document.getElementById('btnRemote').className=m==='remote'?'mode-btn active bg-[#0e1230] border text-[10px] px-3 py-1.5 rounded-full font-bold':'mode-btn bg-[#0e1230] border border-[#252d63] text-[10px] px-3 py-1.5 rounded-full font-bold';
+  calcTotal();
+}
+function updateGearOptions(){
+  currentType=document.getElementById('typeGearSelect').value;
+  let tracks=gearingTracks[currentType];
+  document.getElementById('gearTrackSelect').innerHTML=tracks.map(t=>`<option value="${t.id}">${t.label}&#x2014; $${t.price}</option>`).join('');
+  document.getElementById('gearLabel').innerText=currentType+' gear';
+  currentTrackId=tracks[0].id;
+  calcTotal();
+}
+function setGearTrack(id){currentTrackId=id; calcTotal();}
+function calcTotal(){
+  let track=gearingTracks[currentType].find(t=>t.id===currentTrackId);
+  let price=track?track.price:55.99;
+  let label=track?track.label:'292 ilvl in each slot (M+0)';
+  if(document.getElementById('chkExpress').checked) price*=(1+expressPerc/100);
+  if(currentMode==='remote') price*=(1+remotePerc/100);
+  let curr=document.getElementById('currencySelect').value;
+  let rate=currencyRates[curr]||1;
+  let sym=currencySymbols[curr]||'$';
+  let finalP=curr==='COP'?Math.round(price*rate):(price*rate).toFixed(2);
+  document.getElementById('totalP').innerText=sym+finalP;
+  document.getElementById('usdRef').innerText=price.toFixed(2);
+  document.getElementById('payBtnPrice').innerText=sym+finalP+' USD';
+  document.querySelectorAll('.binPrice').forEach(e=>e.innerText=sym+finalP+' USD');
+  let elPP=document.getElementById('payphoneBtnPrice'); if(elPP) elPP.innerText=sym+finalP+' USD';
+  document.getElementById('selectedGearLabel').innerText=label;
+  document.getElementById('ilvlBadge').innerText=label.split(' ')[0]+' ilvl';
+  window._last={price:finalP,usd:price.toFixed(2),currency:curr,symbol:sym,title:`Gearing ${currentType} - ${label} - ${currentMode}`,dungeons:label,mode:currentMode,level:label.match(/\d+/)?.[0]||'292'};
+}
+function goCheckout(m){
+  let c=window._last;
+  location.href=`./checkout.html?title=${encodeURIComponent(c.title)}&price=${c.price}&usd=${c.usd}&currency=${c.currency}&symbol=${encodeURIComponent(c.symbol)}&method=${m}&type=GEARING&typeGear=${currentType}&track=${currentTrackId}&mode=${currentMode}&dungeons=${encodeURIComponent(c.dungeons)}&level=${c.level}`;
+}
+function addToCart(){
+  let c=window._last;
+  let cart=getCart();
+  if(cart.length>=5){alert('Max 5');return;}
+  cart.push({
+    id:'CART-'+Date.now(),
+    name:c.title,
+    title:c.title,
+    price:c.price,
+    usd:c.usd,
+    currency:c.currency,
+    symbol:c.symbol,
+    dungeons:c.dungeons,
+    dungeonNames:c.dungeons,
+    playMode:c.mode.toUpperCase(),
+    mode:c.mode.toUpperCase(),
+    traders:2,
+    keyLevel:c.level,
+    level:c.level,
+    type:'GEARING'
+  });
+  saveCart(cart);
+  // animación botón
+  let btn=document.getElementById('cartCountBtn');
+  btn.innerText=cart.length;
+  alert('✅ Agregado: '+c.title);
+}
+function openChatOptions(){document.getElementById('chatModal').classList.add('show');}
+function closeChatOptions(){document.getElementById('chatModal').classList.remove('show');}
+function contactOption(t){closeChatOptions(); if(t==='whatsapp') window.open(contactLinks.whatsapp,'_blank'); else window.open(contactLinks.discord,'_blank');}
+(async function init(){
+applyLang();
+await loadPrices();
+updateGearOptions();
+calcTotal();
+saveCart(getCart());
+setInterval(()=>{let el=document.getElementById('liveTime'); if(el) el.innerText=new Date().toLocaleTimeString();},1000);
+})();
+</script>
+<script src="./global-search.js"></script>
+<script src="./gh-banner.js"></script>
+<script src="./chat-widget.js"></script>
+<!-- ===== INICIO FAQ SEO - GEARING ===== -->
+<div class="max-w-[1350px] mx-auto px-6 mt-10 mb-8">
+  <div class="bg-[#12162e]/60 border border-[#232845] rounded-xl p-6">
+    <h2 class="text-[20px] font-black text-white mb-4">WoW Gearing Service - Full Gear to 311, 318 Vault, 344 Upgraded - Season 2</h2>
+    <p class="text-[13px] text-[#a3a8c9] leading-relaxed mb-4">
+      GearHavenGG <strong class="text-white">Gearing Service</strong> is full character gearing in Midnight Season 2. Not just one key. We mix <strong class="text-white">Mythic+ 10 for 311 Hero, Great Vault 318 Myth 1/6, Myth Mistcrests for upgrade to 344, Heroic Venomous Abyss 318 Myth, and Lair Tidebound Grotto 318 Myth</strong>. You choose package: starter 295, mid 305-308, or max 311+.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-3 my-5">
+      <div class="bg-[#0a0e28] border border-[#2a3366] rounded-lg p-3"><div class="text-[11px] font-black text-white">Starter Gearing - 295 to 302</div><div class="text-[10px] text-[#8b92c9]">M0 292 Champion, +2/+3 295 Champion, +4/+5 298-302 Champion. 305-308 Vault. For fresh 90 alts. Champion Mistcrests.</div></div>
+      <div class="bg-[#0a0e28] border border-[#2a3366] rounded-lg p-3"><div class="text-[11px] font-black text-white">Hero Gearing - 305 to 311</div><div class="text-[10px] text-[#8b92c9]">+6/+8 305-308 Hero, +10 311 Hero 3/6. Vault 315-318. Hero Mistcrests + Myth Mistcrests from +9. Teleports at +10.</div></div>
+      <div class="bg-[#0a0e28] border border-[#8b5cf6] rounded-lg p-3"><div class="text-[11px] font-black text-white">Myth Gearing - 318 to 344 BEST</div><div class="text-[10px] text-[#22c55e]">+10 cap 311 + 318 Vault. Upgrade with 12 Myth Mistcrests per run to 321/324/328/334/344. Includes raid 318-344.</div></div>
+    </div>
+
+    <div class="overflow-x-auto rounded-lg border border-[#2a3366] my-4">
+      <table class="w-full text-[11px] text-left">
+        <thead class="bg-[#151a40] text-[#8b92c9]"><tr><th class="px-3 py-2">Source</th><th class="px-3 py-2">Item Level</th><th class="px-3 py-2">Track</th><th class="px-3 py-2">Vault</th></tr></thead>
+        <tbody class="text-[#c2c8e8]">
+          <tr class="border-t border-[#1e254a]"><td class="px-3 py-2">Heroic Dungeon</td><td class="px-3 py-2">276</td><td class="px-3 py-2">Adventurer 4/6</td><td class="px-3 py-2">289 Veteran</td></tr>
+          <tr class="border-t border-[#1e254a]"><td class="px-3 py-2">Mythic 0</td><td class="px-3 py-2">292</td><td class="px-3 py-2">Champion 1/6</td><td class="px-3 py-2">302 Champion 4/6</td></tr>
+          <tr class="border-t border-[#1e254a]"><td class="px-3 py-2">M+ +2/+3</td><td class="px-3 py-2">295</td><td class="px-3 py-2">Champion 2/6</td><td class="px-3 py-2">305 Hero 1/6</td></tr>
+          <tr class="border-t border-[#1e254a]"><td class="px-3 py-2">M+ +6/+8</td><td class="px-3 py-2">305-308</td><td class="px-3 py-2">Hero 1-2/6</td><td class="px-3 py-2">311-315 Hero</td></tr>
+          <tr class="border-t border-[#1e254a] bg-[#8b5cf6]/10"><td class="px-3 py-2 font-bold text-white">M+ +10 CAP</td><td class="px-3 py-2 font-bold text-[#22c55e]">311</td><td class="px-3 py-2 font-bold">Hero 3/6</td><td class="px-3 py-2 font-bold text-white">318 Myth 1/6</td></tr>
+          <tr class="border-t border-[#1e254a]"><td class="px-3 py-2">Upgraded with Myth Crests</td><td class="px-3 py-2">318-344</td><td class="px-3 py-2">Myth 1/6 to 9/6</td><td class="px-3 py-2">Vault stays 318</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="text-[13px] text-[#a3a8c9] leading-relaxed mb-4">
+      <strong class="text-white">How Mistcrests work:</strong> Champion from +2, Hero from +4, Myth from +9. You need Myth Mistcrests to upgrade Hero 3/6 311 to Myth 1/6 318, then to 321, 324, 328, 334, 344 max. One +10 gives 12 Myth Mistcrests. <strong class="text-white">Gearing = many +10s + Vault choices + Crest farm.</strong> We also add Tidebound Grotto Lair Myth 318 and Venomous Abyss raid for tier sets.
+    </p>
+
+    <h3 class="text-[16px] font-black text-white mt-6 mb-3">Gearing Service FAQ - Season 2</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-[12px] text-[#a3a8c9]">
+      <div><strong class="text-white">What is max ilvl from M+?</strong><br>311 chest + 318 Vault. Then upgrade with Myth Mistcrests to 344 max. +10 is cap, +11 to +20 same loot.</div>
+      <div><strong class="text-white">How many runs for full gear?</strong><br>1 run = 1 Vault slot, 4 runs = 2 slots, 8 runs = 3 slots. For full gear we recommend 8x +10 bundle for 3 Myth vault choices + 96 Myth Mistcrests.</div>
+      <div><strong class="text-white">Do you include tier set?</strong><br>Yes if you add raid Lair. M+ alone does not drop tier, but Vault can have tier. We combine M+10 + Heroic Venomous Abyss + Tidebound Grotto for tier.</div>
+      <div><strong class="text-white">What about Valorstones?</strong><br>Removed in Season 2. Now only Mistcrests. 3 types: Champion, Hero, Myth. Myth from +9/+10 needed for 311 to 344 upgrades.</div>
+    </div>
+  </div>
+</div>
+<!-- ===== FIN FAQ SEO - GEARING ===== -->
+<!-- BARRA DE PAGOS GENIAL - GEARHAVEN -->
+<div class="mt-6 bg-[#0f1333] border border-[#1e254a] rounded-2xl px-4 py-3 flex flex-wrap items-center justify-center md:justify-between gap-4">
+  <span class="text-[10px] tracking-[2px] font-black text-[#6b77b5]">WE ACCEPT</span>
+  <div class="flex items-center gap-5 flex-wrap">
+    <span class="text-white font-black italic text-[16px]">VISA</span>
+    <span class="flex items-center gap-1"><span class="w-4 h-4 rounded-full bg-[#eb001b]"></span><span class="w-4 h-4 rounded-full bg-[#f79e1b] -ml-2"></span><span class="text-[9px] ml-1">Mastercard</span></span>
+    <span class="text-[#0099df] font-bold text-[12px]">PayPal</span>
+    <span class="text-white font-bold text-[12px]"> Pay</span>
+    <span class="text-white font-bold text-[12px]"><span class="text-[#4285f4]">G</span> Pay</span>
+    <span class="bg-[#F3BA2F] text-black text-[9px] font-black px-2 py-1 rounded">Binance Pay</span>
+    <span class="bg-[#f7931a] text-white text-[9px] font-black px-2 py-1 rounded-full">₿ Crypto</span>
+  </div>
+  <span class="text-[8px] text-[#444]">🔒 256-bit SSL • Encrypted</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin V6 - Categorias - GearHaven</title><script src="https://cdn.tailwindcss.com"></script>
+<style>.cat.active{background:#8b5cf6!important;color:white}.sub.active{background:#1a204f!important;border-color:#8b5cf6!important;color:white}</style>
+<script>
+const CF_API = "https://silent-term-1b1a.riasdeath77.workers.dev/api/prices";
+const PRICE_KEY = "Gear2024!";
+
+function collectCurrentRetail(){
+  // Usa tu misma logica de saveAll pero sin descargar
+  try{
+    let b=data.retail.bundle; let nl={}, nlb={}, nd={};
+    for(let k in b.levelPrices){ let e=document.getElementById('b-lvl-'+k); if(e) nl[k]=parseFloat(e.value); let l=document.getElementById('b-lbl-'+k); if(l) nlb[k]=l.value; }
+    for(let id in b.dungeonNames){ let e=document.getElementById('b-dun-'+id); if(e) nd[id]=e.value; }
+    if(Object.keys(nl).length){ b.levelPrices=nl; b.keystoneLabels=nlb; b.dungeonNames=nd; b.percents={express:parseInt(document.getElementById('b-exp').value), specific:parseInt(document.getElementById('b-spe').value), remote:parseInt(document.getElementById('b-rem').value), trader3:parseInt(document.getElementById('b-t3').value), trader4:parseInt(document.getElementById('b-t4').value)}; }
+
+    let k=data.retail.keys; if(k && document.getElementById('k-lvl-2')){ let nk={},nkl={},nkd={},nbp={}; for(let lv in k.levelPrices){ let el=document.getElementById('k-lvl-'+lv); if(!el) continue; nk[lv]=parseFloat(el.value); let lb=document.getElementById('k-lbl-'+lv); nkl[lv]=lb?lb.value:''; } for(let id in k.dungeonNames){ let e=document.getElementById('k-dun-'+id); if(e) nkd[id]=e.value; } k.levelPrices=nk; k.keystoneLabels=nkl; k.dungeonNames=nkd; k.percents={express:parseInt(document.getElementById('k-exp').value), specific:parseInt(document.getElementById('k-spe').value), remote:parseInt(document.getElementById('k-rem').value), trader3:parseInt(document.getElementById('k-t3').value), trader4:parseInt(document.getElementById('k-t4').value)}; for(let n in k.bundlePercents){ let e=document.getElementById('k-bperc-'+n); if(e) nbp[n]=parseInt(e.value); } k.bundlePercents=nbp; }
+
+    let h=data.retail.hero; if(h && document.getElementById('h-full-conqueror')){ let hFull={}, hDuns={}; for(let t in h.fullPrices){ let e=document.getElementById('h-full-'+t); if(e) hFull[t]=parseFloat(e.value); } for(let t in h.dungeonPrices){ hDuns[t]={}; for(let id in h.dungeonPrices[t]){ let e=document.getElementById('h-dun-'+t+'-'+id); if(e) hDuns[t][id]=parseFloat(e.value); } } h.fullPrices=hFull; h.dungeonPrices=hDuns; h.percents={express:parseInt(document.getElementById('h-exp').value), trader3:parseInt(document.getElementById('h-t3').value), trader4:parseInt(document.getElementById('h-t4').value)}; }
+
+    // m10, m0, crests, gearing se recogen igual que en tu saveAll
+    let m=data.retail.m10; if(document.getElementById('m10-price')){ m.price=parseFloat(document.getElementById('m10-price').value); m.base=parseFloat(document.getElementById('m10-base-price').value); }
+    let m0=data.retail.m0; if(m0 && document.getElementById('m0-price')){ m0.price=parseFloat(document.getElementById('m0-price').value); m0.base=parseFloat(document.getElementById('m0-base-price').value); }
+    if(data.retail.crests && document.getElementById('crests-veteran')){ data.retail.crests.prices={veteran:parseFloat(document.getElementById('crests-veteran').value), champion:parseFloat(document.getElementById('crests-champion').value), hero:parseFloat(document.getElementById('crests-hero').value), myth:parseFloat(document.getElementById('crests-myth').value)}; }
+  }catch(e){}
+  return data.retail;
+}
+
+async function saveToCloudflare(){
+
+  let statusEl = document.getElementById('status');
+  if(curSub==='keys') statusEl=document.getElementById('status-k');
+  if(curSub==='hero') statusEl=document.getElementById('status-h');
+  if(curSub==='m10') statusEl=document.getElementById('status-m10');
+  if(curSub==='gearing') statusEl=document.getElementById('status-g');
+  if(curSub==='m0') statusEl=document.getElementById('status-m0');
+  if(curSub==='crests') statusEl=document.getElementById('status-crests');
+
+  statusEl.innerText='☁️ Subiendo a Cloudflare...';
+  try{
+    let currentRetail = collectCurrentRetail();
+    let resCloud = await fetch(CF_API).then(r=>r.json()).catch(()=>({}));
+    // Si la nube viene como {retail:{...}} o como archivo plano, normalizamos
+    let base = resCloud.retail? resCloud : {retail: resCloud.retail || {}, forever: resCloud.forever, leveling: resCloud.leveling, gold: resCloud.gold};
+    let merged = {
+     ...base,
+      retail: currentRetail,
+      forever: base.forever || resCloud.forever,
+      leveling: base.leveling || resCloud.leveling,
+      gold: base.gold || resCloud.gold
+    };
+    let res = await fetch(CF_API, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({key:PRICE_KEY,data:merged})
+    });
+    let j = await res.json();
+    if(j.ok){
+      statusEl.innerText='✅ EN VIVO! Cloudflare actualizado';
+      alert("✅ Precios RETAIL en vivo! Ya lo está usando gearhavengg.com");
+    } else {
+      statusEl.innerText='❌ Error: '+(j.error||'no admin');
+      alert("Error: "+(j.error||"no admin - logueate como admin en /account.html"));
+    }
+  }catch(e){ statusEl.innerText='❌ '+e.message; alert("Error Cloudflare: "+e.message); }
+}
+</script>
+</head>
+<body class="bg-[#080c22] text-white p-4">
+<div class="max-w-[1300px] mx-auto">
+<h1 class="text-[24px] font-black">GEAR<span class="text-[#8b5cf6]">HAVEN</span> ADMIN V6</h1>
+<div class="flex gap-2 mt-3 mb-5 flex-wrap">
+  <button onclick="location.href='./admin-price.html'" id="nav-retail" class="px-4 py-2 rounded-full text-[10px] font-black border">🛒 RETAIL BOOSTS</button>
+  <button onclick="location.href='./admin-v7-forever.html'" id="nav-forever" class="px-4 py-2 rounded-full text-[10px] font-black border">💀 FOREVER D/R/PVP</button>
+  <button onclick="location.href='./admin-leveling-gold.html'" id="nav-levelgold" class="px-4 py-2 rounded-full text-[10px] font-black border">📈💰 LEVEL + GOLD</button>
+</div>
+<script>
+let cur = location.pathname.includes('admin-price')? 'nav-retail' : location.pathname.includes('admin-v7')? 'nav-forever' : 'nav-levelgold';
+document.getElementById(cur).classList.add('bg-[#8b5cf6]','text-white','border-[#8b5cf6]');
+['nav-retail','nav-forever','nav-levelgold'].forEach(id=>{ if(id!==cur) document.getElementById(id).classList.add('bg-[#111536]','border-[#2a3366]','text-[#8b92c9]'); });
+</script>
+<div id="retail-subs" class="flex gap-2 mb-5 overflow-x-auto pb-2">
+<button onclick="setSub('bundle')" id="sub-bundle" class="sub active bg-[#0a0e28] border border-[#2a3366] px-4 py-2 rounded-full text-[10px] font-bold whitespace-nowrap">📦 Mythic+ Bundle</button>
+<button onclick="setSub('keys')" id="sub-keys" class="sub bg-[#0a0e28] border px-4 py-2 rounded-full text-[10px] font-bold whitespace-nowrap">🔑 Mythic+ Keys</button>
+<button onclick="setSub('hero')" id="sub-hero" class="sub bg-[#0a0e28] border px-4 py-2 rounded-full text-[10px] font-bold whitespace-nowrap">🦸 Keystone Hero</button>
+<button onclick="setSub('m10')" id="sub-m10" class="sub bg-[#0a0e28] border px-4 py-2 rounded-full text-[10px] font-bold whitespace-nowrap">+10 Mythic +10</button>
+<button onclick="setSub('gearing')" id="sub-gearing" class="sub bg-[#0a0e28] border px-4 py-2 rounded-full text-[10px] font-bold whitespace-nowrap">🛡️ Gearing</button>
+<button onclick="setSub('m0')" id="sub-m0" class="sub bg-[#0a0e28] border px-4 py-2 rounded-full text-[10px] font-bold whitespace-nowrap">0️⃣ Mythic +0</button>
+<button onclick="setSub('crests')" id="sub-crests" class="sub bg-[#0a0e28] border px-4 py-2 rounded-full text-[10px] font-bold whitespace-nowrap">💎 Mistcrests</button>
+</div>
+
+<!-- PANEL BUNDLE YA HECHO -->
+<div id="panel-bundle" class="panel">
+<div class="grid lg:grid-cols-[1fr_300px] gap-4">
+<div class="space-y-4">
+<div class="bg-[#111536] border border-[#2a3366] rounded-2xl p-4"><h2 class="text-[11px] font-black text-[#8b5cf6] mb-3">KEYSTONE - PRECIO + TEXTO DROPDOWN</h2><div id="b-levels" class="space-y-2"></div></div>
+<div class="bg-[#111536] border border-[#2a3366] rounded-2xl p-4"><h2 class="text-[11px] font-black text-[#22c55e] mb-3">MAZMORRAS</h2><div id="b-duns" class="grid md:grid-cols-2 gap-2"></div></div>
+</div>
+<div class="bg-[#111536] border rounded-2xl p-4 h-fit"><h2 class="text-[10px] font-black mb-3">% EXTRAS</h2><div id="b-perc" class="grid grid-cols-2 gap-2 text-[10px]"></div>
+<button onclick="saveAll()" class="w-full mt-4 bg-[#8b5cf6] py-3 rounded-xl font-black text-[12px]">💾 GUARDAR TODO (descarga)</button>
+<button onclick="saveToCloudflare()" class="w-full mt-2 bg-[#f59e0b] text-black py-3 rounded-xl font-black text-[12px]">☁️ GUARDAR EN CLOUDFLARE - EN VIVO</button>
+<p id="status" class="text-[9px] text-center text-[#6b77b5] mt-2">Cargando...</p>
+</div>
+</div>
+</div>
+
+<!-- PANELES VACIOS PARA LAS OTRAS 6 - SE LLENAN CUANDO ME PASES EL HTML -->
+<div id="panel-keys" class="panel hidden">
+<div class="grid lg:grid-cols-[1fr_300px] gap-4">
+<div class="space-y-4">
+<div class="bg-[#111536] border border-[#2a3366] rounded-2xl p-4"><h2 class="text-[11px] font-black text-[#8b5cf6] mb-3">KEYS 2-20 - PRECIO + TEXTO</h2><div id="k-levels" class="space-y-2"></div></div>
+<div class="bg-[#111536] border border-[#2a3366] rounded-2xl p-4"><h2 class="text-[11px] font-black text-[#22c55e] mb-3">MAZMORRAS KEYS</h2><div id="k-duns" class="grid md:grid-cols-2 gap-2"></div></div>
+</div>
+<div class="space-y-4">
+<div class="bg-[#111536] border rounded-2xl p-4"><h2 class="text-[10px] font-black mb-3">% EXTRAS KEYS</h2><div id="k-perc" class="grid grid-cols-2 gap-2 text-[10px]"></div></div>
+<div class="bg-[#111536] border rounded-2xl p-4"><h2 class="text-[10px] font-black mb-3">SLIDER 1-20 KEYS %</h2><div id="k-bundlePerc" class="grid grid-cols-2 gap-2 text-[10px]"></div></div>
+<button onclick="saveAll()" class="w-full bg-[#8b5cf6] py-3 rounded-xl font-black text-[12px]">💾 GUARDAR TODO</button>
+<button onclick="saveToCloudflare()" class="w-full mt-2 bg-[#f59e0b] text-black py-3 rounded-xl font-black text-[12px]">☁️ GUARDAR EN CLOUDFLARE - EN VIVO</button>
+<p id="status-k" class="text-[9px] text-center text-[#6b77b5] mt-2">Cargando keys...</p>
+</div>
+</div>
+</div>
+<div id="panel-hero" class="panel hidden">
+<div class="grid lg:grid-cols-[1fr_300px] gap-4">
+<div class="space-y-4">
+<div class="bg-[#111536] border border-[#2a3366] rounded-2xl p-4">
+<h2 class="text-[11px] font-black text-[#f59e0b] mb-3">HERO - FULL PRICES 5 TIERS</h2>
+<div id="h-full" class="grid grid-cols-2 md:grid-cols-3 gap-2"></div>
+</div>
+<div class="bg-[#111536] border border-[#2a3366] rounded-2xl p-4">
+<h2 class="text-[11px] font-black text-[#8b5cf6] mb-3">HERO - PRECIO POR MAZMORRA (8x5)</h2>
+<div id="h-duns" class="space-y-3"></div>
+</div>
+</div>
+<div class="space-y-4">
+<div class="bg-[#111536] border rounded-2xl p-4">
+<h2 class="text-[10px] font-black mb-3">% EXTRAS HERO</h2>
+<div id="h-perc" class="grid grid-cols-3 gap-2 text-[10px]"></div>
+</div>
+<div class="bg-[#111536] border rounded-2xl p-4">
+<h2 class="text-[10px] font-black mb-3">TIER ENABLED</h2>
+<div id="h-enabled" class="grid grid-cols-2 gap-2 text-[10px]"></div>
+</div>
+<button onclick="saveAll()" class="w-full bg-[#f59e0b] text-black py-3 rounded-xl font-black text-[12px]">💾 GUARDAR TODO</button>
+<button onclick="saveToCloudflare()" class="w-full mt-2 bg-[#f59e0b] text-black py-3 rounded-xl font-black text-[12px]">☁️ GUARDAR EN CLOUDFLARE - EN VIVO</button>
+<p id="status-h" class="text-[9px] text-center text-[#6b77b5] mt-2">Cargando hero...</p>
+</div>
+</div>
+</div>
+<div id="panel-m10" class="panel hidden">
+<div class="grid lg:grid-cols-[1fr_300px] gap-4">
+<div class="space-y-4">
+<div class="bg-[#111536] border border-[#2a3366] rounded-2xl p-4"><h2 class="text-[11px] font-black text-[#8b5cf6] mb-3">M10 - PRECIO BASE + CARD</h2><div id="m10-base" class="space-y-2"></div></div>
+<div class="bg-[#111536] border border-[#2a3366] rounded-2xl p-4"><h2 class="text-[11px] font-black text-[#22c55e] mb-3">M10 - SLIDER 1-8 BARRA %</h2><div id="m10-bundle" class="grid grid-cols-2 gap-2"></div></div>
+</div>
+<div class="space-y-4">
+<div class="bg-[#111536] border rounded-2xl p-4"><h2 class="text-[10px] font-black mb-3">% EXTRAS M10</h2><div id="m10-perc" class="grid grid-cols-2 gap-2 text-[10px]"></div></div>
+<button onclick="saveAll()" class="w-full bg-[#8b5cf6] py-3 rounded-xl font-black text-[12px]">💾 GUARDAR TODO</button>
+<button onclick="saveToCloudflare()" class="w-full mt-2 bg-[#f59e0b] text-black py-3 rounded-xl font-black text-[12px]">☁️ GUARDAR EN CLOUDFLARE - EN VIVO</button>
+<p id="status-m10" class="text-[9px] text-center text-[#6b77b5] mt-2">Cargando m10...</p>
+</div>
+</div>
+</div>
+<div id="panel-gearing" class="panel hidden">
+<div class="grid lg:grid-cols-[1fr_300px] gap-4">
+<div class="space-y-4">
+<div class="bg-[#111536] border border-[#2a3366] rounded-2xl p-4"><h2 class="text-[11px] font-black text-[#8b5cf6] mb-3">GEARING - MYTHIC TRACKS</h2><div id="g-mythic" class="space-y-2"></div></div>
+<div class="bg-[#111536] border border-[#2a3366] rounded-2xl p-4"><h2 class="text-[11px] font-black text-[#22c55e] mb-3">GEARING - PVP TRACKS</h2><div id="g-pvp" class="space-y-2"></div></div>
+<div class="bg-[#111536] border border-[#2a3366] rounded-2xl p-4"><h2 class="text-[11px] font-black text-[#f59e0b] mb-3">GEARING - RAID TRACKS</h2><div id="g-raid" class="space-y-2"></div></div>
+</div>
+<div class="space-y-4">
+<div class="bg-[#111536] border rounded-2xl p-4"><h2 class="text-[10px] font-black mb-3">% EXTRAS GEARING</h2><div id="g-perc" class="grid grid-cols-2 gap-2 text-[10px]"></div></div>
+<button onclick="saveAll()" class="w-full bg-[#8b5cf6] py-3 rounded-xl font-black text-[12px]">💾 GUARDAR TODO</button>
+<button onclick="saveToCloudflare()" class="w-full mt-2 bg-[#f59e0b] text-black py-3 rounded-xl font-black text-[12px]">☁️ GUARDAR EN CLOUDFLARE - EN VIVO</button>
+<p id="status-g" class="text-[9px] text-center text-[#6b77b5] mt-2">Cargando gearing...</p>
+</div>
+</div>
+</div>
+<div id="panel-m0" class="panel hidden">
+<div class="grid lg:grid-cols-[1fr_300px] gap-4">
+<div class="space-y-4">
+<div class="bg-[#111536] border border-[#2a3366] rounded-2xl p-4"><h2 class="text-[11px] font-black text-[#22c55e] mb-3">M0 - PRECIO BASE + CARD + MAZMORRAS</h2><div id="m0-base" class="space-y-2"></div><div id="m0-duns" class="grid md:grid-cols-2 gap-2 mt-3"></div></div>
+<div class="bg-[#111536] border border-[#2a3366] rounded-2xl p-4"><h2 class="text-[11px] font-black text-[#8b5cf6] mb-3">M0 - SLIDER 1-8 BARRA %</h2><div id="m0-bundle" class="grid grid-cols-2 gap-2"></div></div>
+</div>
+<div class="space-y-4">
+<div class="bg-[#111536] border rounded-2xl p-4"><h2 class="text-[10px] font-black mb-3">% EXTRAS M0</h2><div id="m0-perc" class="grid grid-cols-2 gap-2 text-[10px]"></div></div>
+<button onclick="saveAll()" class="w-full bg-[#22c55e] text-black py-3 rounded-xl font-black text-[12px]">💾 GUARDAR TODO</button>
+<button onclick="saveToCloudflare()" class="w-full mt-2 bg-[#f59e0b] text-black py-3 rounded-xl font-black text-[12px]">☁️ GUARDAR EN CLOUDFLARE - EN VIVO</button>
+<p id="status-m0" class="text-[9px] text-center text-[#6b77b5] mt-2">Cargando m0...</p>
+</div>
+</div>
+</div>
+<div id="panel-crests" class="panel hidden">
+<div class="grid lg:grid-cols-[1fr_300px] gap-4">
+<div class="space-y-4">
+<div class="bg-[#111536] border border-[#2a3366] rounded-2xl p-4">
+<h2 class="text-[11px] font-black text-[#8b5cf6] mb-3">💎 MISTCRESTS - PRECIO POR CREST</h2>
+<div id="crests-prices" class="grid grid-cols-2 gap-3"></div>
+</div>
+<div class="bg-[#111536] border border-[#2a3366] rounded-2xl p-4">
+<h2 class="text-[11px] font-black text-[#22c55e] mb-3">MISTCRESTS - CONFIG</h2>
+<div id="crests-config" class="grid grid-cols-3 gap-3"></div>
+</div>
+</div>
+<div class="space-y-4">
+<div class="bg-[#111536] border rounded-2xl p-4">
+<h2 class="text-[10px] font-black mb-3">% EXTRAS CRESTS</h2>
+<div id="crests-perc" class="grid grid-cols-2 gap-2 text-[10px]"></div>
+</div>
+<button onclick="saveAll()" class="w-full bg-[#8b5cf6] py-3 rounded-xl font-black text-[12px]">💾 GUARDAR TODO</button>
+<button onclick="saveToCloudflare()" class="w-full mt-2 bg-[#f59e0b] text-black py-3 rounded-xl font-black text-[12px]">☁️ GUARDAR EN CLOUDFLARE - EN VIVO</button>
+<p id="status-crests" class="text-[9px] text-center text-[#6b77b5] mt-2">Cargando crests...</p>
+</div>
+</div>
+</div>
+
+</div>
+<script>
+let data=null;
+let curCat='retail', curSub='bundle';
+let def={retail:{
+ bundle:{levelPrices:{"6":6.99,"7":8.99,"8":10.99,"9":12.99,"10":14.99,"11":16.99,"12":19.99,"13":22.99,"14":25.99,"15":29.99,"16":34.99,"17":39.99,"18":44.99,"19":49.99,"20":59.99},keystoneLabels:{"6":"+6","7":"+7","8":"+8","9":"+9","10":"+10","11":"+11","12":"+12","13":"+13","14":"+14","15":"+15","16":"+16","17":"+17","18":"+18","19":"+19","20":"+20"},dungeonNames:{altar:"Altar of Fangs",murder:"Murder Row",den:"Den of Nalorakk",vale:"The Blinding Vale",voidscar:"Voidscar Arena",kings:"Kings' Rest",temple:"Temple of Sethraliss",ruby:"Ruby Life Pools"},percents:{express:30,specific:20,remote:15,trader3:30,trader4:50}},
+ keys:{levelPrices:{"2":5,"3":6,"4":7,"5":8,"6":9,"7":10,"8":11,"9":12,"10":14,"11":16,"12":18,"13":21,"14":24,"15":28,"16":32,"17":36,"18":40,"19":45,"20":50},keystoneLabels:{"2":"+2","3":"+3","4":"+4","5":"+5","6":"+6","7":"+7","8":"+8","9":"+9","10":"+10","11":"+11","12":"+12","13":"+13","14":"+14","15":"+15","16":"+16","17":"+17","18":"+18","19":"+19","20":"+20"},dungeonNames:{altar:"Altar",murder:"Murder Row",den:"Den",vale:"Vale",voidscar:"Voidscar",kings:"Kings",temple:"Temple",ruby:"Ruby"},percents:{express:30,specific:20,remote:15,trader3:30,trader4:50},bundlePercents:{"1":0,"2":10,"3":15,"4":20,"5":25,"6":30,"7":35,"8":40}},
+ hero:{fullPrices:{conqueror:52.99,master:52.99,hero:79.13,legend:111.99,myth:344.99},perDungeonBase:{conqueror:7.5,master:7.5,hero:10,legend:15,myth:50},dungeonPrices:{conqueror:{altar:7.5,murder:7.5,den:7.5,vale:7.5,voidscar:7.5,kings:7.5,temple:7.5,ruby:7.5},master:{altar:7.5,murder:7.5,den:7.5,vale:7.5,voidscar:7.5,kings:7.5,temple:7.5,ruby:7.5},hero:{altar:10,murder:10,den:10,vale:10,voidscar:10,kings:10,temple:10,ruby:10},legend:{altar:15,murder:15,den:15,vale:15,voidscar:15,kings:15,temple:15,ruby:15},myth:{altar:50,murder:50,den:50,vale:50,voidscar:50,kings:50,temple:50,ruby:50}},percents:{express:30,trader3:30,trader4:50},tierEnabled:{conqueror:true,master:true,hero:true,legend:true,myth:true}},
+ m10:{price:10.99, base:9.00, percents:{express:30,specific:20,remote:30,trader3:30,trader4:50}, bundlePercents:{"1":100,"2":200,"3":300,"4":400,"5":500,"6":600,"7":700,"8":800}},
+  m0:{price:6.99, base:6.99, dungeonNames:{altar:"Altar of Fangs",murder:"Murder Row",den:"Den of Nalorakk",vale:"The Blinding Vale",voidscar:"Voidscar Arena",kings:"Kings' Rest",temple:"Temple of Sethraliss",ruby:"Ruby Life Pools"}, percents:{express:30,specific:20,remote:30,trader3:30,trader4:50}, bundlePercents:{"1":100,"2":200,"3":300,"4":400,"5":500,"6":600,"7":700,"8":800}},
+ crests:{prices:{veteran:0.26,champion:0.40,hero:0.46,myth:0.82},percents:{express:30,remote:10},min:0,max:804,default:396},
+ gearing:{tracks:{mythic:[{id:'m0',label:'292 ilvl in each slot (M+0)',price:55.99},{id:'m6',label:'305 ilvl in each slot (M+6)',price:84.99},{id:'m8',label:'308 ilvl in each slot (M+8)',price:105.99},{id:'m10',label:'311 ilvl in each slot (M+10)',price:108.99}],pvp:[{id:'p331',label:'331 ilvl Honor (PvP)',price:18.99},{id:'p344',label:'344 ilvl Conquest (PvP)',price:87.99}],raid:[{id:'r292',label:'292 ilvl Normal Raid',price:384.99},{id:'r318',label:'318 ilvl Heroic Raid',price:461.99},{id:'r344',label:'344 ilvl Mythic Raid',price:4799.99}]},percents:{express:30,remote:10}},
+}};
+function setCat(c){curCat=c; document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active')); document.getElementById('cat-'+c).classList.add('active');}
+function setSub(s){curSub=s; document.querySelectorAll('.sub').forEach(x=>x.classList.remove('active')); document.getElementById('sub-'+s).classList.add('active'); document.querySelectorAll('.panel').forEach(p=>p.classList.add('hidden')); document.getElementById('panel-'+s).classList.remove('hidden');}
+async function init(){
+ try{
+  let raw = await fetch(CF_API+'?v='+Date.now()).then(r=>r.json()).catch(()=>null);
+  if(raw && raw.retail){
+    data=raw;
+    if(data.retail && data.retail.retail) data=data.retail;
+    if(!data.retail.m10) data.retail.m10=def.retail.m10;
+    if(!data.retail.bundle?.levelPrices) data.retail.bundle=def.retail.bundle;
+    if(!data.retail.keys?.levelPrices) data.retail.keys=def.retail.keys;
+    if(!data.retail.hero?.fullPrices) data.retail.hero=def.retail.hero;
+    if(!data.retail.gearing?.tracks) data.retail.gearing=def.retail.gearing;
+    if(!data.retail.m0) data.retail.m0=def.retail.m0;
+    if(!data.retail.crests) data.retail.crests=def.retail.crests;
+    document.getElementById('status').innerText='✅ EN VIVO desde Cloudflare';
+  } else {
+    let r=await fetch('./precios-page.json?v='+Date.now());
+    if(r.ok){
+      let raw2=await r.json();
+      data=raw2.retail?{retail:raw2.retail, forever:raw2.forever, leveling:raw2.leveling, gold:raw2.gold}:raw2
+      if(data.retail && data.retail.retail) data=data.retail;
+      if(!data.retail.m10) data.retail.m10=def.retail.m10;
+      if(!data.retail.bundle?.levelPrices) data.retail.bundle=def.retail.bundle;
+      if(!data.retail.keys?.levelPrices) data.retail.keys=def.retail.keys;
+      if(!data.retail.hero?.fullPrices) data.retail.hero=def.retail.hero;
+      if(!data.retail.gearing?.tracks) data.retail.gearing=def.retail.gearing;
+      document.getElementById('status').innerText='✅ JSON local';
+    } else { data=def; }
+  }
+ }catch(e){ data=def; }
+ renderBundle(); renderKeys(); renderHero(); renderM10(); renderM0(); renderCrests(); renderGearing();
+}
+function renderBundle(){let b=data.retail.bundle; document.getElementById('b-levels').innerHTML=Object.keys(b.levelPrices).sort((a,b)=>a-b).map(k=>`<div class="flex gap-2 items-center bg-[#0a0e28] border border-[#1e254a] rounded-xl p-2"><span class="text-[10px] font-black w-[30px] text-[#8b5cf6]">+${k}</span><input id="b-lbl-${k}" value="${(b.keystoneLabels&&b.keystoneLabels[k])||''}" class="flex-1 bg-[#111536] border rounded-lg px-2 py-2 text-[10px]"><input id="b-lvl-${k}" value="${b.levelPrices[k]}" type="number" step="0.01" class="w-[65px] bg-[#111536] border rounded-lg px-2 py-2 text-[11px] font-bold"></div>`).join(''); document.getElementById('b-duns').innerHTML=Object.keys(b.dungeonNames).map(id=>`<label class="text-[8px] bg-[#0a0e28] p-2 rounded-xl border">${id}<input id="b-dun-${id}" value="${b.dungeonNames[id]}" class="w-full mt-1 bg-[#111536] border rounded-lg px-2 py-2 text-[10px] font-bold"></label>`).join(''); document.getElementById('b-perc').innerHTML=`<label class="bg-[#0a0e28] p-2 rounded-xl border">Express<input id="b-exp" value="${b.percents.express}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label><label class="bg-[#0a0e28] p-2 rounded-xl border">Specific<input id="b-spe" value="${b.percents.specific}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label><label class="bg-[#0a0e28] p-2 rounded-xl border">Remote<input id="b-rem" value="${b.percents.remote}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label><label class="bg-[#0a0e28] p-2 rounded-xl border">3 Trad<input id="b-t3" value="${b.percents.trader3}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label><label class="bg-[#0a0e28] p-2 rounded-xl border col-span-2">4 Trad<input id="b-t4" value="${b.percents.trader4}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label>`;}
+function renderKeys(){let k=data.retail.keys; document.getElementById('k-levels').innerHTML=Object.keys(k.levelPrices).sort((a,b)=>a-b).map(lv=>`<div class="flex gap-2 items-center bg-[#0a0e28] border border-[#1e254a] rounded-xl p-2"><span class="text-[10px] font-black w-[30px] text-[#8b5cf6]">+${lv}</span><input id="k-lbl-${lv}" value="${(k.keystoneLabels&&k.keystoneLabels[lv])||''}" class="flex-1 bg-[#111536] border rounded-lg px-2 py-2 text-[10px]"><input id="k-lvl-${lv}" value="${k.levelPrices[lv]}" type="number" step="0.01" class="w-[65px] bg-[#111536] border rounded-lg px-2 py-2 text-[11px] font-bold"></div>`).join(''); document.getElementById('k-duns').innerHTML=Object.keys(k.dungeonNames).map(id=>`<label class="text-[8px] bg-[#0a0e28] p-2 rounded-xl border">${id}<input id="k-dun-${id}" value="${k.dungeonNames[id]}" class="w-full mt-1 bg-[#111536] border rounded-lg px-2 py-2 text-[10px] font-bold"></label>`).join(''); document.getElementById('k-perc').innerHTML=`<label class="bg-[#0a0e28] p-2 rounded-xl border">Express<input id="k-exp" value="${k.percents.express}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label><label class="bg-[#0a0e28] p-2 rounded-xl border">Specific<input id="k-spe" value="${k.percents.specific}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label><label class="bg-[#0a0e28] p-2 rounded-xl border">Remote<input id="k-rem" value="${k.percents.remote}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label><label class="bg-[#0a0e28] p-2 rounded-xl border">3 Trad<input id="k-t3" value="${k.percents.trader3}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label><label class="bg-[#0a0e28] p-2 rounded-xl border col-span-2">4 Trad<input id="k-t4" value="${k.percents.trader4}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label>`; document.getElementById('k-bundlePerc').innerHTML=Object.keys(k.bundlePercents).sort((a,b)=>a-b).map(n=>`<label class="bg-[#0a0e28] p-2 rounded-xl border">${n} keys<input id="k-bperc-${n}" value="${k.bundlePercents[n]}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label>`).join(''); document.getElementById('status-k').innerText='✅ Keys listo';}
+function renderHero(){let h=data.retail.hero; document.getElementById('h-full').innerHTML=Object.keys(h.fullPrices).map(t=>`<label class="bg-[#0a0e28] p-2 rounded-xl border text-[9px]">${t.toUpperCase()} FULL<input id="h-full-${t}" value="${h.fullPrices[t]}" type="number" step="0.01" class="w-full mt-1 bg-[#111536] border rounded-lg px-2 py-2 text-[11px] font-bold"></label>`).join(''); document.getElementById('h-duns').innerHTML=Object.keys(h.fullPrices).map(t=>`<div class="bg-[#0a0e28] border border-[#1e254a] rounded-xl p-2"><div class="text-[10px] font-black text-[#f59e0b] mb-2">${t.toUpperCase()} - $${h.fullPrices[t]}</div><div class="grid grid-cols-2 md:grid-cols-4 gap-2">${Object.keys(h.dungeonPrices[t]||{}).map(id=>`<label class="text-[8px]">${id}<input id="h-dun-${t}-${id}" value="${h.dungeonPrices[t][id]}" type="number" step="0.01" class="w-full bg-[#111536] border rounded px-1 py-1 mt-1 text-[10px]"></label>`).join('')}</div></div>`).join(''); document.getElementById('h-perc').innerHTML=`<label class="bg-[#0a0e28] p-2 rounded-xl border">Express<input id="h-exp" value="${h.percents.express}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label><label class="bg-[#0a0e28] p-2 rounded-xl border">3 Trad<input id="h-t3" value="${h.percents.trader3}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label><label class="bg-[#0a0e28] p-2 rounded-xl border">4 Trad<input id="h-t4" value="${h.percents.trader4}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label>`; document.getElementById('h-enabled').innerHTML=Object.keys(h.tierEnabled).map(t=>`<label class="bg-[#0a0e28] p-2 rounded-xl border flex items-center gap-2"><input type="checkbox" id="h-en-${t}" ${h.tierEnabled[t]?'checked':''}> ${t}</label>`).join(''); document.getElementById('status-h').innerText='✅ Hero listo - '+Object.keys(h.fullPrices).length+' tiers';}
+function renderM10(){
+  let m=data.retail.m10;
+  if(!m.bundlePercents) m.bundlePercents={"1":100,"2":200,"3":300,"4":400,"5":500,"6":600,"7":700,"8":800};
+  if(!m.percents) m.percents={express:30,specific:20,remote:30,trader3:30,trader4:50};
+  document.getElementById('m10-base').innerHTML=`
+    <label class="text-[10px] bg-[#0a0e28] p-3 rounded-xl border block">Precio Card (muestra)<input id="m10-price" value="${m.price}" type="number" step="0.01" class="w-full mt-1 bg-[#111536] border rounded-lg px-2 py-2 text-[12px] font-bold"></label>
+    <label class="text-[10px] bg-[#0a0e28] p-3 rounded-xl border block">Base Price (calcTotal base 1 key)<input id="m10-base-price" value="${m.base||m.price}" type="number" step="0.01" class="w-full mt-1 bg-[#111536] border rounded-lg px-2 py-2 text-[12px] font-bold"></label>
+  `;
+  document.getElementById('m10-perc').innerHTML=`
+    <label class="bg-[#0a0e28] p-2 rounded-xl border">Express<input id="m10-exp" value="${m.percents.express}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label>
+    <label class="bg-[#0a0e28] p-2 rounded-xl border">Specific<input id="m10-spe" value="${m.percents.specific}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label>
+    <label class="bg-[#0a0e28] p-2 rounded-xl border">Remote<input id="m10-rem" value="${m.percents.remote}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label>
+    <label class="bg-[#0a0e28] p-2 rounded-xl border">3 Trad<input id="m10-t3" value="${m.percents.trader3}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label>
+    <label class="bg-[#0a0e28] p-2 rounded-xl border col-span-2">4 Trad<input id="m10-t4" value="${m.percents.trader4}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label>
+  `;
+  document.getElementById('m10-bundle').innerHTML=Object.keys(m.bundlePercents).sort((a,b)=>a-b).map(n=>`<label class="bg-[#0a0e28] p-2 rounded-xl border text-[10px]">${n} keys = %<input id="m10-bperc-${n}" value="${m.bundlePercents[n]}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label>`).join('');
+  document.getElementById('status-m10').innerText='✅ M10 listo';
+}
+function renderM0(){
+  let m=data.retail.m0||def.retail.m0;
+  if(!m.bundlePercents) m.bundlePercents={"1":100,"2":200,"3":300,"4":400,"5":500,"6":600,"7":700,"8":800};
+  if(!m.percents) m.percents={express:30,specific:20,remote:30,trader3:30,trader4:50};
+  if(!m.dungeonNames) m.dungeonNames=def.retail.m0.dungeonNames;
+  document.getElementById('m0-base').innerHTML=`
+    <label class="text-[10px] bg-[#0a0e28] p-3 rounded-xl border block">Precio Card<input id="m0-price" value="${m.price}" type="number" step="0.01" class="w-full mt-1 bg-[#111536] border rounded-lg px-2 py-2 text-[12px] font-bold"></label>
+    <label class="text-[10px] bg-[#0a0e28] p-3 rounded-xl border block">Base Price<input id="m0-base-price" value="${m.base||m.price}" type="number" step="0.01" class="w-full mt-1 bg-[#111536] border rounded-lg px-2 py-2 text-[12px] font-bold"></label>
+  `;
+  document.getElementById('m0-duns').innerHTML=Object.keys(m.dungeonNames).map(id=>`<label class="text-[8px] bg-[#0a0e28] p-2 rounded-xl border">${id}<input id="m0-dun-${id}" value="${m.dungeonNames[id]}" class="w-full mt-1 bg-[#111536] border rounded-lg px-2 py-2 text-[10px] font-bold"></label>`).join('');
+  document.getElementById('m0-perc').innerHTML=`
+    <label class="bg-[#0a0e28] p-2 rounded-xl border">Express<input id="m0-exp" value="${m.percents.express}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label>
+    <label class="bg-[#0a0e28] p-2 rounded-xl border">Specific<input id="m0-spe" value="${m.percents.specific}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label>
+    <label class="bg-[#0a0e28] p-2 rounded-xl border">Remote<input id="m0-rem" value="${m.percents.remote}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label>
+    <label class="bg-[#0a0e28] p-2 rounded-xl border">3 Trad<input id="m0-t3" value="${m.percents.trader3}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label>
+    <label class="bg-[#0a0e28] p-2 rounded-xl border col-span-2">4 Trad<input id="m0-t4" value="${m.percents.trader4}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label>
+  `;
+  document.getElementById('m0-bundle').innerHTML=Object.keys(m.bundlePercents).sort((a,b)=>a-b).map(n=>`<label class="bg-[#0a0e28] p-2 rounded-xl border text-[10px]">${n} keys = %<input id="m0-bperc-${n}" value="${m.bundlePercents[n]}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label>`).join('');
+  document.getElementById('status-m0').innerText='✅ M0 listo';
+}
+function renderCrests(){
+  let c=data.retail.crests||def.retail.crests;
+  if(!c.prices) c.prices={veteran:0.26,champion:0.40,hero:0.46,myth:0.82};
+  if(!c.percents) c.percents={express:30,remote:10};
+  document.getElementById('crests-prices').innerHTML=`
+    <label class="bg-[#0a0e28] p-3 rounded-xl border text-[10px]">VETERAN $/crest<input id="crests-veteran" value="${c.prices.veteran}" type="number" step="0.01" class="w-full mt-1 bg-[#111536] border rounded-lg px-2 py-2 text-[12px] font-bold"></label>
+    <label class="bg-[#0a0e28] p-3 rounded-xl border text-[10px]">CHAMPION $/crest<input id="crests-champion" value="${c.prices.champion}" type="number" step="0.01" class="w-full mt-1 bg-[#111536] border rounded-lg px-2 py-2 text-[12px] font-bold"></label>
+    <label class="bg-[#0a0e28] p-3 rounded-xl border text-[10px]">HERO $/crest<input id="crests-hero" value="${c.prices.hero}" type="number" step="0.01" class="w-full mt-1 bg-[#111536] border rounded-lg px-2 py-2 text-[12px] font-bold"></label>
+    <label class="bg-[#0a0e28] p-3 rounded-xl border text-[10px]">MYTH $/crest<input id="crests-myth" value="${c.prices.myth}" type="number" step="0.01" class="w-full mt-1 bg-[#111536] border rounded-lg px-2 py-2 text-[12px] font-bold"></label>
+  `;
+  document.getElementById('crests-config').innerHTML=`
+    <label class="bg-[#0a0e28] p-2 rounded-xl border text-[10px]">MIN<input id="crests-min" value="${c.min||0}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label>
+    <label class="bg-[#0a0e28] p-2 rounded-xl border text-[10px]">MAX<input id="crests-max" value="${c.max||804}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label>
+    <label class="bg-[#0a0e28] p-2 rounded-xl border text-[10px]">DEFAULT<input id="crests-default" value="${c.default||396}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label>
+  `;
+  document.getElementById('crests-perc').innerHTML=`
+    <label class="bg-[#0a0e28] p-2 rounded-xl border">Express %<input id="crests-exp" value="${c.percents.express}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label>
+    <label class="bg-[#0a0e28] p-2 rounded-xl border">Remote %<input id="crests-rem" value="${c.percents.remote}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label>
+  `;
+  document.getElementById('status-crests').innerText='✅ Crests listo';
+}
+function renderGearing(){
+ let g=data.retail.gearing;
+ if(!g.tracks) g.tracks=def.retail.gearing.tracks;
+ if(!g.percents) g.percents=def.retail.gearing.percents;
+ document.getElementById('g-mythic').innerHTML=g.tracks.mythic.map((t,i)=>`<div class="flex gap-2 items-center bg-[#0a0e28] border border-[#1e254a] rounded-xl p-2"><input id="g-m-id-${i}" value="${t.id}" class="w-[50px] bg-[#111536] border rounded-lg px-2 py-2 text-[10px] font-bold"><input id="g-m-label-${i}" value="${t.label}" class="flex-1 bg-[#111536] border rounded-lg px-2 py-2 text-[10px]"><input id="g-m-price-${i}" value="${t.price}" type="number" step="0.01" class="w-[80px] bg-[#111536] border rounded-lg px-2 py-2 text-[11px] font-bold"></div>`).join('');
+ document.getElementById('g-pvp').innerHTML=g.tracks.pvp.map((t,i)=>`<div class="flex gap-2 items-center bg-[#0a0e28] border border-[#1e254a] rounded-xl p-2"><input id="g-p-id-${i}" value="${t.id}" class="w-[50px] bg-[#111536] border rounded-lg px-2 py-2 text-[10px] font-bold"><input id="g-p-label-${i}" value="${t.label}" class="flex-1 bg-[#111536] border rounded-lg px-2 py-2 text-[10px]"><input id="g-p-price-${i}" value="${t.price}" type="number" step="0.01" class="w-[80px] bg-[#111536] border rounded-lg px-2 py-2 text-[11px] font-bold"></div>`).join('');
+ document.getElementById('g-raid').innerHTML=g.tracks.raid.map((t,i)=>`<div class="flex gap-2 items-center bg-[#0a0e28] border border-[#1e254a] rounded-xl p-2"><input id="g-r-id-${i}" value="${t.id}" class="w-[50px] bg-[#111536] border rounded-lg px-2 py-2 text-[10px] font-bold"><input id="g-r-label-${i}" value="${t.label}" class="flex-1 bg-[#111536] border rounded-lg px-2 py-2 text-[10px]"><input id="g-r-price-${i}" value="${t.price}" type="number" step="0.01" class="w-[80px] bg-[#111536] border rounded-lg px-2 py-2 text-[11px] font-bold"></div>`).join('');
+ document.getElementById('g-perc').innerHTML=`<label class="bg-[#0a0e28] p-2 rounded-xl border">Express<input id="g-exp" value="${g.percents.express}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label><label class="bg-[#0a0e28] p-2 rounded-xl border">Remote<input id="g-rem" value="${g.percents.remote}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label>`;
+ document.getElementById('status-g').innerText='✅ Gearing listo';
+}
+function saveAll(){
+ let b=data.retail.bundle; let nl={}, nlb={}, nd={}; for(let k in b.levelPrices){ let e=document.getElementById('b-lvl-'+k); if(e) nl[k]=parseFloat(e.value); let l=document.getElementById('b-lbl-'+k); if(l) nlb[k]=l.value; } for(let id in b.dungeonNames){ let e=document.getElementById('b-dun-'+id); if(e) nd[id]=e.value; } b.levelPrices=nl; b.keystoneLabels=nlb; b.dungeonNames=nd; b.percents={express:parseInt(document.getElementById('b-exp').value), specific:parseInt(document.getElementById('b-spe').value), remote:parseInt(document.getElementById('b-rem').value), trader3:parseInt(document.getElementById('b-t3').value), trader4:parseInt(document.getElementById('b-t4').value)};
+ let k=data.retail.keys; if(k.levelPrices){ let nk={},nkl={},nkd={},nbp={}; for(let lv in k.levelPrices){ let el=document.getElementById('k-lvl-'+lv); if(!el) continue; nk[lv]=parseFloat(el.value); let lb=document.getElementById('k-lbl-'+lv); nkl[lv]=lb?lb.value:''; } for(let id in k.dungeonNames){ let e=document.getElementById('k-dun-'+id); if(e) nkd[id]=e.value; } k.levelPrices=nk; k.keystoneLabels=nkl; k.dungeonNames=nkd; k.percents={express:parseInt(document.getElementById('k-exp').value), specific:parseInt(document.getElementById('k-spe').value), remote:parseInt(document.getElementById('k-rem').value), trader3:parseInt(document.getElementById('k-t3').value), trader4:parseInt(document.getElementById('k-t4').value)}; for(let n in k.bundlePercents){ let e=document.getElementById('k-bperc-'+n); if(e) nbp[n]=parseInt(e.value); } k.bundlePercents=nbp; }
+ let h=data.retail.hero; let hFull={}, hDuns={}, hPerc={}, hEn={}; for(let t in h.fullPrices){ let e=document.getElementById('h-full-'+t); if(e) hFull[t]=parseFloat(e.value); } for(let t in h.dungeonPrices){ hDuns[t]={}; for(let id in h.dungeonPrices[t]){ let e=document.getElementById('h-dun-'+t+'-'+id); if(e) hDuns[t][id]=parseFloat(e.value); } } hPerc={express:parseInt(document.getElementById('h-exp').value), trader3:parseInt(document.getElementById('h-t3').value), trader4:parseInt(document.getElementById('h-t4').value)}; for(let t in h.tierEnabled){ let e=document.getElementById('h-en-'+t); hEn[t]=e?e.checked:true; } h.fullPrices=hFull; h.dungeonPrices=hDuns; h.percents=hPerc; h.tierEnabled=hEn; h.perDungeonBase={}; for(let t in hFull) h.perDungeonBase[t]=parseFloat((hFull[t]/8).toFixed(2));
+  let m=data.retail.m10;
+ m.price=parseFloat(document.getElementById('m10-price').value);
+ m.base=parseFloat(document.getElementById('m10-base-price').value);
+ m.percents={express:parseInt(document.getElementById('m10-exp').value), specific:parseInt(document.getElementById('m10-spe').value), remote:parseInt(document.getElementById('m10-rem').value), trader3:parseInt(document.getElementById('m10-t3').value), trader4:parseInt(document.getElementById('m10-t4').value)};
+ let mbp={}; for(let n in m.bundlePercents){ let e=document.getElementById('m10-bperc-'+n); if(e) mbp[n]=parseInt(e.value); } m.bundlePercents=mbp;
+ let g=data.retail.gearing;
+let nm=[], np=[], nr=[];
+for(let i=0;i<g.tracks.mythic.length;i++){ nm.push({id:document.getElementById('g-m-id-'+i).value, label:document.getElementById('g-m-label-'+i).value, price:parseFloat(document.getElementById('g-m-price-'+i).value)}); }
+for(let i=0;i<g.tracks.pvp.length;i++){ np.push({id:document.getElementById('g-p-id-'+i).value, label:document.getElementById('g-p-label-'+i).value, price:parseFloat(document.getElementById('g-p-price-'+i).value)}); }
+for(let i=0;i<g.tracks.raid.length;i++){ nr.push({id:document.getElementById('g-r-id-'+i).value, label:document.getElementById('g-r-label-'+i).value, price:parseFloat(document.getElementById('g-r-price-'+i).value)}); }
+g.tracks={mythic:nm,pvp:np,raid:nr};
+g.percents={express:parseInt(document.getElementById('g-exp').value), remote:parseInt(document.getElementById('g-rem').value)};
+  // M0 SAVE
+  let m0=data.retail.m0;
+  if(!m0) m0={};
+  m0.price=parseFloat(document.getElementById('m0-price').value);
+  m0.base=parseFloat(document.getElementById('m0-base-price').value);
+  let m0duns={}; for(let id in def.retail.m0.dungeonNames){ let e=document.getElementById('m0-dun-'+id); if(e) m0duns[id]=e.value; }
+  m0.dungeonNames=m0duns;
+  m0.percents={express:parseInt(document.getElementById('m0-exp').value), specific:parseInt(document.getElementById('m0-spe').value), remote:parseInt(document.getElementById('m0-rem').value), trader3:parseInt(document.getElementById('m0-t3').value), trader4:parseInt(document.getElementById('m0-t4').value)};
+  let m0bp={}; for(let n in m0.bundlePercents){ let e=document.getElementById('m0-bperc-'+n); if(e) m0bp[n]=parseInt(e.value); } m0.bundlePercents=m0bp;
+  data.retail.m0=m0;
+
+  // CRESTS SAVE
+  data.retail.crests={
+    prices:{
+      veteran:parseFloat(document.getElementById('crests-veteran').value),
+      champion:parseFloat(document.getElementById('crests-champion').value),
+      hero:parseFloat(document.getElementById('crests-hero').value),
+      myth:parseFloat(document.getElementById('crests-myth').value)
+    },
+    percents:{
+      express:parseInt(document.getElementById('crests-exp').value),
+      remote:parseInt(document.getElementById('crests-rem').value)
+    },
+    min:parseInt(document.getElementById('crests-min').value),
+    max:parseInt(document.getElementById('crests-max').value),
+    default:parseInt(document.getElementById('crests-default').value)
+  };
+let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); let a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='precios-page.json'; a.click(); document.getElementById('status').innerText='✅ Guardado!'; document.getElementById('status-k').innerText='✅ Guardado!'; document.getElementById('status-h').innerText='✅ Hero Guardado! Hero='+hFull.hero;
+ document.getElementById('status-m10').innerText='✅ M10 Guardado! Base='+m.base;
+ document.getElementById('status-g').innerText='✅ Gearing Guardado!';
+ document.getElementById('status-crests').innerText='✅ Crests Guardado!';
+}
+init();
+</script>
+</body>
+</html>

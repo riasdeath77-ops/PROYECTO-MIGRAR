@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin V8.3 COMPLETO - Barra Precios Editable - GearHaven</title><script src="https://cdn.tailwindcss.com"></script>
+<style>.sub.active{background:#1a204f!important;border-color:#fbbf24!important;color:white}</style>
+<script>
+const CF_API = "https://silent-term-1b1a.riasdeath77.workers.dev/api/prices";
+const PRICE_KEY = "Gear2024!";
+async function saveToCloudflare(){
+  updatePreview();
+  let currentData = JSON.parse(document.getElementById('preview').value);
+  let currentLeveling = currentData.leveling;
+  let currentGold = currentData.gold;
+  document.getElementById('preview').value = "☁️ Subiendo LEVELING+GOLD...";
+  try{
+    let resCloud = await fetch(CF_API).then(r=>r.json()).catch(()=>({}));
+    let base = resCloud.retail? resCloud : {retail: {}, forever: {}, leveling: resCloud.leveling, gold: resCloud.gold};
+    let merged = {...base, retail: base.retail, forever: base.forever, leveling: currentLeveling, gold: currentGold};
+    let res = await fetch(CF_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key: PRICE_KEY, data: merged})});
+    let j=await res.json();
+    if(j.ok){ alert("✅ LEVELING+GOLD en vivo!"); updatePreview(); }
+    else{ alert("Error: "+(j.error||'no admin')); }
+  }catch(e){ alert(e.message); }
+}
+</script>
+</head>
+<body class="bg-[#080c22] text-white p-4">
+<div class="max-w-[1400px] mx-auto">
+<h1 class="text-[22px] font-black">GEAR<span class="text-[#8b5cf6]">HAVEN</span> ADMIN V8.3 BARRA EDITABLE</h1>
+<div class="flex gap-2 mt-3 mb-5 flex-wrap">
+<button onclick="setSub('leveling')" id="sub-leveling" class="sub active bg-[#111536] border border-[#2a3366] px-5 py-2.5 rounded-full text-[10px] font-black">📈 LEVELING $/LVL</button>
+<button onclick="setSub('direct')" id="sub-direct" class="sub bg-[#fbbf24] text-black border border-[#fbbf24] px-5 py-2.5 rounded-full text-[10px] font-black">💲 BARRA PRECIOS DIRECTOS</button>
+<button onclick="setSub('sellers')" id="sub-sellers" class="sub bg-[#111536] border border-[#2a3366] px-5 py-2.5 rounded-full text-[10px] font-black">👤 SELLERS</button>
+<button onclick="setSub('offers')" id="sub-offers" class="sub bg-[#111536] border border-[#2a3366] px-5 py-2.5 rounded-full text-[10px] font-black">💰 OFFERS</button>
+<button onclick="setSub('gold')" id="sub-gold" class="sub bg-[#111536] border border-[#2a3366] px-5 py-2.5 rounded-full text-[10px] font-black">⚙️ RATES</button>
+</div>
+
+<!-- LEVELING $/LVL -->
+<div id="panel-leveling" class="panel">
+<div class="grid lg:grid-cols-[1fr_340px] gap-4">
+<div class="bg-[#111536] border border-[#2a3366] rounded-2xl p-4">
+<h2 class="text-[11px] font-black text-[#22c55e]">BASE $/LVL - 7 KEYS</h2>
+<div id="f-leveling" class="space-y-2 mt-3"></div>
+<div class="mt-4"><h3 class="text-[10px] font-black text-[#ef4444] mb-2">🚫 BLOCKED IDS (0=1-90,1=1-60,2=1-80,3=80-90,4=1-30,6=30-50,5=50-60)</h3><input id="lev-blocked" placeholder="ej: 0,1" class="w-full bg-black border rounded-lg px-2 py-2 text-[11px]"></div>
+</div>
+<div class="bg-[#111536] border rounded-2xl p-4 h-fit">
+<div id="f-lev-perc" class="grid gap-2 text-[10px]"></div>
+<button onclick="saveAll()" class="w-full mt-4 bg-[#22c55e] text-black py-3 rounded-xl font-black">💾 GUARDAR JSON</button>
+<button onclick="saveToCloudflare()" class="w-full mt-2 bg-[#f59e0b] text-black py-3 rounded-xl font-black">☁️ GUARDAR EN CLOUDFLARE - EN VIVO</button>
+<textarea id="preview" readonly class="w-full h-[600px] bg-black border border-[#1e254a] rounded-lg p-2 text-[7px] font-mono mt-3 text-[#8b92c9]"></textarea>
+</div>
+</div>
+</div>
+
+<!-- DIRECT PRECIOS FINALES -->
+<div id="panel-direct" class="panel hidden">
+<div class="bg-[#111536] border-2 border-[#fbbf24] rounded-2xl p-4">
+<h2 class="text-[13px] font-black text-[#fbbf24] mb-1">💲 BARRA QUE SE PUEDE MODIFICAR EL PRECIO - PRECIOS FINALES</h2>
+<p class="text-[10px] text-[#8b92c9] mb-4">Si pones valor aquí, pisa el cálculo de $/lvl. Si lo dejas vacío usa base. ID: 0=1-90 FULL $40, 1=1-60 FULL $362, 2=1-80 $16.5, 3=80-90 $23.8, 4=1-30 $79, 6=30-50 $130, 5=50-60 $176</p>
+<div id="f-direct" class="space-y-3"></div>
+<button onclick="saveAll()" class="w-full mt-6 bg-[#fbbf24] text-black py-3 rounded-xl font-black text-[13px]">💾 GUARDAR TODO gold-orders-price.json</button>
+<button onclick="saveToCloudflare()" class="w-full mt-2 bg-[#f59e0b] text-black py-3 rounded-xl font-black">☁️ GUARDAR EN CLOUDFLARE - EN VIVO</button>
+</div>
+</div>
+
+<!-- SELLERS -->
+<div id="panel-sellers" class="panel hidden">
+<div class="grid lg:grid-cols-[1fr_340px] gap-4">
+<div class="bg-[#111536] border border-[#2a3366] rounded-2xl p-4">
+<div class="flex justify-between items-center mb-3"><h2 class="text-[11px] font-black text-[#fbbf24]">👤 VENDEDORES</h2><button onclick="addSeller()" class="bg-[#fbbf24] text-black px-3 py-1 rounded-full text-[10px] font-black">+ Nuevo</button></div>
+<div id="f-sellers" class="space-y-2"></div>
+</div>
+<div class="bg-[#111536] border rounded-2xl p-4 h-fit">
+<h2 class="text-[10px] font-black mb-2">CREAR / EDITAR SELLER</h2>
+<input id="s-name" placeholder="Nombre ej: booster_jhon" class="w-full bg-black border rounded-lg px-2 py-2 text-[11px] mt-1">
+<input id="s-id" placeholder="id ej: booster_jhon" class="w-full bg-black border rounded-lg px-2 py-2 text-[11px] mt-2">
+<input id="s-rating" placeholder="Rating 5.0" value="5.0" class="w-full bg-black border rounded-lg px-2 py-2 text-[11px] mt-2">
+<input id="s-reviews" placeholder="Reviews 120" value="120" class="w-full bg-black border rounded-lg px-2 py-2 text-[11px] mt-2">
+<label class="flex gap-2 mt-3 text-[10px]"><input type="checkbox" id="s-online" checked> Online 🟢</label>
+<label class="flex gap-2 mt-2 text-[10px]"><input type="checkbox" id="s-verified" checked> Verified ✓</label>
+<button onclick="saveSeller()" class="w-full mt-3 bg-[#fbbf24] text-black py-2 rounded-full font-black text-[11px]">💾 Guardar Seller</button>
+<button onclick="saveAll()" class="w-full mt-2 bg-[#22c55e] text-black py-2 rounded-full font-black text-[11px]">💾 Guardar Todo JSON</button>
+<button onclick="saveToCloudflare()" class="w-full mt-2 bg-[#f59e0b] text-black py-3 rounded-xl font-black">☁️ GUARDAR EN CLOUDFLARE - EN VIVO</button>
+</div>
+</div>
+</div>
+
+<!-- OFFERS -->
+<div id="panel-offers" class="panel hidden">
+<div class="flex gap-2 mb-3 flex-wrap">
+<button id="o-tab-us" onclick="setOfferFilter('region','us')" class="bg-[#fbbf24] text-black px-4 py-2 rounded-full text-[10px] font-black">🇺🇸 US</button>
+<button id="o-tab-eu" onclick="setOfferFilter('region','eu')" class="bg-[#111536] border border-[#2a3366] px-4 py-2 rounded-full text-[10px] font-bold">🇪🇺 EU</button>
+<div class="w-px bg-[#2a3366] mx-2"></div>
+<button id="o-tab-forever" onclick="setOfferFilter('type','forever')" class="bg-[#fbbf24] text-black px-4 py-2 rounded-full text-[10px] font-black">FOREVER</button>
+<button id="o-tab-midnight" onclick="setOfferFilter('type','midnight')" class="bg-[#111536] border border-[#2a3366] px-4 py-2 rounded-full text-[10px] font-bold">MIDNIGHT</button>
+<span id="o-count" class="ml-auto text-[10px] text-[#fbbf24] font-black"></span>
+</div>
+<div class="grid lg:grid-cols-[1fr_340px] gap-4">
+<div class="bg-[#111536] border border-[#2a3366] rounded-2xl p-4">
+<div class="flex justify-between items-center mb-3"><h2 id="o-list-title" class="text-[11px] font-black text-[#fbbf24]">OFFERS</h2><button onclick="addOffer()" class="bg-[#22c55e] text-black px-3 py-1 rounded-full text-[10px] font-black">+ Nueva Oferta</button></div>
+<div id="f-offers" class="space-y-2 max-h-[700px] overflow-y-auto"></div>
+</div>
+<div class="bg-[#111536] border rounded-2xl p-4 h-fit">
+<h2 class="text-[10px] font-black mb-2">OFERTA - <span id="o-form-filter" class="text-[#fbbf24]">US FOREVER</span></h2>
+<select id="o-seller" class="w-full bg-black border rounded-lg px-2 py-2 text-[11px] mt-1"></select>
+<input id="o-price" type="number" step="0.01" placeholder="Price 0.65" class="w-full bg-black border rounded-lg px-2 py-2 text-[11px] mt-2">
+<input id="o-stock" placeholder="Stock 2M" class="w-full bg-black border rounded-lg px-2 py-2 text-[11px] mt-2">
+<input id="o-min" placeholder="Min 100K" class="w-full bg-black border rounded-lg px-2 py-2 text-[11px] mt-2">
+<input id="o-server" placeholder="Server ALL SERVER" class="w-full bg-black border rounded-lg px-2 py-2 text-[11px] mt-2">
+<select id="o-faction" class="w-full bg-black border rounded-lg px-2 py-2 text-[11px] mt-2"><option>Horde</option><option>Alliance</option></select>
+<input id="o-id" type="hidden">
+<button onclick="saveOffer()" class="w-full mt-3 bg-[#22c55e] text-black py-2 rounded-full font-black text-[11px]">💾 Guardar en <span id="o-save-label">US FOREVER</span></button>
+<button onclick="saveAll()" class="w-full mt-2 bg-[#fbbf24] text-black py-3 rounded-xl font-black text-[12px]">💾 GUARDAR TODO JSON</button>
+<button onclick="saveToCloudflare()" class="w-full mt-2 bg-[#f59e0b] text-black py-3 rounded-xl font-black">☁️ GUARDAR EN CLOUDFLARE - EN VIVO</button>
+</div>
+</div>
+</div>
+
+<!-- GOLD -->
+<div id="panel-gold" class="panel hidden">
+<div class="grid lg:grid-cols-[1fr_320px] gap-4">
+<div class="bg-[#111536] border border-[#2a3366] rounded-2xl p-4"><h2 class="text-[11px] font-black text-[#fbbf24] mb-3">RATES BASE</h2><div id="f-gold" class="space-y-2"></div></div>
+<div class="bg-[#111536] border rounded-2xl p-4 h-fit"><div id="f-gold-perc" class="grid gap-2 text-[10px]"></div><button onclick="saveAll()" class="w-full mt-4 bg-[#fbbf24] text-black py-3 rounded-xl font-black">💾 GUARDAR</button><button onclick="saveToCloudflare()" class="w-full mt-2 bg-[#f59e0b] text-black py-3 rounded-xl font-black">☁️ EN VIVO</button></div></div>
+</div>
+
+</div>
+<script>
+let data=null;
+let def={
+  leveling:{prices:{"1-80":0.203625,"80-90":2.39,"1-30":2.73,"30-50":8.8,"50-60":13.2,"1-90":0.203625,"1-60":2.73}, names:{"1-80":"RETAIL 1-80","80-90":"RETAIL 80-90","1-30":"FOREVER 1-30","30-50":"FOREVER 30-50","50-60":"FOREVER 50-60","1-90":"RETAIL MIDNIGHT 1-90 FULL","1-60":"FOREVER 1-60 FULL"}, percents:{selfplay:0,pilot:0,remote:30}, blocked:[], custom_prices:{"0":40,"1":362,"2":16.5,"3":23.8,"4":79,"5":130,"6":176}},
+  gold:{prices:{gold_rate:0.25,gold_rate_midnight:0.65}, sellers:[{id:"booster_jhon",name:"booster_jhon",rating:5,reviews:120,online:true,verified:true}], offers:[{id:1791601476423,seller_id:"booster_jhon",price:0.65,stock:"2M",min:"100K",server:"ALL SERVER",faction:"Horde",region:"US",type:"midnight",delivery:"TRADE",title:"Midnight Gold"}], percents:{remote:0}, blocked:[]}
+};
+const PACKS=[
+ {id:0,g:'midnight',f:1,t:90,name:'🌙 RETAIL MIDNIGHT 1-90 FULL'},
+ {id:1,g:'forever',f:1,t:60,name:'⚔️ FOREVER 1-60 FULL'},
+ {id:2,g:'midnight',f:1,t:80,name:'🌙 RETAIL 1-80 Midnight'},
+ {id:3,g:'midnight',f:80,t:90,name:'🌙 RETAIL 80-90 Midnight'},
+ {id:4,g:'forever',f:1,t:30,name:'⚔️ FOREVER 1-30'},
+ {id:6,g:'forever',f:30,t:50,name:'⚔️ FOREVER 30-50'},
+ {id:5,g:'forever',f:50,t:60,name:'⚔️ FOREVER 50-60'}
+];
+let offerFilter={region:'us',type:'forever'};
+function setOfferFilter(k,v){offerFilter[k]=v; document.getElementById('o-tab-us').className=offerFilter.region==='us'?'bg-[#fbbf24] text-black px-4 py-2 rounded-full text-[10px] font-black':'bg-[#111536] border border-[#2a3366] px-4 py-2 rounded-full text-[10px] font-bold'; document.getElementById('o-tab-eu').className=offerFilter.region==='eu'?'bg-[#fbbf24] text-black px-4 py-2 rounded-full text-[10px] font-black':'bg-[#111536] border border-[#2a3366] px-4 py-2 rounded-full text-[10px] font-bold'; document.getElementById('o-tab-forever').className=offerFilter.type==='forever'?'bg-[#fbbf24] text-black px-4 py-2 rounded-full text-[10px] font-black':'bg-[#111536] border border-[#2a3366] px-4 py-2 rounded-full text-[10px] font-bold'; document.getElementById('o-tab-midnight').className=offerFilter.type==='midnight'?'bg-[#fbbf24] text-black px-4 py-2 rounded-full text-[10px] font-black':'bg-[#111536] border border-[#2a3366] px-4 py-2 rounded-full text-[10px] font-bold'; document.getElementById('o-list-title').innerText=`💰 OFFERS ${offerFilter.region.toUpperCase()} + ${offerFilter.type.toUpperCase()}`; document.getElementById('o-form-filter').innerText=`${offerFilter.region.toUpperCase()} ${offerFilter.type.toUpperCase()}`; document.getElementById('o-save-label').innerText=`${offerFilter.region.toUpperCase()} ${offerFilter.type.toUpperCase()}`; renderOffersForm();}
+function setSub(s){document.querySelectorAll('.sub').forEach(x=>x.classList.remove('active'));document.getElementById('sub-'+s).classList.add('active');document.querySelectorAll('.panel').forEach(p=>p.classList.add('hidden'));document.getElementById('panel-'+s).classList.remove('hidden'); updatePreview();}
+async function init(){try{let r=await fetch('./gold-orders-price.json?v='+Date.now()); if(r.ok){data=await r.json();} else data=def;}catch(e){data=def;} if(!data.leveling) data.leveling=def.leveling; if(!data.leveling.custom_prices) data.leveling.custom_prices=def.leveling.custom_prices; if(!data.gold) data.gold=def.gold; if(!data.gold.sellers) data.gold.sellers=def.gold.sellers; if(!data.gold.offers) data.gold.offers=def.gold.offers; renderAll();}
+function renderAll(){
+ document.getElementById('f-leveling').innerHTML=Object.keys(data.leveling.prices).map(k=>`<div class="flex gap-2 items-center bg-[#0a0e28] border border-[#1e254a] rounded-xl p-2"><span class="w-[50px] text-[10px] font-black">${k}</span><input id="lev-name-${k}" value="${data.leveling.names[k]||k}" class="flex-1 bg-[#111536] border rounded-lg px-2 py-2 text-[10px]"><input id="lev-price-${k}" value="${data.leveling.prices[k]}" type="number" step="0.0001" class="w-[110px] bg-[#111536] border rounded-lg px-2 py-2 text-[11px] font-bold"></div>`).join('');
+ document.getElementById('lev-blocked').value=(data.leveling.blocked||[]).join(',');
+ document.getElementById('f-lev-perc').innerHTML=`<label class="bg-[#0a0e28] p-3 rounded-xl border block">SELF %<input id="lev-self" value="${data.leveling.percents.selfplay||0}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label><label class="bg-[#0a0e28] p-3 rounded-xl border block mt-2">PILOT %<input id="lev-pilot" value="${data.leveling.percents.pilot||0}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label><label class="bg-[#0a0e28] p-3 rounded-xl border block mt-2">REMOTE %<input id="lev-remote" value="${data.leveling.percents.remote||30}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-1 mt-1"></label>`;
+ document.getElementById('f-direct').innerHTML=PACKS.map(p=>{
+   let base=0; if(p.g==='midnight'){ for(let lvl=p.f; lvl<p.t; lvl++){ if(lvl<80) base+=data.leveling.prices['1-80']||0; else base+=data.leveling.prices['80-90']||0; } } else { for(let lvl=p.f; lvl<p.t; lvl++){ if(lvl<30) base+=data.leveling.prices['1-30']||0; else if(lvl<50) base+=data.leveling.prices['30-50']||0; else base+=data.leveling.prices['50-60']||0; } }
+   let custom=data.leveling.custom_prices[p.id]??'';
+   return `<div class="flex items-center gap-3 bg-[#0a0e28] border ${custom!==''?'border-[#fbbf24] bg-[#fbbf24]/10':'border-[#1e254a]'} rounded-xl px-4 py-3">
+     <div class="flex-1"><div class="text-[11px] font-black">${p.id}. ${p.name}</div><div class="text-[9px] text-[#6b77b5]">Base $${base.toFixed(2)} | ${p.f}->${p.t} | ${p.g}</div></div>
+     <div class="flex items-center gap-2"><span class="text-[11px] font-black">$</span><input id="direct-${p.id}" value="${custom}" type="number" step="0.1" placeholder="${base.toFixed(0)}" class="w-[120px] bg-[#111536] border-2 border-[#fbbf24]/50 rounded-lg px-3 py-2 text-[13px] font-black text-[#fbbf24] text-center"><button onclick="clearDirect(${p.id})" class="bg-[#1a204f] border border-[#2a3366] px-3 py-2 rounded-full text-[9px] font-bold">Clear</button></div>
+   </div>`;
+ }).join('');
+ renderSellers(); renderOffersForm(); renderGoldRates(); updatePreview();
+}
+function clearDirect(id){ document.getElementById('direct-'+id).value=''; updatePreview(); }
+function renderSellers(){
+ document.getElementById('f-sellers').innerHTML=data.gold.sellers.map(s=>`<div class="flex gap-2 items-center bg-[#0a0e28] border border-[#1e254a] rounded-xl p-3 text-[10px]"><div class="flex-1"><b class="text-[11px]">${s.name}</b> <span class="text-[#fbbf24]">★${s.rating}</span> (${s.reviews})<div class="text-[9px] text-[#8b92c9]">${s.id} ${s.online?'🟢 Online':'🔴 Offline'} ${s.verified?'✓ Verified':''}</div></div><button onclick="editSeller('${s.id}')" class="bg-[#1a204f] border border-[#2a3366] px-3 py-1 rounded-full">✏️</button><button onclick="delSeller('${s.id}')" class="bg-[#ef4444]/20 border border-[#ef4444]/30 px-3 py-1 rounded-full">🗑️</button></div>`).join('') || `<div class="text-[10px] text-[#6b77b5] text-center py-6">Sin sellers</div>`;
+ let sel=document.getElementById('o-seller'); if(sel) sel.innerHTML=data.gold.sellers.map(s=>`<option value="${s.id}">${s.name} (${s.id}) - ★${s.rating}</option>`).join('');
+}
+function renderOffersForm(){
+ let filtered=data.gold.offers.filter(o=>o.region.toLowerCase()===offerFilter.region && o.type===offerFilter.type);
+ document.getElementById('o-count').innerText=filtered.length+' offers';
+ document.getElementById('f-offers').innerHTML=filtered.map(o=>`<div class="flex gap-2 items-center bg-[#0a0e28] border border-[#1e254a] rounded-xl p-3 text-[10px]"><div class="flex-1"><b class="text-[#fbbf24]">$${o.price}</b> ${o.server} ${o.faction}<div class="text-[9px] text-[#8b92c9]">${o.seller_id} | Stock ${o.stock} Min ${o.min} | ${o.title}</div></div><button onclick="editOffer(${o.id})" class="bg-[#1a204f] border border-[#2a3366] px-3 py-1 rounded-full">✏️</button><button onclick="delOffer(${o.id})" class="bg-[#ef4444]/20 border border-[#ef4444]/30 px-3 py-1 rounded-full">🗑️</button></div>`).join('') || `<div class="text-[10px] text-[#6b77b5] text-center py-10">No hay ofertas en ${offerFilter.region.toUpperCase()} ${offerFilter.type.toUpperCase()}</div>`;
+}
+function renderGoldRates(){
+ document.getElementById('f-gold').innerHTML=`<label class="bg-[#0a0e28] p-3 rounded-xl border block">Forever Rate $/1G<input id="gold-rate" value="${data.gold.prices.gold_rate||0.25}" type="number" step="0.01" class="w-full bg-[#111536] border rounded-lg px-2 py-2 mt-1 font-bold"></label><label class="bg-[#0a0e28] p-3 rounded-xl border block mt-2">Midnight Rate $/10k<input id="gold-rate-mid" value="${data.gold.prices.gold_rate_midnight||0.65}" type="number" step="0.01" class="w-full bg-[#111536] border rounded-lg px-2 py-2 mt-1 font-bold"></label>`;
+ document.getElementById('f-gold-perc').innerHTML=`<label class="bg-[#0a0e28] p-3 rounded-xl border block">GOLD REMOTE %<input id="gold-remote" value="${data.gold.percents.remote||0}" type="number" class="w-full bg-[#111536] border rounded-lg px-2 py-2 mt-1"></label>`;
+}
+function addSeller(){ document.getElementById('s-id').value=''; document.getElementById('s-name').value=''; document.getElementById('s-rating').value='5.0'; document.getElementById('s-reviews').value='120'; }
+function saveSeller(){ let id=document.getElementById('s-id').value||document.getElementById('s-name').value.toLowerCase().replace(/\s+/g,'_'); if(!id) return alert('Pon nombre'); let obj={id, name:document.getElementById('s-name').value||id, rating:parseFloat(document.getElementById('s-rating').value)||5, reviews:parseInt(document.getElementById('s-reviews').value)||0, online:document.getElementById('s-online').checked, verified:document.getElementById('s-verified').checked}; let idx=data.gold.sellers.findIndex(s=>s.id===id); if(idx>=0) data.gold.sellers[idx]=obj; else data.gold.sellers.push(obj); renderSellers(); updatePreview(); }
+function editSeller(id){ let s=data.gold.sellers.find(x=>x.id===id); if(!s) return; document.getElementById('s-id').value=s.id; document.getElementById('s-name').value=s.name; document.getElementById('s-rating').value=s.rating; document.getElementById('s-reviews').value=s.reviews; document.getElementById('s-online').checked=s.online; document.getElementById('s-verified').checked=s.verified; setSub('sellers'); }
+function delSeller(id){ if(!confirm('Borrar seller '+id+'?')) return; data.gold.sellers=data.gold.sellers.filter(s=>s.id!==id); renderSellers(); updatePreview(); }
+function addOffer(){ document.getElementById('o-id').value=''; document.getElementById('o-price').value=''; document.getElementById('o-stock').value=''; document.getElementById('o-min').value=''; document.getElementById('o-server').value=''; }
+function saveOffer(){
+ let id=document.getElementById('o-id').value||Date.now();
+ let obj={ id:parseInt(id), seller_id:document.getElementById('o-seller').value, price:parseFloat(document.getElementById('o-price').value)||0.25, stock:document.getElementById('o-stock').value||'5000', min:document.getElementById('o-min').value||'10', server:document.getElementById('o-server').value||'PVP - US', faction:document.getElementById('o-faction').value, region:offerFilter.region.toUpperCase(), type:offerFilter.type, delivery:'TRADE', title:offerFilter.type==='forever'?'PvP Gold':'Midnight Gold' };
+ let idx=data.gold.offers.findIndex(o=>o.id==id); if(idx>=0) data.gold.offers[idx]=obj; else data.gold.offers.push(obj);
+ renderOffersForm(); updatePreview(); addOffer();
+}
+function editOffer(id){ let o=data.gold.offers.find(x=>x.id==id); if(!o) return; offerFilter.region=o.region.toLowerCase(); offerFilter.type=o.type; setOfferFilter('region',offerFilter.region); setOfferFilter('type',offerFilter.type); document.getElementById('o-id').value=o.id; document.getElementById('o-seller').value=o.seller_id; document.getElementById('o-price').value=o.price; document.getElementById('o-stock').value=o.stock; document.getElementById('o-min').value=o.min; document.getElementById('o-server').value=o.server; document.getElementById('o-faction').value=o.faction; setSub('offers'); }
+function delOffer(id){ if(!confirm('Borrar oferta?')) return; data.gold.offers=data.gold.offers.filter(o=>o.id!=id); renderOffersForm(); updatePreview(); }
+function updatePreview(){
+ let out={ leveling:{prices:{},names:{},percents:{},blocked:[],custom_prices:{}}, gold:{prices:{},sellers:data.gold.sellers,offers:data.gold.offers,percents:{},blocked:[]} };
+ document.querySelectorAll('[id^="lev-price-"]').forEach(el=>{ let k=el.id.replace('lev-price-',''); out.leveling.prices[k]=parseFloat(el.value)||0; });
+ document.querySelectorAll('[id^="lev-name-"]').forEach(el=>{ let k=el.id.replace('lev-name-',''); out.leveling.names[k]=el.value; });
+ PACKS.forEach(p=>{ let v=document.getElementById('direct-'+p.id)?.value; if(v!=='' && v!=null) out.leveling.custom_prices[p.id]=parseFloat(v); });
+ let blockedStr=document.getElementById('lev-blocked').value.trim(); out.leveling.blocked=blockedStr?blockedStr.split(',').map(s=>parseInt(s.trim())).filter(n=>!isNaN(n)):[];
+ out.leveling.percents={selfplay:parseInt(document.getElementById('lev-self')?.value||0), pilot:parseInt(document.getElementById('lev-pilot')?.value||0), remote:parseInt(document.getElementById('lev-remote')?.value||30)};
+ out.gold.prices.gold_rate=parseFloat(document.getElementById('gold-rate')?.value||0.25);
+ out.gold.prices.gold_rate_midnight=parseFloat(document.getElementById('gold-rate-mid')?.value||0.65);
+ out.gold.percents={remote:parseInt(document.getElementById('gold-remote')?.value||0)};
+ document.getElementById('preview').value=JSON.stringify(out,null,2);
+}
+function saveAll(){ updatePreview(); let txt=document.getElementById('preview').value; let blob=new Blob([txt],{type:'application/json'}); let a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='gold-orders-price.json'; a.click(); }
+init();
+</script>
+</body>
+</html>

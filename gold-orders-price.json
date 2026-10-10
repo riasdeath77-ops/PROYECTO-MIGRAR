@@ -1,0 +1,72 @@
+{
+  "leveling": {
+    "prices": {
+      "1-80": 0.2,
+      "80-90": 2.05,
+      "1-30": 2.73,
+      "30-50": 8.8,
+      "50-60": 13.2,
+      "1-90": 33,
+      "1-60": 2.73
+    },
+    "names": {
+      "1-80": "RETAIL 1-80",
+      "80-90": "RETAIL 80-90",
+      "1-30": "FOREVER 1-30",
+      "30-50": "FOREVER 30-50",
+      "50-60": "FOREVER 50-60",
+      "1-90": "RETAIL MIDNIGHT 1-90 FULL",
+      "1-60": "FOREVER 1-60 FULL"
+    },
+    "percents": {
+      "selfplay": 0,
+      "pilot": 0,
+      "remote": 30
+    },
+    "blocked": [],
+    "custom_prices": {
+      "0": 33,
+      "1": 362,
+      "2": 16,
+      "3": 20.5,
+      "4": 79,
+      "5": 130,
+      "6": 176
+    }
+  },
+  "gold": {
+    "prices": {
+      "gold_rate": 0.25,
+      "gold_rate_midnight": 0.65
+    },
+    "sellers": [
+      {
+        "id": "booster_jhon",
+        "name": "booster_jhon",
+        "rating": 5,
+        "reviews": 120,
+        "online": true,
+        "verified": true
+      }
+    ],
+    "offers": [
+      {
+        "id": 1791601476423,
+        "seller_id": "booster_jhon",
+        "price": 0.65,
+        "stock": "2M",
+        "min": "100K",
+        "server": "ALL SERVER",
+        "faction": "Horde",
+        "region": "US",
+        "type": "midnight",
+        "delivery": "TRADE",
+        "title": "Midnight Gold"
+      }
+    ],
+    "percents": {
+      "remote": 0
+    },
+    "blocked": []
+  }
+}

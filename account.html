@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Account - User, Premium, VIP Ranks - Loyalty Rewards | GearHavenGG</title>
+<meta name="description" content="Create account at GearHavenGG - User, Premium, VIP ranks based on purchases and loyalty. Premium gets faster support, discounts, bonus gold, priority queue. VIP exclusive deals. Register now.">
+<link rel="icon" type="image/png" href="./imagenes/favicon.jpg">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+<style>
+  /* ===== PARCHE UNIVERSAL MOVIL - COPIA ESTO EN TODOS LOS HTML ===== */
+  html, body { max-width: 100vw !important; overflow-x: hidden !important; }
+    * { box-sizing: border-box; }
+  img { max-width: 100%; height: auto; }
+  /* Tus fotos con altura fija no se rompen */
+  #bundleImg, .like-img, .hero-banner img, #heroImg, .card img {
+    height: auto !important; 
+  }
+  #bundleImg{height:160px !important; width:100% !important; object-fit:cover !important;}
+  .like-img{height:90px !important; width:100% !important; object-fit:cover !important;}
+  .hero-banner img, #heroImg{height:100% !important; width:100% !important; object-fit:cover !important;}
+
+  @media (max-width: 768px) {
+    header { padding-left: 12px !important; padding-right: 12px !important; flex-wrap: wrap !important; max-width: 100vw !important; }
+    .max-w-\[1350px\], .max-w-\[1200px\], .max-w-\[1400px\] { padding-left: 12px !important; padding-right: 12px !important; }
+  }
+  /* ===== FIN PARCHE UNIVERSAL ===== */
+  img { max-width: 100% !important; height: auto !important; }
+body{background:#06081a;color:#fff;font-family:Inter,sans-serif;overflow-x:hidden}
+.mono{font-family:"JetBrains Mono",monospace}
+.bg-dynamic{position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse at top left, rgba(139,92,246,0.35) 0%, transparent 55%),radial-gradient(ellipse at bottom right, rgba(251,191,36,0.25) 0%, transparent 60%),radial-gradient(ellipse at center, rgba(34,197,94,0.12) 0%, transparent 70%),url('./foreverraid/abominacion.jpg') center/cover no-repeat}
+.bg-dynamic::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom, #06081a 0%, rgba(6,8,26,0.85) 50%, #06081a 100%)}
+.glass{background:rgba(21,26,54,0.85);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.08)}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#fbbf24;color:#000;padding:12px 22px;border-radius:999px;font-weight:900;font-size:12px;z-index:100;display:none;box-shadow:0 8px 32px rgba(251,191,36,0.4);max-width:90vw;text-align:center}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+</style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18496576661"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-18496576661');
+</script>
+<body>
+<div class="bg-dynamic"></div>
+<div id="toast"></div>
+
+<!-- MODAL PRUEBA -->
+<div id="proofModal" class="modal" onclick="this.style.display='none'"><div class="bg-[#0f1333] border border-[#2a3366] rounded-[20px] p-6 max-w-[500px] w-full" onclick="event.stopPropagation()"><h3 class="font-black text-[14px]">📸 Subir Prueba</h3><p id="proofOrderId" class="text-[11px] text-[#8b92c9] mt-1 truncate"></p><input id="proofFile" type="file" accept="image/*" class="mt-4 w-full bg-[#0a0e28] border border-[#2a3366] rounded-[12px] px-3 py-2 text-[12px]"><input id="proofLink" placeholder="O pega link directo de imagen (imgur)" class="mt-2 w-full bg-[#0a0e28] border border-[#2a3366] rounded-[12px] px-3 py-2 text-[12px]"><button onclick="uploadProof()" class="mt-4 w-full bg-[#22c55e] text-black py-3 rounded-full font-black text-[12px]">Subir Prueba</button><button onclick="document.getElementById('proofModal').style.display='none'" class="mt-2 w-full bg-[#1a204f] border border-[#2a3366] py-2 rounded-full text-[11px]">Cancelar</button></div></div>
+
+<!-- MODAL RETIRO NUEVO 100% -->
+<div id="withdrawModal" class="modal" onclick="this.style.display='none'"><div class="bg-[#0f1333] border border-[#f59e0b]/30 rounded-[20px] p-6 max-w-[440px] w-full" onclick="event.stopPropagation()">
+  <h3 class="font-black text-[15px]">💸 Solicitar Retiro</h3>
+  <p class="text-[11px] text-[#8b92c9] mt-1">Disponible: <span id="wAvailable" class="text-[#4ade80] font-black">$0.00</span> - Min $10</p>
+  <input id="wAmount" type="number" placeholder="Monto $ Ej: 50" class="mt-4 w-full bg-[#0a0e28] border border-[#2a3366] rounded-[12px] px-4 py-3 text-[13px]">
+  <select id="wMethod" class="mt-3 w-full bg-[#0a0e28] border border-[#2a3366] rounded-[12px] px-4 py-3 text-[12px]"><option value="PayPal">PayPal</option><option value="USDT-Binance">USDT Binance</option><option value="Zelle">Zelle</option><option value="PayPhone">PayPhone Ecuador</option><option value="Crypto">Crypto Other</option></select>
+  <input id="wDetails" placeholder="Tu PayPal email / wallet / número" class="mt-3 w-full bg-[#0a0e28] border border-[#2a3366] rounded-[12px] px-4 py-3 text-[12px]">
+  <button onclick="submitWithdraw()" class="mt-4 w-full bg-[#f59e0b] text-black py-3 rounded-full font-black text-[12px]">Solicitar Retiro</button>
+  <button onclick="document.getElementById('withdrawModal').style.display='none'" class="mt-2 w-full bg-[#1a204f] border border-[#2a3366] py-2 rounded-full text-[11px]">Cancelar</button>
+</div></div>
+
+<header class="h-[56px] flex items-center justify-between px-6 border-b border-[#1e254a] sticky top-0 z-40 bg-[#0f1333]/90 backdrop-blur-xl">
+  <div class="flex items-center gap-4 min-w-0">
+    <div onclick="location.href='./midnight.html'" class="font-black text-[18px] cursor-pointer shrink-0">GEAR<span class="text-[#8b5cf6]">HAVEN</span></div>
+    <div class="hidden md:flex items-center gap-1 bg-[#0a0e28] border border-[#2a3366] rounded-full p-1 shrink-0">
+      <button onclick="switchView('orders')" id="tabOrders" class="px-4 py-1.5 rounded-full text-[11px] font-bold bg-white text-black">📦 Orders</button>
+      <button onclick="switchView('overview')" id="tabOverview" class="px-4 py-1.5 rounded-full text-[11px] font-bold text-white/60">👤 Account</button>
+      <button onclick="switchView('booster')" id="tabBooster" class="hidden px-4 py-1.5 rounded-full text-[11px] font-bold text-[#22c55e] border border-[#22c55e]/30">⚔️ Booster</button>
+    </div>
+  </div>
+  <div class="flex items-center gap-3 shrink-0">
+    <div id="ghNavUserGuest" class="flex items-center gap-2"><button onclick="loginSocial('google')" class="text-[11px] bg-white text-black px-4 py-2 rounded-full font-bold">Sign In</button></div>
+    <div id="ghNavUserLogged" class="hidden items-center gap-2">
+      <div class="flex items-center gap-2 bg-[#111536] border border-[#2a3366] pl-1 pr-3 py-1 rounded-full max-w-[180px]">
+        <img id="navAvatarImg" src="" class="w-7 h-7 rounded-full object-cover hidden shrink-0"><div id="navAvatarLetter" class="w-7 h-7 rounded-full bg-gradient-to-br from-[#8b5cf6] to-[#22c55e] flex items-center justify-center font-black text-[11px] shrink-0">R</div>
+        <span id="ghNavName" class="text-[12px] font-bold truncate">User</span><div id="navRankDot" class="w-2 h-2 rounded-full bg-[#2a3366] shrink-0"></div>
+      </div>
+      <button onclick="ghLogout()" class="w-8 h-8 bg-white/10 rounded-full shrink-0">↗</button>
+    </div>
+  </div>
+</header>
+
+<div class="max-w-[1200px] mx-auto p-4 md:p-8 relative z-10">
+  <div id="notLogged" class="max-w-[460px] mx-auto mt-10 md:mt-16 glass rounded-[28px] p-8 md:p-10 text-center border border-[#232845] bg-[#12162e]/80 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_0_1px_rgba(139,92,246,0.1)_inset]">
+
+    <!-- Logo animado chevere -->
+    <div class="relative w-16 h-16 mx-auto">
+      <div class="absolute inset-0 bg-gradient-to-br from-white to-[#8b5cf6] rounded-[18px] blur-[12px] opacity-60 animate-pulse"></div>
+      <div class="relative w-16 h-16 bg-gradient-to-br from-white to-[#8b5cf6] text-black rounded-[18px] flex items-center justify-center font-black text-[24px] shadow-[0_0_20px_rgba(139,92,246,0.4)] border border-white/30">G</div>
+      <div class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-[#22c55e] rounded-full border-[3px] border-[#12162e]"></div>
+    </div>
+
+    <h2 class="font-black text-[26px] mt-6 text-white tracking-tight">Welcome to Gearhaven</h2>
+    <p class="text-[#8b92c9] text-[13px] mt-2 leading-relaxed">Track your Forever & Midnight boosts<br>Unlock Premium & VIP loyalty rewards</p>
+
+    <!-- Benefits mini -->
+    <div class="grid grid-cols-3 gap-2 mt-6 mb-2">
+      <div class="bg-[#0a0e28] border border-[#1e254a] rounded-xl p-2.5">
+        <div class="text-[16px]">⚡</div>
+        <div class="text-[10px] font-bold text-white mt-1">Fast Start</div>
+        <div class="text-[9px] text-[#8b92c9]">30 min</div>
+      </div>
+      <div class="bg-[#0a0e28] border border-[#1e254a] rounded-xl p-2.5">
+        <div class="text-[16px]">🎁</div>
+        <div class="text-[10px] font-bold text-white mt-1">+10% Gold</div>
+        <div class="text-[9px] text-[#8b92c9]">Premium</div>
+      </div>
+      <div class="bg-[#0a0e28] border border-[#8b5cf6]/30 rounded-xl p-2.5">
+        <div class="text-[16px]">👑</div>
+        <div class="text-[10px] font-bold text-[#8b5cf6] mt-1">VIP 20% OFF</div>
+        <div class="text-[9px] text-[#8b92c9]">Loyalty</div>
+      </div>
+    </div>
+
+    <!-- Buttons mejorados -->
+    <button onclick="loginSocial('google')" class="w-full mt-6 bg-white text-black py-3.5 rounded-full font-black text-[13px] flex items-center justify-center gap-2.5 hover:bg-[#f0f0f0] transition-all hover:scale-[1.02] active:scale-[0.98]">
+      <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Continue with Google
+    </button>
+
+    <button onclick="loginSocial('discord')" class="w-full mt-3 bg-[#5865F2] text-white py-3.5 rounded-full font-black text-[13px] flex items-center justify-center gap-2.5 hover:bg-[#4752c4] transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_15px_rgba(88,101,242,0.3)]">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3847-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+      Continue with Discord
+    </button>
+
+    <div class="flex items-center gap-3 my-5">
+      <div class="flex-1 h-[1px] bg-[#1e254a]"></div>
+      <div class="text-[10px] text-[#5a6494] font-bold tracking-widest">SECURE • FAST • VIP REWARDS</div>
+      <div class="flex-1 h-[1px] bg-[#1e254a]"></div>
+    </div>
+
+    <p class="text-[11px] text-[#5a6494] leading-relaxed">
+      By continuing you agree to our Terms & Privacy.<br>
+      <span class="text-[#8b92c9]">No spam. Your data safe. VPN protected boosts.</span>
+    </p>
+  </div>
+</div>
+
+  <div id="isLogged" style="display:none">
+    <div id="adminButtons" class="hidden mb-6">
+  <div class="glass rounded-[20px] p-5 border border-[#f59e0b]/30 bg-gradient-to-r from-[#f59e0b]/10 via-[#8b5cf6]/10 to-[#22c55e]/10">
+    <div class="flex flex-col gap-3">
+      <div class="flex items-center justify-between flex-wrap gap-3">
+        <div class="min-w-0"><div class="font-black text-[13px]">👑 Admin Access - Precios</div><div class="text-[10px] text-[#8b92c9]">Solo tú ves esto</div></div>
+        <div class="flex gap-2 shrink-0">
+          <button id="btnAdminHub" onclick="goAdmin()" class="hidden bg-gradient-to-r from-[#f59e0b] to-[#fbbf24] text-black px-5 py-2.5 rounded-full font-black text-[11px]">👑 Admin Hub</button>
+          <button id="btnBoosterDash" onclick="switchView('booster')" class="hidden bg-[#111536] border border-[#22c55e] px-5 py-2.5 rounded-full font-bold text-[11px] text-[#22c55e]">⚔️ Mi Panel Booster</button>
+        </div>
+      </div>
+      <div class="flex gap-2 flex-wrap">
+        <button onclick="location.href='./admin-price.html'" class="bg-[#111536] border border-[#2a3366] hover:border-[#f59e0b] px-4 py-2 rounded-full font-black text-[10px]">🛒 RETAIL BOOSTS</button>
+        <button onclick="location.href='./admin-v7-forever.html'" class="bg-[#111536] border border-[#8b5cf6] hover:bg-[#8b5cf6] px-4 py-2 rounded-full font-black text-[10px]">💀 FOREVER D/R/PVP</button>
+        <button onclick="location.href='./admin-leveling-gold.html'" class="bg-[#111536] border border-[#fbbf24] hover:bg-[#fbbf24] hover:text-black px-4 py-2 rounded-full font-black text-[10px]">📈💰 LEVEL + GOLD</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="grid grid-cols-12 gap-4 mb-8">
+      <div class="col-span-12 md:col-span-5 glass rounded-[20px] p-5 md:p-6 relative overflow-hidden min-w-0">
+        <div class="absolute -top-20 -right-20 w-[250px] h-[250px] rounded-full blur-[50px] opacity-20" id="profileGlow" style="background:#8b5cf6"></div>
+        <div class="flex items-start gap-4 relative min-w-0">
+          <div class="relative shrink-0"><img id="avatarImg" class="w-[72px] h-[72px] rounded-[18px] object-cover hidden border-2 border-white/10"><div id="avatarLetter" class="w-[72px] h-[72px] rounded-[18px] bg-gradient-to-br from-[#8b5cf6] to-[#22c55e] flex items-center justify-center text-[28px] font-black">R</div><div id="rankEmoji" class="absolute -bottom-2 -right-2 w-8 h-8 bg-[#0f1333] border-2 border-[#1e254a] rounded-full flex items-center justify-center text-[14px]">👤</div></div>
+          <div class="flex-1 min-w-0"><div class="flex items-center gap-2 flex-wrap"><div id="loggedName" class="font-black text-[20px] truncate max-w-[180px]">User</div><div id="adminBadge" class="hidden text-[8px] bg-[#f59e0b] text-black px-2 py-1 rounded-full font-black shrink-0">ADMIN</div></div><div id="loggedEmail" class="text-[11px] text-[#8b92c9] mono truncate"></div><div id="rankBadgeMain" class="mt-2 inline-flex items-center gap-1.5 text-[10px] font-black px-3 py-1.5 rounded-full border truncate">👤 NORMAL</div></div>
+        </div>
+        <div class="grid grid-cols-3 gap-2.5 mt-6">
+          <div class="bg-[#0a0e28] border border-[#1e254a] rounded-[14px] p-3 min-w-0"><div class="text-[9px] text-[#6b7280] uppercase font-black">RSK CODE</div><div id="rskCode" class="mono text-[11px] font-bold mt-1.5 text-[#fbbf24] truncate">RSK-3-XXXX</div></div>
+          <div class="bg-[#0a0e28] border border-[#1e254a] rounded-[14px] p-3 min-w-0"><div class="text-[9px] text-[#6b7280] uppercase font-black">DISCOUNT</div><div id="discountValue" class="text-[16px] font-black mt-1 text-[#22c55e] truncate">0%</div></div>
+          <div class="bg-[#0a0e28] border border-[#1e254a] rounded-[14px] p-3 min-w-0"><div class="text-[9px] text-[#6b7280] uppercase font-black">ORDERS</div><div id="ordersCount" class="text-[16px] font-black mt-1 truncate">0</div></div>
+        </div>
+      </div>
+      <div class="col-span-12 md:col-span-7 glass rounded-[20px] p-5 md:p-6 flex flex-col justify-between min-w-0">
+        <div class="relative min-w-0">
+          <div class="flex justify-between items-start gap-3 min-w-0"><div class="min-w-0"><h3 class="font-black text-[15px] flex items-center gap-2 truncate"><span id="rankTitleIcon" class="shrink-0">👤</span><span id="rankTitleText" class="truncate">Normal Member</span></h3><p id="rankDescription" class="text-[11px] text-[#8b92c9] mt-1.5 max-w-[420px] leading-relaxed">Upgrade to unlock discounts.</p></div><div id="rankDiscountBadge" class="text-[10px] font-black px-3 py-1.5 rounded-full bg-[#1a204f] border border-[#2a3366] shrink-0">0% OFF</div></div>
+          <div id="benefitsList" class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-5"></div>
+        </div>
+        <div id="upgradeRow" class="grid grid-cols-2 gap-3 mt-6">
+          <div class="bg-gradient-to-br from-[#a855f7]/20 to-[#0a0e28] border border-[#a855f7]/30 rounded-[16px] p-4 cursor-pointer min-w-0" onclick="buyRank('premium')"><div class="font-black text-[14px] truncate">💎 Premium</div><div class="text-[11px] text-white/60 leading-tight mt-1">$9.99 / month • 10% OFF</div></div>
+          <div class="bg-gradient-to-br from-[#eab308]/20 to-[#0a0e28] border border-[#eab308]/30 rounded-[16px] p-4 cursor-pointer min-w-0" onclick="buyRank('vip')"><div class="font-black text-[14px] truncate">👑 VIP</div><div class="text-[11px] text-white/60 leading-tight mt-1">$24.99 / month • 20% OFF</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="view-orders">
+      <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-3"><h2 class="font-black text-[18px]">📦 Your Orders</h2><div class="flex gap-2 flex-wrap"><input id="searchOrder" oninput="renderOrders()" placeholder="🔍 GH-XXXX" class="bg-[#0a0e28] border border-[#2a3366] rounded-full px-4 py-2 text-[11px] w-full md:w-[200px] text-white"><div class="flex bg-[#0a0e28] border border-[#2a3366] rounded-full p-1"><button onclick="filterOrders('all')" id="fAll" class="px-3.5 py-1.5 rounded-full text-[11px] font-bold bg-white text-black">All</button><button onclick="filterOrders('PENDING')" id="fPending" class="px-3.5 py-1.5 rounded-full text-[11px] text-white/60">⏳ Pending</button><button onclick="filterOrders('PAID')" id="fPaid" class="px-3.5 py-1.5 rounded-full text-[11px] text-white/60">✓ Verified</button></div></div></div>
+      <div id="ordersList"></div>
+    </div>
+
+    <div id="view-booster" style="display:none">
+      <!-- BALANCE CARDS MEJORADAS -->
+      <div class="grid md:grid-cols-3 gap-4 mb-6">
+        <div class="glass rounded-[20px] p-6 border border-[#22c55e]/30 min-w-0">
+          <div class="text-[9px] text-[#6b7280] uppercase font-black">DISPONIBLE PARA RETIRO</div>
+          <div id="boostBalance" class="text-[32px] font-black text-[#4ade80] mt-1 truncate">$0.00</div>
+          <div class="text-[10px] text-[#8b92c9] mt-1">Pendiente: <span id="boostPending" class="text-[#f59e0b] font-bold">$0.00</span> | Total: <span id="boostTotal">$0.00</span></div>
+          <button onclick="requestPay()" class="mt-4 w-full bg-[#f59e0b] text-black py-3 rounded-full font-black text-[12px]">💸 Solicitar Retiro / Liberar</button>
+          <div class="text-[9px] text-[#6b7280] mt-2 text-center">Min $10 - Se aprueba en Admin</div>
+        </div>
+        <div class="glass rounded-[20px] p-6 min-w-0">
+          <div class="text-[9px] text-[#6b7280] uppercase font-black">TELEGRAM & CUENTA</div>
+          <div id="boostTg" class="font-bold text-[14px] mt-2 text-white truncate">No vinculado</div>
+          <div class="mt-3 text-[11px] bg-[#0a0e28] border border-[#1e254a] rounded-[10px] p-3 min-w-0">
+            <div class="truncate">Email: <span id="boostEmail" class="text-white"></span></div>
+            <div class="mt-1 truncate">Rango: <span id="boostRank" class="text-[#4ade80] font-black"></span></div>
+            <div class="mt-2 text-[10px] text-[#22c55e]">● LIVE 5s - Notificaciones por Telegram activas</div>
+          </div>
+        </div>
+        <div class="glass rounded-[20px] p-6 min-w-0">
+          <div class="text-[9px] text-[#6b7280] uppercase font-black">MÉTODO DE PAGO - DONDE TE PAGAMOS</div>
+          <div id="boostPayCurrent" class="font-bold text-[12px] mt-2 truncate">PayPal - sin configurar</div>
+          <select id="payMethod" class="mt-3 w-full bg-[#0a0e28] border border-[#2a3366] rounded-[10px] px-3 py-2 text-[12px]"><option>PayPal</option><option>USDT-Binance</option><option>Zelle</option><option>PayPhone</option><option>Crypto</option></select>
+          <input id="payAccount" placeholder="paypal@email.com / wallet / zelle" class="mt-2 w-full bg-[#0a0e28] border border-[#2a3366] rounded-[10px] px-3 py-2 text-[12px]">
+          <button onclick="savePayMethod()" class="mt-2 w-full bg-[#1a204f] border border-[#2a3366] py-2 rounded-full font-bold text-[11px]">💾 Guardar método</button>
+        </div>
+      </div>
+
+      <!-- ORDENES ASIGNADAS -->
+      <div class="glass rounded-[20px] p-4 md:p-5 overflow-x-auto mb-6">
+        <div class="flex justify-between items-center mb-3 min-w-[500px]"><h3 class="font-black text-[14px]">📦 Órdenes Asignadas</h3><span id="boosterLastUpdate" class="text-[10px] text-[#8b92c9]">-</span></div>
+        <table class="w-full text-[12px] min-w-[500px]"><thead><tr class="text-[10px] text-[#8b92c9] border-b border-[#1e254a]"><th class="text-left p-2">ID</th><th class="text-left p-2">$</th><th class="text-left p-2">Estado</th><th class="text-left p-2">Prueba</th><th class="p-2 text-center">Acción</th></tr></thead><tbody id="boosterOrdersBody"><tr><td colspan="5" class="p-6 text-center text-[#8b92c9]">Cargando...</td></tr></tbody></table>
+      </div>
+
+      <!-- HISTORIAL RETIROS NUEVO -->
+      <div class="glass rounded-[20px] p-4 md:p-5 overflow-x-auto">
+        <div class="flex justify-between items-center mb-3 min-w-[500px]"><h3 class="font-black text-[14px]">💸 Mis Retiros - Dinero Aprobado / Pendiente</h3><button onclick="loadWithdrawHistory()" class="text-[10px] bg-[#1a204f] border border-[#2a3366] px-3 py-1 rounded-full">🔄 Refrescar</button></div>
+        <table class="w-full text-[12px] min-w-[500px]"><thead><tr class="text-[10px] text-[#8b92c9] border-b border-[#1e254a]"><th class="text-left p-2">Fecha</th><th class="text-left p-2">Monto</th><th class="text-left p-2">Método</th><th class="text-left p-2">Estado</th></tr></thead><tbody id="withdrawHistoryBody"><tr><td colspan="4" class="p-6 text-center text-[#8b92c9]">Sin retiros aún</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <div id="view-overview" style="display:none" class="glass rounded-[20px] p-6 max-w-[560px]"><h3 class="font-black text-[15px] mb-5">⚙️ Settings</h3><label class="text-[10px] font-black text-[#6b7280] uppercase">Display Name</label><input id="setName" class="w-full mt-2 bg-[#0a0e28] border border-[#2a3366] rounded-[12px] px-4 py-3 text-[13px] text-white"><label class="text-[10px] font-black text-[#6b7280] uppercase mt-5 block">Email</label><input id="setEmail" readonly class="w-full mt-2 bg-[#0a0e28]/50 border border-[#2a3366] rounded-[12px] px-4 py-3 text-[13px] opacity-60"><button onclick="saveSettings()" class="w-full mt-6 bg-white text-black py-3.5 rounded-full font-black text-[12px]">Save Changes</button></div>
+  </div>
+</div>
+
+<script>
+const AUTH_WORKER="https://silent-term-1b1a.riasdeath77.workers.dev";
+let currentFilter='all', currentUserData=null, currentToken="", pollBooster=null, proofTargetOrder=null;
+function showToast(m,c="#fbbf24"){const t=document.getElementById("toast");t.innerText=m;t.style.display="block";t.style.background=c;setTimeout(()=>t.style.display="none",3500);}
+function loginSocial(p){location.href=p==="google"?`${AUTH_WORKER}/auth/google`:`${AUTH_WORKER}/auth/discord`;}
+function getTokenFromUrl(){let p=new URLSearchParams(location.search); if(p.get("session")) return p.get("session"); let h=new URLSearchParams(location.hash.slice(1)); if(h.get("session")) return h.get("session"); return "";}
+async function fetchNoCache(url, opts={}){let sep=url.includes("?")?"&":"?"; return fetch(url+sep+"_t="+Date.now(), {...opts,cache:"no-store",credentials:"include",headers:{...(opts.headers||{}),"Cache-Control":"no-cache, no-store","Pragma":"no-cache"}});}
+async function fetchSession(token){ return fetchNoCache(`${AUTH_WORKER}/api/session`,{headers: token?{Authorization:`Bearer ${token}`}:{}}); }
+function goAdmin(){ if(currentToken){ location.href='./admin.html#session='+encodeURIComponent(currentToken); } else { location.href='./admin.html'; } }
+
+async function processOAuth(){
+  let token=getTokenFromUrl();
+  if(token){
+    currentToken=token;
+    try{let r=await fetchSession(token); if(!r.ok) throw new Error(); let d=await r.json(); if(!d.logged) throw new Error(); history.replaceState({}, "", location.pathname); showLogged(d.user, token); return true;}catch{ history.replaceState({}, "", location.pathname); }
+  }
+  try{let r=await fetchNoCache(`${AUTH_WORKER}/api/session`); if(r.ok){ let d=await r.json(); if(d.logged){ currentToken=""; showLogged(d.user,""); return true; } } }catch{}
+  return false;
+}
+
+function applyRankUI(user){
+  try{
+    const rank=(user.rank||'user').toLowerCase();
+    const info=user.rankInfo||{label: rank==='booster'?'Booster':rank==='vip'?'VIP':rank==='premium'?'Premium':'Normal',discount: rank==='vip'?20:rank==='premium'?10:0,color: rank==='vip'?'#eab308':rank==='premium'?'#a855f7':rank==='booster'?'#22c55e':'#888',badge: rank==='booster'?'⚔️':rank==='vip'?'👑':rank==='premium'?'💎':'👤'};
+    let s=(id,fn)=>{let el=document.getElementById(id); if(el) try{fn(el)}catch{}};
+    s("rankBadgeMain",el=>{el.innerText=`${info.badge} ${info.label.toUpperCase()}`;el.style.color=info.color;el.style.borderColor=info.color+'60';el.style.background=info.color+'22';});
+    s("rankEmoji",el=>el.innerText=info.badge); s("rankTitleIcon",el=>el.innerText=info.badge);
+    s("rankTitleText",el=>el.innerText=info.label+(rank==='user'?' Member':''));
+    s("rankDescription",el=>el.innerText= rank==='booster'?'Modo booster activo. Recibe órdenes y sube pruebas. Solicita retiro cuando quieras.' : 'Upgrade to unlock discounts and priority support.');
+    s("rskCode",el=>el.innerText=user.rsk||'RSK-3-XXXX'); s("discountValue",el=>el.innerText=info.discount>0?`-${info.discount}%`:'0%');
+    s("rankDiscountBadge",el=>{el.innerText=info.discount>0?`${info.discount}% OFF`:'0% OFF';el.style.color=info.color;});
+    s("navRankDot",el=>el.style.background=info.color); s("profileGlow",el=>el.style.background=info.color);
+    let benefits=[]; if(rank==='user') benefits=['✕ No discount','✕ No priority','✓ Standard support']; else if(rank==='premium') benefits=['✓ 10% discount','✓ Priority queue','✓ Premium support']; else if(rank==='vip') benefits=['✓ 20% discount','✓ +2 traders free','✓ 👑 VIP']; else if(rank==='booster') benefits=['⚔️ Booster Mode','✓ Órdenes por Telegram','✓ Sube prueba aquí','✓ Retiro a PayPal/Binance','✓ Live 5s'];
+    s("benefitsList",el=>el.innerHTML=benefits.map(b=>`<div class="bg-[#0a0e28] border border-[#1e254a] rounded-full px-3.5 py-2 text-[11px] truncate">${b}</div>`).join(''));
+    s("upgradeRow",el=>el.style.display=(rank==='user')?'grid':'none');
+  }catch(e){}
+}
+
+async function loadBoosterPanel(token, silent=false){
+  try{
+    if(!silent){ let b=document.getElementById("boosterOrdersBody"); if(b) b.innerHTML='<tr><td colspan="5" class="p-6 text-center text-[#8b92c9]">Cargando...</td></tr>'; }
+    // Balance real desde /api/boosters/list
+    try{
+      let rb=await fetchNoCache(`${AUTH_WORKER}/api/boosters/list?token=${encodeURIComponent(token||"")}`,{headers:{Authorization:`Bearer ${token||""}`}});
+      let jb=await rb.json(); let me=jb.boosters?.find(x=>x.email.toLowerCase()===(currentUserData?.email||'').toLowerCase());
+      if(me){
+        document.getElementById("boostBalance").innerText="$"+(me.balance_available||me.balance||0).toFixed(2);
+        document.getElementById("boostPending").innerText="$"+(me.balance_pending||0).toFixed(2);
+        document.getElementById("boostTotal").innerText="$"+(me.balance||0).toFixed(2);
+        document.getElementById("wAvailable").innerText="$"+(me.balance_available||0).toFixed(2);
+        document.getElementById("boostTg").innerText=me.telegram_id?`TG: ${me.telegram_id} ✓`:'No vinculado - Avísale al admin';
+        if(me.payment_method){ document.getElementById("boostPayCurrent").innerText=me.payment_method+" - "+(me.payment_details||''); document.getElementById("payMethod").value=me.payment_method; document.getElementById("payAccount").value=me.payment_details||''; }
+      }
+    }catch{}
+    let ro=await fetchNoCache(`${AUTH_WORKER}/api/booster/my-orders?token=${encodeURIComponent(token||"")}`,{headers:{Authorization:`Bearer ${token||""}`}});
+    let jo=await ro.json(); if(!ro.ok) throw new Error(jo.error||"No booster");
+    let lu=document.getElementById("boosterLastUpdate"); if(lu) lu.innerText=new Date().toLocaleTimeString();
+    let tbody=document.getElementById("boosterOrdersBody"); if(!tbody) return;
+    if(!jo.orders||jo.orders.length==0){tbody.innerHTML='<tr><td colspan="5" class="p-6 text-center text-[#8b92c9]">Sin órdenes asignadas aún.</td></tr>'; return;}
+    let be=document.getElementById("boostEmail"); if(be) be.innerText=currentUserData?.email||""; let br=document.getElementById("boostRank"); if(br) br.innerText=currentUserData?.rank||"booster";
+    tbody.innerHTML=jo.orders.map(o=>{
+      let proof=o.proof_url||''; let id=o.order_id||o.code||o.id;
+      return `<tr class="border-b border-[#1e254a]/30"><td class="p-2"><div class="font-bold truncate max-w-[100px]">${id}</div></td><td class="p-2 font-black text-[#4ade80]">$${(o.amount||o.order_total||0)}</td><td class="p-2"><span class="text-[10px] px-2 py-1 rounded-full bg-[#1a204f] border border-[#2a3366]">${o.status}</span></td><td class="p-2">${proof?`<a href="${proof}" target="_blank" class="text-[#8b5cf6] text-[10px] underline">Ver</a>`:'-'}</td><td class="p-2 text-center"><button onclick="openProofModal('${id}')" class="bg-[#1a204f] border border-[#2a3366] px-3 py-1 rounded-full text-[10px]">📸 Prueba</button></td></tr>`;
+    }).join('');
+    loadWithdrawHistory();
+  }catch(e){ let b=document.getElementById("boosterOrdersBody"); if(b) b.innerHTML='<tr><td colspan="5" class="p-6 text-center text-[#8b92c9]">'+e.message+'</td></tr>'; }
+}
+
+function showLogged(user, token){
+  try{
+    currentUserData=user; if(token) currentToken=token;
+    document.getElementById("notLogged").style.display="none"; document.getElementById("isLogged").style.display="block";
+    document.getElementById("loggedName").innerText=user.name||"User"; document.getElementById("loggedEmail").innerText=user.email||"";
+    document.getElementById("setName").value=user.name||""; document.getElementById("setEmail").value=user.email||""; document.getElementById("ghNavName").innerText=user.name||"User";
+    const letter=(user.name||"U")[0].toUpperCase(); document.getElementById("avatarLetter").innerText=letter; document.getElementById("navAvatarLetter").innerText=letter;
+    let avImg=document.getElementById("avatarImg"), navImg=document.getElementById("navAvatarImg");
+    if(user.picture){avImg.src=user.picture;avImg.classList.remove("hidden");document.getElementById("avatarLetter").classList.add("hidden");navImg.src=user.picture;navImg.classList.remove("hidden");document.getElementById("navAvatarLetter").classList.add("hidden");}
+    if(user.isAdmin) document.getElementById("adminBadge").classList.remove("hidden");
+    let box=document.getElementById("adminButtons"), bAdmin=document.getElementById("btnAdminHub"), bBoost=document.getElementById("btnBoosterDash"), tabBoost=document.getElementById("tabBooster");
+    let rank=(user.rank||'user').toLowerCase();
+    if(user.isAdmin){box.classList.remove("hidden");bAdmin.classList.remove("hidden");bBoost.classList.remove("hidden");tabBoost.classList.remove("hidden");}
+    else if(rank==='booster'){box.classList.remove("hidden");bAdmin.classList.add("hidden");bBoost.classList.remove("hidden");tabBoost.classList.add("flex");}
+    document.getElementById("ghNavUserGuest").classList.add("hidden"); document.getElementById("ghNavUserLogged").classList.remove("hidden"); document.getElementById("ghNavUserLogged").classList.add("flex");
+    applyRankUI(user); renderOrders(); loadBoosterPanel(currentToken);
+    if(pollBooster) clearInterval(pollBooster);
+    if(rank==='booster' || user.isAdmin) pollBooster=setInterval(()=>{loadBoosterPanel(currentToken,true);}, 5000);
+  }catch(e){ document.getElementById("isLogged").style.display="block"; }
+}
+function showLoggedOut(){document.getElementById("notLogged").style.display="block";document.getElementById("isLogged").style.display="none";document.getElementById("ghNavUserGuest").classList.remove("hidden");document.getElementById("ghNavUserLogged").classList.add("hidden");}
+function ghLogout(){fetchNoCache(`${AUTH_WORKER}/auth/logout`,{method:"POST"}).catch(()=>{}); currentToken=""; showLoggedOut(); location.href="./"; }
+function switchView(t){
+  document.getElementById("tabOrders").className=t==='orders'?"px-4 py-1.5 rounded-full text-[11px] font-bold bg-white text-black":"px-4 py-1.5 rounded-full text-[11px] font-bold text-white/60";
+  document.getElementById("tabOverview").className=t==='overview'?"px-4 py-1.5 rounded-full text-[11px] font-bold bg-white text-black":"px-4 py-1.5 rounded-full text-[11px] font-bold text-white/60";
+  let tb=document.getElementById("tabBooster"); if(!tb.classList.contains("hidden")) tb.className=t==='booster'?"px-4 py-1.5 rounded-full text-[11px] font-bold bg-[#22c55e]/20 text-[#22c55e] border border-[#22c55e]/30 flex":"px-4 py-1.5 rounded-full text-[11px] font-bold text-[#22c55e] border border-[#22c55e]/30";
+  document.getElementById("view-orders").style.display=t==='orders'?"block":"none"; document.getElementById("view-overview").style.display=t==='overview'?"block":"none"; document.getElementById("view-booster").style.display=t==='booster'?"block":"none";
+  if(t==='booster') loadBoosterPanel(currentToken);
+}
+function filterOrders(f){currentFilter=f;document.getElementById("fAll").className=f==='all'?"px-3.5 py-1.5 rounded-full text-[11px] font-bold bg-white text-black":"px-3.5 py-1.5 rounded-full text-[11px] text-white/60";document.getElementById("fPending").className=f==='PENDING'?"px-3.5 py-1.5 rounded-full text-[11px] font-bold bg-[#f59e0b]/20 text-[#f59e0b] border":"px-3.5 py-1.5 rounded-full text-[11px] text-white/60";document.getElementById("fPaid").className=f==='PAID'?"px-3.5 py-1.5 rounded-full text-[11px] font-bold bg-[#22c55e]/20 text-[#22c55e] border":"px-3.5 py-1.5 rounded-full text-[11px] text-white/60";renderOrders();}
+function normalizeStatus(s){if(!s)return'PENDING';s=String(s).toUpperCase();if(s.includes('REJECT')||s.includes('CANCEL'))return'REJECTED';if(s.includes('PAID')||s.includes('VERIFIED')||s.includes('COMPLETE')||s.includes('IN_PROGRESS'))return s;return'PENDING';}
+async function fetchD1Orders(){try{let r=await fetchNoCache(`${AUTH_WORKER}/api/orders?token=${encodeURIComponent(currentToken||"")}`,{headers:{Authorization:`Bearer ${currentToken||""}`}}); if(!r.ok) return []; let d=await r.json(); return d.orders||[];}catch{return[];}}
+async function deleteOrder(id){if(!confirm(`Borrar ${id}?`))return; try{await fetchNoCache(`${AUTH_WORKER}/api/delete-order`,{method:'POST',headers:{"Content-Type":"application/json"},body:JSON.stringify({token:currentToken, id})});}catch{} showToast("🗑️ Borrado","#22c55e"); setTimeout(()=>renderOrders(),400);}
+async function renderOrders(){
+  let list=document.getElementById("ordersList"); if(!list) return;
+  list.innerHTML=`<div class="flex items-center gap-3 text-[11px] text-[#8b92c9] p-6 glass rounded-[16px]"><div class="w-5 h-5 border-2 border-[#2a3366] border-t-[#8b5cf6] rounded-full animate-spin"></div>Loading...</div>`;
+  let all=await fetchD1Orders(); let orders=all;
+  let q=(document.getElementById("searchOrder")?.value||'').toLowerCase(); if(q) orders=orders.filter(o=>JSON.stringify(o).toLowerCase().includes(q));
+  if(currentFilter!=='all') orders=orders.filter(o=>{let s=normalizeStatus(o.status); if(currentFilter==='PENDING') return s==='PENDING'; if(currentFilter==='PAID') return s!=='PENDING'&&s!=='REJECTED'; return true;});
+  document.getElementById("ordersCount").innerText=orders.length;
+  if(orders.length===0){list.innerHTML=`<div class="glass rounded-[20px] p-12 text-center"><div class="font-black text-[16px]">No orders yet</div><button onclick="location.href='./midnight.html'" class="mt-6 bg-white text-black px-6 py-3 rounded-full text-[11px] font-black">Go to Store →</button></div>`;return;}
+  list.innerHTML=orders.map(o=>{let status=normalizeStatus(o.status); let badge=status==='PAID'||status==='COMPLETED'?`<span class="bg-[#22c55e]/15 text-[#22c55e] border border-[#22c55e]/30 px-3 py-1 rounded-full text-[9px] font-black">✓ ${status}</span>`:status==='IN_PROGRESS'?`<span class="bg-[#38bdf8]/15 text-[#38bdf8] border px-3 py-1 rounded-full text-[9px] font-black">⚔️ ${status}</span>`:`<span class="bg-[#f59e0b]/15 text-[#f59e0b] border border-[#f59e0b]/30 px-3 py-1 rounded-full text-[9px] font-black">⏳ ${status}</span>`; let title=(o.title||o.items?.[0]?.name||o.code||'Boost'); let total=o.total||'0'; let img=o.items?.[0]?.img||'./foreverdungeon/foesaken.jpeg'; return `<div class="rounded-[18px] p-4 mb-3 flex gap-4 items-center glass min-w-0"><img src="${img}" class="w-[64px] h-[64px] rounded-[14px] object-cover bg-[#0a0e28] shrink-0"><div class="flex-1 min-w-0"><div class="font-black text-[13px] truncate">${title} <span class="mono text-[10px] text-white/30">${o.code||o.id}</span></div><div class="text-[11px] text-[#8b92c9] truncate">$${total}</div></div><div class="flex flex-col items-end gap-2 shrink-0">${badge}<button onclick="deleteOrder('${o.code||o.id}')" class="w-8 h-8 bg-white/5 rounded-full">🗑️</button></div></div>`}).join("");
+}
+function saveSettings(){showToast("✅ Saved","#22c55e");}
+function openProofModal(orderId){ proofTargetOrder=orderId; document.getElementById("proofOrderId").innerText="Orden: "+orderId; document.getElementById("proofModal").style.display="flex"; }
+async function uploadProof(){
+  if(!proofTargetOrder) return;
+  let file=document.getElementById("proofFile").files[0]; let link=document.getElementById("proofLink").value.trim(); let proofUrl=link;
+  if(file &&!link){ proofUrl = await new Promise(res=>{ let r=new FileReader(); r.onload=()=>res(r.result); r.readAsDataURL(file); }); if(proofUrl.length > 900000){ return showToast("Imagen muy grande, usa link imgur","#ef4444"); } }
+  if(!proofUrl) return showToast("Sube imagen o link","#ef4444");
+  try{ let r=await fetchNoCache(`${AUTH_WORKER}/api/booster/upload-proof`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({token:currentToken, code: proofTargetOrder, order_id: proofTargetOrder, proof_url: proofUrl})}); let j=await r.json(); if(!r.ok) throw new Error(j.error||"Error"); }catch(e){ return showToast("Error: "+e.message,"#ef4444"); }
+  document.getElementById("proofModal").style.display="none"; showToast("✅ Prueba subida - Admin verificará y liberará dinero","#22c55e"); loadBoosterPanel(currentToken,true);
+}
+async function savePayMethod(){
+  let method=document.getElementById("payMethod").value; let account=document.getElementById("payAccount").value.trim();
+  if(!account) return showToast("Pon tu PayPal / wallet","#ef4444");
+  try{
+    let r=await fetchNoCache(`${AUTH_WORKER}/api/booster/save-payment`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({token:currentToken, method, details: account, payment_method: method, payment_details: account})});
+    let j=await r.json(); if(!r.ok) throw new Error(j.error||'Error');
+    showToast("✅ Método guardado - Admin te pagará ahí","#22c55e");
+    document.getElementById("boostPayCurrent").innerText=method+" - "+account;
+  }catch(e){ showToast("Error: "+e.message,"#ef4444"); }
+}
+function requestPay(){
+  // ABRIR MODAL DE RETIRO NUEVO
+  let availText=document.getElementById("boostBalance").innerText.replace('$','');
+  let avail=parseFloat(availText)||0;
+  if(avail<10) return showToast(`Saldo insuficiente $${avail} - Min $10`,"#ef4444");
+  document.getElementById("wAvailable").innerText="$"+avail.toFixed(2);
+  document.getElementById("wAmount").value=avail.toFixed(2);
+  document.getElementById("withdrawModal").style.display="flex";
+}
+async function submitWithdraw(){
+  let amount=parseFloat(document.getElementById("wAmount").value);
+  let method=document.getElementById("wMethod").value;
+  let details=document.getElementById("wDetails").value.trim() || document.getElementById("payAccount").value.trim();
+  if(!amount || amount<10) return showToast("Min $10","#ef4444");
+  if(!details) return showToast("Pon tu PayPal/wallet donde recibir","#ef4444");
+  try{
+    let r=await fetchNoCache(`${AUTH_WORKER}/api/withdrawals/create`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({token:currentToken, amount, method, details, booster_email: currentUserData.email})});
+    let txt=await r.text(); let j; try{j=JSON.parse(txt)}catch{j={}};
+    if(!r.ok) throw new Error(j.error||txt.slice(0,200));
+    document.getElementById("withdrawModal").style.display="none";
+    showToast(`💸 Retiro $${amount} solicitado - Pendiente de aprobación`,"#22c55e");
+    loadWithdrawHistory();
+  }catch(e){ showToast("Error: "+e.message,"#ef4444"); }
+}
+async function loadWithdrawHistory(){
+  try{
+    let r=await fetchNoCache(`${AUTH_WORKER}/api/withdrawals/my?token=${encodeURIComponent(currentToken)}`,{headers:{Authorization:`Bearer ${currentToken}`}});
+    let j=await r.json(); let list=j.withdrawals||[];
+    let tbody=document.getElementById("withdrawHistoryBody");
+    if(!list.length){ tbody.innerHTML='<tr><td colspan="4" class="p-6 text-center text-[#8b92c9]">Sin retiros aún - Pide tu primer retiro</td></tr>'; return; }
+    tbody.innerHTML=list.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at)).map(w=>{
+      let st=(w.status||'PENDING').toUpperCase();
+      let color=st==='PENDING'?'#f59e0b':st==='APPROVED'||st==='COMPLETED'?'#22c55e':'#ef4444';
+      return `<tr class="border-b border-[#1e254a]/30"><td class="p-2 text-[10px]">${w.created_at?new Date(w.created_at).toLocaleDateString():''}</td><td class="p-2 font-black text-[#4ade80]">$${w.amount}</td><td class="p-2 text-[11px]">${w.method}<div class="text-[9px] text-[#8b92c9] truncate max-w-[120px]">${w.details||''}</div></td><td class="p-2"><span style="color:${color}" class="text-[10px] font-black border px-2 py-1 rounded-full">${st}</span></td></tr>`;
+    }).join('');
+  }catch{ document.getElementById("withdrawHistoryBody").innerHTML='<tr><td colspan="4" class="p-6 text-center text-[#8b92c9]">Error cargando retiros</td></tr>'; }
+}
+function buyRank(rank){ if(!confirm(`Upgrade to ${rank}?`)) return; fetchNoCache(`${AUTH_WORKER}/api/set-rank`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:currentToken,email:currentUserData.email,rank})}).then(async r=>{let d=await r.json(); if(d.ok){showToast(`Upgraded to ${rank} 👑`,"#22c55e"); let r2=await fetchSession(currentToken); let d2=await r2.json(); if(d2.logged) showLogged(d2.user,currentToken);} else showToast("Failed","#ef4444");}).catch(()=>showToast("Error","#ef4444")); }
+async function init(){ let ok=await processOAuth(); if(ok) return; showLoggedOut(); }
+init();
+</script>
+<script src="./global-search.js"></script>
+<script src="./gh-banner.js"></script>
+<script src="./chat-widget.js"></script>
+<!-- ===== INICIO FAQ SEO - ACCOUNT RANGOS USER PREMIUM VIP ===== -->
+<div class="max-w-[1350px] mx-auto px-6 mt-10 mb-8">
+  <div class="bg-[#12162e]/60 border border-[#232845] rounded-xl p-6">
+    <h2 class="text-[22px] font-black text-white mb-4">GearHavenGG Account - User, Premium, VIP - Loyalty System & Rewards</h2>
+    <p class="text-[13px] text-[#a3a8c9] leading-relaxed mb-5">
+      Create <strong class="text-white">GearHavenGG account</strong> to track all WoW Forever and Midnight boosts, gold orders, dungeons, raids, PvP. <strong class="text-white">Ranks upgrade automatically based on purchases and loyalty</strong> - more orders = higher rank = better discounts and perks. Secure login, order history, support tickets, bonus balance.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-4 mb-6">
+      <div class="bg-[#0a0e28] border border-[#2a3366] rounded-xl p-4">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 bg-[#2a3366] rounded-full flex items-center justify-center text-white text-[12px] font-black">U</div>
+          <div class="text-[14px] font-black text-white">User - Starter Rank</div>
+        </div>
+        <div class="text-[11px] text-[#a3a8c9] space-y-2">
+          <div><strong class="text-white">How to get:</strong> Register free email + password on gearhavengg.com/account. Instant activation.</div>
+          <div><strong class="text-white">Perks:</strong> Order tracking, ticket support 24/7 reply under 5 mins, save Battle.net tag, order history, email notifications for beta/launch Nov 4 and raid unlock Dec 9.</div>
+          <div><strong class="text-white">Discount:</strong> Base prices + occasional promo codes.</div>
+        </div>
+      </div>
+      <div class="bg-[#0a0e28] border border-[#8b5cf6] rounded-xl p-4">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 bg-[#8b5cf6] rounded-full flex items-center justify-center text-white text-[12px] font-black">P</div>
+          <div class="text-[14px] font-black text-white">Premium - Loyalty Rank</div>
+          <div class="bg-[#8b5cf6] text-white text-[9px] px-2 py-1 rounded-full font-black">MOST POPULAR</div>
+        </div>
+        <div class="text-[11px] text-[#a3a8c9] space-y-2">
+          <div><strong class="text-white">How to get:</strong> Automatic upgrade after X purchases or total spent (example: 3 orders or $150+ spent). Based on fidelity.</div>
+          <div><strong class="text-white">Perks Premium:</strong></div>
+          <ul class="list-disc ml-4 space-y-1">
+            <li>Faster support priority queue - specialist assigned</li>
+            <li>5-10% discount on all Forever + Midnight services</li>
+            <li>Bonus gold +5% extra on gold orders</li>
+            <li>Free Express start (5-10 mins) on leveling/dungeons</li>
+            <li>Access to Premium Starter bundle $399 and pre-orders</li>
+            <li>Invite-A-Friend extra bonus</li>
+          </ul>
+        </div>
+      </div>
+      <div class="bg-[#0a0e28] border border-[#f59e0b] rounded-xl p-4">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 bg-[#f59e0b] rounded-full flex items-center justify-center text-black text-[12px] font-black">V</div>
+          <div class="text-[14px] font-black text-white">VIP - Top Loyalty</div>
+          <div class="bg-[#f59e0b] text-black text-[9px] px-2 py-1 rounded-full font-black">ELITE</div>
+        </div>
+        <div class="text-[11px] text-[#a3a8c9] space-y-2">
+          <div><strong class="text-white">How to get:</strong> High fidelity - many orders or big spend (example: 10+ orders or $500+). Manual review.</div>
+          <div><strong class="text-white">Perks VIP:</strong></div>
+          <ul class="list-disc ml-4 space-y-1">
+            <li>15-20% discount VIP exclusive</li>
+            <li>10% bonus gold free max (80 free on 1000 gold Forever)</li>
+            <li>Dedicated manager Discord/WhatsApp</li>
+            <li>Early access beta slots + name reservation help Oct 27</li>
+            <li>Free raid carry Barrow Deeps/Hyjal on milestones</li>
+            <li>Legacy Points Bundle $799 perks & Spectral Bear</li>
+            <li>Refund priority + lifetime warranty</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-[#0a0e28] border border-[#232845] rounded-xl p-4 mb-5">
+      <h3 class="text-[13px] font-black text-white mb-2">HOW RANK UP WORKS - LOYALTY POINTS</h3>
+      <div class="grid md:grid-cols-4 gap-3 text-[11px] text-[#a3a8c9]">
+        <div><strong class="text-white">1. Register:</strong> Go gearhavengg.com/account, email + password, verify.</div>
+        <div><strong class="text-white">2. Order:</strong> Every Forever Gold $2.54, Dungeon $13, Raid $349, Leveling, PvP adds points. 1 order = points.</div>
+        <div><strong class="text-white">3. Auto Upgrade:</strong> System upgrades User → Premium → VIP automatically based on total orders / total spent / fidelity time.</div>
+        <div><strong class="text-white">4. Keep Rank:</strong> Rank never downgrades. Once Premium/VIP always Premium/VIP + better future discounts on Spring 2027 and Summer 2027 new raids.</div>
+      </div>
+    </div>
+
+    <h3 class="text-[16px] font-black text-white mt-6 mb-3">Account FAQ - GearHavenGG</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-[12px] text-[#a3a8c9]">
+      <div><strong class="text-white">Is account free?</strong><br>Yes 100% free registration. No subscription. Only pay for boosts/gold you order. Account needed to track orders and get discounts.</div>
+      <div><strong class="text-white">What if I lose password?</strong><br>Reset via email in account page. Support 24/7 under 5 mins helps restore. All orders linked to email history safe.</div>
+      <div><strong class="text-white">Do Premium/VIP expire?</strong><br>No, permanent. Once you reach Premium or VIP based on loyalty, you keep it forever like Forever game level 60 cap permanent. More orders = bigger discounts but rank stays.</div>
+      <div><strong class="text-white">Can I have multiple Battle.net linked?</strong><br>Yes add multiple WoW accounts in same GearHaven account - useful if you have Forever + Retail Midnight separate. We use VPN same city IP for safety.</div>
+      <div><strong class="text-white">How to see my rank?</strong><br>Login gearhavengg.com/account dashboard shows current rank User/Premium/VIP, next rank progress bar (orders needed / spent needed), active bonuses, bonus gold balance.</div>
+      <div><strong class="text-white">What about security?</strong><br>Hand-farmed no bots, no third-party traders, piloted with VPN match, selfplay available. No account sharing required for gold (face-to-face green item). Lifetime warranty on accounts.</div>
+    </div>
+  </div>
+</div>
+<!-- ===== FIN FAQ SEO - ACCOUNT RANGOS ===== -->
+<!-- BARRA DE PAGOS GENIAL - GEARHAVEN -->
+<div class="mt-6 bg-[#0f1333] border border-[#1e254a] rounded-2xl px-4 py-3 flex flex-wrap items-center justify-center md:justify-between gap-4">
+  <span class="text-[10px] tracking-[2px] font-black text-[#6b77b5]">WE ACCEPT</span>
+  <div class="flex items-center gap-5 flex-wrap">
+    <span class="text-white font-black italic text-[16px]">VISA</span>
+    <span class="flex items-center gap-1"><span class="w-4 h-4 rounded-full bg-[#eb001b]"></span><span class="w-4 h-4 rounded-full bg-[#f79e1b] -ml-2"></span><span class="text-[9px] ml-1">Mastercard</span></span>
+    <span class="text-[#0099df] font-bold text-[12px]">PayPal</span>
+    <span class="text-white font-bold text-[12px]"> Pay</span>
+    <span class="text-white font-bold text-[12px]"><span class="text-[#4285f4]">G</span> Pay</span>
+    <span class="bg-[#F3BA2F] text-black text-[9px] font-black px-2 py-1 rounded">Binance Pay</span>
+    <span class="bg-[#f7931a] text-white text-[9px] font-black px-2 py-1 rounded-full">₿ Crypto</span>
+  </div>
+  <span class="text-[8px] text-[#444]">🔒 256-bit SSL • Encrypted</span>
+</div>
+</body>
+</html>

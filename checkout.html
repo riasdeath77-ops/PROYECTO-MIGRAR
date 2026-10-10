@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./imagenes/favicon.jpg">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18496576661"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-18496576661');
+</script>
+<title>Checkout | GEARHAVEN</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  /* ===== PARCHE UNIVERSAL MOVIL - COPIA ESTO EN TODOS LOS HTML ===== */
+  html, body { max-width: 100vw !important; overflow-x: hidden !important; }
+    * { box-sizing: border-box; }
+  img { max-width: 100%; height: auto; }
+  /* Tus fotos con altura fija no se rompen */
+  #bundleImg, .like-img, .hero-banner img, #heroImg, .card img {
+    height: auto !important; 
+  }
+  #bundleImg{height:160px !important; width:100% !important; object-fit:cover !important;}
+  .like-img{height:90px !important; width:100% !important; object-fit:cover !important;}
+  .hero-banner img, #heroImg{height:100% !important; width:100% !important; object-fit:cover !important;}
+
+  @media (max-width: 768px) {
+    header { padding-left: 12px !important; padding-right: 12px !important; flex-wrap: wrap !important; max-width: 100vw !important; }
+    .max-w-\[1350px\], .max-w-\[1200px\], .max-w-\[1400px\] { padding-left: 12px !important; padding-right: 12px !important; }
+  }
+  /* ===== FIN PARCHE UNIVERSAL ===== */
+body{background:#06081a;color:#fff;font-family:Inter,sans-serif;overflow-x:hidden}
+.bg-dynamic{position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse at top, rgba(139,92,246,0.45) 0%, transparent 55%),radial-gradient(ellipse at bottom right, rgba(251,191,36,0.30) 0%, transparent 60%),url('./foreverraid/abominacion.jpg') center/cover no-repeat}
+.bg-dynamic::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom, #06081a 0%, rgba(6,8,26,0.90) 40%, #06081a 100%)}
+.glass{background:rgba(21,26,54,0.9);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.08)}
+.glass-glow{background:rgba(21,26,54,0.92);backdrop-filter:blur(16px);border:1px solid rgba(139,92,246,0.35);border-radius:16px;box-shadow:0 0 0 1px rgba(139,92,246,0.20) inset, 0 0 30px rgba(139,92,246,0.22)}
+.icon-gold{width:64px;height:64px;min-width:64px;background:linear-gradient(135deg,#fbbf24,#f59e0b);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 0 20px rgba(251,191,36,0.5)}
+input{outline:none}
+input:focus{border-color:#8b5cf6!important;box-shadow:0 0 0 3px rgba(139,92,246,0.25), 0 0 20px rgba(139,92,246,0.35)!important}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#fbbf24;color:#000;padding:12px 24px;border-radius:30px;font-weight:900;font-size:12px;z-index:100;display:none}
+</style>
+</head>
+<body>
+<div id="topPayBar" class="sticky top-0 z-30 w-full bg-[#0f1333]/90 backdrop-blur-xl border-b border-[#8b5cf6]/20 px-4 py-[9px] flex items-center justify-center gap-4">
+  <span class="text-[9px] tracking-[2.5px] font-black text-[#6b77b5]">WE ACCEPT</span>
+  <div class="flex items-center gap-4">
+    <span class="text-white font-black italic text-[14px] leading-none">VISA</span>
+    <span class="flex items-center -space-x-1.5"><span class="w-4 h-4 rounded-full bg-[#eb001b]"></span><span class="w-4 h-4 rounded-full bg-[#f79e1b]"></span><span class="text-[8px] ml-2 text-[#8b92c9] font-bold">Master</span></span>
+    <span class="text-[#0099df] font-bold text-[12px] leading-none">PayPal</span>
+    <span class="text-white font-bold text-[12px] leading-none"> Pay</span>
+    <span class="text-white font-bold text-[12px] leading-none flex gap-0.5"><span class="text-[#4285f4]">G</span> Pay</span>
+    <span class="bg-[#F3BA2F] text-black text-[8px] font-black px-2 py-[3px] rounded">Binance</span>
+    <span class="bg-[#f7931a] text-white text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full">₿</span>
+  </div>
+</div>
+<div class="bg-dynamic"></div>
+<div id="toast"></div>
+<div class="max-w-[1150px] mx-auto p-4 md:p-6 relative z-10">
+<div class="flex justify-between items-center mb-5 gap-2">
+<button onclick="location.href='./midnight.html'" class="flex items-center gap-2 text-[11px] bg-[#1a204f] border border-[#2a3366] px-4 py-2 rounded-full font-bold">← Continue shopping</button>
+<div class="flex gap-2">
+<div class="glass rounded-full p-2 px-3 text-[10px] text-[#8b92c9]">🔒 Secure <span class="text-[#f59e0b] font-bold">● PENDING</span></div>
+<button onclick="toggleLang()" id="langBtn" class="text-[11px] bg-[#0e1230] border border-[#8b5cf6] px-3 py-2 rounded-full font-bold">EN</button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-6 items-start">
+<div class="grid gap-5">
+<div id="singleProduct" class="glass-glow p-5 flex gap-4 relative">
+<button onclick="deleteSingleProduct()" class="absolute top-2 right-2 bg-[#2a0a0a] border border-[#ef4444] text-[#ef4444] px-2 py-1 rounded-full text-[9px] font-black">X Remove</button>
+<div class="icon-gold">💰</div>
+<div class="flex-1">
+<div id="cTitle" class="font-black text-[15px]">Mythic+ Bundle</div>
+<div id="cDetails" class="text-[11px] text-[#8b92c9] mt-1"></div>
+<div id="cMode" class="mt-2 text-[10px] font-bold px-3 py-1 rounded-full inline-block bg-[#0e1230] border border-[#2a3366]"></div>
+<div id="cDungeons" class="mt-2 text-[11px] font-bold px-3 py-1 rounded-lg bg-[#8b5cf6]/20 border border-[#8b5cf6]/40 text-[#22c55e]"></div>
+<div class="mt-2 flex items-baseline gap-2"><span class="text-white font-black text-[22px]">$</span><span id="cPrice" class="text-white font-black text-[22px]"></span><span id="cCurrency" class="text-[11px] bg-[#1a204f] border px-2 py-0.5 rounded-full font-bold">USD</span></div>
+<div class="text-[11px] text-[#8b92c9] mt-1">≈ $<span id="cUsd">0</span> USD • <span id="cLevel">+10</span> x<span id="cBundle">3</span></div>
+</div>
+</div>
+<div id="cartProduct" style="display:none" class="glass-glow p-5">
+<div class="flex justify-between items-center mb-3">
+<div class="font-black text-[14px]">🛒 Cart - <span id="cartCountTop">0</span> products</div>
+<span id="cartCode" class="text-[9px] bg-[#8b5cf6] px-2 py-1 rounded-full font-black">GH-XXX-MULTI</span>
+</div>
+<div id="cartItemsList" class="grid gap-2 max-h-[300px] overflow-y-auto pr-1"></div>
+<div class="mt-4 pt-4 border-t border-[#2a3366]">
+<div class="flex justify-between font-black text-[16px]"><span>Total (<span id="cartCountBottom">0</span> items)</span><span id="cartTotalTop">$0</span></div>
+<div class="text-[10px] text-[#8b92c9] mt-1">≈ $<span id="cartUsdTop">0</span> USD • 1 single MULTI order</div>
+</div>
+<button onclick="location.href='./midnight.html'" class="w-full mt-4 bg-transparent border border-white/10 text-[11px] py-2.5 rounded-full">← Continue shopping</button>
+</div>
+<div class="glass-glow p-5">
+<h2 class="font-black text-[13px] mb-3">📝 Your Details - Only 3 required</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<input id="charName" placeholder="⚔️ Character *" class="w-full bg-[#0a0e28] border border-[#2a3366] rounded-lg px-3 py-3 text-[12px] text-white">
+<input id="realm" placeholder="🌍 Realm *" class="w-full bg-[#0a0e28] border border-[#2a3366] rounded-lg px-3 py-3 text-[12px] text-white">
+<input id="btag" placeholder="💎 BattleTag *" class="w-full bg-[#0a0e28] border border-[#2a3366] rounded-lg px-3 py-3 text-[12px] text-white">
+<input id="contactPhone" placeholder="📱 WhatsApp / Discord (optional)" class="w-full bg-[#0a0e28] border border-[#2a3366]/50 rounded-lg px-3 py-3 text-[12px] text-white opacity-70">
+</div>
+<div id="formError" class="hidden mt-3 bg-[#ef4444]/20 border border-[#ef4444]/50 text-[#ef4444] text-[11px] p-3 rounded-lg"></div>
+</div>
+<!-- TRUST BOX - DEBAJO DE YOUR DETAILS -->
+<div class="glass-glow p-4 mt-1 border border-[#22c55e]/20">
+  <div class="flex items-center justify-between mb-3">
+    <p class="text-[11px] font-black tracking-[0.5px] text-white">🔒 YOUR ACCOUNT IS 100% SAFE</p>
+    <span class="text-[9px] bg-[#22c55e]/20 text-[#22c55e] border border-[#22c55e]/30 px-2 py-1 rounded-full font-bold">✓ NO BAN IN 5K+ ORDERS</span>
+  </div>
+
+  <div class="grid grid-cols-2 gap-2 mb-3">
+    <div class="bg-[#0a0e28] border border-[#1e254a] rounded-lg p-2.5 flex gap-2 items-center">
+      <div class="w-7 h-7 rounded-lg bg-[#8b5cf6]/20 flex items-center justify-center text-[13px]">🛡️</div>
+      <div><b class="text-[10px] text-white block leading-none">VPN + Offline Mode</b><span class="text-[9px] text-[#6b77b5]">Matching your city</span></div>
+    </div>
+    <div class="bg-[#0a0e28] border border-[#1e254a] rounded-lg p-2.5 flex gap-2 items-center">
+      <div class="w-7 h-7 rounded-lg bg-[#fbbf24]/20 flex items-center justify-center text-[13px]">🔑</div>
+      <div><b class="text-[10px] text-white block leading-none">No Password Needed</b><span class="text-[9px] text-[#6b77b5]">For selfplay / duo</span></div>
+    </div>
+    <div class="bg-[#0a0e28] border border-[#1e254a] rounded-lg p-2.5 flex gap-2 items-center">
+      <div class="w-7 h-7 rounded-lg bg-[#22c55e]/20 flex items-center justify-center text-[13px]">⚡</div>
+      <div><b class="text-[10px] text-white block leading-none">5-30 Min Start</b><span class="text-[9px] text-[#6b77b5]">Avg delivery time</span></div>
+    </div>
+    <div class="bg-[#0a0e28] border border-[#1e254a] rounded-lg p-2.5 flex gap-2 items-center">
+      <div class="w-7 h-7 rounded-lg bg-[#22c55e]/20 flex items-center justify-center text-[13px]">↩️</div>
+      <div><b class="text-[10px] text-white block leading-none">Money-Back</b><span class="text-[9px] text-[#6b77b5]">If not started</span></div>
+    </div>
+  </div>
+
+  <div class="bg-[#0f1333] border border-[#1e254a] rounded-lg px-3 py-2 flex items-center gap-2">
+    <div class="w-6 h-6 rounded-full bg-[#22c55e] flex items-center justify-center text-[10px] text-black font-black">✓</div>
+    <p class="text-[10px] text-[#8b92c9] leading-[1.3]"><b class="text-white">2,847 players</b> trusted us this month • <b class="text-[#fbbf24]">★★★★★ 4.9/5</b> from 1,400+ reviews • <span class="text-[#22c55e]">● Live:</span> Alex from US bought +15 x3 2m ago</p>
+  </div>
+</div>
+</div>
+<div class="lg:sticky lg:top-[70px] grid gap-5">
+<div class="glass-glow p-5">
+<h2 class="font-black text-[13px] mb-3">&#128179; Pay - <span id="payCurrency">USD</span> - <span id="payType">Single</span></h2>
+<div style="background:rgba(255,255,255,0.05); border:1px solid #232a5a; padding:8px 10px; border-radius:8px; margin-bottom:10px">
+  <p style="font-size:10.5px; color:#8b92c9; line-height:1.35; margin:0">
+    <b style="color:#fff; font-size:11px">&#128179; Secure Card Payment</b><br>
+    We're based in Ecuador — card page shows in Spanish, charged in USD (100% safe).
+  </p>
+</div>
+<div style="display:flex; gap:5px; flex-wrap:wrap; justify-content:center; margin-bottom:6px">
+  <span style="background:#e5e7eb; color:#111; padding:4px 8px; border-radius:6px; font-size:10px; font-weight:800">🔒 Secure</span>
+  <span style="background:#e5e7eb; color:#1a1f71; padding:4px 8px; border-radius:6px; font-size:10px; font-weight:900">VISA</span>
+  <span style="background:#e5e7eb; color:#000; padding:4px 8px; border-radius:6px; font-size:10px; font-weight:700">●● MC</span>
+  <span style="background:#e5e7eb; color:#444; padding:4px 8px; border-radius:6px; font-size:10px">G Pay</span>
+  <span style="background:#e5e7eb; color:#000; padding:4px 8px; border-radius:6px; font-size:10px; font-weight:700"> Pay</span>
+  <span style="background:#e5e7eb; color:#003087; padding:4px 8px; border-radius:6px; font-size:10px; font-weight:800">PayPal</span>
+  <span style="background:#e5e7eb; color:#9d6d00; padding:4px 8px; border-radius:6px; font-size:10px; font-weight:700">Binance</span>
+  <span style="background:#e5e7eb; color:#555; padding:4px 8px; border-radius:6px; font-size:10px">₿ BTC</span>
+  <span style="background:#e5e7eb; color:#ff6a00; padding:4px 8px; border-radius:6px; font-size:10px; font-weight:800">payphone</span>
+</div>
+<p style="font-size:8.5px; color:#5a6490; text-align:center; margin:0 0 12px 0; letter-spacing:0.3px">SSL • PCI-DSS • Protected • Ecuador</p>
+<div class="grid gap-3">
+<button onclick="handlePay('payphone')" class="w-full bg-[#22c55e] text-black font-black py-3.5 rounded-xl text-[13px] shadow-[0_0_20px_rgba(34,197,94,0.35)]">&#128179; Credit Card - <span id="payphonePrice">$0</span> <span class="text-[10px] opacity-70" id="payphoneUsd">($0 USD)</span></button>
+<button onclick="handlePay('paypal')" class="w-full bg-[#ffc439] text-black font-black py-3.5 rounded-xl text-[13px]">&#128179; PayPal - <span id="paypalPrice">$0</span> <span class="text-[10px] opacity-70" id="paypalUsd">($0 USD)</span></button>
+<button onclick="handlePay('binance')" class="w-full bg-[#F3BA2F] text-black font-black py-3.5 rounded-xl text-[13px]">◉ Binance Pay - <span id="binancePrice">$0</span></button>
+</div>
+<style>
+.gh-trust-wrap{margin-top:20px;font-family:Inter,system-ui,sans-serif}
+.gh-trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.gh-trust-item{background:#0f0f0f;border:1px solid #222;border-radius:12px;padding:11px 12px;display:flex;gap:10px;align-items:center}
+.gh-trust-icon{width:32px;height:32px;border-radius:8px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:16px}
+.gh-trust-item b{font-size:12px;color:#fff;display:block;line-height:1.2}
+.gh-trust-item span{font-size:11px;color:#888;line-height:1.2}
+.gh-trust-links{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+.gh-trust-links a{font-size:11px;color:#888;text-decoration:underline;cursor:pointer}
+.gh-trust-badge{display:flex;align-items:center;justify-content:center;gap:8px;background:#111;border:1px dashed #2a2a2a;border-radius:10px;padding:9px 12px;color:#aaa;font-size:11px;margin-top:12px;text-align:center}
+.gh-support-row{display:flex; gap:8px; margin-top:12px}
+.gh-sup-btn{flex:1; display:flex; align-items:center; justify-content:center; gap:7px; padding:11px 10px; border-radius:12px; font-size:11px; font-weight:900; text-decoration:none; cursor:pointer; border:1px solid; transition:all.2s; color:#fff}
+.gh-sup-btn:hover{transform:translateY(-2px); filter:brightness(1.1)}
+.gh-sup-wa{background:linear-gradient(135deg,#25D366,#128C7E); border-color:#25D366; color:#000!important}
+.gh-sup-dc{background:linear-gradient(135deg,#5865F2,#4752c4); border-color:#5865F2}
+.gh-sup-tg{background:linear-gradient(135deg,#229ED9,#1a7fb5); border-color:#229ED9}
+</style>
+<div class="gh-trust-wrap">
+  <div class="gh-trust-grid">
+    <div class="gh-trust-item"><div class="gh-trust-icon">⚡</div><div><b>Instant Start</b><span>5-30 min after payment</span></div></div>
+    <div class="gh-trust-item"><div class="gh-trust-icon">🛡️</div><div><b>100% Secure Payment</b><span> PayPal SSL</span></div></div>
+    <div class="gh-trust-item"><div class="gh-trust-icon">↩️</div><div><b>Money-Back Guarantee</b><span>Full refund if not started</span></div></div>
+  </div>
+  <div class="gh-trust-badge">🔒 256-bit SSL Encrypted Checkout • We never store card data • VPN & Offline Mode • 24/7 Live Support on Discord</div>
+  <div class="gh-trust-links">
+    <a onclick="openPolicy('privacy')">Privacy Policy</a>
+    <a onclick="openPolicy('refund')">Refund Policy</a>
+    <a onclick="openPolicy('delivery')">Delivery Policy</a>
+    <a onclick="openPolicy('terms')">Terms of Service</a>
+  </div>
+</div>
+<div id="policy-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#121212;border:1px solid #222;border-radius:16px;max-width:680px;width:100%;max-height:85vh;overflow:auto;padding:28px;position:relative">
+    <button onclick="closePolicy()" style="position:absolute;top:12px;right:12px;background:#222;border:0;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer">✕</button>
+    <div id="policy-content" style="color:#ccc;font-size:13px;line-height:1.7"></div>
+  </div>
+</div>
+<script>
+const policies = {
+privacy: `
+<h2 style="color:#fff;margin:0 0 14px">Privacy Policy</h2>
+<p><b>Last updated: October 8, 2026 - GearHaven (gearhavengg.com)</b></p>
+<p>Your privacy is critical to us. This policy explains what we collect and how we protect you.</p>
+<p><b>1. Information We Collect:</b> Email, in-game username, order details (GH-XXXX), Discord ID (optional). We NEVER store credit card numbers - all payments are processed securely by Stripe / PayPal.</p>
+<p><b>2. How We Use It:</b> Only to deliver your boost, contact you about your order, provide support, and prevent fraud. We do NOT sell your data.</p>
+<p><b>3. Data Protection:</b> All traffic is 256-bit SSL encrypted via Cloudflare. Passwords (if needed for piloted boosts) are deleted automatically 7 days after completion.</p>
+<p><b>4. Cookies:</b> Only essential cookies for login session and cart.</p>
+<p><b>5. Your Rights:</b> You can request data deletion anytime: support@gearhavengg.com - We comply with GDPR/CCPA.</p>
+<p><b>6. Boosters:</b> Verified boosters only see your order info, never your payment info. They sign NDA.</p>
+`,
+refund: `
+<h2 style="color:#fff;margin:0 0 14px">Refund & Cancellation Policy</h2>
+<p><b>We have a 100% fair refund policy. You never lose money.</b></p>
+<p><b>1. Full Refund (100%) if:</b> We didn't start your order within 24 hours, we can't complete your order due to our error, duplicate payment.</p>
+<p><b>2. Partial Refund if:</b> You cancel after boost started - refund proportional to unfinished work. Ex: 50% done = 50% refund.</p>
+<p><b>3. No Refund if:</b> Order is COMPLETED and verified with screenshot/video proof in your account panel. Piloted account banned after boost due to your actions (sharing, toxicity).</p>
+<p><b>4. How to request:</b> Email support@gearhavengg.com or Discord ticket with code GH-XXXX. We reply in &lt;12h. Refunds to original payment method in 2-5 business days.</p>
+<p><b>Chargebacks:</b> Please contact us first. Chargebacks without contact will result in permanent ban.</p>
+`,
+delivery: `
+<h2 style="color:#fff;margin:0 0 14px">Delivery Policy</h2>
+<p><b>Fastest delivery in boosting.</b></p>
+<p><b>1. Start Time:</b> 90% of orders start in 5-30 minutes after payment. Max 12h during peak hours. You will get GH-XXXX code instantly.</p>
+<p><b>2. Duration:</b> Estimated time shown on product page. Ex: 0-1000 Gems = 24-48h average.</p>
+<p><b>3. Process:</b> After payment, a PRO verified booster (top 0.1%) claims your order. Status updates live in account.html: PENDING → PAID → IN_PROGRESS → COMPLETED with proof.</p>
+<p><b>4. Requirements:</b> For piloted boosts we may need login. We use VPN matching your city + Offline Mode. For duo/selfplay we invite you.</p>
+<p><b>5. Guarantee:</b> If not started in 24h, automatic full refund + 20% discount code.</p>
+`,
+terms: `
+<h2 style="color:#fff;margin:0 0 14px">Terms of Service</h2>
+<p><b>By purchasing at GearHaven you agree to:</b></p>
+<p><b>1. Service:</b> We provide professional boosting/coaching services. We are NOT affiliated with Roblox, Supercell, Epic Games, etc. All game trademarks are property of their owners.</p>
+<p><b>2. Account Safety:</b> We use manual pro players, VPN, offline mode - no cheats/hacks/bots. 0 bans in 5k+ orders but we cannot guarantee game publisher actions. Use at your own risk.</p>
+<p><b>3. Customer Duties:</b> Provide correct login/nickname. Do not log in during piloted boost. Not following this may void warranty/refund.</p>
+<p><b>4. Communication:</b> Keep email/Discord active. If booster can't reach you for 48h, order is paused.</p>
+<p><b>5. One order, one claim:</b> Abuse of refund system, chargebacks, false claims = permanent ban & blacklist.</p>
+<p><b>6. Contact:</b> support@gearhavengg.com - Official Discord: discord.gg/gearhaven</p>
+<p><b>7. Law:</b> Services provided as digital goods. 18+ or parental consent.</p>
+`
+};
+function openPolicy(k){document.getElementById('policy-content').innerHTML=policies[k];document.getElementById('policy-modal').style.display='flex';}
+function closePolicy(){document.getElementById('policy-modal').style.display='none';}
+</script>
+<div style="margin-top:14px; background:rgba(255,255,255,0.04); border:1px dashed #2a3366; border-radius:12px; padding:10px 12px">
+  <div style="font-size:10px; color:#8b92c9; text-align:center; margin-bottom:8px; font-weight:700; letter-spacing:0.3px">⚡ NEED FASTER VERIFICATION? CONTACT LIVE SUPPORT</div>
+  <div class="gh-support-row">
+    <a id="checkoutWaBtn" href="https://wa.me/593979294075?text=Hi%2C%20I%20need%20help%20with%20my%20order%20GH-" target="_blank" class="gh-sup-btn gh-sup-wa">📱 WhatsApp</a>
+    <a id="checkoutDcBtn" href="https://discord.gg/kbbpUUePa4" target="_blank" class="gh-sup-btn gh-sup-dc">💬 Discord</a>
+    <a id="checkoutTgBtn" href="https://t.me/gearhaven_client_support_bot" target="_blank" class="gh-sup-btn gh-sup-tg">✈️ Telegram</a>
+  </div>
+  <div style="font-size:9px; color:#5a6490; text-align:center; margin-top:6px">Copy your GH-XXXX code and send it — avg reply < 3 min</div>
+</div>
+<script>
+const GH_WORKER = "https://gearhaven-client-support.riasdeath77.workers.dev";
+document.getElementById('checkoutWaBtn')?.addEventListener('click', ()=>{ try{ fetch(GH_WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'whatsapp_lead',source:'checkout',page:location.href})}); }catch(e){} });
+document.getElementById('checkoutDcBtn')?.addEventListener('click', ()=>{ try{ fetch(GH_WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'discord_lead',source:'checkout',page:location.href})}); }catch(e){} });
+document.getElementById('checkoutTgBtn')?.addEventListener('click', ()=>{ try{ fetch(GH_WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'telegram_lead',source:'checkout',page:location.href})}); }catch(e){} });
+</script>
+<div style="background:linear-gradient(135deg, rgba(34,197,94,0.1), rgba(139,92,246,0.08)); border:1px solid rgba(34,197,94,0.3); border-radius:12px; padding:12px 14px; margin-top:12px">
+  <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px">
+    <div style="width:24px; height:24px; background:#22c55e; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px">✓</div>
+    <p style="font-size:12px; font-weight:900; color:#fff; margin:0">Why 2,800+ players trust GEARHAVEN</p>
+  </div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:8px">
+    <span style="font-size:10px; color:#a8b3d1">⚡ <b style="color:#fff">5-10 min</b> delivery</span>
+    <span style="font-size:10px; color:#a8b3d1">🔒 <b style="color:#fff">100% secure</b> payment</span>
+    <span style="font-size:10px; color:#a8b3d1">👤 Real boosters</span>
+    <span style="font-size:10px; color:#a8b3d1">💬 Live support</span>
+  </div>
+  <p style="font-size:10px; color:#7a86ab; margin:0; line-height:1.4; border-top:1px solid rgba(255,255,255,0.08); padding-top:8px"><b style="color:#22c55e">100% Money-Back Guarantee:</b> If we don't deliver, you get a full refund. No risk. No scam. Your account is always safe — we never ask for password.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="binanceModal" style="display:none" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"><div class="bg-[#1a1d2e] border border-[#2a3366] rounded-[16px] w-full max-w-[340px] p-6 relative"><button onclick="document.getElementById('binanceModal').style.display='none'" class="absolute top-3 right-4">✕</button><h2 class="font-black text-[16px] mb-2">Binance Pay</h2><div class="bg-white p-3 rounded-[8px] w-fit mx-auto"><img id="binanceQR" src="./binance/binance.jpeg" class="w-[180px] h-[180px]"></div><div class="mt-3 text-[11px] text-center">Total: <span id="modalPrice" class="font-bold">$0</span> • <span id="modalUsd">$0 USD</span></div><button onclick="confirmBinancePay()" class="w-full mt-4 bg-[#F3BA2F] text-black font-black py-3 rounded-xl text-[12px]">✅ I paid</button></div></div>
+<div id="otherModal" style="display:none" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"><div class="bg-[#151a40] border border-[#2a3366] rounded-[16px] w-full max-w-[340px] p-6 relative"><button onclick="document.getElementById('otherModal').style.display='none'" class="absolute top-3 right-4">✕</button><h2 class="font-black text-[16px] mb-4">💬 Other Methods</h2><div class="grid gap-2"><a id="waChatBtn" href="https://wa.me/593979294075" target="_blank" class="w-full bg-[#25D366] text-black py-3.5 rounded-xl font-black text-[12px] text-center block">📱 WhatsApp - <span class="waPrice">$0</span></a><a id="discordChatBtn" href="https://discord.gg/kbbpUUePa4" target="_blank" class="w-full bg-[#5865F2] text-white py-3.5 rounded-xl font-black text-[12px] text-center block">🎮 Discord</a><button onclick="handlePay('other_chat')" class="w-full bg-[#8b5cf6] text-white py-3 rounded-xl font-black text-[12px]">💬 Confirm</button></div></div></div>
+<script>
+const AUTH_WORKER = "https://silent-term-1b1a.riasdeath77.workers.dev";
+const WORKER_BASE = "https://gearhaven-telegram.riasdeath77.workers.dev";
+const PAYPHONE_LINK = "https://ppls.me/9ZVVjBN3s0bpc2IFSMthg";
+const WORKER_URL = WORKER_BASE + "/api/order";
+const DUNGEON_NAMES = {altar:'Altar of Fangs', murder:'Murder Row', den:'Den of Nalorakk', vale:'The Blinding Vale', voidscar:'Voidscar Arena', kings:"Kings' Rest", temple:'Temple of Sethraliss', ruby:'Ruby Life Pools'};
+function resolveDungeonNames(raw){ if(!raw) return 'Any Dungeon'; let s = Array.isArray(raw)? raw.join(', ') : String(raw); s = s.trim(); if(s === '') return 'Any Dungeon'; let low = s.toLowerCase(); if(low === 'any' || low === 'any dungeon' || low.includes('any +10') || low === 'any dungeon +10') return 'Any Dungeon'; if(s.length > 35 || s.includes(' of ') || s.includes('Row') || s.includes('Rest') || s.includes('Thanes') || s.includes('Chasm') || s.includes('Deadmines') || s.includes('Gnomeregan') || s.includes('Maraudon')){ return s; } return s.split(',').map(id=>{ let k=id.trim().toLowerCase(); return DUNGEON_NAMES[k] || id.trim(); }).filter(Boolean).join(', '); }
+async function saveOrderToD1(order){ const sess = localStorage.getItem('gearhaven_session'); if(!sess){ console.log('No session, skip D1 save'); return; } try{ const res = await fetch(`${AUTH_WORKER}/api/orders`, { method:'POST', headers:{'Content-Type':'application/json','Authorization':`Bearer ${sess}`}, body: JSON.stringify({ order: order }) }); const d = await res.json(); console.log('✅ Order saved to D1:', d); return d; }catch(e){ console.error('D1 save error', e); } }
+async function saveToCloudflare(order){ try{ let telegramPayload = { id: order.id, code: order.code, title: order.title, serviceName: order.title, dungeons: order.dungeons, details: order.items.map(i=> `${i.name} - ${i.dungeonNames} - ${i.playMode} - ${i.traders} traders - +${i.level}`).join(' | '), totalPrice: order.total, total: order.total, price: order.total, level: order.level, bundle: order.bundle, traders: order.items[0]?.traders || 2, key: order.level, status: order.status, charInfo: `${order.customer.charName} - Realm: ${order.customer.realm} - BattleTag: ${order.customer.btag}`, email: order.customer.btag, battleTag: order.customer.btag, btag: order.customer.btag, character: order.customer.charName, charName: order.customer.charName, realm: order.customer.realm, faction: order.customer.faction, buyerEmail: order.customer.btag, customer: order.customer, items: order.items }; let res = await fetch(WORKER_URL, { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(telegramPayload) }); let j = await res.json(); console.log("Telegram OK", j); return j; }catch(e){ console.error(e); return {ok:0}; } }
+let currentLang=localStorage.getItem('gh_lang')||'en';
+function toggleLang(){currentLang=currentLang==='en'?'es':'en';localStorage.setItem('gh_lang',currentLang);location.reload();}
+function showToast(m){let t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(()=>t.style.display='none',2500);}
+let params=new URLSearchParams(location.search);
+let lastOrder=JSON.parse(localStorage.getItem('gh_last_order')||'null');
+let cart=JSON.parse(localStorage.getItem('gearhaven_cart')||'[]');
+let checkoutCart = lastOrder?.items?.length? lastOrder.items : cart;
+function calcCartTotal(items){ return items.reduce((s,i)=> s + parseFloat(i.price||i.usd||0), 0); }
+function updatePayButtons(total){
+  document.getElementById('paypalPrice').innerText='$'+total.toFixed(2);
+  document.getElementById('payphonePrice').innerText='$'+total.toFixed(2);
+  document.getElementById('payphoneUsd').innerText='($'+total.toFixed(2)+' USD)';
+  document.getElementById('binancePrice').innerText='$'+total.toFixed(2);
+  document.getElementById('modalPrice').innerText='$'+total.toFixed(2);
+  document.getElementById('modalUsd').innerText='$'+total.toFixed(2)+' USD';
+  let el=document.getElementById('paypalUsd'); if(el) el.innerText='($'+total.toFixed(2)+' USD)';
+  if(window._checkoutData){
+    if(window._checkoutData.isCart){ window._checkoutData.total=total.toFixed(2); window._checkoutData.usd=total.toFixed(2); }
+    else { window._checkoutData.price=total.toFixed(2); window._checkoutData.usd=total.toFixed(2); }
+  }
+}
+function deleteCartItem(idx){
+  checkoutCart.splice(idx,1);
+  localStorage.setItem('gearhaven_cart', JSON.stringify(checkoutCart));
+  localStorage.removeItem('gh_last_order');
+  if(checkoutCart.length===0){
+    document.getElementById('cartItemsList').innerHTML='<div class="text-[12px] text-[#8b92c9] p-3 text-center">Cart empty</div>';
+    document.getElementById('cartCountTop').innerText='0'; document.getElementById('cartCountBottom').innerText='0';
+    document.getElementById('cartTotalTop').innerText='$0.00'; document.getElementById('cartUsdTop').innerText='0.00';
+    updatePayButtons(0); return;
+  }
+  let newTotal=calcCartTotal(checkoutCart);
+  document.getElementById('cartCountTop').innerText=checkoutCart.length;
+  document.getElementById('cartCountBottom').innerText=checkoutCart.length;
+  document.getElementById('cartTotalTop').innerText='$'+newTotal.toFixed(2);
+  document.getElementById('cartUsdTop').innerText=newTotal.toFixed(2);
+  updatePayButtons(newTotal);
+  document.getElementById('cartItemsList').innerHTML=checkoutCart.map((i,idx2)=>{
+    let m=(i.playMode||i.mode||'self').toUpperCase(); let t=i.traders||i.bundle||2;
+    let dName=resolveDungeonNames(i.dungeons||i.dungeonNames||'Any');
+    return `<div class="bg-[#0a0e28] border border-[#1e254a] rounded-lg p-2 flex gap-2 text-[11px] items-center"><div class="text-[9px] bg-[#1a204f] px-1.5 py-0.5 rounded">#${idx2+1}</div><div class="flex-1"><div class="font-bold text-white">${i.name||i.title}</div><div class="text-[9px] text-[#22c55e]">${dName} | ${m} | ${t} traders</div></div><div class="font-black text-[#fbbf24]">$${i.price}</div><button onclick="deleteCartItem(${idx2})" class="bg-[#2a0a0a] border border-[#ef4444] text-[#ef4444] w-6 h-6 rounded-full font-black text-[11px]">X</button></div>`;
+  }).join('');
+}
+
+function deleteSingleProduct(){
+  checkoutCart=[];
+  localStorage.removeItem('gearhaven_cart');
+  localStorage.removeItem('gh_last_order');
+  document.getElementById('cTitle').innerText='No items';
+  document.getElementById('cDungeons').innerText='Cart empty';
+  document.getElementById('cPrice').innerText='0.00';
+  document.getElementById('cUsd').innerText='0.00';
+  updatePayButtons(0);
+}
+let isCartMode = (checkoutCart.length > 1) || params.get('is_cart')==='1' || (lastOrder && lastOrder.isCart === true);
+let title=params.get('title')||lastOrder?.items?.[0]?.name||'Mythic+ Bundle';
+let price=params.get('price')||lastOrder?.total||'0';
+let usd=params.get('usd')||price;
+let currency=params.get('currency')||'USD';
+let level=params.get('level')||'10';
+let bundle=params.get('bundle')||'3';
+let mode=params.get('mode')||'self';
+let dungeonsRaw=params.get('dungeons')?decodeURIComponent(params.get('dungeons')): (lastOrder?.dungeons || 'Any Dungeon');
+let dungeonsParam = resolveDungeonNames(dungeonsRaw);
+if(isCartMode){
+ document.getElementById('singleProduct').style.display='none';
+ document.getElementById('cartProduct').style.display='block';
+ let realTotal = calcCartTotal(checkoutCart);
+ let total = parseFloat(lastOrder?.total || params.get('cart_total') || realTotal || 0);
+ if(total===0) total = realTotal;
+ let count = checkoutCart.length;
+ let code = lastOrder?.code || 'GH-'+Math.random().toString(36).substr(2,4).toUpperCase()+'-MULTI';
+ document.getElementById('cartCode').innerText=code;
+ document.getElementById('cartCountTop').innerText=count;
+ document.getElementById('cartCountBottom').innerText=count;
+ document.getElementById('cartTotalTop').innerText='$'+total.toFixed(2);
+ document.getElementById('cartUsdTop').innerText=total.toFixed(2);
+ document.getElementById('paypalPrice').innerText='$'+total.toFixed(2);
+ document.getElementById('payphonePrice').innerText='$'+total.toFixed(2);
+ document.getElementById('payphoneUsd').innerText='($'+total.toFixed(2)+' USD)';
+ document.getElementById('binancePrice').innerText='$'+total.toFixed(2);
+ document.getElementById('modalPrice').innerText='$'+total.toFixed(2);
+ document.getElementById('modalUsd').innerText='$'+total.toFixed(2)+' USD';
+ document.getElementById('payCurrency').innerText=currency;
+ document.getElementById('payType').innerText='MULTI x'+count;
+ document.getElementById('paypalUsd').innerText='($'+total.toFixed(2)+' USD)';
+document.getElementById('cartItemsList').innerHTML=checkoutCart.map((i,idx)=>{ let m = (i.playMode||i.mode||mode||'self').toUpperCase(); let t = i.traders||i.bundle||2; let dName = resolveDungeonNames(i.dungeons||i.dungeonNames||'Any'); return `<div class="bg-[#0a0e28] border border-[#1e254a] rounded-lg p-2 flex gap-2 text-[11px] items-center"><div class="text-[9px] bg-[#1a204f] px-1.5 py-0.5 rounded">#${idx+1}</div><div class="flex-1"><div class="font-bold text-white">${i.name||i.title}</div><div class="text-[9px] text-[#22c55e]">${dName} | ${m} | ${t} traders</div></div><div class="font-black text-[#fbbf24]">$${i.price}</div><button onclick="deleteCartItem(${idx})" class="bg-[#2a0a0a] border border-[#ef4444] text-[#ef4444] w-6 h-6 rounded-full font-black text-[11px]">X</button></div>`; }).join('');
+ window._checkoutData={isCart:true,cart:checkoutCart,total:total.toFixed(2),usd:total.toFixed(2),currency:currency,symbol:'$',count:count,code:code,dungeons:checkoutCart.map(c=> resolveDungeonNames(c.dungeons||c.dungeonNames||'Any')).join(' | ')};
+}else{
+ document.getElementById('cTitle').innerText=decodeURIComponent(title);
+ document.getElementById('cPrice').innerText=price;
+ document.getElementById('cDetails').innerText=`Level +${level} - x${bundle} - ${mode}`;
+ document.getElementById('cMode').innerText=mode+' | +'+level+' x'+bundle;
+ document.getElementById('cDungeons').innerText=dungeonsParam;
+ document.getElementById('cUsd').innerText=usd;
+ document.getElementById('cLevel').innerText='+'+level;
+ document.getElementById('cBundle').innerText=bundle;
+ document.getElementById('paypalPrice').innerText='$'+price;
+ document.getElementById('binancePrice').innerText='$'+price;
+ document.getElementById('payphonePrice').innerText='$'+price;
+ document.getElementById('payphoneUsd').innerText='($'+usd+' USD)';
+ document.getElementById('modalPrice').innerText='$'+price;
+ document.getElementById('modalUsd').innerText='$'+usd+' USD';
+ document.getElementById('payCurrency').innerText=currency;
+ document.getElementById('paypalUsd').innerText='($'+usd+' USD)';
+ window._checkoutData={isCart:false,title:title,price:price,usd:usd,currency:currency,symbol:'$',level:level,bundle:bundle,mode:mode,dungeons:dungeonsParam,dungeonIds:params.get('dungeons')||''};
+}
+function validateForm(){ let c=document.getElementById('charName').value.trim(); let r=document.getElementById('realm').value.trim(); let b=document.getElementById('btag').value.trim(); let err=document.getElementById('formError'); if(!c||!r||!b){err.innerText='Missing: Character, Realm and BattleTag are required';err.classList.remove('hidden');return false;} err.classList.add('hidden');return true; }
+function generateOrderCode(){ let random=Math.random().toString(36).substring(2,6).toUpperCase(); return window._checkoutData.isCart? (window._checkoutData.code||`GH-${random}-MULTI`) : `GH-${random}`; }
+async function createOrder(method){ let orderId=params.get('id') || localStorage.getItem('gh_last_order_id') || generateOrderCode(); let customer={ charName:document.getElementById('charName').value.trim(), realm:document.getElementById('realm').value.trim(), btag:document.getElementById('btag').value.trim(), battleTag:document.getElementById('btag').value.trim(), contactPhone:document.getElementById('contactPhone').value.trim()||'Not provided', region:'US', faction: params.get('faction') || localStorage.getItem('gh_faction') || 'N/A', email: document.getElementById('btag').value.trim() }; let data=window._checkoutData; let fullItems = data.isCart? data.cart.map(it=>{ return { title: it.title||it.name||'Mythic Bundle', name: it.name||it.title||'Mythic Bundle', price: it.price||it.usd||0, usd: it.usd||it.price||0, dungeons: resolveDungeonNames(it.dungeons||it.dungeonNames||data.dungeons), dungeonNames: resolveDungeonNames(it.dungeonNames||it.dungeons||data.dungeons), playMode: (it.playMode||it.mode||data.mode||'self').toUpperCase(), mode: (it.mode||it.playMode||data.mode||'self').toUpperCase(), traders: it.traders||it.bundle||2, bundle: it.bundle||it.traders||2, keyLevel: it.keyLevel||it.level||data.level||'10', level: it.level||it.keyLevel||data.level||'10' }; }) : [{ title:decodeURIComponent(data.title), name:decodeURIComponent(data.title), price:data.price, usd:data.usd, dungeons:data.dungeons, dungeonNames:data.dungeons, playMode: (data.mode||'self').toUpperCase(), mode: (data.mode||'self').toUpperCase(), traders: data.bundle||2, bundle: data.bundle||2, keyLevel: data.level||'10', level: data.level||'10' }]; let isPilotOrder = fullItems.some(i=> i.playMode.includes('PILOT')); let order={ id:orderId, date:new Date().toLocaleString(), status:'PENDING_VERIFICATION', method:method, payMethod:method, customer:customer, buyerName:customer.charName, buyerEmail:customer.btag, isCart:data.isCart, status_history:[{status:'PENDING_VERIFICATION',date:new Date().toLocaleString()}], title: data.isCart? `Cart ${data.count} products` : decodeURIComponent(data.title), price: data.isCart? data.total : data.price, total: data.isCart? data.total : data.price, usd: data.isCart? data.usd : data.usd, currency:data.currency, count: data.isCart? data.count : 1, items: fullItems, dungeons: data.dungeons, level: data.isCart? 'MULTI' : data.level, bundle: data.isCart? data.count : data.bundle, mode: data.isCart? (isPilotOrder? 'PILOT MULTI' : 'SELF MULTI') : data.mode.toUpperCase(), playMode: data.isCart? (isPilotOrder? 'PILOT MULTI' : 'SELF MULTI') : data.mode.toUpperCase(), isPilot: isPilotOrder, code: data.code||orderId }; let orders=JSON.parse(localStorage.getItem('gearhaven_orders')||'[]'); orders.unshift(order); localStorage.setItem('gearhaven_orders',JSON.stringify(orders)); localStorage.setItem('gh_last_order', JSON.stringify(order)); showToast('Sending to Telegram + D1...'); await Promise.all([ saveToCloudflare(order), saveOrderToD1(order) ]); if(data.isCart){localStorage.removeItem('gearhaven_cart');} return order; }
+function goToPending(order){ let d=window._checkoutData; let c=order.customer; let base = `order_id=${order.id}&charName=${encodeURIComponent(c.charName)}&realm=${encodeURIComponent(c.realm)}&btag=${encodeURIComponent(c.btag)}&battleTag=${encodeURIComponent(c.btag)}&faction=${encodeURIComponent(c.faction)}&buyerEmail=${encodeURIComponent(c.btag)}&currency=${d.currency}`; if(d.isCart){ location.href=`./thankyou.html?verified=false&${base}&is_cart=1&cart_total=${d.total}&cart_usd=${d.usd}&count=${d.count}&dungeons=${encodeURIComponent(d.dungeons||'')}&title=${encodeURIComponent(order.title)}&price=${d.total}&usd=${d.usd}`; }else{ location.href=`./thankyou.html?verified=false&${base}&title=${encodeURIComponent(d.title)}&price=${d.price}&usd=${d.usd}&level=${d.level}&bundle=${d.bundle}&mode=${d.mode}&dungeons=${encodeURIComponent(d.dungeons||'')}`; } }
+async function handlePay(type){ if(!validateForm()) return; if(type==='payphone'){ let order = await createOrder('PayPhone - Credit Card'); window.open(PAYPHONE_LINK, '_blank'); goToPending(order); return; } if(!validateForm()) return; if(type==='paypal'){ let order=await createOrder('PayPal'); let paypalBase = JSON.parse(localStorage.getItem('gearhaven_chat_links')||'{}').paypal || 'https://www.paypal.com/paypalme/Reinarez007611'; window.open(paypalBase.replace(/\/$/,'')+'/'+parseFloat(window._checkoutData.isCart?window._checkoutData.total:window._checkoutData.price).toFixed(2),'_blank'); goToPending(order); }else if(type==='binance'){document.getElementById('binanceModal').style.display='flex';} else if(type==='other'||type==='other_chat'){document.getElementById('otherModal').style.display='flex'; if(type==='other_chat'){let order=await createOrder('Other'); goToPending(order);}} }
+async function confirmBinancePay(){ if(!validateForm()) return; let order=await createOrder('Binance'); document.getElementById('binanceModal').style.display='none'; goToPending(order); }
+function openOtherModal(){document.getElementById('otherModal').style.display='flex';}
+</script>
+<script src="./global-search.js"></script>
+<script src="./gh-banner.js"></script>
+<script src="./chat-widget.js"></script>
+
+<!-- BARRA TOP - AHORA SI BIEN PUESTA -->
+<div id="topPayBar" class="sticky top-0 z-30 w-full bg-[#0f1333] border-b border-[#1e254a] px-4 py-[9px] flex items-center justify-center gap-4">
+  <span class="text-[9px] tracking-[2.5px] font-black text-[#6b77b5]">WE ACCEPT</span>
+  <div class="flex items-center gap-4">
+    <span class="text-white font-black italic text-[14px] leading-none">VISA</span>
+    <span class="flex items-center -space-x-1.5"><span class="w-4 h-4 rounded-full bg-[#eb001b]"></span><span class="w-4 h-4 rounded-full bg-[#f79e1b]"></span><span class="text-[8px] ml-2 text-[#8b92c9] font-bold">Master</span></span>
+    <span class="text-[#0099df] font-bold text-[12px] leading-none">PayPal</span>
+    <span class="text-white font-bold text-[12px] leading-none"> Pay</span>
+    <span class="text-white font-bold text-[12px] leading-none flex gap-0.5"><span class="text-[#4285f4]">G</span> Pay</span>
+    <span class="bg-[#F3BA2F] text-black text-[8px] font-black px-2 py-[3px] rounded">Binance</span>
+    <span class="bg-[#f7931a] text-white text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full">₿</span>
+  </div>
+</body>
+</html>
